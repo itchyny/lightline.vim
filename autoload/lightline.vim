@@ -57,13 +57,15 @@ function! lightline#init()
   endfor
   try
     let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+  catch
+    call lightline#error('Colorscheme ' . g:lightline.colorscheme . ' not found.')
+    let g:lightline.colorscheme = 'default'
+    let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+  finally
     for m in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command']
       call lightline#highlight(m)
     endfor
     let s:_ = 0
-  catch
-    call lightline#error('Colorscheme ' . g:lightline.colorscheme . ' not found.')
-    let g:lightline.colorscheme = 'default'
   endtry
 endfunction
 
