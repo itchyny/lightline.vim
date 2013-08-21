@@ -5,14 +5,12 @@ let s:_ = 1
 
 function! lightline#update(...)
   if s:_ | call lightline#init() | endif
-  let s = lightline#statusline(1)
-  for nr in filter(range(1, winnr('$')), 'v:val != winnr()')
-    call setwinvar(nr, '&statusline', s)
-    call setwinvar(nr, 'lightline', 1)
+  let s = [lightline#statusline(0), lightline#statusline(1)]
+  let w = winnr()
+  for n in range(1, winnr('$'))
+    call setwinvar(n, '&statusline', s[n!=w])
+    call setwinvar(n, 'lightline', n!=w)
   endfor
-  let s = lightline#statusline(0)
-  call setwinvar(winnr(), '&statusline', s)
-  call setwinvar(winnr(), 'lightline', 0)
 endfunction
 
 function! lightline#update_once()
