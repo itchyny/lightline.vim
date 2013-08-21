@@ -9,4 +9,4 @@ let s:c.visual.left = [ [ '#5f00ff', '#ffffff', 57, 231 ], [ '#ffffff', '#5f00ff
 let s:c.normal.middle = [ '#ffffff', '#303030', 231, 236 ]
 let s:c.inactive.middle = [ '#303030', '#121212', 236, 233 ]
 
-let g:lightline#colorscheme#default#color = s:c
+let g:lightline#colorscheme#default#palette = s:c

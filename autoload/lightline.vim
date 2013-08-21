@@ -50,13 +50,13 @@ function! lightline#init()
   let g:lightline.subseparator = get(g:lightline, 'subseparator', {})
   let g:lightline.subseparator.left = get(g:lightline.subseparator, 'left', '')
   let g:lightline.subseparator.right = get(g:lightline.subseparator, 'right', '')
-  let g:lightline.color = get(g:lightline, 'color', {})
+  let g:lightline.palette = get(g:lightline, 'palette', {})
   let g:lightline.colorscheme = get(g:lightline, 'colorscheme', 'default')
   for m in ['normal', 'insert', 'replace', 'visual', 'inactive']
-    let g:lightline.color[m] = get(g:lightline.color, m, {})
+    let g:lightline.palette[m] = get(g:lightline.palette, m, {})
   endfor
   try
-    let g:lightline.color = g:lightline#colorscheme#{g:lightline.colorscheme}#color
+    let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
     for m in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command']
       call lightline#highlight(m)
     endfor
@@ -82,8 +82,8 @@ function! lightline#mode()
 endfunction
 
 function! lightline#highlight(mode)
-  let d = has_key(g:lightline.color, a:mode) ? a:mode : 'normal'
-  let c = g:lightline.color
+  let d = has_key(g:lightline.palette, a:mode) ? a:mode : 'normal'
+  let c = g:lightline.palette
   let left = d == 'inactive' ? g:lightline.inactive.left : g:lightline.active.left
   let right = d == 'inactive' ? g:lightline.inactive.right : g:lightline.active.right
   let l = has_key(c, d) && has_key(c[d], 'left') ? c[d].left : c.normal.left
