@@ -8,9 +8,17 @@ function! lightline#update(...)
   let s = lightline#statusline(0)
   for nr in filter(range(1, winnr('$')), 'v:val != winnr()')
     call setwinvar(nr, '&statusline', s)
+    call setwinvar(nr, 'lightline', 1)
   endfor
   let s = lightline#statusline(1)
   call setwinvar(winnr(), '&statusline', s)
+  call setwinvar(winnr(), 'lightline', 0)
+endfunction
+
+function! lightline#update_once()
+  if !exists('w:lightline') || w:lightline
+    call lightline#update()
+  endif
 endfunction
 
 function! lightline#init()
