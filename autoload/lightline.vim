@@ -5,12 +5,12 @@ let s:_ = 1
 
 function! lightline#update(...)
   if s:_ | call lightline#init() | endif
-  let s = lightline#statusline(0)
+  let s = lightline#statusline(1)
   for nr in filter(range(1, winnr('$')), 'v:val != winnr()')
     call setwinvar(nr, '&statusline', s)
     call setwinvar(nr, 'lightline', 1)
   endfor
-  let s = lightline#statusline(1)
+  let s = lightline#statusline(0)
   call setwinvar(winnr(), '&statusline', s)
   call setwinvar(winnr(), 'lightline', 0)
 endfunction
@@ -126,9 +126,9 @@ function! lightline#subseparator(x, y, s)
   endif
 endfunction
 
-function! lightline#statusline(active)
+function! lightline#statusline(inactive)
   let _ = ''
-  let mode = a:active ? 'active' : 'inactive'
+  let mode = a:inactive ? 'inactive' : 'active'
   let left = has_key(g:lightline, mode) ? g:lightline[mode].left : g:lightline.active.left
   let right = has_key(g:lightline, mode) ? g:lightline[mode].right : g:lightline.active.right
   for i in range(len(left))
