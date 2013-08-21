@@ -154,9 +154,7 @@ function! lightline#statusline(inactive)
 endfunction
 
 function! lightline#error(msg)
-  echohl ErrorMsg
-  echomsg 'lightline.vim: '.a:msg
-  echohl None
+  echohl ErrorMsg | echomsg 'lightline.vim: '.a:msg | echohl None
 endfunction
 
 let &cpo = s:save_cpo
