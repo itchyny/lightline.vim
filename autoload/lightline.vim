@@ -56,7 +56,7 @@ function! lightline#init()
     let g:lightline.color[m] = get(g:lightline.color, m, {})
   endfor
   try
-    exec 'call lightline#colorscheme#' . g:lightline.colorscheme . '#init()'
+    let g:lightline.color = g:lightline#colorscheme#{g:lightline.colorscheme}#color
     for m in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command']
       call lightline#highlight(m)
     endfor
