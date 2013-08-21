@@ -1,4 +1,5 @@
-# A light and configurable statusline for Vim
+# lightline.vim
+A light and configurable statusline for Vim
 
 ## Author
 itchyny (https://github.com/itchyny)

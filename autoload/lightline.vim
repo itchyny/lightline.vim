@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 04:53:30.
+" Last Change: 2013/08/22 05:34:46.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -72,7 +72,7 @@ function! lightline#init()
   try
     let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
   catch
-    call lightline#error('Colorscheme ' . g:lightline.colorscheme . ' not found.')
+    call lightline#error('Colorscheme ' . g:lightline.colorscheme . ' could not loaded.')
     let g:lightline.colorscheme = 'default'
     let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
   finally
@@ -104,7 +104,7 @@ function! lightline#highlight(mode)
   let right = d == 'inactive' ? g:lightline.inactive.right : g:lightline.active.right
   let l = has_key(c, d) && has_key(c[d], 'left') ? c[d].left : c.normal.left
   let r = has_key(c, d) && has_key(c[d], 'right') ? c[d].right : c.normal.right
-  let m = has_key(c, d) && has_key(c[d], 'middle') ? c[d].middle : c.normal.middle
+  let m = has_key(c, d) && has_key(c[d], 'middle') ? c[d].middle[0] : c.normal.middle[0]
   for i in range(len(left))
     exec printf('hi LightLineLeft_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', a:mode, i, l[i][0], l[i][1], l[i][2], l[i][3])
     exec printf('hi LightLineLeft_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', a:mode,
