@@ -1,3 +1,11 @@
+" =============================================================================
+" Filename: plugin/lightline.vim
+" Version: 0.0
+" Author: itchyny
+" License: MIT License
+" Last Change: 2013/08/22 04:53:26.
+" =============================================================================
+
 let s:save_cpo = &cpo
 set cpo&vim
 

@@ -1,3 +1,11 @@
+" =============================================================================
+" Filename: autoload/lightline/colorscheme/landscape.vim
+" Version: 0.0
+" Author: itchyny
+" License: MIT License
+" Last Change: 2013/08/22 04:54:25.
+" =============================================================================
+
 let s:c = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}}
 let s:c.normal.left = [ ['#0000ff', '#ffffff', 21, 231 ], [ '#ffffff', '#0000ff', 231, 21 ], [ '#ffffff', '#0000ff', 231, 21 ] ]
 let s:c.normal.right = [ [ '#303030', '#d0d0d0', 236, 252 ], [ '#303030', '#8a8a8a', 236, 245 ], [ '#bcbcbc', '#585858', 250, 240 ] ]
