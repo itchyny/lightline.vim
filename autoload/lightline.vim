@@ -90,13 +90,13 @@ function! lightline#highlight(mode)
   let r = has_key(c, d) && has_key(c[d], 'right') ? c[d].right : c.normal.right
   let m = has_key(c, d) && has_key(c[d], 'middle') ? c[d].middle : c.normal.middle
   for i in range(len(left))
-    exec printf('hi LightLineLeft_%s_%d ctermfg=%d ctermbg=%d', a:mode, i, l[i][0], l[i][1])
-    exec printf('hi LightLineLeft_%s_%d_%d ctermfg=%d ctermbg=%d', a:mode, i, i + 1, l[i][1], i == len(left) - 1 ? m[1] : l[i + 1][1])
+    exec printf('hi LightLineLeft_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', a:mode, i, l[i][0], l[i][1], l[i][2], l[i][3])
+    exec printf('hi LightLineLeft_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', a:mode, i, i + 1, l[i][1], i == len(left) - 1 ? m[1] : l[i + 1][1], l[i][3], i == len(left) - 1 ? m[3] : l[i + 1][3])
   endfor
-  exec printf('hi LightLineMiddle_%s ctermfg=%d ctermbg=%d', a:mode, m[0], m[1])
+  exec printf('hi LightLineMiddle_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d', a:mode, m[0], m[1], m[2], m[3])
   for i in reverse(range(len(right)))
-    exec printf('hi LightLineRight_%s_%d_%d ctermfg=%d ctermbg=%d', a:mode, i, i + 1, r[i][1], i == len(right) - 1 ? m[1] : r[i + 1][1])
-    exec printf('hi LightLineRight_%s_%d ctermfg=%d ctermbg=%d', a:mode, i, r[i][0], r[i][1])
+    exec printf('hi LightLineRight_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', a:mode, i, i + 1, r[i][1], i == len(right) - 1 ? m[1] : r[i + 1][1], r[i][3], i == len(right) - 1 ? m[3] : r[i + 1][3])
+    exec printf('hi LightLineRight_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', a:mode, i, r[i][0], r[i][1], r[i][2], r[i][3])
   endfor
 endfunction
 
