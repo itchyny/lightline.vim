@@ -286,4 +286,4 @@ Of course, you can name your component as you wish.
         \   'my_filename': 'MyFilename', ...
 ```
 
-This is the end of the tutorial. Good luck with your nice statuslines.
+This is the end of the tutorial. For more information, see `:help lightline`. Good luck with your nice statuslines.
