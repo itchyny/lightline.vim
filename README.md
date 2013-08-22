@@ -46,8 +46,9 @@ With branch name, readonly mark and modified mark.
 ![lightline.vim - landscape - fugitive](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/5.png)
 
 ## Why yet another clone for powerline?
-+ vim-powerline is a nice plugin, but deprecated.
-+ vim-airline is a nice plugin, but not configurable. Also, it does *too much* for other plugins, which should be done by users in .vimrc.
++ [vim-powerline](https://github.com/Lokaltog/vim-powerline) is a nice plugin, but deprecated.
++ [powerline](https://github.com/Lokaltog/powerline) is a nice plugin, but difficult to configure.
++ [vim-airline](https://github.com/bling/vim-airline) is a nice plugin, but not configurable. Also, it does *too much* for other plugins, which should be done by users in .vimrc.
 
 ## Author
 itchyny (https://github.com/itchyny)
@@ -85,7 +86,7 @@ If you want a wombat colorscheme, add the folowing setting to your .vimrc (or \_
 to get:
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/2.png)
 
-If you have installed vim-fugitive, the branch status is automatically available:
+If you have installed [vim-fugitive](https://github.com/tpope/vim-fugitive), the branch status is automatically available:
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/3.png)
 but you find it annoying! So you add to your .vimrc:
 ```vim
@@ -98,7 +99,7 @@ but you find it annoying! So you add to your .vimrc:
 ```
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/4.png)
 OK. The branch section has been removed.
-The `g:lightline.active.left` stands for the components which appears on the left hand side, for the active window.
+The `g:lightline.active.left` stands for the components which appear on the left hand side, for the active window.
 
 You find the read-only mark is not cool:
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/5.png)
