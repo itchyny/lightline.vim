@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 19:01:04.
+" Last Change: 2013/08/22 19:05:48.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -89,9 +89,7 @@ function! lightline#init()
     let g:lightline.colorscheme = 'default'
     let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
   finally
-    for m in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command']
-      call lightline#highlight(m)
-    endfor
+    call lightline#highlight()
     let s:_ = 0
   endtry
 endfunction
@@ -127,8 +125,9 @@ function! s:gui2cui(rgb, fallback)
   return rgb[0] + rgb[1] + rgb[2]
 endfunction
 
-function! lightline#highlight(mode)
-  let d = has_key(g:lightline.palette, a:mode) ? a:mode : 'normal'
+function! lightline#highlight()
+  for mode in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command']
+  let d = has_key(g:lightline.palette, mode) ? mode : 'normal'
   let c = g:lightline.palette
   let left = d == 'inactive' ? g:lightline.inactive.left : g:lightline.active.left
   let right = d == 'inactive' ? g:lightline.inactive.right : g:lightline.active.right
@@ -148,17 +147,18 @@ function! lightline#highlight(mode)
   for i in range(len(left))
     let li = i < len(l) ? l[i] : l[-1]
     let lj = i + 1 < len(l) ? l[i + 1] : l[-1]
-    exec printf('hi LightLineLeft_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', a:mode, i, li[0], li[1], li[2], li[3], s:term(li))
-    exec printf('hi LightLineLeft_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', a:mode,
+    exec printf('hi LightLineLeft_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, li[0], li[1], li[2], li[3], s:term(li))
+    exec printf('hi LightLineLeft_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', mode,
           \ i, i + 1, li[1], i == len(left) - 1 ? m[1] : lj[1], li[3], i == len(left) - 1 ? m[3] : lj[3])
   endfor
-  exec printf('hi LightLineMiddle_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', a:mode, m[0], m[1], m[2], m[3], s:term(m))
+  exec printf('hi LightLineMiddle_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, m[0], m[1], m[2], m[3], s:term(m))
   for i in reverse(range(len(right)))
     let ri = i < len(r) ? r[i] : r[-1]
     let rj = i + 1 < len(r) ? r[i + 1] : r[-1]
-    exec printf('hi LightLineRight_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', a:mode,
+    exec printf('hi LightLineRight_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', mode,
           \ i, i + 1, ri[1], i == len(right) - 1 ? m[1] : rj[1], ri[3], i == len(right) - 1 ? m[3] : rj[3])
-    exec printf('hi LightLineRight_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', a:mode, i, ri[0], ri[1], ri[2], ri[3], s:term(ri))
+    exec printf('hi LightLineRight_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, ri[0], ri[1], ri[2], ri[3], s:term(ri))
+  endfor
   endfor
 endfunction
 
