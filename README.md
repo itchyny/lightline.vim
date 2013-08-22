@@ -14,6 +14,13 @@ A light and configurable statusline for Vim
 ![lightline.vim - wombat - visual](https://raw.github.com/itchyny/lightline.vim/master/image/wombat/3.png)
 ![lightline.vim - wombat - replace](https://raw.github.com/itchyny/lightline.vim/master/image/wombat/4.png)
 
+### jellybeans (with font integration)
+
+![lightline.vim - jellybeans - normal](https://raw.github.com/itchyny/lightline.vim/master/image/jellybeans/1.png)
+![lightline.vim - jellybeans - insert](https://raw.github.com/itchyny/lightline.vim/master/image/jellybeans/2.png)
+![lightline.vim - jellybeans - visual](https://raw.github.com/itchyny/lightline.vim/master/image/jellybeans/3.png)
+![lightline.vim - jellybeans - replace](https://raw.github.com/itchyny/lightline.vim/master/image/jellybeans/4.png)
+
 ### solarized theme (dark)
 
 ![lightline.vim - solarized_dark - normal](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_dark/1.png)
