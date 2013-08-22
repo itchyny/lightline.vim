@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 10:19:45.
+" Last Change: 2013/08/22 10:21:58.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -46,7 +46,6 @@ function! lightline#init()
         \ 'n' : 'normal', 'i' : 'insert', 'R' : 'replace', 'v' : 'visual', 'V' : 'visual',
         \ 'c' : 'command', '': 'visual', 's' : 'select', 'S' : 'select', '': 'select', }
   let g:lightline._component = {
-        \ 'nothing': '',
         \ 'mode': '%{lightline#mode()}',
         \ 'filename': '%t',
         \ 'modified': '%M',
