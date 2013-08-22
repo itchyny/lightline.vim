@@ -13,8 +13,6 @@ A light and configurable statusline for Vim
 ![lightline.vim - solarized_dark - insert](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_dark/2.png)
 ![lightline.vim - solarized_dark - visual](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_dark/3.png)
 ![lightline.vim - solarized_dark - replace](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_dark/4.png)
-With branch name, readonly mark and modified mark.
-![lightline.vim - solarized_dark - fugitive](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_dark/5.png)
 
 ### solarized theme (light)
 
@@ -22,8 +20,6 @@ With branch name, readonly mark and modified mark.
 ![lightline.vim - solarized_light - insert](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_light/2.png)
 ![lightline.vim - solarized_light - visual](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_light/3.png)
 ![lightline.vim - solarized_light - replace](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_light/4.png)
-With branch name, readonly mark and modified mark.
-![lightline.vim - solarized_light - fugitive](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_light/5.png)
 
 
 ### landscape theme (with font integration)
