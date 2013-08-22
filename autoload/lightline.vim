@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 06:03:02.
+" Last Change: 2013/08/22 09:00:36.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -45,7 +45,7 @@ function! lightline#init()
   let g:lightline._mode_ = {
         \ 'n' : 'normal', 'i' : 'insert', 'R' : 'replace', 'v' : 'visual', 'V' : 'visual',
         \ 'c' : 'command', '': 'visual', 's' : 'select', 'S' : 'select', '': 'select', }
-  let g:lightline.component = get(g:lightline, 'component', {
+  let g:lightline._component = {
         \ 'mode': '%{lightline#mode()}',
         \ 'filename': '%t',
         \ 'modified': '%M',
@@ -54,10 +54,18 @@ function! lightline#init()
         \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}',
         \ 'percent': '%3p%%',
         \ 'lineinfo': '%3l:%-2v',
-        \ 'fugitive': '%{fugitive#head()}' })
-  let g:lightline.component_length = get(g:lightline, 'component_length', {
+        \ 'fugitive': '%{fugitive#head()}' }
+  let g:lightline.component = get(g:lightline, 'component', {})
+  for [k, v] in items(g:lightline._component)
+    let g:lightline.component[k] = get(g:lightline.component, k, v)
+  endfor
+  let g:lightline._component_length = {
         \ 'modified': '(&modified||!&modifiable)',
-        \ 'fugitive': 'strlen(fugitive#head())' })
+        \ 'fugitive': 'strlen(fugitive#head())' }
+  let g:lightline.component_length = get(g:lightline, 'component_length', {})
+  for [k, v] in items(g:lightline._component_length)
+    let g:lightline.component_length[k] = get(g:lightline.component_length, k, v)
+  endfor
   let g:lightline.separator = get(g:lightline, 'separator', {})
   let g:lightline.separator.left = get(g:lightline.separator, 'left', '')
   let g:lightline.separator.right = get(g:lightline.separator, 'right', '')
@@ -98,7 +106,7 @@ function! lightline#mode()
 endfunction
 
 function! s:term(l)
-  return len(a:l) == 5 && type(a:l[4]) == 1 ? 'term='.a:l[4] : ''
+  return len(a:l) == 5 && type(a:l[4]) == 1 ? 'term='.a:l[4].' cterm='.a:l[4] : ''
 endfunction
 function! lightline#highlight(mode)
   let d = has_key(g:lightline.palette, a:mode) ? a:mode : 'normal'
