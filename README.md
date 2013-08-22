@@ -7,6 +7,25 @@ A light and configurable statusline for Vim
 ![lightline.vim - powerline - visual](https://raw.github.com/itchyny/lightline.vim/master/image/powerline/3.png)
 ![lightline.vim - powerline - replace](https://raw.github.com/itchyny/lightline.vim/master/image/powerline/4.png)
 
+### solarized theme (dark)
+
+![lightline.vim - solarized_dark - normal](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_dark/1.png)
+![lightline.vim - solarized_dark - insert](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_dark/2.png)
+![lightline.vim - solarized_dark - visual](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_dark/3.png)
+![lightline.vim - solarized_dark - replace](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_dark/4.png)
+With branch name, readonly mark and modified mark.
+![lightline.vim - solarized_dark - fugitive](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_dark/5.png)
+
+### solarized theme (light)
+
+![lightline.vim - solarized_light - normal](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_light/1.png)
+![lightline.vim - solarized_light - insert](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_light/2.png)
+![lightline.vim - solarized_light - visual](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_light/3.png)
+![lightline.vim - solarized_light - replace](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_light/4.png)
+With branch name, readonly mark and modified mark.
+![lightline.vim - solarized_light - fugitive](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_light/5.png)
+
+
 ### landscape theme (with font integration)
 
 ![lightline.vim - landscape - normal](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/1.png)

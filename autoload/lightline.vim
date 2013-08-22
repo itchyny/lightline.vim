@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 22-Aug-2013.
+" Last Change: 2013/08/22 12:30:46.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -82,18 +82,18 @@ function! lightline#init()
   for m in ['normal', 'insert', 'replace', 'visual', 'inactive']
     let g:lightline.palette[m] = get(g:lightline.palette, m, {})
   endfor
-  try
+  " try
     let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
-  catch
-    call lightline#error('Colorscheme ' . g:lightline.colorscheme . ' could not loaded.')
-    let g:lightline.colorscheme = 'default'
-    let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
-  finally
+  " catch
+  "   call lightline#error('Colorscheme ' . g:lightline.colorscheme . ' could not loaded.')
+  "   let g:lightline.colorscheme = 'default'
+  "   let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+  " finally
     for m in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command']
       call lightline#highlight(m)
     endfor
-    let s:_ = 0
-  endtry
+  "   let s:_ = 0
+  " endtry
 endfunction
 
 function! lightline#mode()

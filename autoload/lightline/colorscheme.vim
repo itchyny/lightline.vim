@@ -37,6 +37,15 @@ let s:cuicolor = {
       \ 'gray8'          : 247,
       \ 'gray9'          : 250,
       \ 'gray10'         : 252,
+      \
+      \ 'yellow'         : 136,
+      \ 'orange'         : 166,
+      \ 'red'            : 160,
+      \ 'magenta'        : 125,
+      \ 'violet'         : 61,
+      \ 'blue'           : 33,
+      \ 'cyan'           : 37,
+      \ 'green'          : 64,
       \ }
 
 let s:guicolor = {
@@ -78,6 +87,15 @@ let s:guicolor = {
       \ 'gray8'          : '#9e9e9e',
       \ 'gray9'          : '#bcbcbc',
       \ 'gray10'         : '#d0d0d0',
+      \
+      \ 'yellow'         : '#b58900',
+      \ 'orange'         : '#cb4b16',
+      \ 'red'            : '#dc322f',
+      \ 'magenta'        : '#d33682',
+      \ 'violet'         : '#6c71c4',
+      \ 'blue'           : '#268bd2',
+      \ 'cyan'           : '#2aa198',
+      \ 'green'          : '#859900',
       \ }
 
 function! lightline#colorscheme#fill(p)
