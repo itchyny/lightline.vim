@@ -342,7 +342,10 @@ Here's my setting. I use the patched font for vim-powerline.
 ```
 When the window width is too narrow, the mode component and the file information component collapse.
 For example, the gundo buffer is narrow.
+Before:
+![lightline.vim - gundo](https://raw.github.com/itchyny/lightline.vim/master/image/gundo0.png)
 
-![lightline.vim - gundo](https://raw.github.com/itchyny/lightline.vim/master/image/gundo.png)
+After:
+![lightline.vim - gundo](https://raw.github.com/itchyny/lightline.vim/master/image/gundo1.png)
 
-Nice, isn't it?
+Nice looking, isn't it?
