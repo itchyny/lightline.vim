@@ -4,14 +4,15 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/22 14:36:22.
+Last Change: 2013/08/22 21:07:54.
 
 CONTENTS					*lightline-contents*
 
 Introduction				|lightline-introduction|
 Options					|lightline-options|
+Font					|lightline-font|
 Examples				|lightline-examples|
-NiceExamples				|lightline-nice-examples|
+Nice Examples				|lightline-nice-examples|
 Troubleshooting				|lightline-troubleshooting|
 Changelog				|lightline-changelog|
 
@@ -74,7 +75,8 @@ OPTIONS						*lightline-options*
 	g:lightline.component_func			*g:lightline.component_func*
 		Another dictionary for components. This is more convenient
 		because the user does not have to set both component and
-		component_flag.
+		component_flag. If a component set to both component and
+		component_func, the setting of component_func has priority.
 		For example, if you want a component for readonly mark, which
 		disappears in help windows:
 >
@@ -113,9 +115,62 @@ OPTIONS						*lightline-options*
 		    \ 'S' : 'S-LINE',
 		    \ '': 'S-BLOCK',
 		    \ '?': '      ' }
+
+==============================================================================
+FONT						*lightline-font*
+You can use the patched font you used for |vim-powerline| or |powerline|.
+
+The patched font for |powerline| is available at
+https://github.com/Lokaltog/powerline-fonts
+
+How to create the patched font for |vim-powerline| is available at
+https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher
+
+If you have installed the patched font for |powerline|, following settings look
+nice.
+>
+	let g:lightline = {
+		\ 'component': {
+		\   'lineinfo': ' %3l:%-2v',
+		\ },
+		\ 'component_func': {
+		\   'readonly': 'MyReadonly',
+		\   'fugitive': 'MyFugitive'
+		\ },
+		\ 'separator': { 'left': '', 'right': '' },
+		\ 'subseparator': { 'left': '', 'right': '' }
+		\ }
+	function! MyReadonly()
+		return &readonly ? '' : ''
+	endfunction
+	function! MyFugitive()
+		return exists("*fugitive#head") && len(fugitive#head()) ? ''.fugitive#head() : ''
+	endfunction
+<
+If you have installed the patched font for |vim-powerline|, following settings
+look nice.
+>
+	let g:lightline = {
+		\ 'component': {
+		\   'lineinfo': '⭡ %3l:%-2v',
+		\ },
+		\ 'component_func': {
+		\   'readonly': 'MyReadonly',
+		\   'fugitive': 'MyFugitive'
+		\ },
+		\ 'separator': { 'left': '⮀', 'right': '⮂' },
+		\ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+		\ }
+	function! MyReadonly()
+		return &readonly ? '⭤' : ''
+	endfunction
+	function! MyFugitive()
+		return exists("*fugitive#head") && len(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+	endfunction
 <
 
-------------------------------------------------------------------------------
+==============================================================================
+
 EXAMPLES					*lightline-examples*
 You can configure the appearance of statusline.
 Write the following examples in you .vimrc(_vimrc).
@@ -184,27 +239,26 @@ A nice example for |vim-powerline| font users:
 	let g:lightline = {
 		\ 'colorscheme': 'wombat',
 		\ 'active': {
-		\   'left': [ [ 'mode', 'paste' ], [ 'myfugitive', 'myfilename' ] ]
+		\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
 		\ },
 		\ 'component_func': {
-		\   'mymodified': 'MyModified',
-		\   'myreadonly': 'MyReadonly',
-		\   'myfugitive': 'MyFugitive',
-		\   'myfilename': 'MyFilename',
+		\   'fugitive': 'MyFugitive',
+		\   'filename': 'MyFilename'
 		\ },
 		\ 'separator': { 'left': '⮀', 'right': '⮂' },
 		\ 'subseparator': { 'left': '⮁', 'right': '⮃' }
 		\ }
 	function! MyModified()
-		return &modifiable && &modified ? '+' : ''
+		return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 	endfunction
 	function! MyReadonly()
-		return &ft !~? 'help' && &ro ? '⭤' : ''
+		return &ft !~? 'help\|vimfiler' && &ro ? '⭤' : ''
 	endfunction
 	function! MyFilename()
 		return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
 		\ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
 		\  &ft == 'unite' ? unite#get_status_string() : 
+		\  &ft == 'vimshell' ? vimshell#get_status_string() : 
 		\ '' != expand('%t') ? expand('%t') : '[No Name]') .
 		\ ('' != MyModified() ? ' ' . MyModified() : '')
 	endfunction
@@ -212,7 +266,6 @@ A nice example for |vim-powerline| font users:
 		return &ft !~? 'vimfiler' && exists("*fugitive#head") && len(fugitive#head()) ? '⭠ '.fugitive#head() : ''
 	endfunction
 <
-
 ------------------------------------------------------------------------------
 TROUBLESHOOTING					*lightline-troubleshooting*
 
