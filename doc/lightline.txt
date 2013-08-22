@@ -1,0 +1,133 @@
+*lightline.txt*	A light and configurable statusline for Vim
+
+Version: 0.0
+Author: itchyny (https://github.com/itchyny)
+License: MIT License
+Repository: https://github.com/itchyny/lightline.vim
+Last Change: 2013/08/22 10:37:17.
+
+CONTENTS					*lightline-contents*
+
+Introduction				|lightline-introduction|
+Options					|lightline-options|
+Examples				|lightline-examples|
+NiceExamples				|lightline-nice-examples|
+Troubleshooting				|lightline-troubleshooting|
+Changelog				|lightline-changelog|
+
+==============================================================================
+INTRODUCTION					*lightline-introduction*
+
+The *lightline* plugin is a light and configurable statusline for Vim.
+
+------------------------------------------------------------------------------
+OPTIONS						*lightline-options*
+
+------------------------------------------------------------------------------
+EXAMPLES					*lightline-examples*
+
+In order to change the colorscheme:
+>
+	let g:lightline = {
+		\ 'colorscheme': 'landscape',
+		\ }
+
+In order to define own component:
+>
+	let g:lightline = {
+		\ 'active': {
+		\   'left': [ [ 'mode', 'paste' ], [ 'myfilename' ] ]
+		\ },
+		\ 'component_func': {
+		\   'myfilename': 'MyFilename',
+		\   'myreadonly': 'MyReadonly',
+		\   'mymodified': 'MyModified',
+		\ },
+		\ }
+	function! MyFilename()
+		return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+		      \ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
+		      \  &ft == 'unite' ? unite#get_status_string() : 
+		      \ '' != expand('%t') ? expand('%t') : '[No Name]') .
+		      \ ('' != MyModified() ? ' ' . MyModified() : '')
+	endfunction
+	function! MyReadonly()
+		return &ft !~? 'help' && &ro ? 'RO' : ''
+	endfunction
+	function! MyModified()
+		return &modifiable && &modified ? '+' : ''
+	endfunction
+
+Separators settings:
+>
+	let g:lightline = {
+		\ 'separator': { 'left': '▶', 'right': '◀' },
+		\ 'subseparator': { 'left': '>', 'right': '<' }
+		\ }
+<
+
+For |powerline| font users:
+>
+	let g:lightline = {
+		\ 'separator': { 'left': '', 'right': '' },
+		\ 'subseparator': { 'left': '', 'right': '' }
+		\ }
+<
+
+For |vim-powerline| font users:
+>
+	let g:lightline = {
+		\ 'separator': { 'left': '⮀', 'right': '⮂' },
+		\ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+		\ }
+<
+
+------------------------------------------------------------------------------
+NICE EXAMPLES					*lightline-nice-examples*
+
+A nice example for |vim-powerline| font users:
+>
+	let g:lightline = {
+		\ 'colorscheme': 'landscape',
+		\ 'active': {
+		\   'left': [ [ 'mode', 'paste' ], [ 'myfugitive', 'myfilename' ] ]
+		\ },
+		\ 'component_func': {
+		\   'mymodified': 'MyModified',
+		\   'myreadonly': 'MyReadonly',
+		\   'myfugitive': 'MyFugitive',
+		\   'myfilename': 'MyFilename',
+		\ },
+		\ 'separator': { 'left': '⮀', 'right': '⮂' },
+		\ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+		\ }
+	function! MyModified()
+		return &modifiable && &modified ? '+' : ''
+	endfunction
+	function! MyReadonly()
+		return &ft !~? 'help\|zcalendar' && &ro ? '⭤' : ''
+	endfunction
+	function! MyFilename()
+		return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+		\ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
+		\  &ft == 'unite' ? unite#get_status_string() : 
+		\ '' != expand('%t') ? expand('%t') : '[No Name]') .
+		\ ('' != MyModified() ? ' ' . MyModified() : '')
+	endfunction
+	function! MyFugitive()
+		return &ft !~? 'vimfiler' && exists("*fugitive#head") && len(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+	endfunction
+<
+
+------------------------------------------------------------------------------
+TROUBLESHOOTING					*lightline-troubleshooting*
+
+
+==============================================================================
+CHANGELOG					*lightline-changelog*
+
+0.0	2013-08-21, ...
+	- Initial commit and implementation
+
+==============================================================================
+vim:tw=78:sw=4:ts=8:ft=help:norl:noet:
