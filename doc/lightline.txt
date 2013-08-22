@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/22 22:22:16.
+Last Change: 2013/08/22 22:34:41.
 
 CONTENTS					*lightline-contents*
 
@@ -197,8 +197,8 @@ In order to define own component:
 		\ }
 	function! MyFilename()
 		return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-		      \ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
-		      \  &ft == 'unite' ? unite#get_status_string() : 
+		      \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+		      \  &ft == 'unite' ? unite#get_status_string() :
 		      \ '' != expand('%t') ? expand('%t') : '[No Name]') .
 		      \ ('' != MyModified() ? ' ' . MyModified() : '')
 	endfunction
@@ -259,9 +259,9 @@ A nice example for |vim-powerline| font users:
 	endfunction
 	function! MyFilename()
 		return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-		\ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
-		\  &ft == 'unite' ? unite#get_status_string() : 
-		\  &ft == 'vimshell' ? vimshell#get_status_string() : 
+		\ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+		\  &ft == 'unite' ? unite#get_status_string() :
+		\  &ft == 'vimshell' ? vimshell#get_status_string() :
 		\ '' != expand('%t') ? expand('%t') : '[No Name]') .
 		\ ('' != MyModified() ? ' ' . MyModified() : '')
 	endfunction
