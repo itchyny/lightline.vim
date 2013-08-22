@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 09:00:36.
+" Last Change: 2013/08/22 09:06:23.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -31,7 +31,7 @@ function! lightline#init()
   let g:lightline = get(g:, 'lightline', {})
   let g:lightline.active = get(g:lightline, 'active', {})
   let g:lightline.inactive = get(g:lightline, 'inactive', {})
-  let g:lightline.active.left = get(g:lightline.active, 'left', [ [ 'mode' ], [ 'filename', 'modified' ] ])
+  let g:lightline.active.left = get(g:lightline.active, 'left', [ [ 'mode' ], [ 'readonly', 'filename', 'modified' ] ])
   let g:lightline.inactive.left = get(g:lightline.inactive, 'left', [ [ 'filename' ] ])
   let g:lightline.active.right = get(g:lightline.active, 'right', [ [ 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ])
   let g:lightline.inactive.right = get(g:lightline.inactive, 'right', [ [ 'lineinfo' ], [ 'percent' ] ])
@@ -49,6 +49,7 @@ function! lightline#init()
         \ 'mode': '%{lightline#mode()}',
         \ 'filename': '%t',
         \ 'modified': '%M',
+        \ 'readonly': '%R',
         \ 'fileencoding': '%{strlen(&fenc)?&fenc:&enc}',
         \ 'fileformat': '%{&fileformat}',
         \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}',
@@ -59,12 +60,13 @@ function! lightline#init()
   for [k, v] in items(g:lightline._component)
     let g:lightline.component[k] = get(g:lightline.component, k, v)
   endfor
-  let g:lightline._component_length = {
+  let g:lightline._component_flag = {
         \ 'modified': '(&modified||!&modifiable)',
+        \ 'readonly': '(&readonly)',
         \ 'fugitive': 'strlen(fugitive#head())' }
-  let g:lightline.component_length = get(g:lightline, 'component_length', {})
-  for [k, v] in items(g:lightline._component_length)
-    let g:lightline.component_length[k] = get(g:lightline.component_length, k, v)
+  let g:lightline.component_flag = get(g:lightline, 'component_flag', {})
+  for [k, v] in items(g:lightline._component_flag)
+    let g:lightline.component_flag[k] = get(g:lightline.component_flag, k, v)
   endfor
   let g:lightline.separator = get(g:lightline, 'separator', {})
   let g:lightline.separator.left = get(g:lightline.separator, 'left', '')
@@ -130,14 +132,14 @@ function! lightline#highlight(mode)
 endfunction
 
 function! lightline#subseparator(x, y, s)
-  if has_key(g:lightline.component_length, a:x)
-    if has_key(g:lightline.component_length, a:y)
-      return '%{'.g:lightline.component_length[a:x].'*'.g:lightline.component_length[a:y]."?(g:lightline.subseparator.left):''}"
+  if has_key(g:lightline.component_flag, a:x)
+    if has_key(g:lightline.component_flag, a:y)
+      return '%{'.g:lightline.component_flag[a:x].'*'.g:lightline.component_flag[a:y]."?(g:lightline.subseparator.left):''}"
     else
-      return '%{'.g:lightline.component_length[a:x]."?(g:lightline.subseparator.left):''}"
+      return '%{'.g:lightline.component_flag[a:x]."?(g:lightline.subseparator.left):''}"
     endif
-  elseif has_key(g:lightline.component_length, a:y)
-    return '%{'.g:lightline.component_length[a:y]."?(g:lightline.subseparator.left):''}"
+  elseif has_key(g:lightline.component_flag, a:y)
+    return '%{'.g:lightline.component_flag[a:y]."?(g:lightline.subseparator.left):''}"
   else
     return a:s
   endif
