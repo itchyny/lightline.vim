@@ -7,7 +7,7 @@ A light and configurable statusline for Vim
 ![lightline.vim - powerline - visual](https://raw.github.com/itchyny/lightline.vim/master/image/powerline/3.png)
 ![lightline.vim - powerline - replace](https://raw.github.com/itchyny/lightline.vim/master/image/powerline/4.png)
 
-### wombat
+### wombat (with font integration)
 
 ![lightline.vim - wombat - normal](https://raw.github.com/itchyny/lightline.vim/master/image/wombat/1.png)
 ![lightline.vim - wombat - insert](https://raw.github.com/itchyny/lightline.vim/master/image/wombat/2.png)
