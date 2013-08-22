@@ -50,6 +50,11 @@ With branch name, readonly mark and modified mark.
 + [powerline](https://github.com/Lokaltog/powerline) is a nice plugin, but difficult to configure.
 + [vim-airline](https://github.com/bling/vim-airline) is a nice plugin, but not configurable. Also, it does *too much* for other plugins, which should be done by users in .vimrc.
 
+## Spirit of this plugin
++ Minimalism. The core script is very small.
++ Configurablity. You can create your own component and easily add to the statusline.
++ Orthogonality. Any plugin should not change the settings of another plugin. Such a plugin-crossing setting should be written by users in `.vimrc`.
+
 ## Author
 itchyny (https://github.com/itchyny)
 
@@ -77,7 +82,7 @@ MIT License
 ## Configuration tutorial
 In default, the statusline looks like:
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/1.png)
-If you want a wombat colorscheme, add the folowing setting to your .vimrc (or \_vimrc in Windows):
+If you want a wombat colorscheme, add the following setting to your .vimrc (or \_vimrc in Windows):
 ```vim
   let g:lightline = {
         \ 'colorscheme': 'wombat',
@@ -138,7 +143,7 @@ Hurrah! Cool!
 
 
 Now, you look into a help file to find the marks annoying.
-Help files are read-only and no-modifiable? We know, of cource!
+Help files are read-only and no-modifiable? We know, of course!
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/8.png)
 OK, so you again edit your .vimrc.
 ```vim
@@ -271,7 +276,7 @@ Define your own filename component. It has priority over the component lightline
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/13.png)
 Looks nice.
 
-Of cource, you can name your component as you wish.
+Of course, you can name your component as you wish.
 ```vim
   let g:lightline = {
         \ 'active': {
