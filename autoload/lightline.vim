@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 10:21:58.
+" Last Change: 2013/08/22 10:23:15.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -22,9 +22,7 @@ function! lightline#update(...)
 endfunction
 
 function! lightline#update_once()
-  if !exists('w:lightline') || w:lightline
-    call lightline#update()
-  endif
+  if !exists('w:lightline') || w:lightline | call lightline#update() | endif
 endfunction
 
 function! lightline#init()
