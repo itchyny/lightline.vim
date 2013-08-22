@@ -40,7 +40,7 @@ With branch name, readonly mark and modified mark.
 
 ## Why yet another...?
 + vim-powerline is a nice plugin, but deprecated.
-+ vim-airline is a nice plugin, but not configurable. Also, it does *too much* for other plugins, which should be done by uesrs in .vimrc.
++ vim-airline is a nice plugin, but not configurable. Also, it does *too much* for other plugins, which should be done by users in .vimrc.
 
 ## Author
 itchyny (https://github.com/itchyny)
