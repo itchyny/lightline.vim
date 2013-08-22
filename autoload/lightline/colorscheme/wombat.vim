@@ -3,9 +3,10 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 13:55:15.
+" Last Change: 2013/08/22 21:44:14.
 " =============================================================================
 let s:base03 = [ '#242424', 235 ]
+let s:base023 = [ '#353535 ', 236 ]
 let s:base02 = [ '#444444 ', 238 ]
 let s:base01 = [ '#585858', 240 ]
 let s:base00 = [ '#666666', 242  ]
@@ -29,7 +30,7 @@ let s:p.insert.left = [ [ s:base02, s:green ], [ s:base3, s:base01 ] ]
 let s:p.replace.left = [ [ s:base02, s:red ], [ s:base3, s:base01 ] ]
 let s:p.visual.left = [ [ s:base02, s:magenta ], [ s:base3, s:base01 ] ]
 let s:p.normal.middle = [ [ s:base02, s:base02 ] ]
-let s:p.inactive.middle = [ [ s:base03, s:base03 ] ]
+let s:p.inactive.middle = [ [ s:base03, s:base023 ] ]
 
 function! s:flatten(p)
   for k in values(a:p)

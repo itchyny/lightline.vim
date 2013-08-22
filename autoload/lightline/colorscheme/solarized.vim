@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 13:31:27.
+" Last Change: 2013/08/22 21:45:29.
 " =============================================================================
 let s:base03 = [ '#002b36', 234 ]
 let s:base02 = [ '#073642', 235 ]
@@ -36,7 +36,7 @@ let s:p.insert.left = [ [ s:base3, s:green ], [ s:base3, s:base01 ] ]
 let s:p.replace.left = [ [ s:base3, s:red ], [ s:base3, s:base01 ] ]
 let s:p.visual.left = [ [ s:base3, s:magenta ], [ s:base3, s:base01 ] ]
 let s:p.normal.middle = [ [ s:base02, s:base02 ] ]
-let s:p.inactive.middle = [ [ s:base03, s:base03 ] ]
+let s:p.inactive.middle = [ [ s:base02, s:base02 ] ]
 
 function! s:flatten(p)
   for k in values(a:p)
