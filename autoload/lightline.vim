@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 23:29:52.
+" Last Change: 2013/08/23 07:32:53.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -57,13 +57,13 @@ function! lightline#init()
         \ 'percent': '%3p%%',
         \ 'lineinfo': '%3l:%-2v',
         \ 'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}' }, 'keep')
-  let g:lightline.component_flag = get(g:lightline, 'component_flag', {})
-  call extend(g:lightline.component_flag, {
+  let g:lightline.component_visible_condition = get(g:lightline, 'component_visible_condition', {})
+  call extend(g:lightline.component_visible_condition, {
         \ 'modified': '(&modified||!&modifiable)',
         \ 'readonly': '(&readonly)',
         \ 'paste': '(&paste)',
         \ 'fugitive': '(exists("*fugitive#head")&&strlen(fugitive#head()))' }, 'keep')
-  let g:lightline.component_func = get(g:lightline, 'component_func', {})
+  let g:lightline.component_function = get(g:lightline, 'component_function', {})
   let g:lightline.separator = get(g:lightline, 'separator', {})
   call extend(g:lightline.separator, { 'left': '', 'right': '' }, 'keep')
   let g:lightline.subseparator = get(g:lightline, 'subseparator', {})
@@ -132,16 +132,14 @@ function! lightline#highlight()
     let [m[2], m[3]] = [s:gui2cui(m[0], m[2]), s:gui2cui(_[1], m[3])]
   endif
   for i in range(len(left))
-    let li = i < len(l) ? l[i] : l[-1]
-    let lj = i + 1 < len(l) ? l[i + 1] : l[-1]
+    let [li, lj] = [i < len(l) ? l[i] : l[-1], i + 1 < len(l) ? l[i + 1] : l[-1]]
     exec printf('hi LightLineLeft_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, li[0], li[1], li[2], li[3], s:term(li))
     exec printf('hi LightLineLeft_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', mode,
           \ i, i + 1, li[1], i == len(left) - 1 ? m[1] : lj[1], li[3], i == len(left) - 1 ? m[3] : lj[3])
   endfor
   exec printf('hi LightLineMiddle_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, m[0], m[1], m[2], m[3], s:term(m))
   for i in reverse(range(len(right)))
-    let ri = i < len(r) ? r[i] : r[-1]
-    let rj = i + 1 < len(r) ? r[i + 1] : r[-1]
+    let [ri, rj] = [i < len(r) ? r[i] : r[-1], i + 1 < len(r) ? r[i + 1] : r[-1]]
     exec printf('hi LightLineRight_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', mode,
           \ i, i + 1, ri[1], i == len(right) - 1 ? m[1] : rj[1], ri[3], i == len(right) - 1 ? m[3] : rj[3])
     exec printf('hi LightLineRight_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, ri[0], ri[1], ri[2], ri[3], s:term(ri))
@@ -150,20 +148,20 @@ function! lightline#highlight()
 endfunction
 
 function! lightline#subseparator(x, y, s)
-  return '%{('.(has_key(g:lightline.component_func,a:x)?'!!strlen('.(g:lightline.component_func[a:x]).'())':get(g:lightline.component_flag,a:x,"1")).')*('.
-        \join(map(copy(a:y),'(has_key(g:lightline.component_func,v:val)?"!!strlen(".g:lightline.component_func[v:val]."())":'.
-        \'get(g:lightline.component_flag,v:val,has_key(g:lightline.component,v:val)?"1":"0"))'),'+').")?('".a:s."'):''}"
+  let [c, f, v] = [ g:lightline.component, g:lightline.component_function,  g:lightline.component_visible_condition ]
+  return '%{('.(has_key(f,a:x)?'!!strlen('.(f[a:x]).'())':get(v,a:x,"1")).')*(('.join(map(copy(a:y),
+        \'(has_key(f,v:val)?"!!strlen(".f[v:val]."())":get(v,v:val,has_key(c,v:val)?"1":"0"))'),')+(')."))?('".a:s."'):''}"
 endfunction
 
 function! lightline#statusline(inactive)
-  let _ = ''
+  let [_, c, f] = [ '', g:lightline.component, g:lightline.component_function ]
   let mode = a:inactive ? 'inactive' : 'active'
   let left = has_key(g:lightline, mode) ? g:lightline[mode].left : g:lightline.active.left
   let right = has_key(g:lightline, mode) ? g:lightline[mode].right : g:lightline.active.right
   for i in range(len(left))
     let _ .= printf('%%#LightLineLeft_%s_%d#', mode, i)
     for j in range(len(left[i]))
-      let _ .= '%( '.(has_key(g:lightline.component_func,left[i][j])?'%{'.g:lightline.component_func[left[i][j]].'()}':get(g:lightline.component,left[i][j],'')).' %)'
+      let _ .= '%( '.(has_key(f,left[i][j])?'%{'.f[left[i][j]].'()}':get(c,left[i][j],'')).' %)'
       if j < len(left[i]) - 1
         let _ .= lightline#subseparator(left[i][j], left[i][j+1:], g:lightline.subseparator.left)
       endif
@@ -178,7 +176,7 @@ function! lightline#statusline(inactive)
       if j
         let _ .= lightline#subseparator(right[i][j], right[i][:j-1], g:lightline.subseparator.right)
       endif
-      let _ .= '%( '.(has_key(g:lightline.component_func,right[i][j])?'%{'.g:lightline.component_func[right[i][j]].'()}':get(g:lightline.component,right[i][j],'')).' %)'
+      let _ .= '%( '.(has_key(f,right[i][j])?'%{'.f[right[i][j]].'()}':get(c,right[i][j],'')).' %)'
     endfor
   endfor
   return _

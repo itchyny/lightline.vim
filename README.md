@@ -163,7 +163,7 @@ OK, so you again edit your .vimrc.
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/9.png)
 Huh? Weird!
 The component does not collapse even if it has no information!
-In order to avoid this, you set expressions to component\_flag, which becomes 1 only when the corresponding components have information.
+In order to avoid this, you set expressions to component\_visible\_condition, which should become 1 only when the corresponding components have information.
 ```vim
   let g:lightline = {
         \ 'colorscheme': 'wombat',
@@ -174,7 +174,7 @@ In order to avoid this, you set expressions to component\_flag, which becomes 1 
         \   'readonly': '%{&filetype!="help"&& &readonly?"⭤":""}',
         \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
         \ },
-        \ 'component_flag': {
+        \ 'component_visible_condition': {
         \   'readonly': '(&filetype!="help"&& &readonly)',
         \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))'
         \ },
@@ -197,7 +197,7 @@ In fact, the components can be created using functions.
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
         \             [ 'readonly', 'filename', 'modified' ] ] },
-        \ 'component_func': {
+        \ 'component_function': {
         \   'readonly': 'MyReadonly',
         \   'modified': 'MyModified'
         \ },
@@ -238,7 +238,7 @@ Now you may know what to do.
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
         \             [ 'filename' ] ] },
-        \ 'component_func': {
+        \ 'component_function': {
         \   'filename': 'MyFilename',
         \   'readonly': 'MyReadonly',
         \   'modified': 'MyModified'
@@ -282,7 +282,7 @@ Of course, you can name your component as you wish.
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
         \             [ 'my_filename' ] ] },
-        \ 'component_func': {
+        \ 'component_function': {
         \   'my_filename': 'MyFilename', ...
 ```
 
@@ -297,7 +297,7 @@ Here's my setting. I use the patched font for vim-powerline.
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
         \ },
-        \ 'component_func': {
+        \ 'component_function': {
         \   'modified': 'MyModified',
         \   'readonly': 'MyReadonly',
         \   'fugitive': 'MyFugitive',
