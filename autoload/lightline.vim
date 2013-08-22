@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 10:09:27.
+" Last Change: 2013/08/22 10:19:45.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -31,7 +31,7 @@ function! lightline#init()
   let g:lightline = get(g:, 'lightline', {})
   let g:lightline.active = get(g:lightline, 'active', {})
   let g:lightline.inactive = get(g:lightline, 'inactive', {})
-  let g:lightline.active.left = get(g:lightline.active, 'left', [ [ 'mode' ], [ 'fugitive', 'readonly', 'filename', 'modified' ] ])
+  let g:lightline.active.left = get(g:lightline.active, 'left', [ [ 'mode', 'paste' ], [ 'fugitive', 'readonly', 'filename', 'modified' ] ])
   let g:lightline.inactive.left = get(g:lightline.inactive, 'left', [ [ 'filename' ] ])
   let g:lightline.active.right = get(g:lightline.active, 'right', [ [ 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ])
   let g:lightline.inactive.right = get(g:lightline.inactive, 'right', [ [ 'lineinfo' ], [ 'percent' ] ])
@@ -50,6 +50,7 @@ function! lightline#init()
         \ 'mode': '%{lightline#mode()}',
         \ 'filename': '%t',
         \ 'modified': '%M',
+        \ 'paste': '%{&paste?"PASTE":""}',
         \ 'readonly': '%R',
         \ 'fileencoding': '%{strlen(&fenc)?&fenc:&enc}',
         \ 'fileformat': '%{&fileformat}',
@@ -64,6 +65,7 @@ function! lightline#init()
   let g:lightline._component_flag = {
         \ 'modified': '(&modified||!&modifiable)',
         \ 'readonly': '(&readonly)',
+        \ 'paste': '(&paste)',
         \ 'fugitive': '(exists("*fugitive#head")&&strlen(fugitive#head()))' }
   let g:lightline.component_flag = get(g:lightline, 'component_flag', {})
   for [k, v] in items(g:lightline._component_flag)
