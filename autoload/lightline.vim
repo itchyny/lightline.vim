@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 21:31:50.
+" Last Change: 2013/08/22 21:38:38.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -39,12 +39,12 @@ function! lightline#init()
         \ 'right': [ [ 'lineinfo' ], [ 'percent' ] ] }, 'keep')
   let g:lightline.mode_map = get(g:lightline, 'mode_map', {})
   call extend(g:lightline.mode_map, {
-        \ 'n' : 'NORMAL', 'i' : 'INSERT', 'R' : 'REPLACE', 'v' : 'VISUAL',
-        \ 'V' : 'V-LINE', 'c' : 'COMMAND', '': 'V-BLOCK', 's' : 'SELECT',
-        \ 'S' : 'S-LINE', '': 'S-BLOCK', '?': '      ' }, 'keep')
+        \ 'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL',
+        \ 'V': 'V-LINE', 'c': 'COMMAND', '': 'V-BLOCK', 's': 'SELECT',
+        \ 'S': 'S-LINE', '': 'S-BLOCK', '?': '      ' }, 'keep')
   let g:lightline._mode_ = {
-        \ 'n' : 'normal', 'i' : 'insert', 'R' : 'replace', 'v' : 'visual', 'V' : 'visual',
-        \ 'c' : 'command', '': 'visual', 's' : 'select', 'S' : 'select', '': 'select' }
+        \ 'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual',
+        \ 'c': 'command', '': 'visual', 's': 'select', 'S': 'select', '': 'select' }
   let g:lightline.component = get(g:lightline, 'component', {})
   call extend(g:lightline.component, {
         \ 'mode': '%{lightline#mode()}',
