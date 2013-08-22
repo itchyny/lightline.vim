@@ -7,14 +7,14 @@ A light and configurable statusline for Vim
 ![lightline.vim - powerline - visual](https://raw.github.com/itchyny/lightline.vim/master/image/powerline/3.png)
 ![lightline.vim - powerline - replace](https://raw.github.com/itchyny/lightline.vim/master/image/powerline/4.png)
 
-### wombat (with font integration)
+### wombat (with patched font)
 
 ![lightline.vim - wombat - normal](https://raw.github.com/itchyny/lightline.vim/master/image/wombat/1.png)
 ![lightline.vim - wombat - insert](https://raw.github.com/itchyny/lightline.vim/master/image/wombat/2.png)
 ![lightline.vim - wombat - visual](https://raw.github.com/itchyny/lightline.vim/master/image/wombat/3.png)
 ![lightline.vim - wombat - replace](https://raw.github.com/itchyny/lightline.vim/master/image/wombat/4.png)
 
-### jellybeans (with font integration)
+### jellybeans (with patched font)
 
 ![lightline.vim - jellybeans - normal](https://raw.github.com/itchyny/lightline.vim/master/image/jellybeans/1.png)
 ![lightline.vim - jellybeans - insert](https://raw.github.com/itchyny/lightline.vim/master/image/jellybeans/2.png)
@@ -36,7 +36,7 @@ A light and configurable statusline for Vim
 ![lightline.vim - solarized_light - replace](https://raw.github.com/itchyny/lightline.vim/master/image/solarized_light/4.png)
 
 
-### landscape theme (with font integration)
+### landscape theme (with patched font)
 
 ![lightline.vim - landscape - normal](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/1.png)
 ![lightline.vim - landscape - insert](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/2.png)
@@ -45,7 +45,7 @@ A light and configurable statusline for Vim
 With branch name, readonly mark and modified mark.
 ![lightline.vim - landscape - fugitive](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/5.png)
 
-## Why yet another...?
+## Why yet another clone for powerline?
 + vim-powerline is a nice plugin, but deprecated.
 + vim-airline is a nice plugin, but not configurable. Also, it does *too much* for other plugins, which should be done by users in .vimrc.
 
@@ -102,7 +102,7 @@ The `g:lightline.active.left` stands for the components which appears on the lef
 
 You find the read-only mark is not cool:
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/5.png)
-So you add the component setting (the following setting is effective with the integrated font for vim-powerline):
+So you add the component setting (the following setting is effective with the patched font for vim-powerline):
 ```vim
   let g:lightline = {
         \ 'colorscheme': 'wombat',
