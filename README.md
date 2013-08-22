@@ -42,7 +42,7 @@ A light and configurable statusline for Vim
 ![lightline.vim - landscape - insert](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/2.png)
 ![lightline.vim - landscape - visual](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/3.png)
 ![lightline.vim - landscape - replace](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/4.png)
-With branch name, readonly mark and modified mark.
+With branch name, read-only mark and modified mark.
 ![lightline.vim - landscape - fugitive](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/5.png)
 
 ## Why yet another clone for powerline?
@@ -52,7 +52,7 @@ With branch name, readonly mark and modified mark.
 
 ## Spirit of this plugin
 + Minimalism. The core script is very small.
-+ Configurablity. You can create your own component and easily add to the statusline.
++ Configurability. You can create your own component and easily add to the statusline.
 + Orthogonality. Any plugin should not change the settings of another plugin. Such a plugin-crossing setting should be written by users in `.vimrc`.
 
 ## Author
