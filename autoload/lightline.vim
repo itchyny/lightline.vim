@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 14:21:34.
+" Last Change: 2013/08/22 15:32:52.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -163,9 +163,12 @@ function! lightline#highlight(mode)
 endfunction
 
 function! lightline#subseparator(x, y, s)
-  return '%{('.get(g:lightline.component_flag,a:x,has_key(g:lightline.component_func,a:x)?'!!strlen('.g:lightline.component_func[a:x].'())':"1").')*('.
-        \join(map(copy(a:y),'get(g:lightline.component_flag,v:val,has_key(g:lightline.component_func,v:val)?'.
-        \'"!!strlen(".g:lightline.component_func[v:val]."())":has_key(g:lightline.component,v:val)?"1":"0")'),'+').")?('".a:s."'):''}"
+  return '%{('.(has_key(g:lightline.component_func,a:x)?'!!strlen('.(g:lightline.component_func[a:x]).'())':get(g:lightline.component_flag,a:x,"1")).')*('.
+        \join(map(copy(a:y),'(has_key(g:lightline.component_func,v:val)?"!!strlen(".g:lightline.component_func[v:val]."())":'.
+        \'get(g:lightline.component_flag,v:val,has_key(g:lightline.component,v:val)?"1":"0"))'),'+').")?('".a:s."'):''}"
+  " return '%{('.get(g:lightline.component_flag,a:x,has_key(g:lightline.component_func,a:x)?'!!strlen('.g:lightline.component_func[a:x].'())':"1").')*('.
+  "       \join(map(copy(a:y),'get(g:lightline.component_flag,v:val,has_key(g:lightline.component_func,v:val)?'.
+  "       \'"!!strlen(".g:lightline.component_func[v:val]."())":has_key(g:lightline.component,v:val)?"1":"0")'),'+').")?('".a:s."'):''}"
 endfunction
 
 function! lightline#statusline(inactive)
@@ -176,7 +179,8 @@ function! lightline#statusline(inactive)
   for i in range(len(left))
     let _ .= printf('%%#LightLineLeft_%s_%d#', mode, i)
     for j in range(len(left[i]))
-      let _ .= '%( '.get(g:lightline.component,left[i][j],has_key(g:lightline.component_func,left[i][j])?'%{'.g:lightline.component_func[left[i][j]].'()}':'').' %)'
+      " let _ .= '%( '.get(g:lightline.component,left[i][j],has_key(g:lightline.component_func,left[i][j])?'%{'.g:lightline.component_func[left[i][j]].'()}':'').' %)'
+      let _ .= '%( '.(has_key(g:lightline.component_func,left[i][j])?'%{'.g:lightline.component_func[left[i][j]].'()}':get(g:lightline.component,left[i][j],'')).' %)'
       if j < len(left[i]) - 1
         let _ .= lightline#subseparator(left[i][j], left[i][j+1:], g:lightline.subseparator.left)
       endif
@@ -191,7 +195,8 @@ function! lightline#statusline(inactive)
       if j
         let _ .= lightline#subseparator(right[i][j], right[i][:j-1], g:lightline.subseparator.right)
       endif
-      let _ .= '%( '.get(g:lightline.component,right[i][j],has_key(g:lightline.component_func,right[i][j])?'%{'.g:lightline.component_func[right[i][j]].'()}':'').' %)'
+      " let _ .= '%( '.get(g:lightline.component,right[i][j],has_key(g:lightline.component_func,right[i][j])?'%{'.g:lightline.component_func[right[i][j]].'()}':'').' %)'
+      let _ .= '%( '.(has_key(g:lightline.component_func,right[i][j])?'%{'.g:lightline.component_func[right[i][j]].'()}':get(g:lightline.component,right[i][j],'')).' %)'
     endfor
   endfor
   return _
