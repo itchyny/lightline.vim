@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 09:06:23.
+" Last Change: 2013/08/22 09:07:55.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -55,7 +55,7 @@ function! lightline#init()
         \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}',
         \ 'percent': '%3p%%',
         \ 'lineinfo': '%3l:%-2v',
-        \ 'fugitive': '%{fugitive#head()}' }
+        \ 'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}' }
   let g:lightline.component = get(g:lightline, 'component', {})
   for [k, v] in items(g:lightline._component)
     let g:lightline.component[k] = get(g:lightline.component, k, v)
@@ -63,7 +63,7 @@ function! lightline#init()
   let g:lightline._component_flag = {
         \ 'modified': '(&modified||!&modifiable)',
         \ 'readonly': '(&readonly)',
-        \ 'fugitive': 'strlen(fugitive#head())' }
+        \ 'fugitive': '(exists("*fugitive#head")&&strlen(fugitive#head()))' }
   let g:lightline.component_flag = get(g:lightline, 'component_flag', {})
   for [k, v] in items(g:lightline._component_flag)
     let g:lightline.component_flag[k] = get(g:lightline.component_flag, k, v)
