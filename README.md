@@ -218,7 +218,7 @@ Fine and readable!
 
 Finally, you come up with concatenating the three components:
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/12.png)
-Now you may now know what to do.
+Now you may know what to do.
 ```vim
   let g:lightline = {
         \ 'colorscheme': 'wombat',
