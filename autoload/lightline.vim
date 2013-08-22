@@ -3,14 +3,13 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 21:38:38.
+" Last Change: 2013/08/22 23:29:52.
 " =============================================================================
 
 let s:save_cpo = &cpo
 set cpo&vim
 
 let s:_ = 1
-
 let s:is_win32term = (has('win32') || has('win64')) && !has('gui_running')
 
 function! lightline#update(...)
