@@ -272,7 +272,7 @@ Now you may know what to do.
          \ ('' != MyModified() ? ' ' . MyModified() : '')
   endfunction
 ```
-Define your own filename component. It has priority over the component lightline has.
+Define your own filename component. Your component has priority over the default component.
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/13.png)
 Looks nice.
 
@@ -286,4 +286,4 @@ Of course, you can name your component as you wish.
         \   'my_filename': 'MyFilename', ...
 ```
 
-This is the end of the tutorial. Good luck with your nice statusline.
+This is the end of the tutorial. Good luck with your nice statuslines.
