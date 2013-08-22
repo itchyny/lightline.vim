@@ -82,7 +82,7 @@ MIT License
 ## Configuration tutorial
 In default, the statusline looks like:
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/1.png)
-If you want a wombat colorscheme, add the following setting to your .vimrc (or \_vimrc in Windows):
+If you want a wombat colorscheme, add the following setting to your .vimrc (or \_vimrc on Windows):
 ```vim
   let g:lightline = {
         \ 'colorscheme': 'wombat',
@@ -93,7 +93,7 @@ to get:
 
 If you have installed [vim-fugitive](https://github.com/tpope/vim-fugitive), the branch status is automatically available:
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/3.png)
-but you find it annoying! So you add to your .vimrc:
+but you find it annoying! Then you add to your .vimrc:
 ```vim
   let g:lightline = {
         \ 'colorscheme': 'wombat',
@@ -106,7 +106,7 @@ but you find it annoying! So you add to your .vimrc:
 OK. The branch section has been removed.
 The `g:lightline.active.left` stands for the components which appear on the left hand side, for the active window.
 
-You find the read-only mark is not cool:
+You think that the read-only mark is not so cool:
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/5.png)
 So you add the component setting (the following setting is effective with the patched font for vim-powerline):
 ```vim
@@ -186,7 +186,7 @@ In order to avoid this, you set expressions to component\_flag, which becomes 1 
 Okay. Works nice.
 
 
-However, you may wonder we cannot gather these settings?
+However, you may wonder we cannot gather these settings.
 Or, if you want to do something more complicated?
 
 
@@ -229,7 +229,7 @@ In fact, the components can be created using functions.
 Fine and readable! 
 
 
-Finally, you come up with concatenating the three components:
+Finally, you come up with concatenating the three components: the read-only mark, the filename and the modified mark.
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/12.png)
 Now you may know what to do.
 ```vim
