@@ -16,6 +16,10 @@ A light and configurable statusline for Vim
 With branch name, readonly mark and modified mark.
 ![lightline.vim - landscape - fugitive](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/5.png)
 
+## Why yet another...?
++ vim-powerline is a nice plugin, but deprecated.
++ vim-airline is a nice plugin, but not configurable. Also, it does *too much* for other plugins, which should be done by uesrs in .vimrc.
+
 ## Author
 itchyny (https://github.com/itchyny)
 
