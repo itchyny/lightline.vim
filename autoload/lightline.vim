@@ -3,13 +3,15 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 10:23:15.
+" Last Change: 22-Aug-2013.
 " =============================================================================
 
 let s:save_cpo = &cpo
 set cpo&vim
 
 let s:_ = 1
+
+let s:is_win32term = (has('win32') || has('win64')) && !has('gui_running')
 
 function! lightline#update(...)
   if s:_ | call lightline#init() | endif
@@ -111,6 +113,20 @@ endfunction
 function! s:term(l)
   return len(a:l) == 5 && type(a:l[4]) == 1 ? 'term='.a:l[4].' cterm='.a:l[4] : ''
 endfunction
+
+function! s:gui2cui(rgb, fallback)
+  let rgb = map(matchlist(a:rgb, '#\(..\)\(..\)\(..\)')[1:3], '0 + ("0x".v:val)')
+  if len(rgb) == 0
+    let rgb = lightline#colortable#name_to_rgb(a:rgb)
+    if len(rgb) == 0
+		throw a:rgb
+      return a:fallback % 128
+    endif
+  endif
+  let rgb = [rgb[0] > 127 ? 4 : 0, rgb[1] > 127 ? 2 : 0, rgb[2] > 127 ? 1 : 0]
+  return rgb[0] + rgb[1] + rgb[2]
+endfunction
+
 function! lightline#highlight(mode)
   let d = has_key(g:lightline.palette, a:mode) ? a:mode : 'normal'
   let c = g:lightline.palette
@@ -119,6 +135,16 @@ function! lightline#highlight(mode)
   let l = has_key(c, d) && has_key(c[d], 'left') ? c[d].left : c.normal.left
   let r = has_key(c, d) && has_key(c[d], 'right') ? c[d].right : c.normal.right
   let m = has_key(c, d) && has_key(c[d], 'middle') ? c[d].middle[0] : c.normal.middle[0]
+  if s:is_win32term
+    " patching color values for windows console
+    for _  in l
+      let [_[2], _[3]] = [s:gui2cui(_[0], _[2]), s:gui2cui(_[1], _[3])]
+    endfor
+    for _  in r
+      let [_[2], _[3]] = [s:gui2cui(_[0], _[2]), s:gui2cui(_[1], _[3])]
+    endfor
+    let [m[2], m[3]] = [s:gui2cui(m[0], m[2]), s:gui2cui(_[1], m[3])]
+  endif
   for i in range(len(left))
     exec printf('hi LightLineLeft_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', a:mode, i, l[i][0], l[i][1], l[i][2], l[i][3], s:term(l[i]))
     exec printf('hi LightLineLeft_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', a:mode,
