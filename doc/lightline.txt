@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/22 21:07:54.
+Last Change: 2013/08/22 21:09:59.
 
 CONTENTS					*lightline-contents*
 
@@ -180,6 +180,7 @@ In order to change the colorscheme:
 	let g:lightline = {
 		\ 'colorscheme': 'wombat',
 		\ }
+<
 
 In order to define own component:
 >
@@ -206,6 +207,7 @@ In order to define own component:
 	function! MyModified()
 		return &modifiable && &modified ? '+' : ''
 	endfunction
+<
 
 Separators settings:
 >
