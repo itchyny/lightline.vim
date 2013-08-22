@@ -331,7 +331,7 @@ Here's my setting. I use the patched font for vim-powerline.
     return winwidth('.') > 60 ? &fileformat : ''
   endfunction
   function! MyFiletype()
-    return winwidth('.') > 60 ? &filetype: ''
+    return winwidth('.') > 60 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
   endfunction
   function! MyFileencoding()
     return winwidth('.') > 60 ? (strlen(&fenc) ? &fenc : &enc) : ''
