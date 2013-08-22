@@ -1,9 +1,9 @@
 " =============================================================================
-" Filename: autoload/lightline/colorscheme/wombat.vim
+" Filename: autoload/lightline/colorscheme/jellybeans.vim
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 18:50:17.
+" Last Change: 2013/08/22 19:40:13.
 " =============================================================================
 let s:base03 = [ '#151513', 233 ]
 let s:base02 = [ '#30302c ', 236 ]

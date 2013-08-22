@@ -98,13 +98,48 @@ let s:guicolor = {
       \ 'green'          : '#859900',
       \ }
 
+function! s:convert(rgb)
+  let rgb = map(matchlist(a:rgb, '#\(..\)\(..\)\(..\)')[1:3], '0 + ("0x".v:val)')
+  if len(rgb) == 0
+    return 0
+  endif
+  if rgb[0] == 0xc0 && rgb[1] == 0xc0 && rgb[2] == 0xc0
+    return 7
+  elseif rgb[0] == 0x80 && rgb[1] == 0x80 && rgb[2] == 0x80
+    return 8
+  elseif (rgb[0] == 0x80 || rgb[0] == 0x00) && (rgb[1] == 0x80 || rgb[1] == 0x00) && (rgb[2] == 0x80 || rgb[2] == 0x00)
+    return (rgb[0] / 0x80) + (rgb[1] / 0x80) * 2 + (rgb[1] / 0x80) * 4
+  elseif abs(rgb[0]-rgb[1]) < 3 && abs(rgb[1]-rgb[2]) < 3 && abs(rgb[2]-rgb[0]) < 3
+    return s:black((rgb[0] + rgb[1] + rgb[2]) / 3)
+  else
+    return 16 + ((s:nr(rgb[0]) * 6) + s:nr(rgb[1])) * 6 + s:nr(rgb[2])
+  endif
+endfunction
+
+function! s:black(x)
+  if a:x < 0x04
+    return 16
+  elseif a:x > 0xf4
+    return 231
+  elseif index([0x00, 0x5f, 0x87, 0xaf, 0xdf, 0xff], a:x) >= 0
+    let l = a:x / 0x30
+    return ((l * 6) + l) * 6 + l + 16
+  else
+    return 232 + (a:x < 8 ? 0 : a:x < 0x60 ? (a:x-8)/10 : a:x < 0x76 ? (a:x-0x60)/6+9 : (a:x-8)/10)
+  endif
+endfunction
+
+function! s:nr(x)
+  return a:x < 0x2f ? 0 : a:x < 0x73 ? 1 : a:x < 0x9b ? 2 : a:x < 0xc7 ? 3 : a:x < 0xef ? 4 : 5
+endfunction
+
 function! lightline#colorscheme#fill(p)
   for k in values(a:p)
     for l in values(k)
       for m in l
         if len(m) < 4 && type(m[0]) == 1 && type(m[1]) == 1
-          call insert(m, get(s:cuicolor, m[0], 15), 2)
-          call insert(m, get(s:cuicolor, m[1], 15), 3)
+          call insert(m, get(s:cuicolor, m[0], s:convert(m[0])), 2)
+          call insert(m, get(s:cuicolor, m[1], s:convert(m[1])), 3)
           let m[0] = get(s:guicolor, m[0], m[0])
           let m[1] = get(s:guicolor, m[1], m[1])
         endif
