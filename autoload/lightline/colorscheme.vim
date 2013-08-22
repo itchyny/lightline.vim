@@ -1,3 +1,11 @@
+" =============================================================================
+" Filename: autoload/colorscheme/colorscheme.vim
+" Version: 0.0
+" Author: itchyny
+" License: MIT License
+" Last Change: 2013/08/22 21:12:07.
+" =============================================================================
+
 let s:cuicolor = {
       \ 'black'          : 16,
       \ 'white'          : 231,

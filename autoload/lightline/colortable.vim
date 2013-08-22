@@ -1,3 +1,11 @@
+" =============================================================================
+" Filename: autoload/colorscheme/colortable.vim
+" Version: 0.0
+" Author: itchyny
+" License: MIT License
+" Last Change: 2013/08/22 21:12:21.
+" =============================================================================
+
 function! s:load()
   let rgbfile = $VIMRUNTIME . '/rgb.txt'
   let table = {}
