@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/22 21:09:59.
+Last Change: 2013/08/22 22:22:16.
 
 CONTENTS					*lightline-contents*
 
@@ -77,7 +77,7 @@ OPTIONS						*lightline-options*
 		because the user does not have to set both component and
 		component_flag. If a component set to both component and
 		component_func, the setting of component_func has priority.
-		For example, if you want a component for readonly mark, which
+		For example, if you want a component for read-only mark, which
 		disappears in help windows:
 >
 		let g:lightline = {
@@ -95,7 +95,8 @@ OPTIONS						*lightline-options*
 <
 	g:lightline.colorscheme			*g:lightline.colorscheme*
 		The colorscheme for lightline.vim.
-		Currently, wombat, solarized and landscape are available.
+		Currently, wombat, solarized, powerline, Tomorrow, jellybeans
+		and landscape are available.
 >
 		let g:lightline.colorscheme = 'default'
 <
