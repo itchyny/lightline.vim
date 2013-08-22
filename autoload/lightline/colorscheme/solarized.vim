@@ -1,9 +1,9 @@
 " =============================================================================
-" Filename: autoload/lightline/colorscheme/default.vim
+" Filename: autoload/lightline/colorscheme/solarized.vim
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 13:13:10.
+" Last Change: 2013/08/22 13:31:27.
 " =============================================================================
 let s:base03 = [ '#002b36', 234 ]
 let s:base02 = [ '#073642', 235 ]
