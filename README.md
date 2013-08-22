@@ -57,7 +57,7 @@ MIT License
 
 ## Installation
 ### Manually
-1. Put all files under $VIM/.
+1. Put all files under $VIM.
 
 ### Vundle (https://github.com/gmarik/vundle)
 1. Add the following configuration to your .vimrc.
