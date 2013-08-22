@@ -7,12 +7,14 @@ A light and configurable statusline for Vim
 ![lightline.vim - powerline - visual](https://raw.github.com/itchyny/lightline.vim/master/image/powerline/3.png)
 ![lightline.vim - powerline - replace](https://raw.github.com/itchyny/lightline.vim/master/image/powerline/4.png)
 
-### landscape theme
+### landscape theme (with font integration)
 
 ![lightline.vim - landscape - normal](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/1.png)
 ![lightline.vim - landscape - insert](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/2.png)
 ![lightline.vim - landscape - visual](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/3.png)
 ![lightline.vim - landscape - replace](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/4.png)
+With branch name, readonly mark and modified mark.
+![lightline.vim - landscape - fugitive](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/5.png)
 
 ## Author
 itchyny (https://github.com/itchyny)
