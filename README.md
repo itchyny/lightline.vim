@@ -69,7 +69,7 @@ MIT License
 ## Configuration tutorial
 In default, the statusline looks like:
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/1.png)
-If you want a wombat colorscheme, add the folowing settin to your .vimrc:
+If you want a wombat colorscheme, add the folowing setting to your .vimrc (or \_vimrc in Windows):
 ```vim
   let g:lightline = {
         \ 'colorscheme': 'wombat',
@@ -90,9 +90,10 @@ but you find it annoying! So you add to your .vimrc:
         \ }
 ```
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/4.png)
-OK. The branch section is removed.
+OK. The branch section has been removed.
+The `g:lightline.active.left` stands for the components which appears on the left hand side, for the active window.
 
-However, you find the readonly mark is not cool:
+You find the read-only mark is not cool:
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/5.png)
 So you add the component setting (the following setting is effective with the integrated font for vim-powerline):
 ```vim
@@ -129,7 +130,7 @@ Hurrah! Cool!
 
 
 Now, you look into a help file to find the marks annoying.
-Help files are readonly and no-modifiable? We know, of cource!
+Help files are read-only and no-modifiable? We know, of cource!
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/8.png)
 OK, so you again edit your .vimrc.
 ```vim
@@ -169,7 +170,7 @@ In order to avoid this, you set expressions to component\_flag, which becomes 1 
         \ }
 ```
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/10.png)
-Okey. Works nice.
+Okay. Works nice.
 
 
 However, you may wonder we cannot gather these settings?
@@ -217,7 +218,7 @@ Fine and readable!
 
 Finally, you come up with concatenating the three components:
 ![lightline.vim - tutorial](https://raw.github.com/itchyny/lightline.vim/master/image/tutorial/12.png)
-Now you may now what to do.
+Now you may now know what to do.
 ```vim
   let g:lightline = {
         \ 'colorscheme': 'wombat',
