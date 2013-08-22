@@ -340,3 +340,7 @@ Here's my setting. I use the patched font for vim-powerline.
     return winwidth('.') > 60 ? lightline#mode() : ''
   endfunction
 ```
+When the window width is too narrow, the mode component and the file information component collapse.
+For example, the gundo buffer is narrow.
+![lightline.vim - gundo](https://raw.github.com/itchyny/lightline.vim/master/image/gundo.png)
+Nice, isn't it?
