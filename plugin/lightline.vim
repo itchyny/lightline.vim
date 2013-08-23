@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/23 13:36:39.
+" Last Change: 2013/08/23 14:19:14.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -13,7 +13,7 @@ augroup LightLine
   autocmd!
   autocmd ColorScheme * call lightline#highlight()
   autocmd WinEnter,BufWinEnter * call lightline#update()
-  autocmd CursorMoved,FileType * call lightline#update_once()
+  autocmd CursorMoved,FileType,BufUnload * call lightline#update_once()
 augroup END
 
 let &cpo = s:save_cpo
