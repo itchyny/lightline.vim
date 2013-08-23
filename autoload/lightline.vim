@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/23 13:36:31.
+" Last Change: 2013/08/23 19:20:42.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -30,7 +30,7 @@ function! lightline#init()
   let g:lightline = get(g:, 'lightline', {})
   let g:lightline.active = get(g:lightline, 'active', {})
   call extend(g:lightline.active, {
-        \ 'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
+        \ 'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
         \ 'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ] }, 'keep')
   let g:lightline.inactive = get(g:lightline, 'inactive', {})
   call extend(g:lightline.inactive, {
@@ -58,14 +58,12 @@ function! lightline#init()
         \ 'fileformat': '%{&fileformat}',
         \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}',
         \ 'percent': '%3p%%',
-        \ 'lineinfo': '%3l:%-2v',
-        \ 'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}' }, 'keep')
+        \ 'lineinfo': '%3l:%-2v' }, 'keep')
   let g:lightline.component_visible_condition = get(g:lightline, 'component_visible_condition', {})
   call extend(g:lightline.component_visible_condition, {
         \ 'modified': '(&modified||!&modifiable)',
         \ 'readonly': '(&readonly)',
-        \ 'paste': '(&paste)',
-        \ 'fugitive': '(exists("*fugitive#head")&&strlen(fugitive#head()))' }, 'keep')
+        \ 'paste': '(&paste)' }, 'keep')
   let g:lightline.component_function = get(g:lightline, 'component_function', {})
   let g:lightline.separator = get(g:lightline, 'separator', {})
   call extend(g:lightline.separator, { 'left': '', 'right': '' }, 'keep')

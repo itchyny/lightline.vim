@@ -86,199 +86,278 @@ MIT License
 ## Configuration tutorial
 In default, the statusline looks like:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/1.png)
-If you want a wombat colorscheme, add the following setting to your .vimrc (or \_vimrc on Windows):
+If you want a colorscheme which looks well with the wombat colorscheme, add the following setting to your .vimrc (or \_vimrc on Windows):
 ```vim
-  let g:lightline = {
-        \ 'colorscheme': 'wombat',
-        \ }
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
 ```
 to get:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/2.png)
 
-If you have installed [vim-fugitive](https://github.com/tpope/vim-fugitive), the branch status is automatically available:
+You may think that the default read-only mark is not so cool:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/3.png)
-but you find it annoying! Then you add to your .vimrc:
+Then edit the readonly component.
+The lightline components are stored in `g:lightline.component`.
+So you add the setting of `g:lightline.component.readonly` in your .vimrc. (the following setting is effective with the patched font for vim-powerline):
 ```vim
-  let g:lightline = {
-        \ 'colorscheme': 'wombat',
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'readonly', 'filename', 'modified' ] ] }
-        \ }
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"⭤":""}',
+      \ }
+      \ }
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/4.png)
-OK. The branch section has been removed.
-The `g:lightline.active.left` stands for the components which appear on the left hand side, for the active window.
-
-You think that the read-only mark is not so cool:
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/5.png)
-So you add the component setting (the following setting is effective with the patched font for vim-powerline):
-```vim
-  let g:lightline = {
-        \ 'colorscheme': 'wombat',
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'readonly', 'filename', 'modified' ] ] },
-        \ 'component': {
-        \   'readonly': '%{&readonly?"⭤":""}'
-        \ }
-        \ }
-```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/6.png)
 How nice!
 
 But the boundaries are quadrilateral. You may miss the powerline.
 You have installed a cool font for powerlines, so you can use it.
 ```vim
-  let g:lightline = {
-        \ 'colorscheme': 'wombat',
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'readonly', 'filename', 'modified' ] ] },
-        \ 'component': {
-        \   'readonly': '%{&readonly?"⭤":""}'
-        \ },
-        \ 'separator': { 'left': '⮀', 'right': '⮂' },
-        \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-        \ }
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"⭤":""}',
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/7.png)
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/5.png)
 Hurrah! Cool!
 
 
 Now, you look into a help file to find the marks annoying.
-Help files are read-only and no-modifiable? We know, of course!
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/8.png)
+Help files are read-only and no-modifiable? We know that!
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/6.png)
 OK, so you again edit your .vimrc.
 ```vim
-  let g:lightline = {
-        \ 'colorscheme': 'wombat',
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'readonly', 'filename', 'modified' ] ] },
-        \ 'component': {
-        \   'readonly': '%{&filetype!="help"&& &readonly?"⭤":""}',
-        \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
-        \ },
-        \ 'separator': { 'left': '⮀', 'right': '⮂' },
-        \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-        \ }
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/7.png)
 Huh? Weird!
 The component does not collapse even if it has no information!
-In order to avoid this, you set expressions to component\_visible\_condition, which should become 1 only when the corresponding components have information.
+In order to avoid this situation, you set expressions to component\_visible\_condition, which should become 1 only when the corresponding components have information.
 ```vim
-  let g:lightline = {
-        \ 'colorscheme': 'wombat',
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'readonly', 'filename', 'modified' ] ] },
-        \ 'component': {
-        \   'readonly': '%{&filetype!="help"&& &readonly?"⭤":""}',
-        \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
-        \ },
-        \ 'component_visible_condition': {
-        \   'readonly': '(&filetype!="help"&& &readonly)',
-        \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))'
-        \ },
-        \ 'separator': { 'left': '⮀', 'right': '⮂' },
-        \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-        \ }
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
 ```
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/8.png)
+Okay. It works nice.
+
+
+How does lightline desides the components to show in the statusline?
+It's very simple.
+The variable to control the components is `g:lightline.active.left` and `g:lightline.active.left`.
+For example, you add the `g:lightline.active.left` in .vimrc.
+```vim
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+```
+The plugin arranges all the component:
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
+The mode component, the paste component, read-only component, filename component and modified component in a row.
+Normally, the paste component does not show up.
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/10.png)
-Okay. Works nice.
+If the file is not read-only (more common case), the read-only component does not show up.
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/11.png)
 
 
-However, you may wonder we cannot gather these settings.
-Or, if you want to do something more complicated?
+Again look into `g:lightline.active.left`.
+```vim
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified' ] ] ...
+```
+And the screen shot.
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
+The mode and paste component are displayed in the same group.
+And The read-only, filename and modified component are in the second group.
+It corresponds to the structure of `g:lightline.active.left`.
+
+
+GitHub branch is important for us.
+And is a default component in powerline.
+However, lightline does not provide the branch feature in default.
+
+In order to show the branch in statusline, firstly you install the [vim-fugitive](https://github.com/tpope/vim-fugitive) plugin.
+Then edit the g:lightline in your .vimrc.
++ Add fugitive component to `g:lightline.component`.
++ Add the condition when the fugitive component has information to `g:lightline.component_visible_condition`.
++ Add the component by inserting 'fugitive' to `g:lightline.active.left`.
+```vim
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+```
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/12.png)
+Okay, the branch component is added!
+
+
+
+Now, you might get tired of setting both `'component'` and `'component_visible_condition'`.
+Or if you want to do something more complicated?
 
 
 In fact, the components can be created using functions.
 ```vim
-  let g:lightline = {
-        \ 'colorscheme': 'wombat',
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'readonly', 'filename', 'modified' ] ] },
-        \ 'component_function': {
-        \   'readonly': 'MyReadonly',
-        \   'modified': 'MyModified'
-        \ },
-        \ 'separator': { 'left': '⮀', 'right': '⮂' },
-        \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-        \ }
-  function! MyModified()
-    if &filetype == "help"
-      return ""
-    elseif &modified
-      return "+"
-    elseif &modifiable
-      return ""
-    else
-      return ""
-    endif
-  endfunction
-  function! MyReadonly()
-    if &filetype == "help"
-      return ""
-    elseif &readonly
-      return "⭤"
-    else
-      return ""
-    endif
-  endfunction
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'MyFugitive',
+      \   'readonly': 'MyReadonly',
+      \   'modified': 'MyModified'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+function! MyModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! MyReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "⭤"
+  else
+    return ""
+  endif
+endfunction
+
+function! MyFugitive()
+  return exists('*fugitive#head') ? fugitive#head()
+endfunction
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/11.png)
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/13.png)
 Fine and readable! 
 
 
 Finally, you come up with concatenating the three components: the read-only mark, the filename and the modified mark.
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/12.png)
 Now you may know what to do.
 ```vim
-  let g:lightline = {
-        \ 'colorscheme': 'wombat',
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'filename' ] ] },
-        \ 'component_function': {
-        \   'filename': 'MyFilename',
-        \   'readonly': 'MyReadonly',
-        \   'modified': 'MyModified'
-        \ },
-        \ 'separator': { 'left': '⮀', 'right': '⮂' },
-        \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-        \ }
-  function! MyModified()
-    if &filetype == "help"
-      return ""
-    elseif &modified
-      return "+"
-    elseif &modifiable
-      return ""
-    else
-      return ""
-    endif
-  endfunction
-  function! MyReadonly()
-    if &filetype == "help"
-      return ""
-    elseif &readonly
-      return "⭤"
-    else
-      return ""
-    endif
-  endfunction
-  function! MyFilename()
-    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-         \ ('' != expand('%t') ? expand('%t') : '[No Name]') .
-         \ ('' != MyModified() ? ' ' . MyModified() : '')
-  endfunction
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'MyFugitive',
+      \   'readonly': 'MyReadonly',
+      \   'modified': 'MyModified',
+      \   'filename': 'MyFilename'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+function! MyModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! MyReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "⭤"
+  else
+    return ""
+  endif
+endfunction
+
+function! MyFugitive()
+  return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+       \ ('' != expand('%t') ? expand('%t') : '[No Name]') .
+       \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
 ```
 Define your own filename component. Your component has priority over the default component.
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/13.png)
-Looks nice.
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/14.png)
+Oops! We forgot the cool mark for the branch component! (work with the patched font for vim-powerline)
+```vim
+function! MyFugitive()
+  return exists('*fugitive#head') && len(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+endfunction
+```
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/15.png)
+How cool!!!
 
 Of course, you can name your component as you wish.
 ```vim
