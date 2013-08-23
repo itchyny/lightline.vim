@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/23 10:39:19.
+" Last Change: 2013/08/23 12:11:54.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -85,6 +85,10 @@ function! lightline#init()
 endfunction
 
 function! lightline#mode()
+  return get(g:lightline.mode_map, mode(), g:lightline.mode_map['?'])
+endfunction
+
+function! lightline#link()
   let mode = get(g:lightline._mode_, mode(), 'normal')
   for i in range(len(g:lightline.active.left))
     exec printf('hi link LightLineLeft_active_%d LightLineLeft_%s_%d', i, mode, i)
@@ -95,7 +99,7 @@ function! lightline#mode()
     exec printf('hi link LightLineRight_active_%d LightLineRight_%s_%d', i, mode, i)
     exec printf('hi link LightLineRight_active_%d_%d LightLineRight_%s_%d_%d', i, i + 1, mode, i, i + 1)
   endfor
-  return get(g:lightline.mode_map, mode(), g:lightline.mode_map['?'])
+  return ''
 endfunction
 
 function! s:term(l)
@@ -157,7 +161,7 @@ function! lightline#subseparator(x, y, s)
 endfunction
 
 function! lightline#statusline(inactive)
-  let [_, c, f] = [ '', g:lightline.component, g:lightline.component_function ]
+  let [_, c, f] = [ '%{lightline#link()}', g:lightline.component, g:lightline.component_function ]
   let mode = a:inactive ? 'inactive' : 'active'
   let left = has_key(g:lightline, mode) ? g:lightline[mode].left : g:lightline.active.left
   let right = has_key(g:lightline, mode) ? g:lightline[mode].right : g:lightline.active.right
