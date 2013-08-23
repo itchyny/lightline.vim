@@ -128,17 +128,22 @@ Hurrah! Cool!
 
 
 
-If your vim looks like:
+If your statusline looks like:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/16.png)
 the patched font is not installed.
 
-There are two kinds of font looks nice:
+There are two kinds of patched fonts:
 
-+ The patched font for [vim-powerline](https://github.com/Lokaltog/vim-powerline): see https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher
-+ The patched font for [powerline](https://github.com/Lokaltog/powerline): see https://github.com/Lokaltog/powerline-fonts
++ The patched fonts for [vim-powerline](https://github.com/Lokaltog/vim-powerline): see https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher
++ The patched fonts for [powerline](https://github.com/Lokaltog/powerline): see https://github.com/Lokaltog/powerline-fonts
 
-This tutorial is based on the former, the font for vim-powerline.
-If you installed the patched font for powerline, use the following settings instead.
+Create or download the font and install it.
+And add the `guifont` setting to your .vimrc.
+If you are using the vim in terminal, the font cannot be controlled in .vimrc.
+Open the terminal setting and select the patched font.
+
+This tutorial is based on the former, the font for vim-powerline (Inconsolata for Powerline).
+If you have installed the patched font for powerline, use the following settings instead.
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -150,7 +155,7 @@ let g:lightline = {
       \ }
 ```
 
-If you will not install a patched font, use the setting like:
+If you will not install a patched font, use ascii characters like:
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -165,7 +170,7 @@ let g:lightline = {
 
 
 
-Now, let us go back to the tutorial (with the patched font for vim-powerline).
+Now, let us get back to the tutorial (with the patched font for vim-powerline).
 You look into a help file to find the marks annoying.
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/6.png)
 Help files are read-only and no-modifiable? We know that!
@@ -228,7 +233,7 @@ let g:lightline = {
       \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
 ```
-If the plugin arranges all the component (in a situation you `set paste` and the file `.vimrc` is read-only, try to modified):
+If the plugin arranges all the component (in a situation you `set paste` and the file `.vimrc` is read-only, try to modify):
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
 The mode component, the paste component, read-only component, filename component and modified component in a row.
 Normally, the paste component does not show up.
@@ -249,12 +254,13 @@ And the screen shot of all the components.
 The mode and paste component are displayed in the same group.
 And the read-only, filename and modified component are in the second group.
 It corresponds to the structure of `g:lightline.active.left`.
-You can configure the components in the statusline by the following four variable:
+You can configure the components in the statusline by the following four variables:
 + `g:lightline.active.left`
 + `g:lightline.active.right`
 + `g:lightline.inactive.left`
 + `g:lightline.inactive.right`
-Of course, Your setting `.vimrc` has priority over the default setting in lightline.
+
+Of course, your setting in `.vimrc` has priority over the default setting in lightline.
 
 
 
@@ -264,9 +270,9 @@ However, lightline does not provide the branch feature in default.
 
 In order to show the branch in the statusline, you firstly install the [vim-fugitive](https://github.com/tpope/vim-fugitive) plugin.
 Then edit the `g:lightline` in your .vimrc.
-+ Add fugitive component to `g:lightline.component`.
++ Add your fugitive component to `g:lightline.component`.
 + Add the condition when the fugitive component has information to `g:lightline.component_visible_condition`.
-+ Add the component by inserting 'fugitive' to `g:lightline.active.left`.
++ Add the component by inserting `'fugitive'` to `g:lightline.active.left`.
 
 ```vim
 let g:lightline = {
@@ -460,13 +466,13 @@ Here's my setting. I use the patched font for vim-powerline.
     return &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head') && len(fugitive#head()) ? '⭠ '.fugitive#head() : ''
   endfunction
   function! MyFileformat()
-    return winwidth('.') > 60 ? &fileformat : ''
+    return winwidth('.') > 70 ? &fileformat : ''
   endfunction
   function! MyFiletype()
-    return winwidth('.') > 60 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
   endfunction
   function! MyFileencoding()
-    return winwidth('.') > 60 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
   endfunction
   function! MyMode()
     return winwidth('.') > 60 ? lightline#mode() : ''
