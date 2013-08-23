@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/23 19:20:42.
+" Last Change: 2013/08/23 23:45:17.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -45,8 +45,7 @@ function! lightline#init()
         \ 'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual',
         \ 'c': 'command', '': 'visual', 's': 'select', 'S': 'select', '': 'select' }
   let g:lightline.mode_fallback = get(g:lightline, 'mode_fallback', {})
-  call extend(g:lightline.mode_fallback, {
-        \ 'replace': 'insert', 'select': 'visual' })
+  call extend(g:lightline.mode_fallback, { 'replace': 'insert', 'select': 'visual' })
   let g:lightline.component = get(g:lightline, 'component', {})
   call extend(g:lightline.component, {
         \ 'mode': '%{lightline#mode()}',
