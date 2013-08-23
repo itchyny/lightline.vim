@@ -260,7 +260,7 @@ You can configure the components in the statusline by the following four variabl
 + `g:lightline.inactive.left`
 + `g:lightline.inactive.right`
 
-Of course, your settings in .vimrc has priority over the default setting in lightline.
+Of course, your settings in .vimrc have priority over the default setting in lightline.
 
 
 
