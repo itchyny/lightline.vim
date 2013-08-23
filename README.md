@@ -86,7 +86,7 @@ MIT License
 ## Configuration tutorial
 In default, the statusline looks like:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/1.png)
-If you want a colorscheme which looks well with the wombat colorscheme, add the following setting to your .vimrc (or \_vimrc on Windows):
+If you use the wombat colorscheme, add the following setting to your .vimrc (or \_vimrc on Windows):
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -125,6 +125,43 @@ let g:lightline = {
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/5.png)
 Hurrah! Cool!
+
+
+If your vim looks like:
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/16.png)
+the patched font is not installed.
+
+There are two kinds of font looks nice:
+
++ The patched font for [vim-powerline](https://github.com/Lokaltog/vim-powerline): see https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher
++ The patched font for [powerline](https://github.com/Lokaltog/powerline): see https://github.com/Lokaltog/powerline-fonts
+
+This tutorial is based on the former, the font for vim-powerline.
+If you installed the patched font for powerline, use the following settings instead.
+```vim
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"":""}',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+```
+
+
+If you will not install a patched font, use the setting like:
+```vim
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"x":""}',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '|', 'right': '|' }
+      \ }
+```
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/17.png)
 
 
 Now, you look into a help file to find the marks annoying.
