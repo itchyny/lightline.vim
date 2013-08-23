@@ -137,10 +137,10 @@ There are two kinds of patched fonts:
 + The patched fonts for [vim-powerline](https://github.com/Lokaltog/vim-powerline): see https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher
 + The patched fonts for [powerline](https://github.com/Lokaltog/powerline): see https://github.com/Lokaltog/powerline-fonts
 
-Create or download the font and install it.
-And add the `guifont` setting to your .vimrc.
-If you are using the vim in terminal, the font cannot be controlled in .vimrc.
-Open the terminal setting and select the patched font.
+Create or download a font and install it.
+And add the `guifont` setting to your .vimrc (see `:help 'guifont'` for more detail).
+If you are using the vim in a terminal, the font cannot be controlled in .vimrc.
+Open the setting of the terminal and select the patched font.
 
 This tutorial is based on the former, the font for vim-powerline (Inconsolata for Powerline).
 If you have installed the patched font for powerline, use the following settings instead.
@@ -252,7 +252,7 @@ let g:lightline = {
 And the screen shot of all the components.
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
 The mode and paste component are displayed in the same group.
-And the read-only, filename and modified component are in the second group.
+The read-only, filename and modified component are in the second group.
 It corresponds to the structure of `g:lightline.active.left`.
 You can configure the components in the statusline by the following four variables:
 + `g:lightline.active.left`
@@ -260,7 +260,7 @@ You can configure the components in the statusline by the following four variabl
 + `g:lightline.inactive.left`
 + `g:lightline.inactive.right`
 
-Of course, your setting in `.vimrc` has priority over the default setting in lightline.
+Of course, your settings in .vimrc has priority over the default setting in lightline.
 
 
 
@@ -403,7 +403,6 @@ function! MyFilename()
        \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 ```
-Define your own filename component. Your component has priority over the default component.
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/14.png)
 Oops! We forgot the cool mark for the branch component! (work with the patched font for vim-powerline)
 ```vim
@@ -419,9 +418,9 @@ Of course, you can name your component as you wish.
   let g:lightline = {
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'my_filename' ] ] },
+        \             [ 'my_component' ] ] },
         \ 'component_function': {
-        \   'my_filename': 'MyFilename', ...
+        \   'my_component': 'MyComponent', ...
 ```
 
 This is the end of the tutorial. For more information, see `:help lightline`. Good luck with your nice statuslines.
