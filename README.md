@@ -49,7 +49,7 @@ With branch name, read-only mark and modified mark.
 
 landscape is my colorscheme, which is a high-contrast cui-supported colorscheme, available at https://github.com/itchyny/landscape.vim
 
-## Why yet another clone for powerline?
+## Why yet another clone of powerline?
 + [vim-powerline](https://github.com/Lokaltog/vim-powerline) is a nice plugin, but deprecated.
 + [powerline](https://github.com/Lokaltog/powerline) is a nice plugin, but difficult to configure.
 + [vim-airline](https://github.com/bling/vim-airline) is a nice plugin, but not configurable. Also, it does *too much* for other plugins, which should be done by users in .vimrc.
