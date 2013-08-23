@@ -127,6 +127,7 @@ let g:lightline = {
 Hurrah! Cool!
 
 
+
 If your vim looks like:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/16.png)
 the patched font is not installed.
@@ -149,7 +150,6 @@ let g:lightline = {
       \ }
 ```
 
-
 If you will not install a patched font, use the setting like:
 ```vim
 let g:lightline = {
@@ -164,10 +164,12 @@ let g:lightline = {
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/17.png)
 
 
-Now, you look into a help file to find the marks annoying.
-Help files are read-only and no-modifiable? We know that!
+
+Now, let us go back to the tutorial (with the patched font for vim-powerline).
+You look into a help file to find the marks annoying.
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/6.png)
-OK, so you again edit your .vimrc.
+Help files are read-only and no-modifiable? We know that!
+OK, so you again edit the components.
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -182,7 +184,7 @@ let g:lightline = {
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/7.png)
 Huh? Weird!
 The component does not collapse even if it has no information!
-In order to avoid this situation, you set expressions to component\_visible\_condition, which should become 1 only when the corresponding components have information.
+In order to avoid this situation, you set expressions to `g:lightline.component_visible_condition`, which should become 1 only when the corresponding components have information.
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -202,9 +204,10 @@ let g:lightline = {
 Okay. It works nice.
 
 
-How does lightline deside the components to show in the statusline?
+
+How does lightline decide the components to show in the statusline?
 It's very simple.
-The variable to control the components is `g:lightline.active.left` and `g:lightline.active.left`.
+The variable to select components is `g:lightline.active.left` and `g:lightline.active.left`.
 For example, you add the `g:lightline.active.left` in .vimrc.
 ```vim
 let g:lightline = {
@@ -225,7 +228,7 @@ let g:lightline = {
       \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
 ```
-The plugin arranges all the component:
+If the plugin arranges all the component (in a situation you `set paste` and the file `.vimrc` is read-only, try to modified):
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
 The mode component, the paste component, read-only component, filename component and modified component in a row.
 Normally, the paste component does not show up.
@@ -246,13 +249,20 @@ And the screen shot of all the components.
 The mode and paste component are displayed in the same group.
 And the read-only, filename and modified component are in the second group.
 It corresponds to the structure of `g:lightline.active.left`.
+You can configure the components in the statusline by the following four variable:
++ `g:lightline.active.left`
++ `g:lightline.active.right`
++ `g:lightline.inactive.left`
++ `g:lightline.inactive.right`
+Of course, Your setting `.vimrc` has priority over the default setting in lightline.
+
 
 
 GitHub branch is important for us.
-And it is a default component in [powerline](https://github.com/Lokaltog/powerline).
+And it is a default component in [powerline](https://github.com/Lokaltog/powerline) and [vim-powerline](https://github.com/Lokaltog/vim-powerline).
 However, lightline does not provide the branch feature in default.
 
-In order to show the branch in statusline, you firstly install the [vim-fugitive](https://github.com/tpope/vim-fugitive) plugin.
+In order to show the branch in the statusline, you firstly install the [vim-fugitive](https://github.com/tpope/vim-fugitive) plugin.
 Then edit the `g:lightline` in your .vimrc.
 + Add fugitive component to `g:lightline.component`.
 + Add the condition when the fugitive component has information to `g:lightline.component_visible_condition`.
@@ -329,7 +339,7 @@ function! MyReadonly()
 endfunction
 
 function! MyFugitive()
-  return exists('*fugitive#head') ? fugitive#head()
+  return exists('*fugitive#head') ? fugitive#head() : ''
 endfunction
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/13.png)
