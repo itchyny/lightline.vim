@@ -1,5 +1,6 @@
 # lightline.vim
 A light and configurable statusline for Vim
+
 https://github.com/itchyny/lightline.vim
 
 ### powerline theme (default)
