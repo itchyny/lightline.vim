@@ -478,7 +478,7 @@ Here's my setting. I use the patched font for vim-powerline.
   endfunction
 ```
 When the window width is too narrow, the mode component and the file information component collapse.
-For example, the gundo buffer is narrow.
+For example, the [gundo](https://github.com/sjl/gundo.vim) buffer is narrow.
 
 Before:
 ![lightline.vim - gundo](https://raw.github.com/wiki/itchyny/lightline.vim/image/gundo0.png)
