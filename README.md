@@ -165,7 +165,7 @@ let g:lightline = {
 Okay. It works nice.
 
 
-How does lightline desides the components to show in the statusline?
+How does lightline deside the components to show in the statusline?
 It's very simple.
 The variable to control the components is `g:lightline.active.left` and `g:lightline.active.left`.
 For example, you add the `g:lightline.active.left` in .vimrc.
@@ -193,7 +193,7 @@ The plugin arranges all the component:
 The mode component, the paste component, read-only component, filename component and modified component in a row.
 Normally, the paste component does not show up.
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/10.png)
-If the file is not read-only (more common case), the read-only component does not show up.
+If the file is not read-only (more common cases), the read-only component does not show up.
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/11.png)
 
 
@@ -204,22 +204,23 @@ let g:lightline = {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filename', 'modified' ] ] ...
 ```
-And the screen shot.
+And the screen shot of all the components.
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
 The mode and paste component are displayed in the same group.
-And The read-only, filename and modified component are in the second group.
+And the read-only, filename and modified component are in the second group.
 It corresponds to the structure of `g:lightline.active.left`.
 
 
 GitHub branch is important for us.
-And is a default component in powerline.
+And it is a default component in [powerline](https://github.com/Lokaltog/powerline).
 However, lightline does not provide the branch feature in default.
 
-In order to show the branch in statusline, firstly you install the [vim-fugitive](https://github.com/tpope/vim-fugitive) plugin.
-Then edit the g:lightline in your .vimrc.
+In order to show the branch in statusline, you firstly install the [vim-fugitive](https://github.com/tpope/vim-fugitive) plugin.
+Then edit the `g:lightline` in your .vimrc.
 + Add fugitive component to `g:lightline.component`.
 + Add the condition when the fugitive component has information to `g:lightline.component_visible_condition`.
 + Add the component by inserting 'fugitive' to `g:lightline.active.left`.
+
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -251,6 +252,7 @@ Or if you want to do something more complicated?
 
 
 In fact, the components can be created using functions.
+Add your function names for components to `g:lightline.component_function`.
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
