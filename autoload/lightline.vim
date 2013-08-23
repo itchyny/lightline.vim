@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/23 07:32:53.
+" Last Change: 2013/08/23 10:39:19.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -44,6 +44,9 @@ function! lightline#init()
   let g:lightline._mode_ = {
         \ 'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual',
         \ 'c': 'command', '': 'visual', 's': 'select', 'S': 'select', '': 'select' }
+  let g:lightline.mode_fallback = get(g:lightline, 'mode_fallback', {})
+  call extend(g:lightline.mode_fallback, {
+        \ 'replace': 'insert', 'select': 'visual' })
   let g:lightline.component = get(g:lightline, 'component', {})
   call extend(g:lightline.component, {
         \ 'mode': '%{lightline#mode()}',
@@ -113,14 +116,14 @@ function! s:gui2cui(rgb, fallback)
 endfunction
 
 function! lightline#highlight()
-  for mode in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command']
-  let d = has_key(g:lightline.palette, mode) ? mode : 'normal'
-  let c = g:lightline.palette
+  for mode in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command', 'select']
+  let [c, f] = [g:lightline.palette, g:lightline.mode_fallback]
+  let d = has_key(c, mode) ? mode : has_key(f, mode) && has_key(c, f[mode]) ? f[mode] : 'normal'
   let left = d == 'inactive' ? g:lightline.inactive.left : g:lightline.active.left
   let right = d == 'inactive' ? g:lightline.inactive.right : g:lightline.active.right
-  let l = has_key(c, d) && has_key(c[d], 'left') ? c[d].left : c.normal.left
-  let r = has_key(c, d) && has_key(c[d], 'right') ? c[d].right : c.normal.right
-  let m = has_key(c, d) && has_key(c[d], 'middle') ? c[d].middle[0] : c.normal.middle[0]
+  let l = has_key(c,d) && has_key(c[d],'left') ? c[d].left : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'left') ? c[f[d]].left : c.normal.left
+  let r = has_key(c,d) && has_key(c[d],'right') ? c[d].right : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'right') ? c[f[d]].right : c.normal.right
+  let m = has_key(c,d) && has_key(c[d],'middle') ? c[d].middle[0] : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'middle') ? c[f[d]].middle[0] : c.normal.middle[0]
   if s:is_win32term
     " patching color values for windows console
     for _  in l
