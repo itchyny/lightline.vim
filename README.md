@@ -45,6 +45,8 @@ A light and configurable statusline for Vim
 With branch name, read-only mark and modified mark.
 ![lightline.vim - landscape - fugitive](https://raw.github.com/itchyny/lightline.vim/master/image/landscape/5.png)
 
+landscape is my colorscheme, which is a high-contrast cui-supported colorscheme, available at https://github.com/itchyny/landscape.vim
+
 ## Why yet another clone for powerline?
 + [vim-powerline](https://github.com/Lokaltog/vim-powerline) is a nice plugin, but deprecated.
 + [powerline](https://github.com/Lokaltog/powerline) is a nice plugin, but difficult to configure.
