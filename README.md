@@ -233,7 +233,7 @@ let g:lightline = {
       \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
 ```
-If the plugin arranges all the component (in a situation you `set paste` and the file `.vimrc` is read-only, try to modify):
+If the plugin arranges all the components (in a situation you `set paste` and the file `.vimrc` is read-only, try to modify):
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
 The mode component, the paste component, read-only component, filename component and modified component in a row.
 Normally, the paste component does not show up.
