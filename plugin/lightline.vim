@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/24 17:18:13.
+" Last Change: 2013/08/24 18:22:31.
 " =============================================================================
 
 if exists('g:loaded_lightline') && g:loaded_lightline
@@ -15,7 +15,8 @@ set cpo&vim
 
 augroup LightLine
   autocmd!
-  autocmd WinEnter,BufWinEnter,FileType,ColorScheme * call lightline#update()
+  autocmd ColorScheme * call lightline#update(1)
+  autocmd WinEnter,BufWinEnter,FileType * call lightline#update(0)
   autocmd CursorMoved,BufUnload * call lightline#update_once()
 augroup END
 
