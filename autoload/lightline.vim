@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/24 12:33:26.
+" Last Change: 2013/08/24 13:11:46.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -173,7 +173,7 @@ function! lightline#statusline(inactive)
   for i in range(len(left))
     let _ .= printf('%%#LightLineLeft_%s_%d#', mode, i)
     for j in range(len(left[i]))
-      let _ .= '%( '.(has_key(f,left[i][j])?'%{'.f[left[i][j]].'()}':get(c,left[i][j],'')).' %)'
+      let _ .= '%( '.(has_key(f,left[i][j])?'%{lightline#function("'.f[left[i][j]].'")}':get(c,left[i][j],'')).' %)'
       if j < len(left[i]) - 1
         let _ .= lightline#subseparator(left[i][j], left[i][j+1:], g:lightline.subseparator.left)
       endif
