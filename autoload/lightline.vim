@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/24 18:23:47.
+" Last Change: 2013/08/24 19:16:30.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -12,9 +12,8 @@ set cpo&vim
 let s:_ = 1
 let s:is_win32term = (has('win32') || has('win64')) && !has('gui_running')
 
-function! lightline#update(hi)
+function! lightline#update()
   if s:_ | call lightline#init() | endif
-  if a:hi | call lightline#highlight() | endif
   let s = [lightline#statusline(0), lightline#statusline(1)]
   let w = winnr()
   for n in range(1, winnr('$'))
