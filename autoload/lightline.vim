@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/23 23:45:17.
+" Last Change: 2013/08/24 12:33:26.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -151,10 +151,18 @@ function! lightline#highlight()
   endfor
 endfunction
 
+function! lightline#function(f)
+  try
+    if exists('*' . a:f) | exec 'return ' . a:f . '()'  | endif
+  catch
+  endtry
+  return ''
+endfunction
+
 function! lightline#subseparator(x, y, s)
   let [c, f, v] = [ g:lightline.component, g:lightline.component_function,  g:lightline.component_visible_condition ]
-  return '%{('.(has_key(f,a:x)?'!!strlen('.(f[a:x]).'())':get(v,a:x,"1")).')*(('.join(map(copy(a:y),
-        \'(has_key(f,v:val)?"!!strlen(".f[v:val]."())":get(v,v:val,has_key(c,v:val)?"1":"0"))'),')+(')."))?('".a:s."'):''}"
+  return '%{('.(has_key(f,a:x)?'!!strlen(lightline#function("'.(f[a:x]).'"))':get(v,a:x,"1")).')*(('.join(map(copy(a:y),
+        \'(has_key(f,v:val)?"!!strlen(lightline#function(\"".(f[v:val])."\"))":get(v,v:val,has_key(c,v:val)?"1":"0"))'),')+(')."))?('".a:s."'):''}"
 endfunction
 
 function! lightline#statusline(inactive)
@@ -180,7 +188,7 @@ function! lightline#statusline(inactive)
       if j
         let _ .= lightline#subseparator(right[i][j], right[i][:j-1], g:lightline.subseparator.right)
       endif
-      let _ .= '%( '.(has_key(f,right[i][j])?'%{'.f[right[i][j]].'()}':get(c,right[i][j],'')).' %)'
+      let _ .= '%( '.(has_key(f,right[i][j])?'%{lightline#function("'.f[right[i][j]].'")}':get(c,right[i][j],'')).' %)'
     endfor
   endfor
   return _
