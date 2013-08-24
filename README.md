@@ -52,7 +52,7 @@ landscape is my colorscheme, which is a high-contrast cui-supported colorscheme,
 ## Why yet another clone of powerline?
 + [vim-powerline](https://github.com/Lokaltog/vim-powerline) is a nice plugin, but deprecated.
 + [powerline](https://github.com/Lokaltog/powerline) is a nice plugin, but difficult to configure.
-+ [vim-airline](https://github.com/bling/vim-airline) is a nice plugin, but not configurable. Also, it does *too much* for other plugins, which should be done by users in .vimrc.
++ [vim-airline](https://github.com/bling/vim-airline) is a nice plugin, but not configurable. Also, it does *too much* for other plugins, which should be done by users in `.vimrc`.
 
 ## Spirit of this plugin
 + Minimalism. The core script is very small.
@@ -70,14 +70,14 @@ MIT License
 1. Put all files under $VIM.
 
 ### Vundle (https://github.com/gmarik/vundle)
-1. Add the following configuration to your .vimrc.
+1. Add the following configuration to your `.vimrc`.
 
         Bundle 'itchyny/lightline.vim'
 
 2. Install with `:BundleInstall`.
 
 ### NeoBundle (https://github.com/Shougo/neobundle.vim)
-1. Add the following configuration to your .vimrc.
+1. Add the following configuration to your `.vimrc`.
 
         NeoBundle 'itchyny/lightline.vim'
 
@@ -86,7 +86,7 @@ MIT License
 ## Configuration tutorial
 In default, the statusline looks like:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/1.png)
-If you use the wombat colorscheme, add the following setting to your .vimrc (or \_vimrc on Windows):
+If you use the wombat colorscheme, add the following setting to your `.vimrc` (or \_vimrc on Windows):
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -97,9 +97,9 @@ to get:
 
 You may think that the default read-only mark is not so cool:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/3.png)
-Then edit the readonly component.
+Then edit the read-only component.
 The lightline components are stored in `g:lightline.component`.
-So you add the setting of `g:lightline.component.readonly` in your .vimrc. (the following setting is effective with the patched font for vim-powerline):
+So you add the setting of `g:lightline.component.readonly` in your `.vimrc`. (the following setting is effective with the patched font for vim-powerline):
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -138,8 +138,8 @@ There are two kinds of patched fonts:
 + The patched fonts for [powerline](https://github.com/Lokaltog/powerline): see https://github.com/Lokaltog/powerline-fonts
 
 Create or download a font and install it.
-And add the `guifont` setting to your .vimrc (see `:help 'guifont'` for more detail).
-If you are using the vim in a terminal, the font cannot be controlled in .vimrc.
+And add the `guifont` setting to your `.vimrc` (see `:help 'guifont'` for more detail).
+If you are using the vim in a terminal, the font cannot be controlled in `.vimrc`.
 Open the setting of the terminal and select the patched font.
 
 This tutorial is based on the former, the font for vim-powerline (Inconsolata for Powerline).
@@ -213,7 +213,7 @@ Okay. It works nice.
 How does lightline decide the components to show in the statusline?
 It's very simple.
 The variable to select components is `g:lightline.active.left` and `g:lightline.active.left`.
-For example, you add the `g:lightline.active.left` in .vimrc.
+For example, you add the `g:lightline.active.left` in `.vimrc`.
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -260,7 +260,7 @@ You can configure the components in the statusline by the following four variabl
 + `g:lightline.inactive.left`
 + `g:lightline.inactive.right`
 
-Of course, your settings in .vimrc have priority over the default setting in lightline.
+Of course, your settings in `.vimrc` have priority over the default setting in lightline.
 
 
 
@@ -269,7 +269,7 @@ And it is a default component in [powerline](https://github.com/Lokaltog/powerli
 However, lightline does not provide the branch feature in default.
 
 In order to show the branch in the statusline, you firstly install the [vim-fugitive](https://github.com/tpope/vim-fugitive) plugin.
-Then edit the `g:lightline` in your .vimrc.
+Then edit the `g:lightline` in your `.vimrc`.
 + Add your fugitive component to `g:lightline.component`.
 + Add the condition when the fugitive component has information to `g:lightline.component_visible_condition`.
 + Add the component by inserting `'fugitive'` to `g:lightline.active.left`.
