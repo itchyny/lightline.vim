@@ -220,7 +220,7 @@ let g:lightline = {
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/7.png)
 Huh? Weird!
-The component does not collapse even if it has no information!
+The components do not collapse even if it has no information!
 In order to avoid this situation, you set expressions to `g:lightline.component_visible_condition`, which should become 1 only when the corresponding components have information.
 ```vim
 let g:lightline = {
