@@ -57,7 +57,7 @@ landscape is my colorscheme, which is a high-contrast cui-supported colorscheme,
 ## Spirit of this plugin
 + Minimalism. The core script is very small.
 + Configurability. You can create your own component and easily add to the statusline.
-+ Orthogonality. Any plugin should not change the settings of another plugin. Such a plugin-crossing setting should be written by users in `.vimrc`.
++ Orthogonality. Any plugin should not change the settings of another plugin. Such plugin-crossing settings should be written by users in `.vimrc`.
 
 ## Author
 itchyny (https://github.com/itchyny)
@@ -86,7 +86,7 @@ MIT License
 ## Configuration tutorial
 In default, the statusline looks like:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/1.png)
-If you use the wombat colorscheme, add the following setting to your `.vimrc` (or \_vimrc on Windows):
+If you use the wombat colorscheme, add the following settings to your `.vimrc` (or \_vimrc on Windows):
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -99,7 +99,7 @@ You may think that the default read-only mark is not so cool:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/3.png)
 Then edit the read-only component.
 The lightline components are stored in `g:lightline.component`.
-So you add the setting of `g:lightline.component.readonly` in your `.vimrc`. (the following setting is effective with the patched font for vim-powerline):
+So you add the settings of `g:lightline.component.readonly` in your `.vimrc`. (the following settings is effective with the patched font for vim-powerline):
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -509,7 +509,7 @@ I show my settings. I use the patched font for vim-powerline.
     return winwidth('.') > 60 ? lightline#mode() : ''
   endfunction
 ```
-When the window width is too narrow, the mode component and the file information component collapse.
+When the current window width is narrow, the mode component and the file information component collapse.
 For example, the [gundo](https://github.com/sjl/gundo.vim) buffer is narrow.
 
 Before:
