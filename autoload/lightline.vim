@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/24 19:16:30.
+" Last Change: 2013/08/25 16:24:57.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -13,13 +13,17 @@ let s:_ = 1
 let s:is_win32term = (has('win32') || has('win64')) && !has('gui_running')
 
 function! lightline#update()
-  if s:_ | call lightline#init() | endif
-  let s = [lightline#statusline(0), lightline#statusline(1)]
-  let w = winnr()
-  for n in range(1, winnr('$'))
-    call setwinvar(n, '&statusline', s[n!=w])
-    call setwinvar(n, 'lightline', n!=w)
-  endfor
+  try
+    if s:_ | call lightline#init() | endif
+    let s = [lightline#statusline(0), lightline#statusline(1)]
+    let w = winnr()
+    for n in range(1, winnr('$'))
+      call setwinvar(n, '&statusline', s[n!=w])
+      call setwinvar(n, 'lightline', n!=w)
+    endfor
+  catch
+    call lightline#init()
+  endtry
 endfunction
 
 function! lightline#update_once()
