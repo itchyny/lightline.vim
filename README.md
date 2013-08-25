@@ -178,6 +178,19 @@ let g:lightline = {
       \ }
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/17.png)
+Still, you have problems like
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/20.png)
+add
+```sh
+export TERM=xterm-256color
+```
+to your `.*shrc` and add
+```vim
+if !has('gui_running')
+  set t_Co=256
+endif
+```
+to your `.vimrc`.
 
 
 
