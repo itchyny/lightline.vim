@@ -192,6 +192,16 @@ endif
 ```
 to your `.vimrc`.
 
+If your status line looks like
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/20.png)
+and the cool statusline appears only on splitting window,
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/21.png)
+add
+```vim
+set laststatus=2
+```
+to your `.vimrc`.
+
 
 
 Now, let us get back to the tutorial (with the patched font for vim-powerline).
