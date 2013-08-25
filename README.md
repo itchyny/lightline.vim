@@ -162,7 +162,7 @@ remove
 ```vim
 set ambiwidth=double
 ```
-from your `.vimrc`. If you want to keep this setting, try to use the patched font for vim-powerline.
+from your `.vimrc`. If you want to keep this setting, use the patched font for vim-powerline.
 + https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher
 
 
