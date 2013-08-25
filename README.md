@@ -208,6 +208,8 @@ If you are using iTerm2, change the following settings of iTerm2:
 + set `Profiles>Colors>Minimum contrast` to Lowest.
 + set `Profiles>Window>Transparency` to Opaquest.
 
+For other terminals, this weird-triangle problem will be resolved by disabling transparency or contrast adjustment.
+
 
 
 Now, let us get back to the tutorial (with the patched font for vim-powerline).
