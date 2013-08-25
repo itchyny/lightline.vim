@@ -439,7 +439,7 @@ endfunction
 Oops! We forgot the cool mark for the branch component! (work with the patched font for vim-powerline)
 ```vim
 function! MyFugitive()
-  return exists('*fugitive#head') && len(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+  return exists('*fugitive#head') && strlen(fugitive#head()) ? '⭠ '.fugitive#head() : ''
 endfunction
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/15.png)
@@ -498,7 +498,7 @@ function! MyFilename()
 endfunction
 
 function! MyFugitive()
-  return &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head') && len(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+  return &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head') && strlen(fugitive#head()) ? '⭠ '.fugitive#head() : ''
 endfunction
 
 function! MyFileformat()

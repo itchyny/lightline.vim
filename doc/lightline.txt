@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/24 01:05:30.
+Last Change: 2013/08/25 17:00:30.
 
 CONTENTS					*lightline-contents*
 
@@ -144,7 +144,7 @@ nice.
 		return &readonly ? '' : ''
 	endfunction
 	function! MyFugitive()
-		return exists("*fugitive#head") && len(fugitive#head()) ? ''.fugitive#head() : ''
+		return exists("*fugitive#head") && strlen(fugitive#head()) ? ''.fugitive#head() : ''
 	endfunction
 <
 If you have installed the patched font for |vim-powerline|, following settings
@@ -165,7 +165,7 @@ look nice.
 		return &readonly ? '⭤' : ''
 	endfunction
 	function! MyFugitive()
-		return exists("*fugitive#head") && len(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+		return exists("*fugitive#head") && strlen(fugitive#head()) ? '⭠ '.fugitive#head() : ''
 	endfunction
 <
 
@@ -265,7 +265,7 @@ A nice example for |vim-powerline| font users:
 		\ ('' != MyModified() ? ' ' . MyModified() : '')
 	endfunction
 	function! MyFugitive()
-		return &ft !~? 'vimfiler' && exists("*fugitive#head") && len(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+		return &ft !~? 'vimfiler' && exists("*fugitive#head") && strlen(fugitive#head()) ? '⭠ '.fugitive#head() : ''
 	endfunction
 <
 ------------------------------------------------------------------------------
