@@ -158,8 +158,7 @@ let g:lightline = {
 
 If you have installed the font for powerline and your statusline looks like
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/18.png)
-
-there's spaces right hand side, remove
+remove
 ```vim
 set ambiwidth=double
 ```
