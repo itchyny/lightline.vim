@@ -154,6 +154,18 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 ```
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/19.png)
+
+If you have installed the font for powerline and your statusline looks like
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/18.png)
+
+there's spaces right hand side, remove
+```vim
+set ambiwidth=double
+```
+from your `.vimrc`. If you want to keep this setting, try to use the patched font for vim-powerline.
++ https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher
+
 
 If you will not install a patched font, use ascii characters like:
 ```vim
