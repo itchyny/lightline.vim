@@ -201,9 +201,10 @@ set laststatus=2
 to your `.vimrc`.
 
 
-Almost all of things go well with the patched font but if the triangle looks weird
+Almost all of things go well with the patched font but if the triangle looks weird:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/22.png)
-if you are using iTerm2, change the following settings of iTerm2:
+
+If you are using iTerm2, change the following settings of iTerm2:
 + set `Profiles>Colors>Minimum contrast` to Lowest.
 + set `Profiles>Window>Transparency` to Opaquest.
 
