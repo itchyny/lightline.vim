@@ -99,7 +99,7 @@ You may think that the default read-only mark is not so cool:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/3.png)
 Then edit the read-only component.
 The lightline components are stored in `g:lightline.component`.
-So you add the settings of `g:lightline.component.readonly` in your `.vimrc`. (the following settings is effective with the patched font for vim-powerline):
+So you add the settings of `g:lightline.component.readonly` in your `.vimrc`. (the following settings are effective with the patched font for vim-powerline):
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -192,7 +192,7 @@ endif
 ```
 to your `.vimrc`.
 
-If your status line looks like
+If your statusline looks like
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/21.png)
 and the cool statusline appears only on splitting window, add
 ```vim
