@@ -457,8 +457,8 @@ Of course, you can name your component as you wish.
 
 This is the end of the tutorial. For more information, see `:help lightline`. Good luck with your nice statuslines.
 
-### My setting
-Here's my setting. I use the patched font for vim-powerline.
+### My settings
+I show my settings. I use the patched font for vim-powerline.
 ```vim
   let g:lightline = {
         \ 'colorscheme': 'landscape',
