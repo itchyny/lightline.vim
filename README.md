@@ -69,6 +69,11 @@ MIT License
 ### Manually
 1. Put all files under $VIM.
 
+### Pathogen
+1. Install with following command
+
+        git clone https://github.com/itchyny/lightline.vim ~/.vim/bundle/lightline.vim
+
 ### Vundle (https://github.com/gmarik/vundle)
 1. Add the following configuration to your `.vimrc`.
 
@@ -230,7 +235,7 @@ let g:lightline = {
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/7.png)
 Huh? Weird!
-The components do not collapse even if it has no information!
+The components do not collapse even if they have no information!
 In order to avoid this situation, you set expressions to `g:lightline.component_visible_condition`, which should become 1 only when the corresponding components have information.
 ```vim
 let g:lightline = {
@@ -254,7 +259,7 @@ Okay. It works nice.
 
 How does lightline decide the components to show in the statusline?
 It's very simple.
-The variable to select components is `g:lightline.active.left` and `g:lightline.active.left`.
+The variables to select components are `g:lightline.active.left` and `g:lightline.active.left`.
 For example, you add the `g:lightline.active.left` in `.vimrc`.
 ```vim
 let g:lightline = {
