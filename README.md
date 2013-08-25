@@ -178,9 +178,9 @@ let g:lightline = {
       \ }
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/17.png)
-Still, you have problems like
+Still, if you have problem like
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/20.png)
-add
+then add
 ```sh
 export TERM=xterm-256color
 ```
