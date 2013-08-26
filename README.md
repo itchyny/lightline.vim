@@ -70,7 +70,7 @@ MIT License
 1. Put all files under $VIM.
 
 ### Pathogen
-1. Install with following command
+1. Install with the following command
 
         git clone https://github.com/itchyny/lightline.vim ~/.vim/bundle/lightline.vim
 
