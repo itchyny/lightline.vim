@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/25 16:24:57.
+" Last Change: 2013/08/26 16:51:35.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -146,7 +146,7 @@ function! lightline#highlight()
           \ i, i + 1, li[1], i == len(left) - 1 ? m[1] : lj[1], li[3], i == len(left) - 1 ? m[3] : lj[3])
   endfor
   exec printf('hi LightLineMiddle_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, m[0], m[1], m[2], m[3], s:term(m))
-  for i in reverse(range(len(right)))
+  for i in range(len(right))
     let [ri, rj] = [i < len(r) ? r[i] : r[-1], i + 1 < len(r) ? r[i + 1] : r[-1]]
     exec printf('hi LightLineRight_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', mode,
           \ i, i + 1, ri[1], i == len(right) - 1 ? m[1] : rj[1], ri[3], i == len(right) - 1 ? m[3] : rj[3])
