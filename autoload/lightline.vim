@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/26 16:51:35.
+" Last Change: 2013/08/27 01:01:16.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -121,8 +121,9 @@ function! s:gui2cui(rgb, fallback)
 endfunction
 
 function! lightline#highlight()
-  for mode in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command', 'select']
   let [c, f] = [g:lightline.palette, g:lightline.mode_fallback]
+  let [g:lightline.llen, g:lightline.rlen] = [len(c.normal.left), len(c.normal.right)]
+  for mode in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command', 'select']
   let d = has_key(c, mode) ? mode : has_key(f, mode) && has_key(c, f[mode]) ? f[mode] : 'normal'
   let left = d == 'inactive' ? g:lightline.inactive.left : g:lightline.active.left
   let right = d == 'inactive' ? g:lightline.inactive.right : g:lightline.active.right
@@ -130,7 +131,6 @@ function! lightline#highlight()
   let r = has_key(c,d) && has_key(c[d],'right') ? c[d].right : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'right') ? c[f[d]].right : c.normal.right
   let m = has_key(c,d) && has_key(c[d],'middle') ? c[d].middle[0] : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'middle') ? c[f[d]].middle[0] : c.normal.middle[0]
   if s:is_win32term
-    " patching color values for windows console
     for _  in l
       let [_[2], _[3]] = [s:gui2cui(_[0], _[2]), s:gui2cui(_[1], _[3])]
     endfor
@@ -140,16 +140,16 @@ function! lightline#highlight()
     let [m[2], m[3]] = [s:gui2cui(m[0], m[2]), s:gui2cui(_[1], m[3])]
   endif
   for i in range(len(left))
-    let [li, lj] = [i < len(l) ? l[i] : l[-1], i + 1 < len(l) ? l[i + 1] : l[-1]]
+    let [li, lj] = [i < len(l) ? l[i] : m, i + 1 < len(l) ? l[i + 1] : m]
     exec printf('hi LightLineLeft_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, li[0], li[1], li[2], li[3], s:term(li))
     exec printf('hi LightLineLeft_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', mode,
-          \ i, i + 1, li[1], i == len(left) - 1 ? m[1] : lj[1], li[3], i == len(left) - 1 ? m[3] : lj[3])
+          \ i, i+1, i>=len(l) ? m[i+1==len(left)] : li[1], i==len(left)-1 ? m[1] : lj[1], i>=len(l) ? m[2+(i+1==len(left))] : li[3], i==len(left)-1 ? m[3] : lj[3])
   endfor
   exec printf('hi LightLineMiddle_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, m[0], m[1], m[2], m[3], s:term(m))
   for i in range(len(right))
-    let [ri, rj] = [i < len(r) ? r[i] : r[-1], i + 1 < len(r) ? r[i + 1] : r[-1]]
+    let [ri, rj] = [i < len(r) ? r[i] : m, i + 1 < len(r) ? r[i + 1] : m]
     exec printf('hi LightLineRight_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', mode,
-          \ i, i + 1, ri[1], i == len(right) - 1 ? m[1] : rj[1], ri[3], i == len(right) - 1 ? m[3] : rj[3])
+          \ i, i+1, i>=len(r) ? m[i+1==len(right)] : ri[1], i==len(right)-1 ? m[1] : rj[1], i>=len(r) ? m[2+(i+1==len(right))] : ri[3], i==len(right)-1 ? m[3] : rj[3])
     exec printf('hi LightLineRight_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, ri[0], ri[1], ri[2], ri[3], s:term(ri))
   endfor
   endfor
@@ -170,7 +170,7 @@ function! lightline#subseparator(x, y, s)
 endfunction
 
 function! lightline#statusline(inactive)
-  let [_, c, f] = [ '%{lightline#link()}', g:lightline.component, g:lightline.component_function ]
+  let [_, c, f, l, r] = [ '%{lightline#link()}', g:lightline.component, g:lightline.component_function, g:lightline.llen, g:lightline.rlen ]
   let mode = a:inactive ? 'inactive' : 'active'
   let left = has_key(g:lightline, mode) ? g:lightline[mode].left : g:lightline.active.left
   let right = has_key(g:lightline, mode) ? g:lightline[mode].right : g:lightline.active.right
@@ -182,11 +182,11 @@ function! lightline#statusline(inactive)
         let _ .= lightline#subseparator(left[i][j], left[i][j+1:], g:lightline.subseparator.left)
       endif
     endfor
-    let _ .= printf('%%#LightLineLeft_%s_%d_%d#', mode, i, i + 1) . g:lightline.separator.left
+    let _ .= printf('%%#LightLineLeft_%s_%d_%d#', mode, i, i + 1) . (i < l ? g:lightline.separator.left : g:lightline.subseparator.left)
   endfor
   let _ .= printf('%%#LightLineMiddle_%s#%%=', mode)
   for i in reverse(range(len(right)))
-    let _ .= printf('%%#LightLineRight_%s_%d_%d#', mode, i, i + 1) . g:lightline.separator.right
+    let _ .= printf('%%#LightLineRight_%s_%d_%d#', mode, i, i + 1) . (i < r ? g:lightline.separator.right : g:lightline.subseparator.right)
     let _ .= printf('%%#LightLineRight_%s_%d#', mode, i)
     for j in range(len(right[i]))
       if j

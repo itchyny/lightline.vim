@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 21:45:29.
+" Last Change: 2013/08/27 00:35:38.
 " =============================================================================
 let s:base03 = [ '#002b36', 234 ]
 let s:base02 = [ '#073642', 235 ]
@@ -29,14 +29,14 @@ if &background ==# 'light'
 endif
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}}
 let s:p.normal.left = [ [ s:base3, s:blue ], [ s:base3, s:base01 ] ]
-let s:p.normal.right = [ [ s:base02, s:base0 ], [ s:base1, s:base01 ], [ s:base0, s:base02 ] ]
-let s:p.inactive.right = [ [ s:base02, s:base01 ], [ s:base0, s:base02 ], [ s:base0, s:base02 ] ]
-let s:p.inactive.left =  [ [ s:base0, s:base02 ], [ s:base00, s:base03 ] ]
+let s:p.normal.right = [ [ s:base02, s:base0 ], [ s:base1, s:base01 ] ]
+let s:p.inactive.right = [ [ s:base02, s:base01 ], [ s:base00, s:base02 ] ]
+let s:p.inactive.left =  [ [ s:base0, s:base02 ], [ s:base00, s:base02 ] ]
 let s:p.insert.left = [ [ s:base3, s:green ], [ s:base3, s:base01 ] ]
 let s:p.replace.left = [ [ s:base3, s:red ], [ s:base3, s:base01 ] ]
 let s:p.visual.left = [ [ s:base3, s:magenta ], [ s:base3, s:base01 ] ]
-let s:p.normal.middle = [ [ s:base02, s:base02 ] ]
-let s:p.inactive.middle = [ [ s:base02, s:base02 ] ]
+let s:p.normal.middle = [ [ s:base00, s:base02 ] ]
+let s:p.inactive.middle = [ [ s:base00, s:base02 ] ]
 
 function! s:flatten(p)
   for k in values(a:p)
@@ -49,4 +49,3 @@ function! s:flatten(p)
   return a:p
 endfunction
 let g:lightline#colorscheme#solarized#palette = s:flatten(s:p)
-

@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 21:45:55.
+" Last Change: 2013/08/27 00:37:34.
 " =============================================================================
 let s:base03 = [ '#151513', 233 ]
 let s:base02 = [ '#30302c ', 236 ]
@@ -22,14 +22,14 @@ let s:cyan = [ '#8fbfdc', 110 ]
 let s:green = [ '#99ad6a', 107 ]
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}}
 let s:p.normal.left = [ [ s:base02, s:blue ], [ s:base3, s:base01 ] ]
-let s:p.normal.right = [ [ s:base02, s:base0 ], [ s:base1, s:base01 ], [ s:base0, s:base02 ] ]
-let s:p.inactive.right = [ [ s:base02, s:base01 ], [ s:base0, s:base02 ], [ s:base0, s:base02 ] ]
-let s:p.inactive.left =  [ [ s:base0, s:base02 ], [ s:base00, s:base03 ] ]
+let s:p.normal.right = [ [ s:base02, s:base1 ], [ s:base2, s:base01 ] ]
+let s:p.inactive.right = [ [ s:base02, s:base00 ], [ s:base0, s:base02 ] ]
+let s:p.inactive.left =  [ [ s:base0, s:base02 ], [ s:base00, s:base02 ] ]
 let s:p.insert.left = [ [ s:base02, s:green ], [ s:base3, s:base01 ] ]
 let s:p.replace.left = [ [ s:base02, s:red ], [ s:base3, s:base01 ] ]
 let s:p.visual.left = [ [ s:base02, s:magenta ], [ s:base3, s:base01 ] ]
-let s:p.normal.middle = [ [ s:base02, s:base02 ] ]
-let s:p.inactive.middle = [ [ s:base02, s:base02 ] ]
+let s:p.normal.middle = [ [ s:base0, s:base02 ] ]
+let s:p.inactive.middle = [ [ s:base00, s:base02 ] ]
 
 function! s:flatten(p)
   for k in values(a:p)

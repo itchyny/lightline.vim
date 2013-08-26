@@ -4,6 +4,7 @@ A light and configurable statusline for Vim
 https://github.com/itchyny/lightline.vim
 
 ### powerline theme (default)
+
 ![lightline.vim - powerline - normal](https://raw.github.com/wiki/itchyny/lightline.vim/image/powerline/1.png)
 ![lightline.vim - powerline - insert](https://raw.github.com/wiki/itchyny/lightline.vim/image/powerline/2.png)
 ![lightline.vim - powerline - visual](https://raw.github.com/wiki/itchyny/lightline.vim/image/powerline/3.png)
@@ -44,6 +45,7 @@ https://github.com/itchyny/lightline.vim
 ![lightline.vim - landscape - insert](https://raw.github.com/wiki/itchyny/lightline.vim/image/landscape/2.png)
 ![lightline.vim - landscape - visual](https://raw.github.com/wiki/itchyny/lightline.vim/image/landscape/3.png)
 ![lightline.vim - landscape - replace](https://raw.github.com/wiki/itchyny/lightline.vim/image/landscape/4.png)
+
 With branch name, read-only mark and modified mark.
 ![lightline.vim - landscape - fugitive](https://raw.github.com/wiki/itchyny/lightline.vim/image/landscape/5.png)
 
@@ -91,6 +93,7 @@ MIT License
 ## Configuration tutorial
 In default, the statusline looks like:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/1.png)
+
 If you use the wombat colorscheme, add the following settings to your `.vimrc` (or \_vimrc on Windows):
 ```vim
 let g:lightline = {
@@ -100,8 +103,39 @@ let g:lightline = {
 to get:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/2.png)
 
+
+If your statusline looks like
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/21.png)
+
+and the cool statuslines appear only on `:vsp`, add
+```vim
+set laststatus=2
+```
+to your `.vimrc`.
+
+
+If you have problem like
+![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/20.png)
+
+then add
+```sh
+export TERM=xterm-256color
+```
+to your `.*shrc` and add
+```vim
+if !has('gui_running')
+  set t_Co=256
+endif
+```
+to your `.vimrc`.
+
+
+Colors appear correctly? Now let's see how to change the appearance.
+
+
 You may think that the default read-only mark is not so cool:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/3.png)
+
 Then edit the read-only component.
 The lightline components are stored in `g:lightline.component`.
 So you add the settings of `g:lightline.component.readonly` in your `.vimrc`. (the following settings are effective with the patched font for vim-powerline):
@@ -114,6 +148,7 @@ let g:lightline = {
       \ }
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/4.png)
+
 How nice!
 
 But the boundaries are quadrilateral. You may miss the powerline.
@@ -129,12 +164,13 @@ let g:lightline = {
       \ }
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/5.png)
-Hurrah! Cool!
 
+Hurrah! Cool!
 
 
 If your statusline looks like:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/16.png)
+
 the patched font is not installed.
 
 There are two kinds of patched fonts:
@@ -163,6 +199,7 @@ let g:lightline = {
 
 If you have installed the font for powerline and your statusline looks like
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/18.png)
+
 remove
 ```vim
 set ambiwidth=double
@@ -183,27 +220,7 @@ let g:lightline = {
       \ }
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/17.png)
-Still, if you have problem like
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/20.png)
-then add
-```sh
-export TERM=xterm-256color
-```
-to your `.*shrc` and add
-```vim
-if !has('gui_running')
-  set t_Co=256
-endif
-```
-to your `.vimrc`.
 
-If your statusline looks like
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/21.png)
-and the cool statusline appears only on splitting window, add
-```vim
-set laststatus=2
-```
-to your `.vimrc`.
 
 
 Almost all of things go well with the patched font but if the triangle looks weird:
@@ -220,6 +237,7 @@ For other terminals, this weird-triangle problem will be resolved by disabling t
 Now, let us get back to the tutorial (with the patched font for vim-powerline).
 You look into a help file to find the marks annoying.
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/6.png)
+
 Help files are read-only and no-modifiable? We know that!
 OK, so you again edit the components.
 ```vim
@@ -234,6 +252,7 @@ let g:lightline = {
       \ }
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/7.png)
+
 Huh? Weird!
 The components do not collapse even if they have no information!
 In order to avoid this situation, you set expressions to `g:lightline.component_visible_condition`, which should become 1 only when the corresponding components have information.
@@ -253,6 +272,7 @@ let g:lightline = {
       \ }
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/8.png)
+
 Okay. It works nice.
 
 
@@ -282,9 +302,11 @@ let g:lightline = {
 ```
 If the plugin arranges all the components (in a situation you `set paste` and the file `.vimrc` is read-only, try to modify):
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
+
 The mode component, the paste component, read-only component, filename component and modified component in a row.
 Normally, the paste component does not show up.
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/10.png)
+
 If the file is not read-only (more common cases), the read-only component does not show up.
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/11.png)
 
@@ -298,6 +320,7 @@ let g:lightline = {
 ```
 And the screen shot of all the components.
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
+
 The mode and paste component are displayed in the same group.
 The read-only, filename and modified component are in the second group.
 It corresponds to the structure of `g:lightline.active.left`.
@@ -343,6 +366,7 @@ let g:lightline = {
       \ }
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/12.png)
+
 Okay, the branch component is added!
 
 
@@ -396,6 +420,7 @@ function! MyFugitive()
 endfunction
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/13.png)
+
 Fine and readable! 
 
 
@@ -451,6 +476,7 @@ function! MyFilename()
 endfunction
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/14.png)
+
 Oops! We forgot the cool mark for the branch component! (work with the patched font for vim-powerline)
 ```vim
 function! MyFugitive()
@@ -458,6 +484,7 @@ function! MyFugitive()
 endfunction
 ```
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/15.png)
+
 How cool!!!
 
 Of course, you can name your component as you wish.
