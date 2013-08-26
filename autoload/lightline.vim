@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/27 01:01:16.
+" Last Change: 2013/08/27 04:41:57.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -14,7 +14,7 @@ let s:is_win32term = (has('win32') || has('win64')) && !has('gui_running')
 
 function! lightline#update()
   try
-    if s:_ | call lightline#init() | endif
+    if s:_ | call lightline#init() | call lightline#colorscheme() | endif
     let s = [lightline#statusline(0), lightline#statusline(1)]
     let w = winnr()
     for n in range(1, winnr('$'))
@@ -23,6 +23,7 @@ function! lightline#update()
     endfor
   catch
     call lightline#init()
+    call lightline#colorscheme()
   endtry
 endfunction
 
@@ -73,6 +74,9 @@ function! lightline#init()
   let g:lightline.subseparator = get(g:lightline, 'subseparator', {})
   call extend(g:lightline.subseparator, { 'left': '|', 'right': '|' }, 'keep')
   call extend(g:lightline, { 'palette': {}, 'colorscheme': 'default' }, 'keep')
+endfunction
+
+function! lightline#colorscheme()
   try
     let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
   catch
@@ -163,7 +167,7 @@ function! lightline#function(f)
   return ''
 endfunction
 
-function! lightline#subseparator(x, y, s)
+function! s:subseparator(x, y, s)
   let [c, f, v] = [ g:lightline.component, g:lightline.component_function,  g:lightline.component_visible_condition ]
   return '%{('.(has_key(f,a:x)?'!!strlen(lightline#function("'.(f[a:x]).'"))':get(v,a:x,"1")).')*(('.join(map(copy(a:y),
         \'(has_key(f,v:val)?"!!strlen(lightline#function(\"".(f[v:val])."\"))":get(v,v:val,has_key(c,v:val)?"1":"0"))'),')+(')."))?('".a:s."'):''}"
@@ -179,7 +183,7 @@ function! lightline#statusline(inactive)
     for j in range(len(left[i]))
       let _ .= '%( '.(has_key(f,left[i][j])?'%{lightline#function("'.f[left[i][j]].'")}':get(c,left[i][j],'')).' %)'
       if j < len(left[i]) - 1
-        let _ .= lightline#subseparator(left[i][j], left[i][j+1:], g:lightline.subseparator.left)
+        let _ .= s:subseparator(left[i][j], left[i][j+1:], g:lightline.subseparator.left)
       endif
     endfor
     let _ .= printf('%%#LightLineLeft_%s_%d_%d#', mode, i, i + 1) . (i < l ? g:lightline.separator.left : g:lightline.subseparator.left)
@@ -190,7 +194,7 @@ function! lightline#statusline(inactive)
     let _ .= printf('%%#LightLineRight_%s_%d#', mode, i)
     for j in range(len(right[i]))
       if j
-        let _ .= lightline#subseparator(right[i][j], right[i][:j-1], g:lightline.subseparator.right)
+        let _ .= s:subseparator(right[i][j], right[i][:j-1], g:lightline.subseparator.right)
       endif
       let _ .= '%( '.(has_key(f,right[i][j])?'%{lightline#function("'.f[right[i][j]].'")}':get(c,right[i][j],'')).' %)'
     endfor

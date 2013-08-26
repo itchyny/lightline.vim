@@ -4,13 +4,14 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/25 17:00:30.
+Last Change: 2013/08/27 04:42:21.
 
 CONTENTS					*lightline-contents*
 
 Introduction				|lightline-introduction|
-Options					|lightline-options|
+Option					|lightline-option|
 Font					|lightline-font|
+Function				|lightline-function|
 Examples				|lightline-examples|
 Nice Examples				|lightline-nice-examples|
 Troubleshooting				|lightline-troubleshooting|
@@ -22,7 +23,7 @@ INTRODUCTION					*lightline-introduction*
 The *lightline* plugin is a light and configurable statusline for Vim.
 
 ------------------------------------------------------------------------------
-OPTIONS						*lightline-options*
+OPTIONS						*lightline-option*
 
 	g:lightline				*g:lightline*
 		All the options are stored into this global variable.
@@ -30,7 +31,8 @@ OPTIONS						*lightline-options*
 	g:lightline.active			*g:lightline.active*
 	g:lightline.inactive			*g:lightline.inactive*
 		Dictionaries to specify the status components.
-		The default values are:
+		Note that right groups of components are stored from right to
+		left. The default values are:
 >
 		let g:lightline.active = {
 		    \ 'left': [ [ 'mode', 'paste' ],
@@ -94,11 +96,15 @@ OPTIONS						*lightline-options*
 <
 	g:lightline.colorscheme			*g:lightline.colorscheme*
 		The colorscheme for lightline.vim.
-		Currently, wombat, solarized, powerline, Tomorrow, jellybeans
-		and landscape are available.
+		Currently, wombat, solarized, powerline, jellybeans, Tomorrow,
+		Tomorrow_Night, and landscape are available.
+		The default value is:
 >
 		let g:lightline.colorscheme = 'default'
 <
+		Note that the default colorscheme is exactly the same as
+		powerline theme.
+
 	g:lightline.mode_map			*g:lightline.mode_map*
 		A dictionary of names for mode.
 		The default value is:
@@ -115,6 +121,22 @@ OPTIONS						*lightline-options*
 		    \ 'S' : 'S-LINE',
 		    \ '': 'S-BLOCK',
 		    \ '?': '      ' }
+<
+		When you search a word, you get into the command mode. But you
+		want to keep the mode indicator as 'NORMAL', add
+>
+		let g:lightline.mode_map.c = 'NORMAL'
+<
+		to your .vimrc.
+
+	g:lightline.separator			*g:lightline.separator*
+	g:lightline.subseparator		*g:lightline.subseparator*
+		A dictionaries to store separators.
+		The default value is
+>
+		let g:lightline.separator = { 'left': '', 'right': '' }
+		let g:lightline.subseparator = { 'left': '|', 'right': '|' }
+<
 
 ==============================================================================
 FONT						*lightline-font*
@@ -170,6 +192,35 @@ look nice.
 <
 
 ==============================================================================
+FUNCTION					*lightline-function*
+Exposed functions for lightline.vim.
+
+	lightline#mode()			*lightline#mode()*
+		Returns the mode of the Vim using |g:lightline.mode_map|.
+
+	lightline#init()			*lightline#init()*
+		Initializes |g:lightline| variable.
+
+	lightline#colorscheme()			*lightline#colorscheme()*
+		Initializes the colorscheme and highlight groups.
+
+	lightline#update()			*lightline#update()*
+		Updates all the statuslines of existing windows.
+
+	lightline#update_once()			*lightline#update_once()*
+		Updates the statuslines only once.
+
+Following functions are exposed, but users may not need.
+
+	lightline#link()			*lightline#link()*
+		Creates links of highlight groups for the active window.
+
+	lightline#highlight(inactive)		*lightline#highlight()*
+		Returns |statusline| strings. If the argument is 0, it returns
+		the statusline for active window, and the statusline for
+		inactive window otherwise.
+
+==============================================================================
 
 EXAMPLES					*lightline-examples*
 You can configure the appearance of statusline.
@@ -182,7 +233,7 @@ In order to change the colorscheme:
 		\ }
 <
 
-In order to define own component:
+In order to define your own component:
 >
 	let g:lightline = {
 		\ 'active': {
