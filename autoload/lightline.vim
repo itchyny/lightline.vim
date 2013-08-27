@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/27 20:12:46.
+" Last Change: 2013/08/27 20:51:53.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -129,10 +129,8 @@ function! lightline#highlight()
   let r = has_key(c,d) && has_key(c[d],'right') ? c[d].right : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'right') ? c[f[d]].right : c.normal.right
   let m = has_key(c,d) && has_key(c[d],'middle') ? c[d].middle[0] : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'middle') ? c[f[d]].middle[0] : c.normal.middle[0]
   if (has('win32') || has('win64')) && !has('gui_running')
-    for _  in l |      let [_[2], _[3]] = [s:gui2cui(_[0], _[2]), s:gui2cui(_[1], _[3])] |    endfor
-    for _  in r
-      let [_[2], _[3]] = [s:gui2cui(_[0], _[2]), s:gui2cui(_[1], _[3])]
-    endfor
+    for _  in l | let [_[2], _[3]] = [s:gui2cui(_[0], _[2]), s:gui2cui(_[1], _[3])] | endfor
+    for _  in r | let [_[2], _[3]] = [s:gui2cui(_[0], _[2]), s:gui2cui(_[1], _[3])] | endfor
     let [m[2], m[3]] = [s:gui2cui(m[0], m[2]), s:gui2cui(_[1], m[3])]
   endif
   for i in range(len(left))
