@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/27 20:45:27.
+Last Change: 2013/08/27 21:57:06.
 
 CONTENTS					*lightline-contents*
 
@@ -73,15 +73,23 @@ OPTIONS						*lightline-option*
 >
 		let g:lightline.component = {
 		    \ 'mode': '%{lightline#mode()}',
+		    \ 'fullpath': '%F',
+		    \ 'relativepath': '%f',
 		    \ 'filename': '%t',
 		    \ 'modified': '%M',
+		    \ 'bufnum': '%n',
 		    \ 'paste': '%{&paste?"PASTE":""}',
 		    \ 'readonly': '%R',
+		    \ 'charvalue': '%b',
+		    \ 'charvaluehex': '%B',
 		    \ 'fileencoding': '%{strlen(&fenc)?&fenc:&enc}',
 		    \ 'fileformat': '%{&fileformat}',
 		    \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}',
 		    \ 'percent': '%3p%%',
-		    \ 'lineinfo': '%3l:%-2v' }
+		    \ 'percentwin': '%P',
+		    \ 'lineinfo': '%3l:%-2v',
+		    \ 'line': '%l',
+		    \ 'column': '%c' }
 <
 	g:lightline.component_visible_condition		*g:lightline.component_visible_condition*
 		Dictionary of boolean expressions for the components.

@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/27 20:51:53.
+" Last Change: 2013/08/27 21:55:49.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -48,20 +48,14 @@ function! lightline#init()
   let s:lightline.component = get(s:lightline, 'component', {})
   call extend(s:lightline.component, {
         \ 'mode': '%{lightline#mode()}',
-        \ 'filename': '%t',
-        \ 'modified': '%M',
-        \ 'paste': '%{&paste?"PASTE":""}',
-        \ 'readonly': '%R',
-        \ 'fileencoding': '%{strlen(&fenc)?&fenc:&enc}',
-        \ 'fileformat': '%{&fileformat}',
-        \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}',
-        \ 'percent': '%3p%%',
-        \ 'lineinfo': '%3l:%-2v' }, 'keep')
+        \ 'fullpath': '%F', 'relativepath': '%f', 'filename': '%t', 'modified': '%M', 'bufnum': '%n',
+        \ 'paste': '%{&paste?"PASTE":""}', 'readonly': '%R', 'charvalue': '%b', 'charvaluehex': '%B',
+        \ 'fileencoding': '%{strlen(&fenc)?&fenc:&enc}', 'fileformat': '%{&fileformat}',
+        \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}', 'percent': '%3p%%', 'percentwin': '%P',
+        \ 'lineinfo': '%3l:%-2v', 'line': '%l', 'column': '%c' }, 'keep')
   let s:lightline.component_visible_condition = get(s:lightline, 'component_visible_condition', {})
   call extend(s:lightline.component_visible_condition, {
-        \ 'modified': '&modified||!&modifiable',
-        \ 'readonly': '&readonly',
-        \ 'paste': '&paste' }, 'keep')
+        \ 'modified': '&modified||!&modifiable', 'readonly': '&readonly', 'paste': '&paste' }, 'keep')
   let s:lightline.component_function = get(s:lightline, 'component_function', {})
   let s:lightline.separator = get(s:lightline, 'separator', {})
   call extend(s:lightline.separator, { 'left': '', 'right': '' }, 'keep')
