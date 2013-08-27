@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/27 11:14:04.
+Last Change: 2013/08/27 11:33:01.
 
 CONTENTS					*lightline-contents*
 
@@ -362,7 +362,7 @@ Problem 3:				|lightline-problem-3|
 	How to uninstall this plugin.
 
 Problem 4:				|lightline-problem-4|
-	Cool statuslines appears only on `:vsp`.
+	Cool statuslines appear only on `:vsp`.
 
 Problem 5:				|lightline-problem-5|
 	The statusline does not seem to be correctly colored.
@@ -371,7 +371,7 @@ Problem 6:				|lightline-problem-6|
 	How to install a patched font.
 
 Problem 7:				|lightline-problem-7|
-	Right triangles does not stick to the right components with the
+	Right triangles do not stick to the right components with the
 	patched font.
 
 Problem 8:				|lightline-problem-8|
@@ -387,7 +387,7 @@ Problem 10:				|lightline-problem-10|
 Problem 11:				|lightline-problem-11|
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
-	Vim hungs up while using this plugin.
+	Vim hangs while using this plugin.
 	Want this plugin to be more configurable.
 	This troubleshooting is not helpful.
 
@@ -400,7 +400,7 @@ Problem 1:					*lightline-problem-1*
 
 			1. Put all the files under $VIM.
 
-		If you are to install this plugin using Vundle:
+		If you are to install this plugin using |Vundle|:
 
 			1. Add the following configuration to your
 			.vimrc(_vimrc).
@@ -409,7 +409,7 @@ Problem 1:					*lightline-problem-1*
 <
 			2. Install with `:BundleInstall`.
 
-		If you are to install this plugin using NeoBundle:
+		If you are to install this plugin using |NeoBundle|:
 
 			1. Add the following configuration to your
 			.vimrc(_vimrc).
@@ -457,7 +457,7 @@ Problem 3:					*lightline-problem-3*
 			2. Update with `:NeoBundleClean`.
 
 Problem 4:					*lightline-problem-4*
-	Cool statuslines appears only on `:vsp`.
+	Cool statuslines appear only on `:vsp`.
 
 		Add the following setting to your .vimrc(_vimrc).
 >
@@ -491,7 +491,7 @@ Problem 6:					*lightline-problem-6*
 		download from https://github.com/Lokaltog/powerline-fonts
 
 Problem 7:					*lightline-problem-7*
-	Right triangles does not stick to the right components with patched
+	Right triangles do not stick to the right components with patched
 	font.
 
 		Remove the following setting from your .vimrc(_vimrc).
@@ -537,7 +537,7 @@ Problem 10:					*lightline-problem-10*
 Problem 11:					*lightline-problem-11*
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
-	Vim hungs up while using this plugin.
+	Vim hangs while using this plugin.
 	Want this plugin to be more configurable.
 	This troubleshooting is not helpful.
 
