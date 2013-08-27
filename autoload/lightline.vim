@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/27 22:09:06.
+" Last Change: 2013/08/27 23:24:21.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -48,7 +48,7 @@ function! lightline#init()
   let s:lightline.component = get(s:lightline, 'component', {})
   call extend(s:lightline.component, {
         \ 'mode': '%{lightline#mode()}',
-        \ 'fullpath': '%F', 'relativepath': '%f', 'filename': '%t', 'modified': '%M', 'bufnum': '%n',
+        \ 'abspath': '%F', 'relativepath': '%f', 'filename': '%t', 'modified': '%M', 'bufnum': '%n',
         \ 'paste': '%{&paste?"PASTE":""}', 'readonly': '%R', 'charvalue': '%b', 'charvaluehex': '%B',
         \ 'fileencoding': '%{strlen(&fenc)?&fenc:&enc}', 'fileformat': '%{&fileformat}',
         \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}', 'percent': '%3p%%', 'percentwin': '%P',
