@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/27 04:42:21.
+Last Change: 2013/08/27 09:13:05.
 
 CONTENTS					*lightline-contents*
 
@@ -243,7 +243,7 @@ In order to define your own component:
 		\   'myfilename': 'MyFilename',
 		\   'myreadonly': 'MyReadonly',
 		\   'mymodified': 'MyModified',
-		\ },
+		\ }
 		\ }
 	function! MyFilename()
 		return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
@@ -263,8 +263,8 @@ In order to define your own component:
 Separators settings:
 >
 	let g:lightline = {
-		\ 'separator': { 'left': '▶', 'right': '◀' },
-		\ 'subseparator': { 'left': '>', 'right': '<' }
+		\ 'separator': { 'left': '', 'right': '' },
+		\ 'subseparator': { 'left': '|', 'right': '|' }
 		\ }
 <
 
