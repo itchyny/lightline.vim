@@ -91,7 +91,7 @@ MIT License
 2. Install with `:NeoBundleInstall`.
 
 ## Configuration tutorial
-In default, the statusline looks like:
+By default, the statusline looks like:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/1.png)
 
 If you use the wombat colorscheme, add the following settings to your `.vimrc` (or \_vimrc on Windows):
@@ -336,7 +336,7 @@ Of course, your settings in `.vimrc` have priority over the default settings in 
 
 GitHub branch is important for us.
 And it is a default component in [powerline](https://github.com/Lokaltog/powerline) and [vim-powerline](https://github.com/Lokaltog/vim-powerline).
-However, lightline does not provide the branch feature in default.
+However, lightline does not provide the branch feature by default.
 
 In order to show the branch in the statusline, you firstly install the [vim-fugitive](https://github.com/tpope/vim-fugitive) plugin.
 Then edit the `g:lightline` in your `.vimrc`.
