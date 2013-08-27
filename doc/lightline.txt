@@ -4,11 +4,12 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/27 11:33:01.
+Last Change: 2013/08/27 11:48:00.
 
 CONTENTS					*lightline-contents*
 
 Introduction				|lightline-introduction|
+Spirit					|lightline-spirit|
 Option					|lightline-option|
 Font					|lightline-font|
 Function				|lightline-function|
@@ -21,6 +22,27 @@ Changelog				|lightline-changelog|
 INTRODUCTION					*lightline-introduction*
 
 The *lightline* plugin is a light and configurable statusline for Vim.
+
+------------------------------------------------------------------------------
+SPIRIT						*lightline-spirit*
+
+	Minimalism
+	    The core script is very small.
+
+	Configurability
+	    You can create your own component and easily add to the statusline.
+
+	Orthogonality
+	    Any plugin should not change the settings of another plugin.
+	    Such plugin-crossing settings should be written by users in
+	    .vimrc.
+
+	You might find this plugin is not so useful in default. This plugin
+	does not provide the branch information, which is a very basic
+	component in existing plugins. The reason is: branch component is one
+	of plugin-crossing settings so users should write the settings using
+	the APIs of the both plugins. Hospitality makes a plugin messy. Good
+	APIS keep a plugin clean.
 
 ------------------------------------------------------------------------------
 OPTIONS						*lightline-option*
@@ -140,12 +162,12 @@ OPTIONS						*lightline-option*
 
 ==============================================================================
 FONT						*lightline-font*
-You can use the patched font you used for |vim-powerline| or |powerline|.
+You can use the patched font you used for |vim-powerline| and |powerline|.
 
 The patched font for |powerline| is available at
 https://github.com/Lokaltog/powerline-fonts
 
-How to create the patched font for |vim-powerline| is available at
+A tutorial to create the patched font for |vim-powerline| is available at
 https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher
 
 If you have installed the patched font for |powerline|, following settings look
