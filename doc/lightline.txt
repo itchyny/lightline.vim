@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/27 17:16:34.
+Last Change: 2013/08/27 20:45:27.
 
 CONTENTS					*lightline-contents*
 
@@ -87,10 +87,12 @@ OPTIONS						*lightline-option*
 		Dictionary of boolean expressions for the components.
 		Each expression should correspond to the condition each
 		component have non-zero length.
-		For example, the visible condition for paste component is:
+		The default value is:
 >
 		let g:lightline.component_visible_condition = {
-		    \ 'paste': '(&paste)' }
+		    \ 'modified': '&modified||!&modifiable',
+		    \ 'readonly': '&readonly',
+		    \ 'paste': '&paste' }
 <
 		Users are recommended to set this option together with the
 		component itself.

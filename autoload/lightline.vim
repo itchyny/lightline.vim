@@ -3,28 +3,22 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/27 19:56:59.
+" Last Change: 2013/08/27 20:12:46.
 " =============================================================================
 
 let s:save_cpo = &cpo
 set cpo&vim
 
 let s:_ = 1
-let s:is_win32term = (has('win32') || has('win64')) && !has('gui_running')
 
 function! lightline#update()
-  try
-    if s:_ | call lightline#init() | call lightline#colorscheme() | endif
-    let s = [lightline#statusline(0), lightline#statusline(1)]
-    let w = winnr()
-    for n in range(1, winnr('$'))
-      call setwinvar(n, '&statusline', s[n!=w])
-      call setwinvar(n, 'lightline', n!=w)
-    endfor
-  catch
-    call lightline#init()
-    call lightline#colorscheme()
-  endtry
+  if s:_ | call lightline#init() | call lightline#colorscheme() | endif
+  let s = [lightline#statusline(0), lightline#statusline(1)]
+  let w = winnr()
+  for n in range(1, winnr('$'))
+    call setwinvar(n, '&statusline', s[n!=w])
+    call setwinvar(n, 'lightline', n!=w)
+  endfor
 endfunction
 
 function! lightline#update_once()
@@ -32,27 +26,27 @@ function! lightline#update_once()
 endfunction
 
 function! lightline#init()
-  let g:lightline = get(g:, 'lightline', {})
-  let g:lightline.active = get(g:lightline, 'active', {})
-  call extend(g:lightline.active, {
+  let s:lightline = deepcopy(get(g:, 'lightline', {}))
+  let s:lightline.active = get(s:lightline, 'active', {})
+  call extend(s:lightline.active, {
         \ 'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
         \ 'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ] }, 'keep')
-  let g:lightline.inactive = get(g:lightline, 'inactive', {})
-  call extend(g:lightline.inactive, {
+  let s:lightline.inactive = get(s:lightline, 'inactive', {})
+  call extend(s:lightline.inactive, {
         \ 'left': [ [ 'filename' ] ],
         \ 'right': [ [ 'lineinfo' ], [ 'percent' ] ] }, 'keep')
-  let g:lightline.mode_map = get(g:lightline, 'mode_map', {})
-  call extend(g:lightline.mode_map, {
+  let s:lightline.mode_map = get(s:lightline, 'mode_map', {})
+  call extend(s:lightline.mode_map, {
         \ 'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL',
         \ 'V': 'V-LINE', 'c': 'COMMAND', '': 'V-BLOCK', 's': 'SELECT',
         \ 'S': 'S-LINE', '': 'S-BLOCK', '?': '      ' }, 'keep')
-  let g:lightline._mode_ = {
+  let s:lightline._mode_ = {
         \ 'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual',
         \ 'c': 'command', '': 'visual', 's': 'select', 'S': 'select', '': 'select' }
-  let g:lightline.mode_fallback = get(g:lightline, 'mode_fallback', {})
-  call extend(g:lightline.mode_fallback, { 'replace': 'insert', 'select': 'visual' })
-  let g:lightline.component = get(g:lightline, 'component', {})
-  call extend(g:lightline.component, {
+  let s:lightline.mode_fallback = get(s:lightline, 'mode_fallback', {})
+  call extend(s:lightline.mode_fallback, { 'replace': 'insert', 'select': 'visual' })
+  let s:lightline.component = get(s:lightline, 'component', {})
+  call extend(s:lightline.component, {
         \ 'mode': '%{lightline#mode()}',
         \ 'filename': '%t',
         \ 'modified': '%M',
@@ -63,26 +57,26 @@ function! lightline#init()
         \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}',
         \ 'percent': '%3p%%',
         \ 'lineinfo': '%3l:%-2v' }, 'keep')
-  let g:lightline.component_visible_condition = get(g:lightline, 'component_visible_condition', {})
-  call extend(g:lightline.component_visible_condition, {
-        \ 'modified': '(&modified||!&modifiable)',
-        \ 'readonly': '(&readonly)',
-        \ 'paste': '(&paste)' }, 'keep')
-  let g:lightline.component_function = get(g:lightline, 'component_function', {})
-  let g:lightline.separator = get(g:lightline, 'separator', {})
-  call extend(g:lightline.separator, { 'left': '', 'right': '' }, 'keep')
-  let g:lightline.subseparator = get(g:lightline, 'subseparator', {})
-  call extend(g:lightline.subseparator, { 'left': '|', 'right': '|' }, 'keep')
-  call extend(g:lightline, { 'palette': {}, 'colorscheme': 'default' }, 'keep')
+  let s:lightline.component_visible_condition = get(s:lightline, 'component_visible_condition', {})
+  call extend(s:lightline.component_visible_condition, {
+        \ 'modified': '&modified||!&modifiable',
+        \ 'readonly': '&readonly',
+        \ 'paste': '&paste' }, 'keep')
+  let s:lightline.component_function = get(s:lightline, 'component_function', {})
+  let s:lightline.separator = get(s:lightline, 'separator', {})
+  call extend(s:lightline.separator, { 'left': '', 'right': '' }, 'keep')
+  let s:lightline.subseparator = get(s:lightline, 'subseparator', {})
+  call extend(s:lightline.subseparator, { 'left': '|', 'right': '|' }, 'keep')
+  call extend(s:lightline, { 'palette': {}, 'colorscheme': 'default' }, 'keep')
 endfunction
 
 function! lightline#colorscheme()
   try
-    let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+    let s:lightline.palette = g:lightline#colorscheme#{s:lightline.colorscheme}#palette
   catch
-    call lightline#error('Could not load colorscheme ' . g:lightline.colorscheme . '.')
-    let g:lightline.colorscheme = 'default'
-    let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+    call lightline#error('Could not load colorscheme ' . s:lightline.colorscheme . '.')
+    let s:lightline.colorscheme = 'default'
+    let s:lightline.palette = g:lightline#colorscheme#{s:lightline.colorscheme}#palette
   finally
     call lightline#highlight()
     let s:_ = 0
@@ -90,25 +84,20 @@ function! lightline#colorscheme()
 endfunction
 
 function! lightline#mode()
-  return get(g:lightline.mode_map, mode(), g:lightline.mode_map['?'])
+  return get(s:lightline.mode_map, mode(), s:lightline.mode_map['?'])
 endfunction
 
 function! lightline#link()
-  try
-    let mode = get(g:lightline._mode_, mode(), 'normal')
-    for i in range(len(g:lightline.active.left))
-      exec printf('hi link LightLineLeft_active_%d LightLineLeft_%s_%d', i, mode, i)
-      exec printf('hi link LightLineLeft_active_%d_%d LightLineLeft_%s_%d_%d', i, i + 1, mode, i, i + 1)
-    endfor
-    exec printf('hi link LightLineMiddle_active LightLineMiddle_%s', mode)
-    for i in range(len(g:lightline.active.right))
-      exec printf('hi link LightLineRight_active_%d LightLineRight_%s_%d', i, mode, i)
-      exec printf('hi link LightLineRight_active_%d_%d LightLineRight_%s_%d_%d', i, i + 1, mode, i, i + 1)
-    endfor
-  catch
-    let s:_ = 1
-    call lightline#update()
-  endtry
+  let mode = get(s:lightline._mode_, mode(), 'normal')
+  for i in range(len(s:lightline.active.left))
+    exec printf('hi link LightLineLeft_active_%d LightLineLeft_%s_%d', i, mode, i)
+    exec printf('hi link LightLineLeft_active_%d_%d LightLineLeft_%s_%d_%d', i, i + 1, mode, i, i + 1)
+  endfor
+  exec printf('hi link LightLineMiddle_active LightLineMiddle_%s', mode)
+  for i in range(len(s:lightline.active.right))
+    exec printf('hi link LightLineRight_active_%d LightLineRight_%s_%d', i, mode, i)
+    exec printf('hi link LightLineRight_active_%d_%d LightLineRight_%s_%d_%d', i, i + 1, mode, i, i + 1)
+  endfor
   return ''
 endfunction
 
@@ -130,19 +119,17 @@ function! s:gui2cui(rgb, fallback)
 endfunction
 
 function! lightline#highlight()
-  let [c, f] = [g:lightline.palette, g:lightline.mode_fallback]
-  let [g:lightline.llen, g:lightline.rlen] = [len(c.normal.left), len(c.normal.right)]
+  let [c, f] = [s:lightline.palette, s:lightline.mode_fallback]
+  let [s:lightline.llen, s:lightline.rlen] = [len(c.normal.left), len(c.normal.right)]
   for mode in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command', 'select']
   let d = has_key(c, mode) ? mode : has_key(f, mode) && has_key(c, f[mode]) ? f[mode] : 'normal'
-  let left = d == 'inactive' ? g:lightline.inactive.left : g:lightline.active.left
-  let right = d == 'inactive' ? g:lightline.inactive.right : g:lightline.active.right
+  let left = d == 'inactive' ? s:lightline.inactive.left : s:lightline.active.left
+  let right = d == 'inactive' ? s:lightline.inactive.right : s:lightline.active.right
   let l = has_key(c,d) && has_key(c[d],'left') ? c[d].left : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'left') ? c[f[d]].left : c.normal.left
   let r = has_key(c,d) && has_key(c[d],'right') ? c[d].right : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'right') ? c[f[d]].right : c.normal.right
   let m = has_key(c,d) && has_key(c[d],'middle') ? c[d].middle[0] : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'middle') ? c[f[d]].middle[0] : c.normal.middle[0]
-  if s:is_win32term
-    for _  in l
-      let [_[2], _[3]] = [s:gui2cui(_[0], _[2]), s:gui2cui(_[1], _[3])]
-    endfor
+  if (has('win32') || has('win64')) && !has('gui_running')
+    for _  in l |      let [_[2], _[3]] = [s:gui2cui(_[0], _[2]), s:gui2cui(_[1], _[3])] |    endfor
     for _  in r
       let [_[2], _[3]] = [s:gui2cui(_[0], _[2]), s:gui2cui(_[1], _[3])]
     endfor
@@ -165,33 +152,33 @@ function! lightline#highlight()
 endfunction
 
 function! s:subseparator(x, y, s)
-  let [c, f, v] = [ g:lightline.component, g:lightline.component_function,  g:lightline.component_visible_condition ]
+  let [c, f, v] = [ s:lightline.component, s:lightline.component_function,  s:lightline.component_visible_condition ]
   return '%{('.(has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,"1")).')*(('.join(map(copy(a:y),
         \'(has_key(f,v:val)?"!!strlen(exists(\"*".f[v:val]."\")?".f[v:val]."():\"\")":get(v,v:val,has_key(c,v:val)?"1":"0"))'),')+(')."))?('".a:s."'):''}"
 endfunction
 
 function! lightline#statusline(inactive)
-  let [_, c, f, l, r] = [ '%{lightline#link()}', g:lightline.component, g:lightline.component_function, g:lightline.llen, g:lightline.rlen ]
+  let [_, c, f, l, r] = [ '%{lightline#link()}', s:lightline.component, s:lightline.component_function, s:lightline.llen, s:lightline.rlen ]
   let mode = a:inactive ? 'inactive' : 'active'
-  let left = has_key(g:lightline, mode) ? g:lightline[mode].left : g:lightline.active.left
-  let right = has_key(g:lightline, mode) ? g:lightline[mode].right : g:lightline.active.right
+  let left = has_key(s:lightline, mode) ? s:lightline[mode].left : s:lightline.active.left
+  let right = has_key(s:lightline, mode) ? s:lightline[mode].right : s:lightline.active.right
   for i in range(len(left))
     let _ .= printf('%%#LightLineLeft_%s_%d#', mode, i)
     for j in range(len(left[i]))
       let _ .= '%( '.(has_key(f,left[i][j])?'%{exists("*'.f[left[i][j]].'")?'.f[left[i][j]].'():""}':get(c,left[i][j],'')).' %)'
       if j < len(left[i]) - 1
-        let _ .= s:subseparator(left[i][j], left[i][j+1:], g:lightline.subseparator.left)
+        let _ .= s:subseparator(left[i][j], left[i][j+1:], s:lightline.subseparator.left)
       endif
     endfor
-    let _ .= printf('%%#LightLineLeft_%s_%d_%d#', mode, i, i + 1) . (i < l ? g:lightline.separator.left : g:lightline.subseparator.left)
+    let _ .= printf('%%#LightLineLeft_%s_%d_%d#', mode, i, i + 1) . (i < l ? s:lightline.separator.left : s:lightline.subseparator.left)
   endfor
   let _ .= printf('%%#LightLineMiddle_%s#%%=', mode)
   for i in reverse(range(len(right)))
-    let _ .= printf('%%#LightLineRight_%s_%d_%d#', mode, i, i + 1) . (i < r ? g:lightline.separator.right : g:lightline.subseparator.right)
+    let _ .= printf('%%#LightLineRight_%s_%d_%d#', mode, i, i + 1) . (i < r ? s:lightline.separator.right : s:lightline.subseparator.right)
     let _ .= printf('%%#LightLineRight_%s_%d#', mode, i)
     for j in range(len(right[i]))
       if j
-        let _ .= s:subseparator(right[i][j], right[i][:j-1], g:lightline.subseparator.right)
+        let _ .= s:subseparator(right[i][j], right[i][:j-1], s:lightline.subseparator.right)
       endif
       let _ .= '%( '.(has_key(f,right[i][j])?'%{exists("*'.f[right[i][j]].'")?'.f[right[i][j]].'():""}':get(c,right[i][j],'')).' %)'
     endfor
