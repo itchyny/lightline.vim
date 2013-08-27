@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/27 11:48:00.
+Last Change: 2013/08/27 11:49:37.
 
 CONTENTS					*lightline-contents*
 
@@ -39,10 +39,10 @@ SPIRIT						*lightline-spirit*
 
 	You might find this plugin is not so useful in default. This plugin
 	does not provide the branch information, which is a very basic
-	component in existing plugins. The reason is: branch component is one
-	of plugin-crossing settings so users should write the settings using
-	the APIs of the both plugins. Hospitality makes a plugin messy. Good
-	APIS keep a plugin clean.
+	component in existing plugins. The reason is that branch component is
+	one of plugin-crossing settings so users should write the settings
+	using the APIs of the both plugins. Hospitality makes a plugin messy.
+	Good APIS keep a plugin clean.
 
 ------------------------------------------------------------------------------
 OPTIONS						*lightline-option*
