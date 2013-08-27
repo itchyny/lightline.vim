@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/27 21:55:49.
+" Last Change: 2013/08/27 22:09:06.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -145,7 +145,7 @@ endfunction
 
 function! s:subseparator(x, y, s)
   let [c, f, v] = [ s:lightline.component, s:lightline.component_function,  s:lightline.component_visible_condition ]
-  return '%{('.(has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,"1")).')*(('.join(map(copy(a:y),
+  return '%{('.(has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,has_key(c,a:x)?"1":"0")).')*(('.join(map(copy(a:y),
         \'(has_key(f,v:val)?"!!strlen(exists(\"*".f[v:val]."\")?".f[v:val]."():\"\")":get(v,v:val,has_key(c,v:val)?"1":"0"))'),')+(')."))?('".a:s."'):''}"
 endfunction
 
@@ -157,10 +157,8 @@ function! lightline#statusline(inactive)
   for i in range(len(left))
     let _ .= printf('%%#LightLineLeft_%s_%d#', mode, i)
     for j in range(len(left[i]))
-      let _ .= '%( '.(has_key(f,left[i][j])?'%{exists("*'.f[left[i][j]].'")?'.f[left[i][j]].'():""}':get(c,left[i][j],'')).' %)'
-      if j < len(left[i]) - 1
-        let _ .= s:subseparator(left[i][j], left[i][j+1:], s:lightline.subseparator.left)
-      endif
+      let _ .= substitute('%( '.(has_key(f,left[i][j])?'%{exists("*'.f[left[i][j]].'")?'.f[left[i][j]].'():""}':get(c,left[i][j],'')).' %)', '%(  %)', '', '')
+      if j < len(left[i]) - 1 | let _ .= s:subseparator(left[i][j], left[i][j+1:], s:lightline.subseparator.left) | endif
     endfor
     let _ .= printf('%%#LightLineLeft_%s_%d_%d#', mode, i, i + 1) . (i < l ? s:lightline.separator.left : s:lightline.subseparator.left)
   endfor
@@ -169,10 +167,8 @@ function! lightline#statusline(inactive)
     let _ .= printf('%%#LightLineRight_%s_%d_%d#', mode, i, i + 1) . (i < r ? s:lightline.separator.right : s:lightline.subseparator.right)
     let _ .= printf('%%#LightLineRight_%s_%d#', mode, i)
     for j in range(len(right[i]))
-      if j
-        let _ .= s:subseparator(right[i][j], right[i][:j-1], s:lightline.subseparator.right)
-      endif
-      let _ .= '%( '.(has_key(f,right[i][j])?'%{exists("*'.f[right[i][j]].'")?'.f[right[i][j]].'():""}':get(c,right[i][j],'')).' %)'
+      if j | let _ .= s:subseparator(right[i][j], right[i][:j-1], s:lightline.subseparator.right) | endif
+      let _ .= substitute('%( '.(has_key(f,right[i][j])?'%{exists("*'.f[right[i][j]].'")?'.f[right[i][j]].'():""}':get(c,right[i][j],'')).' %)', '%(  %)', '', '')
     endfor
   endfor
   return _
