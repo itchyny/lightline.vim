@@ -227,8 +227,8 @@ Almost all of things go well with the patched font but if the triangle looks wei
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/22.png)
 
 If you are using iTerm2, change the following settings of iTerm2:
-+ set `Profiles>Colors>Minimum contrast` to Lowest.
-+ set `Profiles>Window>Transparency` to Opaquest.
++ set `Profiles>Colors>Minimum contrast` to the Lowest.
++ set `Profiles>Window>Transparency` to the Opaquest.
 
 For other terminals, this weird-triangle problem will be resolved by disabling transparency or contrast adjustment.
 
