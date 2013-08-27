@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/27 04:41:57.
+" Last Change: 2013/08/27 16:22:36.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -80,7 +80,7 @@ function! lightline#colorscheme()
   try
     let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
   catch
-    call lightline#error('Colorscheme ' . g:lightline.colorscheme . ' could not loaded.')
+    call lightline#error('Could not load colorscheme ' . g:lightline.colorscheme . '.')
     let g:lightline.colorscheme = 'default'
     let g:lightline.palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
   finally

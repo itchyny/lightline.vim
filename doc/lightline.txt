@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/27 15:05:15.
+Last Change: 2013/08/27 16:19:02.
 
 CONTENTS					*lightline-contents*
 
@@ -144,8 +144,8 @@ OPTIONS						*lightline-option*
 		    \ '': 'S-BLOCK',
 		    \ '?': '      ' }
 <
-		When you search a word, you get into the command mode. But you
-		want to keep the mode indicator as 'NORMAL', add
+		When you search a word, you get into the command mode. But if
+		you want to keep the mode indicator as 'NORMAL', add
 >
 		let g:lightline.mode_map.c = 'NORMAL'
 <
@@ -164,10 +164,10 @@ OPTIONS						*lightline-option*
 FONT						*lightline-font*
 You can use the patched font you used for |vim-powerline| and |powerline|.
 
-The patched font for |powerline| is available at
+The patched fonts for |powerline| are available at
 https://github.com/Lokaltog/powerline-fonts
 
-A tutorial to create the patched font for |vim-powerline| is available at
+A tutorial to create a patched font for |vim-powerline| is available at
 https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher
 
 If you have installed the patched font for |powerline|, following settings look
