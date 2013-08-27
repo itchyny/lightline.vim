@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/27 12:27:20.
+Last Change: 2013/08/27 14:43:40.
 
 CONTENTS					*lightline-contents*
 
@@ -400,7 +400,7 @@ Problem 8:				|lightline-problem-8|
 	Triangles look weird.
 
 Problem 9:				|lightline-problem-9|
-	Where can I find all the list of cool characters for patched fonts?
+	Where can I find the list of all the cool characters for patched fonts?
 
 Problem 10:				|lightline-problem-10|
 	Cool statusline disappears on |unite|, |vimfiler| and |vimshell|
@@ -541,7 +541,7 @@ Problem 8:					*lightline-problem-8*
 		resolved by disabling transparency or contrast adjustment.
 
 Problem 9:					*lightline-problem-9*
-	Where can I find all the list of cool characters of patched fonts?
+	Where can I find the list of all the cool characters for patched fonts?
 
 				Default		powerline	vim-powerline
 	separator.left		''		''		'⮀'
