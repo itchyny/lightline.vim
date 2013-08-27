@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/27 18:29:04.
+" Last Change: 2013/08/27 19:56:59.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -164,18 +164,10 @@ function! lightline#highlight()
   endfor
 endfunction
 
-function! lightline#function(f)
-  try
-    if exists('*' . a:f) | exec 'return ' . a:f . '()'  | endif
-  catch
-  endtry
-  return ''
-endfunction
-
 function! s:subseparator(x, y, s)
   let [c, f, v] = [ g:lightline.component, g:lightline.component_function,  g:lightline.component_visible_condition ]
-  return '%{('.(has_key(f,a:x)?'!!strlen(lightline#function("'.(f[a:x]).'"))':get(v,a:x,"1")).')*(('.join(map(copy(a:y),
-        \'(has_key(f,v:val)?"!!strlen(lightline#function(\"".(f[v:val])."\"))":get(v,v:val,has_key(c,v:val)?"1":"0"))'),')+(')."))?('".a:s."'):''}"
+  return '%{('.(has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,"1")).')*(('.join(map(copy(a:y),
+        \'(has_key(f,v:val)?"!!strlen(exists(\"*".f[v:val]."\")?".f[v:val]."():\"\")":get(v,v:val,has_key(c,v:val)?"1":"0"))'),')+(')."))?('".a:s."'):''}"
 endfunction
 
 function! lightline#statusline(inactive)
@@ -186,7 +178,7 @@ function! lightline#statusline(inactive)
   for i in range(len(left))
     let _ .= printf('%%#LightLineLeft_%s_%d#', mode, i)
     for j in range(len(left[i]))
-      let _ .= '%( '.(has_key(f,left[i][j])?'%{lightline#function("'.f[left[i][j]].'")}':get(c,left[i][j],'')).' %)'
+      let _ .= '%( '.(has_key(f,left[i][j])?'%{exists("*'.f[left[i][j]].'")?'.f[left[i][j]].'():""}':get(c,left[i][j],'')).' %)'
       if j < len(left[i]) - 1
         let _ .= s:subseparator(left[i][j], left[i][j+1:], g:lightline.subseparator.left)
       endif
@@ -201,7 +193,7 @@ function! lightline#statusline(inactive)
       if j
         let _ .= s:subseparator(right[i][j], right[i][:j-1], g:lightline.subseparator.right)
       endif
-      let _ .= '%( '.(has_key(f,right[i][j])?'%{lightline#function("'.f[right[i][j]].'")}':get(c,right[i][j],'')).' %)'
+      let _ .= '%( '.(has_key(f,right[i][j])?'%{exists("*'.f[right[i][j]].'")?'.f[right[i][j]].'():""}':get(c,right[i][j],'')).' %)'
     endfor
   endfor
   return _
