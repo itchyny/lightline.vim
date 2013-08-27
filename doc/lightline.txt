@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/27 11:49:49.
+Last Change: 2013/08/27 11:51:57.
 
 CONTENTS					*lightline-contents*
 
@@ -384,7 +384,7 @@ Problem 3:				|lightline-problem-3|
 	How to uninstall this plugin.
 
 Problem 4:				|lightline-problem-4|
-	Cool statuslines appear only on `:vsp`.
+	Cool statuslines appear only on |:vsp|.
 
 Problem 5:				|lightline-problem-5|
 	The statusline does not seem to be correctly colored.
@@ -429,7 +429,7 @@ Problem 1:					*lightline-problem-1*
 >
 			Bundle 'itchyny/lightline.vim'
 <
-			2. Install with `:BundleInstall`.
+			2. Install with |:BundleInstall|.
 
 		If you are to install this plugin using |NeoBundle|:
 
@@ -438,7 +438,7 @@ Problem 1:					*lightline-problem-1*
 >
 			NeoBundle 'itchyny/lightline.vim'
 <
-			2. Install with `:NeoBundleInstall`.
+			2. Install with |:NeoBundleInstall|.
 
 Problem 2:					*lightline-problem-2*
 	How to update this plugin.
@@ -451,12 +451,12 @@ Problem 2:					*lightline-problem-2*
 
 		If you have installed this plugin using Vundle:
 
-			1. Execute `:BundleInstall!`. Or try git pull in the
+			1. Execute |:BundleInstall!|. Or try git pull in the
 			directory of this plugin.
 
 		If you have installed this plugin using NeoBundle:
 
-			1. Execute `:NeoBundleInstall!`. Or try git pull in
+			1. Execute |:NeoBundleInstall!|. Or try git pull in
 			the directory of this plugin.
 
 Problem 3:					*lightline-problem-3*
@@ -464,22 +464,22 @@ Problem 3:					*lightline-problem-3*
 
 		If you have installed this plugin manually:
 
-			1. Remove all the `lightline.*`s under $VIM.
+			1. Remove all the lightline.*s under $VIM.
 
 		If you have installed this plugin using Vundle:
 
 			1. Remove the :Bundle 'itchyny/lightline.vim'
 			configuration from your .vimrc(_vimrc).
-			2. Update with `:BundleClean`.
+			2. Update with |:BundleClean|.
 
 		If you have installed this plugin using NeoBundle:
 
 			1. Remove the :NeoBundle 'itchyny/lightline.vim'
 			configuration from your .vimrc(_vimrc).
-			2. Update with `:NeoBundleClean`.
+			2. Update with |:NeoBundleClean|.
 
 Problem 4:					*lightline-problem-4*
-	Cool statuslines appear only on `:vsp`.
+	Cool statuslines appear only on |:vsp|.
 
 		Add the following setting to your .vimrc(_vimrc).
 >
@@ -492,13 +492,13 @@ Problem 5:					*lightline-problem-5*
 >
 			export TERM=xterm-256color
 <
-		to your `.*shrc` and add
+		to your .*shrc and add
 >
 			if !has('gui_running')
 			  set t_Co=256
 			endif
 <
-		to your `.vimrc`.
+		to your .vimrc(_vimrc).
 
 Problem 6:					*lightline-problem-6*
 	How to install a patched font.
