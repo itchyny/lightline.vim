@@ -54,7 +54,7 @@ landscape is my colorscheme, which is a high-contrast cui-supported colorscheme,
 ## Why yet another clone of powerline?
 + [vim-powerline](https://github.com/Lokaltog/vim-powerline) is a nice plugin, but deprecated.
 + [powerline](https://github.com/Lokaltog/powerline) is a nice plugin, but difficult to configure.
-+ [vim-airline](https://github.com/bling/vim-airline) is a nice plugin, it uses functions of other plugins, which should be done by users in `.vimrc`.
++ [vim-airline](https://github.com/bling/vim-airline) is a nice plugin, but it uses too much functions of other plugins, which should be done by users in `.vimrc`.
 
 ## Spirit of this plugin
 + Minimalism. The core script is very small.
