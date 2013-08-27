@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/27 21:57:06.
+Last Change: 2013/08/27 23:25:34.
 
 CONTENTS					*lightline-contents*
 
@@ -73,7 +73,7 @@ OPTIONS						*lightline-option*
 >
 		let g:lightline.component = {
 		    \ 'mode': '%{lightline#mode()}',
-		    \ 'fullpath': '%F',
+		    \ 'absolutepath': '%F',
 		    \ 'relativepath': '%f',
 		    \ 'filename': '%t',
 		    \ 'modified': '%M',
