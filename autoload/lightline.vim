@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/28 08:23:36.
+" Last Change: 2013/08/28 08:28:08.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -157,7 +157,7 @@ function! lightline#statusline(inactive)
   for i in range(len(left))
     let _ .= printf('%%#LightLineLeft_%s_%d#', mode, i)
     for j in range(len(left[i]))
-      let _ .= substitute('%( '.(has_key(f,left[i][j])?'%{exists("*'.f[left[i][j]].'")?'.f[left[i][j]].'():""}':get(c,left[i][j],'')).' %)', '%(  %)', '', '')
+      let _ .= substitute('%( '.(has_key(f,left[i][j])?'%{exists("*'.f[left[i][j]].'")?'.f[left[i][j]].'():""}':get(c,left[i][j],'')).' %)', '^%(  %)', '', '')
       if j < len(left[i]) - 1 | let _ .= s:subseparator(left[i][j], left[i][j+1:], s:lightline.subseparator.left) | endif
     endfor
     let _ .= printf('%%#LightLineLeft_%s_%d_%d#', mode, i, i + 1) . (i < l ? s:lightline.separator.left : len(left[i]) ? s:lightline.subseparator.left : '')
@@ -168,7 +168,7 @@ function! lightline#statusline(inactive)
     let _ .= printf('%%#LightLineRight_%s_%d#', mode, i)
     for j in range(len(right[i]))
       if j | let _ .= s:subseparator(right[i][j], right[i][:j-1], s:lightline.subseparator.right) | endif
-      let _ .= substitute('%( '.(has_key(f,right[i][j])?'%{exists("*'.f[right[i][j]].'")?'.f[right[i][j]].'():""}':get(c,right[i][j],'')).' %)', '%(  %)', '', '')
+      let _ .= substitute('%( '.(has_key(f,right[i][j])?'%{exists("*'.f[right[i][j]].'")?'.f[right[i][j]].'():""}':get(c,right[i][j],'')).' %)', '^%(  %)', '', '')
     endfor
   endfor
   return _
