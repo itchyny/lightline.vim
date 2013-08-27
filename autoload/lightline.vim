@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/27 16:22:36.
+" Last Change: 2013/08/27 18:29:04.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -94,16 +94,21 @@ function! lightline#mode()
 endfunction
 
 function! lightline#link()
-  let mode = get(g:lightline._mode_, mode(), 'normal')
-  for i in range(len(g:lightline.active.left))
-    exec printf('hi link LightLineLeft_active_%d LightLineLeft_%s_%d', i, mode, i)
-    exec printf('hi link LightLineLeft_active_%d_%d LightLineLeft_%s_%d_%d', i, i + 1, mode, i, i + 1)
-  endfor
-  exec printf('hi link LightLineMiddle_active LightLineMiddle_%s', mode)
-  for i in range(len(g:lightline.active.right))
-    exec printf('hi link LightLineRight_active_%d LightLineRight_%s_%d', i, mode, i)
-    exec printf('hi link LightLineRight_active_%d_%d LightLineRight_%s_%d_%d', i, i + 1, mode, i, i + 1)
-  endfor
+  try
+    let mode = get(g:lightline._mode_, mode(), 'normal')
+    for i in range(len(g:lightline.active.left))
+      exec printf('hi link LightLineLeft_active_%d LightLineLeft_%s_%d', i, mode, i)
+      exec printf('hi link LightLineLeft_active_%d_%d LightLineLeft_%s_%d_%d', i, i + 1, mode, i, i + 1)
+    endfor
+    exec printf('hi link LightLineMiddle_active LightLineMiddle_%s', mode)
+    for i in range(len(g:lightline.active.right))
+      exec printf('hi link LightLineRight_active_%d LightLineRight_%s_%d', i, mode, i)
+      exec printf('hi link LightLineRight_active_%d_%d LightLineRight_%s_%d_%d', i, i + 1, mode, i, i + 1)
+    endfor
+  catch
+    let s:_ = 1
+    call lightline#update()
+  endtry
   return ''
 endfunction
 

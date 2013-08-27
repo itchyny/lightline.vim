@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/27 16:19:02.
+Last Change: 2013/08/27 17:16:34.
 
 CONTENTS					*lightline-contents*
 
@@ -113,7 +113,7 @@ OPTIONS						*lightline-option*
 			\ },
 			\ }
 		function! MyReadonly()
-			return &ft !~? 'help' && &ro ? 'RO' : ''
+			return &ft !~? 'help' && &readonly ? 'RO' : ''
 		endfunction
 <
 	g:lightline.colorscheme			*g:lightline.colorscheme*
@@ -275,7 +275,7 @@ In order to define your own component:
 		      \ ('' != MyModified() ? ' ' . MyModified() : '')
 	endfunction
 	function! MyReadonly()
-		return &ft !~? 'help' && &ro ? 'RO' : ''
+		return &ft !~? 'help' && &readonly ? 'RO' : ''
 	endfunction
 	function! MyModified()
 		return &modifiable && &modified ? '+' : ''
@@ -325,7 +325,7 @@ A nice example for non-patched font users.
 		return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 	endfunction
 	function! MyReadonly()
-		return &ft !~? 'help\|vimfiler' && &ro ? 'RO' : ''
+		return &ft !~? 'help\|vimfiler' && &readonly ? 'RO' : ''
 	endfunction
 	function! MyFilename()
 		return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
@@ -357,7 +357,7 @@ A nice example for |vim-powerline| font users:
 		return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 	endfunction
 	function! MyReadonly()
-		return &ft !~? 'help\|vimfiler' && &ro ? '⭤' : ''
+		return &ft !~? 'help\|vimfiler' && &readonly ? '⭤' : ''
 	endfunction
 	function! MyFilename()
 		return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
