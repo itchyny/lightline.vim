@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/28 08:28:08.
+" Last Change: 2013/08/28 10:07:44.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -99,19 +99,6 @@ function! s:term(l)
   return len(a:l) == 5 && type(a:l[4]) == 1 ? 'term='.a:l[4].' cterm='.a:l[4] : ''
 endfunction
 
-function! s:gui2cui(rgb, fallback)
-  let rgb = map(matchlist(a:rgb, '#\(..\)\(..\)\(..\)')[1:3], '0 + ("0x".v:val)')
-  if len(rgb) == 0
-    let rgb = lightline#colortable#name_to_rgb(a:rgb)
-    if len(rgb) == 0
-    throw a:rgb
-      return a:fallback % 128
-    endif
-  endif
-  let rgb = [rgb[0] > 127 ? 4 : 0, rgb[1] > 127 ? 2 : 0, rgb[2] > 127 ? 1 : 0]
-  return rgb[0] + rgb[1] + rgb[2]
-endfunction
-
 function! lightline#highlight()
   let [c, f] = [s:lightline.palette, s:lightline.mode_fallback]
   let [s:lightline.llen, s:lightline.rlen] = [len(c.normal.left), len(c.normal.right)]
@@ -123,9 +110,9 @@ function! lightline#highlight()
   let r = has_key(c,d) && has_key(c[d],'right') ? c[d].right : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'right') ? c[f[d]].right : c.normal.right
   let m = has_key(c,d) && has_key(c[d],'middle') ? c[d].middle[0] : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'middle') ? c[f[d]].middle[0] : c.normal.middle[0]
   if (has('win32') || has('win64')) && !has('gui_running')
-    for _  in l | let [_[2], _[3]] = [s:gui2cui(_[0], _[2]), s:gui2cui(_[1], _[3])] | endfor
-    for _  in r | let [_[2], _[3]] = [s:gui2cui(_[0], _[2]), s:gui2cui(_[1], _[3])] | endfor
-    let [m[2], m[3]] = [s:gui2cui(m[0], m[2]), s:gui2cui(_[1], m[3])]
+    for _  in l | let [_[2], _[3]] = [lightline#colortable#gui2cui(_[0], _[2]), lightline#colortable#gui2cui(_[1], _[3])] | endfor
+    for _  in r | let [_[2], _[3]] = [lightline#colortable#gui2cui(_[0], _[2]), lightline#colortable#gui2cui(_[1], _[3])] | endfor
+    let [m[2], m[3]] = [lightline#colortable#gui2cui(m[0], m[2]), lightline#colortable#gui2cui(_[1], m[3])]
   endif
   for i in range(len(left))
     let [li, lj] = [i < len(l) ? l[i] : m, i + 1 < len(l) ? l[i + 1] : m]
