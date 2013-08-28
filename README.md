@@ -130,6 +130,9 @@ endif
 to your `.vimrc`.
 
 
+If the colors of the statusline do not change from the default colors, move the settings of `g:lightline` before setting the colorscheme.
+
+
 Colors appear correctly? Now let's see how to change the appearance.
 
 
