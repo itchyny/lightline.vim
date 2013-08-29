@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/30 01:14:19.
+Last Change: 2013/08/30 02:19:57.
 
 CONTENTS					*lightline-contents*
 
@@ -15,6 +15,7 @@ Font					|lightline-font|
 Function				|lightline-function|
 Examples				|lightline-examples|
 Nice Examples				|lightline-nice-examples|
+Powerful Example			|lightline-powerful-example|
 Troubleshooting				|lightline-troubleshooting|
 Changelog				|lightline-changelog|
 
@@ -396,6 +397,130 @@ A nice example for |vim-powerline| font users:
 		return ''
 	endfunction
 <
+
+------------------------------------------------------------------------------
+POWERFUL EXAMPLE				*lightline-powerful-example*
+
+For users who uses lots of plugins:
+>
+	let g:lightline = {
+	      \ 'colorscheme': 'wombat',
+	      \ 'active': {
+	      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
+	      \   'right': [[ 'lineinfo', 'syntastic' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype']]
+	      \ },
+	      \ 'component_function': {
+	      \   'fugitive': 'MyFugitive',
+	      \   'filename': 'MyFilename',
+	      \   'fileformat': 'MyFileformat',
+	      \   'filetype': 'MyFiletype',
+	      \   'fileencoding': 'MyFileencoding',
+	      \   'mode': 'MyMode',
+	      \   'syntastic': 'SyntasticStatuslineFlag',
+	      \   'ctrlpmark': 'CtrlPMark',
+	      \ },
+	      \ 'subseparator': { 'left': '|', 'right': '|' }
+	      \ }
+	
+	function! MyModified()
+	  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+	endfunction
+	
+	function! MyReadonly()
+	  return &ft !~? 'help' && &readonly ? 'RO' : ''
+	endfunction
+	
+	function! MyFilename()
+	  let fname = expand('%:t')
+	  return fname == 'ControlP' ? g:lightline.ctrlp_item :
+	        \ fname == '__Tagbar__' ? g:lightline.fname :
+	        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+	        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+	        \ &ft == 'unite' ? unite#get_status_string() :
+	        \ &ft == 'vimshell' ? vimshell#get_status_string() :
+	        \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+	        \ ('' != fname ? fname : '[No Name]') .
+	        \ ('' != MyModified() ? ' ' . MyModified() : '')
+	endfunction
+	
+	function! MyFugitive()
+	  try
+	    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+	      let mark = ''  " edit here for cool mark
+	      let _ = fugitive#head()
+	      return strlen(_) ? mark._ : ''
+	    endif
+	  catch
+	  endtry
+	  return ''
+	endfunction
+	
+	function! MyFileformat()
+	  return winwidth('.') > 70 ? &fileformat : ''
+	endfunction
+	
+	function! MyFiletype()
+	  return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+	endfunction
+	
+	function! MyFileencoding()
+	  return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+	endfunction
+	
+	function! MyMode()
+	  let fname = expand('%:t')
+	  return fname == '__Tagbar__' ? 'Tagbar' :
+	        \ fname == 'ControlP' ? 'CtrlP' :
+	        \ fname == '__Gundo__' ? 'Gundo' :
+	        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+	        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+	        \ &ft == 'unite' ? 'Unite' :
+	        \ &ft == 'vimfiler' ? 'VimFiler' :
+	        \ &ft == 'vimshell' ? 'VimShell' :
+	        \ winwidth('.') > 60 ? lightline#mode() : ''
+	endfunction
+	
+	function! CtrlPMark()
+	  if expand('%:t') =~ 'ControlP'
+	    call lightline#link('iR'[g:lightline.ctrlp_regex])
+	    return g:lightline.ctrlp_prev . ' ' . g:lightline.subseparator.left . ' ' .
+	        \ g:lightline.ctrlp_item . ' ' . g:lightline.subseparator.left . ' ' .
+	        \ g:lightline.ctrlp_next . ' ' . g:lightline.subseparator.left . ' ' .
+	        \ g:lightline.ctrlp_marked
+	  else
+	    return ''
+	  endif
+	endfunction
+	
+	let g:ctrlp_status_func = {
+	  \ 'main': 'CtrlPStatusFunc_1',
+	  \ 'prog': 'CtrlPStatusFunc_2',
+	  \ }
+	
+	function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+	  let g:lightline.ctrlp_regex = a:regex
+	  let g:lightline.ctrlp_prev = a:prev
+	  let g:lightline.ctrlp_item = a:item
+	  let g:lightline.ctrlp_next = a:next
+	  let g:lightline.ctrlp_marked = a:marked
+	  return lightline#statusline(0)
+	endfunction
+	
+	function! CtrlPStatusFunc_2(str)
+	  return lightline#statusline(0)
+	endfunction
+	
+	let g:tagbar_status_func = 'TagbarStatusFunc'
+	
+	function! TagbarStatusFunc(current, sort, fname, ...) abort
+	    let g:lightline.fname = a:fname
+	  return lightline#statusline(0)
+	endfunction
+	
+	let g:unite_force_overwrite_statusline = 0
+	let g:vimfiler_force_overwrite_statusline = 0
+	let g:vimshell_force_overwrite_statusline = 0
+<
 ------------------------------------------------------------------------------
 TROUBLESHOOTING					*lightline-troubleshooting*
 
@@ -428,10 +553,13 @@ Problem 9:				|lightline-problem-9|
 	Where can I find the list of all the cool characters for patched fonts?
 
 Problem 10:				|lightline-problem-10|
-	Cool statusline disappears on |unite|, |vimfiler| and |vimshell|
+	Cool statusline disappears in |unite|, |vimfiler| and |vimshell|
 	buffers.
 
 Problem 11:				|lightline-problem-11|
+	Cool statusline disappears in |CtrlP|, |Tagbar| buffers.
+
+Problem 12:				|lightline-problem-12|
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
@@ -588,6 +716,30 @@ Problem 10:					*lightline-problem-10*
 		let g:vimshell_force_overwrite_statusline = 0
 <
 Problem 11:					*lightline-problem-11*
+	Cool statusline disappears in |CtrlP|, |Tagbar| buffers.
+
+		Add the following settings to your .vimrc(_vimrc).
+>
+		let g:ctrlp_status_func = {
+		  \ 'main': 'CtrlPStatusFunc_1',
+		  \ 'prog': 'CtrlPStatusFunc_2',
+		  \ }
+		function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+		  return lightline#statusline(0)
+		endfunction
+		function! CtrlPStatusFunc_2(str)
+		  return lightline#statusline(0)
+		endfunction
+		
+		let g:tagbar_status_func = 'TagbarStatusFunc'
+		function! TagbarStatusFunc(current, sort, fname, ...) abort
+		  return lightline#statusline(0)
+		endfunction
+<
+		See |lightline-powerful-example| for more cool settings for
+		these plugins.
+
+Problem 12:					*lightline-problem-12*
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
