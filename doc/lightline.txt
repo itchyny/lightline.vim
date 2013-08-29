@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/28 10:58:47.
+Last Change: 2013/08/29 14:44:34.
 
 CONTENTS					*lightline-contents*
 
@@ -198,7 +198,11 @@ nice.
 		return &readonly ? '' : ''
 	endfunction
 	function! MyFugitive()
-		return exists("*fugitive#head") && strlen(fugitive#head()) ? ''.fugitive#head() : ''
+		if exists("*fugitive#head")
+			let _ = fugitive#head()
+			return strlen(_) ? ''._ : ''
+		endif
+		return ''
 	endfunction
 <
 If you have installed the patched font for |vim-powerline|, following settings
@@ -219,7 +223,11 @@ look nice.
 		return &readonly ? '⭤' : ''
 	endfunction
 	function! MyFugitive()
-		return exists("*fugitive#head") && strlen(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+		if exists("*fugitive#head")
+			let _ = fugitive#head()
+			return strlen(_) ? '⭠ '._ : ''
+		endif
+		return ''
 	endfunction
 <
 
@@ -346,7 +354,10 @@ A nice example for non-patched font users.
 		\ ('' != MyModified() ? ' ' . MyModified() : '')
 	endfunction
 	function! MyFugitive()
-		return &ft !~? 'vimfiler' && exists("*fugitive#head") && strlen(fugitive#head()) ? fugitive#head() : ''
+		if &ft !~? 'vimfiler' && exists("*fugitive#head")
+			return fugitive#head()
+		endif
+		return ''
 	endfunction
 <
 A nice example for |vim-powerline| font users:
@@ -378,7 +389,11 @@ A nice example for |vim-powerline| font users:
 		\ ('' != MyModified() ? ' ' . MyModified() : '')
 	endfunction
 	function! MyFugitive()
-		return &ft !~? 'vimfiler' && exists("*fugitive#head") && strlen(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+		if &ft !~? 'vimfiler' && exists("*fugitive#head")
+			let _ = fugitive#head()
+			return strlen(_) ? '⭠ '._ : ''
+		endif
+		return ''
 	endfunction
 <
 ------------------------------------------------------------------------------
