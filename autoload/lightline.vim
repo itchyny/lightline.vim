@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/28 10:07:44.
+" Last Change: 2013/08/30 01:07:12.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -81,8 +81,8 @@ function! lightline#mode()
   return get(s:lightline.mode_map, mode(), s:lightline.mode_map['?'])
 endfunction
 
-function! lightline#link()
-  let mode = get(s:lightline._mode_, mode(), 'normal')
+function! lightline#link(...)
+  let mode = get(s:lightline._mode_, a:0 ? a:1 : mode(), 'normal')
   for i in range(len(s:lightline.active.left))
     exec printf('hi link LightLineLeft_active_%d LightLineLeft_%s_%d', i, mode, i)
     exec printf('hi link LightLineLeft_active_%d_%d LightLineLeft_%s_%d_%d', i, i + 1, mode, i, i + 1)
