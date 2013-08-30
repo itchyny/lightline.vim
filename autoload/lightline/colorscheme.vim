@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/22 21:12:07.
+" Last Change: 2013/08/30 23:19:47.
 " =============================================================================
 
 let s:cuicolor = {
@@ -141,15 +141,62 @@ function! s:nr(x)
   return a:x < 0x2f ? 0 : a:x < 0x73 ? 1 : a:x < 0x9b ? 2 : a:x < 0xc7 ? 3 : a:x < 0xef ? 4 : 5
 endfunction
 
+function! s:rgb(r, g, b)
+  return printf("#%02x%02x%02x", a:r, a:g, a:b)
+endfunction
+
+function! s:upconvert(nr)
+  let x = a:nr * 1
+  if x < 7
+    let [b, rg] = [x / 4, x % 4]
+    let [g, r] = [rg / 2, rg % 2]
+    return s:rgb(r * 0x80, g * 0x80, b * 0x80)
+  elseif x == 7
+    return s:rgb(0xc0, 0xc0, 0xc0)
+  elseif x == 8
+    return s:rgb(0x80, 0x80, 0x80)
+  elseif x < 16
+    let y = x - 8
+    let [b, rg] = [y / 4, y % 4]
+    let [g, r] = [rg / 2, rg % 2]
+    return s:rgb(r * 0xff, g * 0xff, b * 0xff)
+  elseif x < 232
+    let y = x - 16
+    let [rg, b] = [y / 6, y % 6]
+    let [r, g] = [rg / 6, rg % 6]
+    let l = [0x00, 0x5f, 0x87, 0xaf, 0xdf, 0xff]
+    return s:rgb(l[r], l[g], l[b])
+  elseif x < 241
+    let k = (x - 232) * 10 + 8
+    return s:rgb(k, k, k)
+  elseif x < 243
+    let k = (x - 241) * 6 + 0x60
+    return s:rgb(k, k, k)
+  else
+    let k = (x - 232) * 10 + 8
+    return s:rgb(k, k, k)
+  endif
+endfunction
+
 function! lightline#colorscheme#fill(p)
   for k in values(a:p)
     for l in values(k)
       for m in l
-        if len(m) < 4 && type(m[0]) == 1 && type(m[1]) == 1
-          call insert(m, get(s:cuicolor, m[0], s:convert(m[0])), 2)
-          call insert(m, get(s:cuicolor, m[1], s:convert(m[1])), 3)
-          let m[0] = get(s:guicolor, m[0], m[0])
-          let m[1] = get(s:guicolor, m[1], m[1])
+        if len(m) < 4
+          if type(m[0]) == 1 && type(m[1]) == 1
+            if m[0] =~ '^\d\+$' && m[1] =~ '^\d\+$'
+              call insert(m, s:upconvert(m[1]), 0)
+              call insert(m, s:upconvert(m[1]), 0)
+            else
+              call insert(m, get(s:cuicolor, m[0], s:convert(m[0])), 2)
+              call insert(m, get(s:cuicolor, m[1], s:convert(m[1])), 3)
+              let m[0] = get(s:guicolor, m[0], m[0])
+              let m[1] = get(s:guicolor, m[1], m[1])
+            endif
+          elseif type(m[0]) == 0 && type(m[1]) == 0
+              call insert(m, s:upconvert(m[1]), 0)
+              call insert(m, s:upconvert(m[1]), 0)
+          endif
         endif
       endfor
     endfor
