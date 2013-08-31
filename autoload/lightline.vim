@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/31 19:14:21.
+" Last Change: 2013/08/31 19:42:33.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -38,11 +38,11 @@ function! lightline#init()
   let s:lightline.mode_map = get(s:lightline, 'mode_map', {})
   call extend(s:lightline.mode_map, {
         \ 'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL',
-        \ 'V': 'V-LINE', 'c': 'COMMAND', '': 'V-BLOCK', 's': 'SELECT',
-        \ 'S': 'S-LINE', '': 'S-BLOCK', '?': '      ' }, 'keep')
+        \ 'V': 'V-LINE', 'c': 'COMMAND', "\<C-v>": 'V-BLOCK', 's': 'SELECT',
+        \ 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', '?': '      ' }, 'keep')
   let s:lightline._mode_ = {
         \ 'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual',
-        \ 'c': 'command', '': 'visual', 's': 'select', 'S': 'select', '': 'select' }
+        \ 'c': 'command', "\<C-v>": 'visual', 's': 'select', 'S': 'select', "\<C-s>": 'select' }
   let s:lightline.mode_fallback = get(s:lightline, 'mode_fallback', {})
   call extend(s:lightline.mode_fallback, { 'replace': 'insert', 'select': 'visual' })
   let s:lightline.component = get(s:lightline, 'component', {})

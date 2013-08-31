@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/31 19:39:59.
+Last Change: 2013/08/31 19:43:56.
 
 CONTENTS					*lightline-contents*
 
@@ -149,10 +149,10 @@ OPTIONS						*lightline-option*
 		    \ 'v' : 'VISUAL',
 		    \ 'V' : 'V-LINE',
 		    \ 'c' : 'COMMAND',
-		    \ '': 'V-BLOCK',
+		    \ "\<C-v>": 'V-BLOCK',
 		    \ 's' : 'SELECT',
 		    \ 'S' : 'S-LINE',
-		    \ '': 'S-BLOCK',
+		    \ "\<C-s>": 'S-BLOCK',
 		    \ '?': '      ' }
 <
 		When you search a word, you get into the command mode. But if
