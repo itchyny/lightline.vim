@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/30 01:07:12.
+" Last Change: 2013/08/31 19:14:21.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -134,6 +134,15 @@ function! s:subseparator(x, y, s)
   let [c, f, v] = [ s:lightline.component, s:lightline.component_function,  s:lightline.component_visible_condition ]
   return '%{('.(has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,has_key(c,a:x)?"1":"0")).')*(('.join(map(copy(a:y),
         \'(has_key(f,v:val)?"!!strlen(exists(\"*".f[v:val]."\")?".f[v:val]."():\"\")":get(v,v:val,has_key(c,v:val)?"1":"0"))'),')+(')."))?('".a:s."'):''}"
+endfunction
+
+function! lightline#concatenate(x, s)
+  let [_, k, s] = ['', 0, ' ' . [s:lightline.subseparator.left, s:lightline.subseparator.right][!!a:s] . ' ']
+  for i in range(len(a:x))
+    let [_, k] = [_ . a:x[i], k || len(a:x[i])]
+    if k && i + 1 < len(a:x) && len(a:x[i + 1]) | let _ .= s | endif
+  endfor
+  return _
 endfunction
 
 function! lightline#statusline(inactive)

@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/30 02:19:57.
+Last Change: 2013/08/31 19:26:18.
 
 CONTENTS					*lightline-contents*
 
@@ -251,15 +251,22 @@ Exposed functions for lightline.vim.
 	lightline#update_once()			*lightline#update_once()*
 		Updates the statuslines only once.
 
-	lightline#link(...)			*lightline#link()*
+	lightline#link([mode])			*lightline#link()*
 		Creates links of the highlight groups for the active window.
 		This function accepts an optional argument. It should be one
 		of the return value of |mode()|.
 
-	lightline#highlight(inactive)		*lightline#highlight()*
+	lightline#highlight({inactive})		*lightline#highlight()*
 		Returns |statusline| strings. If the argument is 0, it returns
 		the statusline for active window, and the statusline for
 		inactive window otherwise.
+
+	lightline#concatenate({list}, {num})	*lightline#concatenate()*
+		A string concatenation function. Concatenating all the strings
+		in {list} using the sub-separator of lightline. If {num} is 0,
+		then the left sub-separator is used. Otherwise, the right
+		sub-separator is used.
+
 
 ==============================================================================
 
@@ -483,10 +490,8 @@ For users who uses lots of plugins:
 	function! CtrlPMark()
 	  if expand('%:t') =~ 'ControlP'
 	    call lightline#link('iR'[g:lightline.ctrlp_regex])
-	    return g:lightline.ctrlp_prev . ' ' . g:lightline.subseparator.left . ' ' .
-	        \ g:lightline.ctrlp_item . ' ' . g:lightline.subseparator.left . ' ' .
-	        \ g:lightline.ctrlp_next . ' ' . g:lightline.subseparator.left . ' ' .
-	        \ g:lightline.ctrlp_marked
+	    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+	          \ , g:lightline.ctrlp_next], 0)
 	  else
 	    return ''
 	  endif
@@ -502,7 +507,6 @@ For users who uses lots of plugins:
 	  let g:lightline.ctrlp_prev = a:prev
 	  let g:lightline.ctrlp_item = a:item
 	  let g:lightline.ctrlp_next = a:next
-	  let g:lightline.ctrlp_marked = a:marked
 	  return lightline#statusline(0)
 	endfunction
 	

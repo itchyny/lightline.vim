@@ -674,10 +674,8 @@ endfunction
 function! CtrlPMark()
   if expand('%:t') =~ 'ControlP'
     call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return g:lightline.ctrlp_prev . ' ' . g:lightline.subseparator.left . ' ' .
-        \ g:lightline.ctrlp_item . ' ' . g:lightline.subseparator.left . ' ' .
-        \ g:lightline.ctrlp_next . ' ' . g:lightline.subseparator.left . ' ' .
-        \ g:lightline.ctrlp_marked
+    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+          \ , g:lightline.ctrlp_next], 0)
   else
     return ''
   endif
@@ -693,7 +691,6 @@ function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
   let g:lightline.ctrlp_prev = a:prev
   let g:lightline.ctrlp_item = a:item
   let g:lightline.ctrlp_next = a:next
-  let g:lightline.ctrlp_marked = a:marked
   return lightline#statusline(0)
 endfunction
 
