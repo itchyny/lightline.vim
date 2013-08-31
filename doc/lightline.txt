@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/31 19:26:18.
+Last Change: 2013/08/31 19:39:59.
 
 CONTENTS					*lightline-contents*
 
@@ -564,6 +564,9 @@ Problem 11:				|lightline-problem-11|
 	Cool statusline disappears in |CtrlP|, |Tagbar| buffers.
 
 Problem 12:				|lightline-problem-12|
+	How to change the lightline colorscheme on the fly.
+
+Problem 13:				|lightline-problem-13|
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
@@ -744,6 +747,32 @@ Problem 11:					*lightline-problem-11*
 		these plugins.
 
 Problem 12:					*lightline-problem-12*
+	How to change the lightline colorscheme on the fly.
+
+		Add the following settings to your .vimrc(_vimrc).
+>
+		augroup LightLineColorscheme
+		  autocmd!
+		  autocmd ColorScheme * call s:lightline_update()
+		augroup END
+		function! s:lightline_update()
+		  if !exists('g:loaded_lightline')
+		    return
+		  endif
+		  try
+		    if g:colors_name =~# 'wombat\|solarized\|landscape\|jellybeans\|Tomorrow'
+		      let g:lightline.colorscheme =
+		            \ substitute(substitute(g:colors_name, '-', '_', 'g'), '256.*', '', '') .
+		            \ (g:colors_name ==# 'solarized' ? '_' . &background : '')
+		      call lightline#init()
+		      call lightline#colorscheme()
+		      call lightline#update()
+		    endif
+		  catch
+		  endtry
+		endfunction
+<
+Problem 13:					*lightline-problem-13*
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
