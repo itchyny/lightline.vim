@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/07 16:22:50.
+" Last Change: 2013/09/07 18:25:26.
 " =============================================================================
 
 function! lightline#tab#filename(n)
@@ -15,12 +15,12 @@ endfunction
 
 function! lightline#tab#modified(n)
   let winnr = tabpagewinnr(a:n)
-  return gettabwinvar(a:n, winnr, '&modified', 0) ? '+' : gettabwinvar(a:n, winnr, '&modifiable', 1) ? '' : '-'
+  return gettabwinvar(a:n, winnr, '&modified') ? '+' : gettabwinvar(a:n, winnr, '&modifiable') ? '' : '-'
 endfunction
 
 function! lightline#tab#readonly(n)
   let winnr = tabpagewinnr(a:n)
-  return gettabwinvar(a:n, winnr, '&readonly', 0) ? 'RO' : ''
+  return gettabwinvar(a:n, winnr, '&readonly') ? 'RO' : ''
 endfunction
 
 function! lightline#tab#tabnum(n)
