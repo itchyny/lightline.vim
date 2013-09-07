@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/07 16:39:34.
+" Last Change: 2013/09/07 19:33:36.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -212,7 +212,7 @@ function! lightline#statusline(inactive)
   return s:line(0, a:inactive)
 endfunction
 
-function! s:expand(tabline, x, l)
+function! s:expand(x)
   let [e, t] = [ s:lightline.component_expand, s:lightline.component_type ]
   let [a, c, _] = [[], [], []]
   for i in range(len(a:x))
@@ -285,12 +285,12 @@ endfunction
 function! s:line(tabline, inactive)
   let _ = a:tabline ? '' : '%{lightline#link()}'
   let [l, r] = a:tabline ? [s:lightline.tab_llen, s:lightline.tab_rlen] : [s:lightline.llen, s:lightline.rlen]
-  let [c, f, e, t] = [s:lightline.component, s:lightline.component_function, s:lightline.component_expand, s:lightline.component_type]
+  let [c, f, t] = [s:lightline.component, s:lightline.component_function, s:lightline.component_type]
   let mode = a:tabline ? 'tabline' : a:inactive ? 'inactive' : 'active'
   let l_ = has_key(s:lightline, mode) ? s:lightline[mode].left : s:lightline.active.left
-  let [ll, lc, lt] = s:expand(a:tabline, copy(l_), l)
+  let [ll, lc, lt] = s:expand(copy(l_))
   let r_ = has_key(s:lightline, mode) ? s:lightline[mode].right : s:lightline.active.right
-  let [rl, rc, rt] = s:expand(a:tabline, copy(r_), r)
+  let [rl, rc, rt] = s:expand(copy(r_))
   for i in range(len(lt))
     let _ .= printf('%%#LightLineLeft_%s_%s#', mode, ll[i])
     for j in range(len(lt[i]))
@@ -318,7 +318,7 @@ function! lightline#tabline()
 endfunction
 
 function! lightline#tabs()
-  let [_, t, l, x, y, z] = ['', tabpagenr(), tabpagenr('$'), [], [], []]
+  let [t, l, x, y, z] = [tabpagenr(), tabpagenr('$'), [], [], []]
   for i in range(1, l)
     call add(i<t?(x):i==t?(y):z, '%'.i.'T%{lightline#onetab('.i.','.(i==t).')}'.(i==l?'%T':''))
   endfor
@@ -327,7 +327,7 @@ endfunction
 
 function! lightline#onetab(n, active)
   let [_, a] = ['', s:lightline.tab[a:active ? 'active' : 'inactive']]
-  let [c, f, l, r] = [s:lightline.tab_component, s:lightline.tab_component_function, s:lightline.tab_llen, s:lightline.tab_rlen ]
+  let [c, f] = [s:lightline.tab_component, s:lightline.tab_component_function ]
   for i in range(len(a))
     let s = has_key(f,a[i]) ? eval(f[a[i]].'('.a:n.')') : eval(get(c,a[i],'""'))
     if strlen(s) | let _ .= (len(_) ? ' ' : '') . s | endif
