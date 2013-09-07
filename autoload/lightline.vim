@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/07 21:05:31.
+" Last Change: 2013/09/07 21:36:03.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -318,7 +318,7 @@ function! lightline#tabline()
 endfunction
 
 function! lightline#tabs()
-  let [t, l, x, y, z, u, d] = [tabpagenr(), tabpagenr('$'), [], [], [], '...', min([winwidth('.') / 40, 4])]
+  let [t, l, x, y, z, u, d] = [tabpagenr(), tabpagenr('$'), [], [], [], '...', max([winwidth('.') / 40, 2])]
   for i in range(1, l)
     call add(i<t?(x):i==t?(y):z, '%'.i.'T%{lightline#onetab('.i.','.(i==t).')}'.(i==l?'%T':''))
   endfor
