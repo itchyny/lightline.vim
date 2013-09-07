@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/07 22:11:56.
+" Last Change: 2013/09/08 00:53:10.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -323,8 +323,8 @@ function! lightline#tabs()
     call add(i<t?(x):i==t?(y):z, '%'.i.'T%{lightline#onetab('.i.','.(i==t).')}'.(i==l?'%T':''))
   endfor
   let [a, b, c] = [len(x), len(z), d * 2]
-  return [a>d&&b>d ? extend(add(x[:d/2-1],u),x[-(d+1)/2:]) : a+b<=c ? x : a<=d ? x : extend(add(x[:(c-b)/2-1],u),x[-(c-b+1)/2:]), y,
-        \ a>d&&b>d ? extend(add(z[:(d+1)/2-1],u),z[-d/2:]) : a+b<=c ? z : b<=d ? z : extend(add(z[:(c-a+1)/2-1],u),z[-(c-a)/2:])]
+  return [a>d&&b>d ? extend(add(x[:d/2-1],u),x[-(d+1)/2:]) : a+b<=c||a<=d ? x : extend(add(x[:(c-b)/2-1],u),x[-(c-b+1)/2:]), y,
+        \ a>d&&b>d ? extend(add(z[:(d+1)/2-1],u),z[-d/2:]) : a+b<=c||b<=d ? z : extend(add(z[:(c-a+1)/2-1],u),z[-(c-a)/2:])]
 endfunction
 
 function! lightline#onetab(n, active)
