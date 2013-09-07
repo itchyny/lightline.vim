@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/27 00:37:34.
+" Last Change: 2013/09/07 12:21:04.
 " =============================================================================
 let s:base03 = [ '#151513', 233 ]
 let s:base02 = [ '#30302c ', 236 ]
@@ -20,7 +20,8 @@ let s:magenta = [ '#f0a0c0', 217 ]
 let s:blue = [ '#8197bf', 103 ]
 let s:cyan = [ '#8fbfdc', 110 ]
 let s:green = [ '#99ad6a', 107 ]
-let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}}
+
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 let s:p.normal.left = [ [ s:base02, s:blue ], [ s:base3, s:base01 ] ]
 let s:p.normal.right = [ [ s:base02, s:base1 ], [ s:base2, s:base01 ] ]
 let s:p.inactive.right = [ [ s:base02, s:base00 ], [ s:base0, s:base02 ] ]
@@ -30,16 +31,11 @@ let s:p.replace.left = [ [ s:base02, s:red ], [ s:base3, s:base01 ] ]
 let s:p.visual.left = [ [ s:base02, s:magenta ], [ s:base3, s:base01 ] ]
 let s:p.normal.middle = [ [ s:base0, s:base02 ] ]
 let s:p.inactive.middle = [ [ s:base00, s:base02 ] ]
+let s:p.tabline.left = [ [ s:base3, s:base00 ] ]
+let s:p.tabline.tabsel = [ [ s:base3, s:base02 ] ]
+let s:p.tabline.middle = [ [ s:base01, s:base1 ] ]
+let s:p.tabline.right = copy(s:p.normal.right)
+let s:p.normal.error = [ [ s:red, s:base02 ] ]
+let s:p.normal.warning = [ [ s:yellow, s:base01 ] ]
 
-function! s:flatten(p)
-  for k in values(a:p)
-    for l in values(k)
-      for m in range(len(l))
-        let l[m] = [l[m][0][0], l[m][1][0], l[m][0][1], l[m][1][1]]
-      endfor
-    endfor
-  endfor
-  return a:p
-endfunction
-let g:lightline#colorscheme#jellybeans#palette = s:flatten(s:p)
-
+let g:lightline#colorscheme#jellybeans#palette = lightline#colorscheme#flatten(s:p)

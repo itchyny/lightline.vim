@@ -1,10 +1,10 @@
-*lightline.txt*	A light and configurable statusline for Vim
+*lightline.txt*	A light and configurable statusline/tabline for Vim
 
 Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/08/31 19:43:56.
+Last Change: 2013/09/07 16:27:13.
 
 CONTENTS					*lightline-contents*
 
@@ -13,6 +13,7 @@ Spirit					|lightline-spirit|
 Option					|lightline-option|
 Font					|lightline-font|
 Function				|lightline-function|
+Component Expansion			|lightline-component-expansion|
 Examples				|lightline-examples|
 Nice Examples				|lightline-nice-examples|
 Powerful Example			|lightline-powerful-example|
@@ -22,7 +23,7 @@ Changelog				|lightline-changelog|
 ==============================================================================
 INTRODUCTION					*lightline-introduction*
 
-The *lightline* plugin is a light and configurable statusline for Vim.
+The *lightline* plugin is a light and configurable statusline/tabline for Vim.
 
 ------------------------------------------------------------------------------
 SPIRIT						*lightline-spirit*
@@ -31,7 +32,8 @@ SPIRIT						*lightline-spirit*
 	    The core script is very small.
 
 	Configurability
-	    You can create your own component and easily add to the statusline.
+	    You can create your own component and easily add to the
+	    statusline/tabline.
 
 	Orthogonality
 	    Any plugin should not change the settings of another plugin.
@@ -53,7 +55,11 @@ OPTIONS						*lightline-option*
 
 	g:lightline.active			*g:lightline.active*
 	g:lightline.inactive			*g:lightline.inactive*
-		Dictionaries to specify the status components.
+	g:lightline.tabline			*g:lightline.tabline*
+		Dictionaries to specify the statusline/tabline components.
+		The components are gathered from either |g:lightline.component|,
+		|g:lightline.component_function| or
+		|g:lightline.component_expand|.
 		Note that right groups of components are stored from right to
 		left. The default values are:
 >
@@ -67,9 +73,23 @@ OPTIONS						*lightline-option*
 		    \ 'left': [ [ 'filename' ] ],
 		    \ 'right': [ [ 'lineinfo' ],
 		    \            [ 'percent' ] ] }
+		let g:lightline.tabline = {
+		    \ 'left': [ [ 'tabs' ] ],
+		    \ 'right': [ [ 'close' ] ] }
+<
+	g:lightline.tab				*g:lightline.tab*
+		Dictionaries to specify the components in each tabs.
+		The components are gathered from either
+		|g:lightline.tab_component| or
+		|g:lightline.tab_component_function|.
+		The default values are:
+>
+		let g:lightline.tab = {
+		    \ 'active': [ 'tabnum', 'filename', 'modified' ],
+		    \ 'inactive': [ 'tabnum', 'filename', 'modified' ] }
 <
 	g:lightline.component			*g:lightline.component*
-		Dictionary for statusline components.
+		Dictionary for statusline/tabline components.
 		The default value is:
 >
 		let g:lightline.component = {
@@ -90,7 +110,8 @@ OPTIONS						*lightline-option*
 		    \ 'percentwin': '%P',
 		    \ 'lineinfo': '%3l:%-2v',
 		    \ 'line': '%l',
-		    \ 'column': '%c' }
+		    \ 'column': '%c'
+		    \ 'close': '%999X X ' }
 <
 	g:lightline.component_visible_condition		*g:lightline.component_visible_condition*
 		Dictionary of boolean expressions for the components.
@@ -127,15 +148,53 @@ OPTIONS						*lightline-option*
 			return &ft !~? 'help' && &readonly ? 'RO' : ''
 		endfunction
 <
+	g:lightline.component_expand		*g:lightline.component_expand*
+		Another dictionary for components. You can create a component
+		which has a special color. For example, error components or
+		warning components. The functions should return one of:
+			+ a string
+			+ an array of three elements:
+				[[ left ], [ middle ], [ right ]]
+		The component in this dictionary has priority over
+		|g:lightline.component| and |g:lightline.component_function|.
+		See |lightline-component-expansion| for more detail.
+>
+		let g:lightline.component_expand = {
+		    \ 'tabs': 'lightline#tabs' }
+<
+	g:lightline.component_type		*g:lightline.component_type*
+		A dictionary to specify the types for components in
+		|g:lightline.component_expand|. The types are used to specify
+		the color. Specifically, the type raw is used to specify a
+		component which should not be wrapped by item group: %(...%).
+>
+		let g:lightline.component_type = {
+		    \ 'tabs': 'tabsel',
+		    \ 'close': 'raw' }
+<
+	g:lightline.tab_component		*g:lightline.tab_component*
+		A dictionary for components in one tab.
+
+	g:lightline.tab_component_function	*g:lightline.tab_component_function*
+		Another dictionary for components in one tab.
+		The default value is:
+>
+		let g:lightline.tab_component_function = {
+		      \ 'filename': 'lightline#tab#filename',
+		      \ 'modified': 'lightline#tab#modified',
+		      \ 'readonly': 'lightline#tab#readonly',
+		      \ 'tabnum': 'lightline#tab#tabnum' }
+<
 	g:lightline.colorscheme			*g:lightline.colorscheme*
 		The colorscheme for lightline.vim.
 		Currently, wombat, solarized, powerline, jellybeans, Tomorrow,
-		Tomorrow_Night, and landscape are available.
+		Tomorrow_Night, Tomorrow_Night_Blue, Tomorrow_Night_Eighties
+		and landscape are available.
 		The default value is:
 >
 		let g:lightline.colorscheme = 'default'
 <
-		Note that the default colorscheme is exactly the same as
+		Note that the default colorscheme is exactly the same as the
 		powerline theme.
 
 	g:lightline.mode_map			*g:lightline.mode_map*
@@ -256,10 +315,16 @@ Exposed functions for lightline.vim.
 		This function accepts an optional argument. It should be one
 		of the return value of |mode()|.
 
-	lightline#highlight({inactive})		*lightline#highlight()*
+	lightline#highlight()			*lightline#highlight()*
+		Set the highlight groups.
+
+	lightline#statusline({inactive})	*lightline#statusline()*
 		Returns |statusline| strings. If the argument is 0, it returns
 		the statusline for active window, and the statusline for
 		inactive window otherwise.
+
+	lightline#tabline()			*lightline#tabline()*
+		Returns the tabline string.
 
 	lightline#concatenate({list}, {num})	*lightline#concatenate()*
 		A string concatenation function. Concatenating all the strings
@@ -268,6 +333,139 @@ Exposed functions for lightline.vim.
 		sub-separator is used.
 
 
+==============================================================================
+COMPONENT EXPANSION				*lightline-component-expansion*
+You can create components, which have specific colors. This section gives an
+example using |syntastic|.
+
+If you want to add the |syntastic| flag to the statusline, an easy example is:
+>
+	" Example A
+	let g:lightline = {
+	      \ 'active': {
+	      \   'right': [ [ 'lineinfo', 'syntastic' ],
+	      \              [ 'percent' ],
+	      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+	      \ },
+	      \ 'component_function': {
+	      \   'syntastic': 'SyntasticStatuslineFlag',
+	      \ }
+	      \ }
+	let g:syntastic_mode_map = { 'mode': 'passive',
+	      \                      'active_filetypes': ['c', 'cpp'] }
+<
+However, the color of the syntastic component is the same as the lineinfo
+component.
+
+In order to change the syntastic component more outstanding, you have to use
+|g:lightline.component_expand|. See the following example:
+>
+	" Example B
+	let g:lightline = {
+	      \ 'active': {
+	      \   'right': [ [ 'syntastic', 'lineinfo' ],
+	      \              [ 'percent' ],
+	      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+	      \ },
+	      \ 'component_expand': {
+	      \   'syntastic': 'SyntasticStatuslineFlag',
+	      \ },
+	      \ 'component_type': {
+	      \   'syntastic': 'error',
+	      \ }
+	      \ }
+	let g:syntastic_mode_map = { 'mode': 'passive' }
+	augroup AutoSyntastic
+	  autocmd!
+	  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+	augroup END
+	function! s:syntastic()
+	  SyntasticCheck
+	  call lightline#update()
+	endfunction
+<
+In order to understand the above codes, you firstly should know how the
+colorschemes work in lightline.vim. Open the following file.
+		autoload/lightline/colorscheme/powerline.vim
+The colorscheme is created by one dictionary: s:p (abbreviation for palette).
+See the value of s:p.normal.right.
+>
+	let s:p.normal.right = [ ['gray5', 'gray10'],
+	      \                  ['gray9', 'gray4'],
+	      \                  ['gray8', 'gray2'] ]
+<
+This array corresponds to the structure of g:lightline.active.right. Recall
+the example A.
+>
+	" Example A
+	let g:lightline.active.right = [ [ 'lineinfo', 'syntastic' ],
+	      \                          [ 'percent' ],
+	      \                          [ 'fileformat', 'fileencoding', 'filetype' ] ]
+<
+The colors are ([fgcolor, bgcolor):
+	(0) [ 'lineinfo', 'syntastic' ]                   ---  s:p.normal.right[0] = ['gray5', 'gray10']
+	(1) [ 'percent' ]                                 ---  s:p.normal.right[1] = ['gray9', 'gray4']
+	(2) [ 'fileformat', 'fileencoding', 'filetype' ]  ---  s:p.normal.right[2] = ['gray8', 'gray2']
+
+
+Recall the example B.
+>
+	" Example B
+	let g:lightline.active.right = [ [ 'syntastic', 'lineinfo' ],
+	      \                          [ 'percent' ],
+	      \                          [ 'fileformat', 'fileencoding', 'filetype' ] ]
+<
+If a component is specified in |g:lightline.component_expand|, lightline.vim
+expands the components before setting to statusline/tabline. In this example,
+the syntastic component is expanded using the |SyntasticStatuslineFlag| function.
+This function returns a {string}. Let us call it `syntastic_flag`.
+>
+	let syntastic_flag = SyntasticStatuslineFlag()
+<
+The syntastic component is now expanded, so it go up to one component group.
+The type of the syntastic component is error, and the palette has error
+colors, the result is:
+>
+	" Expanded result of Example B
+	(error) [ 'syntastic' ]                               ---  s:p.normal.error[0] = ['gray9', 'brightestred']
+	(0)     [ 'lineinfo' ]                                ---  s:p.normal.right[0] = ['gray5', 'gray10']
+	(1)     [ 'percent' ]                                 ---  s:p.normal.right[1] = ['gray9', 'gray4']
+	(2)     [ 'fileformat', 'fileencoding', 'filetype' ]  ---  s:p.normal.right[2] = ['gray8', 'gray2']
+<
+Thus the syntastic component has the red color.
+
+
+Another example for |g:lightline.component_expand| is the tabs component.
+Actually, the expand feature is created for the tabs component.
+>
+	let g:lightline.tabline.left = [ [ 'tabs' ] ]
+	let g:lightline.component_expand = {
+	    \ 'tabs': 'lightline#tabs' }
+<
+Create three tabs and select the middle tab. Then execute
+>
+	echo lightline#tabs()
+	" [['%1T%{lightline#onetab(1,0)}'],
+	"  ['%2T%{lightline#onetab(2,1)}'],
+	"  ['%3T%{lightline#onetab(3,0)}%T']]
+<
+It returns an array of three elements. The expanded result is:
+>
+	" Expanded result of tabline
+	(0)      ['%1T%{lightline#onetab(1,0)}']    ---  s:p.tabline.left[0] = ['gray9', 'gray4']
+	(tabsel) ['%2T%{lightline#onetab(2,1)}']    ---  s:p.tabline.tabsel[0] = ['gray9', 'gray1']
+	(0)      ['%3T%{lightline#onetab(3,0)}%T']  ---  s:p.tabline.left[0] = ['gray9', 'gray4']
+<
+If the tabline components is
+>
+	let g:lightline.tabline.left = [ [ 'A', 'B', 'tabs', 'C', 'D' ] ]
+<
+then the expanded result is:
+>
+	(0)      ['A', 'B', '%1T%{lightline#onetab(1,0)}']    ---  s:p.tabline.left[0]
+	(tabsel) ['%2T%{lightline#onetab(2,1)}']              ---  s:p.tabline.tabsel[0]
+	(0)      ['%3T%{lightline#onetab(3,0)}%T', 'C', 'D']  ---  s:p.tabline.left[0]
+<
 ==============================================================================
 
 EXAMPLES					*lightline-examples*
@@ -414,7 +612,7 @@ For users who uses lots of plugins:
 	      \ 'colorscheme': 'wombat',
 	      \ 'active': {
 	      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
-	      \   'right': [[ 'lineinfo', 'syntastic' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype']]
+	      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
 	      \ },
 	      \ 'component_function': {
 	      \   'fugitive': 'MyFugitive',
@@ -423,8 +621,13 @@ For users who uses lots of plugins:
 	      \   'filetype': 'MyFiletype',
 	      \   'fileencoding': 'MyFileencoding',
 	      \   'mode': 'MyMode',
-	      \   'syntastic': 'SyntasticStatuslineFlag',
 	      \   'ctrlpmark': 'CtrlPMark',
+	      \ },
+	      \ 'component_expand': {
+	      \   'syntastic': 'SyntasticStatuslineFlag',
+	      \ },
+	      \ 'component_type': {
+	      \   'syntastic': 'error',
 	      \ },
 	      \ 'subseparator': { 'left': '|', 'right': '|' }
 	      \ }
@@ -519,6 +722,15 @@ For users who uses lots of plugins:
 	function! TagbarStatusFunc(current, sort, fname, ...) abort
 	    let g:lightline.fname = a:fname
 	  return lightline#statusline(0)
+	endfunction
+	
+	augroup AutoSyntastic
+	  autocmd!
+	  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+	augroup END
+	function! s:syntastic()
+	  SyntasticCheck
+	  call lightline#update()
 	endfunction
 	
 	let g:unite_force_overwrite_statusline = 0

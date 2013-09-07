@@ -1,5 +1,5 @@
 # lightline.vim
-A light and configurable statusline for Vim
+A light and configurable statusline/tabline for Vim
 
 https://github.com/itchyny/lightline.vim
 
@@ -58,7 +58,7 @@ landscape is my colorscheme, which is a high-contrast cui-supported colorscheme,
 
 ## Spirit of this plugin
 + Minimalism. The core script is very small.
-+ Configurability. You can create your own component and easily add to the statusline.
++ Configurability. You can create your own component and easily add to the statusline/tabline.
 + Orthogonality. Any plugin should not change the settings of another plugin. Such plugin-crossing settings should be written by users in `.vimrc`.
 
 ## Author
@@ -598,7 +598,7 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
-      \   'right': [[ 'lineinfo', 'syntastic' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype']]
+      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
       \ 'component_function': {
       \   'fugitive': 'MyFugitive',
@@ -607,8 +607,13 @@ let g:lightline = {
       \   'filetype': 'MyFiletype',
       \   'fileencoding': 'MyFileencoding',
       \   'mode': 'MyMode',
-      \   'syntastic': 'SyntasticStatuslineFlag',
       \   'ctrlpmark': 'CtrlPMark',
+      \ },
+      \ 'component_expand': {
+      \   'syntastic': 'SyntasticStatuslineFlag',
+      \ },
+      \ 'component_type': {
+      \   'syntastic': 'error',
       \ },
       \ 'subseparator': { 'left': '|', 'right': '|' }
       \ }
@@ -703,6 +708,15 @@ let g:tagbar_status_func = 'TagbarStatusFunc'
 function! TagbarStatusFunc(current, sort, fname, ...) abort
     let g:lightline.fname = a:fname
   return lightline#statusline(0)
+endfunction
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
 endfunction
 
 let g:unite_force_overwrite_statusline = 0

@@ -1,9 +1,9 @@
 " =============================================================================
-" Filename: autoload/colorscheme/colortable.vim
+" Filename: autoload/lightline/colortable.vim
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/28 10:07:13.
+" Last Change: 2013/09/07 16:23:03.
 " =============================================================================
 
 function! s:load()

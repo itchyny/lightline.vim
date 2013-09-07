@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/27 00:41:15.
+" Last Change: 2013/09/07 12:15:17.
 " =============================================================================
 let s:base03 = [ '#242424', 235 ]
 let s:base023 = [ '#353535 ', 236 ]
@@ -21,26 +21,21 @@ let s:magenta = [ '#f2c68a', 216 ]
 let s:blue = [ '#8ac6f2', 117 ]
 let s:cyan = s:blue
 let s:green = [ '#95e454', 119 ]
-let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}}
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 let s:p.normal.left = [ [ s:base02, s:blue ], [ s:base3, s:base01 ] ]
 let s:p.normal.right = [ [ s:base02, s:base0 ], [ s:base1, s:base01 ] ]
 let s:p.inactive.right = [ [ s:base023, s:base01 ], [ s:base00, s:base02 ] ]
 let s:p.inactive.left =  [ [ s:base1, s:base02 ], [ s:base00, s:base023 ] ]
 let s:p.insert.left = [ [ s:base02, s:green ], [ s:base3, s:base01 ] ]
-let s:p.replace.left = [ [ s:base02, s:red ], [ s:base3, s:base01 ] ]
+let s:p.replace.left = [ [ s:base023, s:red ], [ s:base3, s:base01 ] ]
 let s:p.visual.left = [ [ s:base02, s:magenta ], [ s:base3, s:base01 ] ]
-let s:p.normal.middle = [ [ s:base1, s:base02 ] ]
-let s:p.inactive.middle = [ [ s:base03, s:base023 ] ]
+let s:p.normal.middle = [ [ s:base2, s:base02 ] ]
+let s:p.inactive.middle = [ [ s:base1, s:base023 ] ]
+let s:p.tabline.left = [ [ s:base3, s:base00 ] ]
+let s:p.tabline.tabsel = [ [ s:base2, s:base023 ] ]
+let s:p.tabline.middle = [ [ s:base02, s:base1 ] ]
+let s:p.tabline.right = [ [ s:base2, s:base01 ] ]
+let s:p.normal.error = [ [ s:base03, s:red ] ]
+let s:p.normal.warning = [ [ s:base023, s:yellow ] ]
 
-function! s:flatten(p)
-  for k in values(a:p)
-    for l in values(k)
-      for m in range(len(l))
-        let l[m] = [l[m][0][0], l[m][1][0], l[m][0][1], l[m][1][1]]
-      endfor
-    endfor
-  endfor
-  return a:p
-endfunction
-let g:lightline#colorscheme#wombat#palette = s:flatten(s:p)
-
+let g:lightline#colorscheme#wombat#palette = lightline#colorscheme#flatten(s:p)

@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/31 19:42:33.
+" Last Change: 2013/09/07 16:39:34.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -27,15 +27,23 @@ endfunction
 
 function! lightline#init()
   let s:lightline = deepcopy(get(g:, 'lightline', {}))
-  let s:lightline.active = get(s:lightline, 'active', {})
+  for k in ['active', 'inactive', 'tabline', 'tab', 'mode_map', 'mode_fallback',
+        \ 'component', 'component_visible_condition', 'component_function', 'component_expand', 'component_type',
+        \ 'tab_component', 'tab_component_function', 'separator', 'subseparator' ]
+    if !has_key(s:lightline, k) | let s:lightline[k] = {} | endif
+  endfor
   call extend(s:lightline.active, {
         \ 'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
         \ 'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ] }, 'keep')
-  let s:lightline.inactive = get(s:lightline, 'inactive', {})
   call extend(s:lightline.inactive, {
         \ 'left': [ [ 'filename' ] ],
         \ 'right': [ [ 'lineinfo' ], [ 'percent' ] ] }, 'keep')
-  let s:lightline.mode_map = get(s:lightline, 'mode_map', {})
+  call extend(s:lightline.tabline, {
+        \ 'left': [ [ 'tabs' ] ],
+        \ 'right': [ [ 'close' ] ] }, 'keep')
+  call extend(s:lightline.tab, {
+        \ 'active': [ 'tabnum', 'filename', 'modified' ],
+        \ 'inactive': [ 'tabnum', 'filename', 'modified' ] }, 'keep')
   call extend(s:lightline.mode_map, {
         \ 'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL',
         \ 'V': 'V-LINE', 'c': 'COMMAND', "\<C-v>": 'V-BLOCK', 's': 'SELECT',
@@ -43,25 +51,25 @@ function! lightline#init()
   let s:lightline._mode_ = {
         \ 'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual',
         \ 'c': 'command', "\<C-v>": 'visual', 's': 'select', 'S': 'select', "\<C-s>": 'select' }
-  let s:lightline.mode_fallback = get(s:lightline, 'mode_fallback', {})
   call extend(s:lightline.mode_fallback, { 'replace': 'insert', 'select': 'visual' })
-  let s:lightline.component = get(s:lightline, 'component', {})
   call extend(s:lightline.component, {
         \ 'mode': '%{lightline#mode()}',
         \ 'absolutepath': '%F', 'relativepath': '%f', 'filename': '%t', 'modified': '%M', 'bufnum': '%n',
         \ 'paste': '%{&paste?"PASTE":""}', 'readonly': '%R', 'charvalue': '%b', 'charvaluehex': '%B',
         \ 'fileencoding': '%{strlen(&fenc)?&fenc:&enc}', 'fileformat': '%{&fileformat}',
         \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}', 'percent': '%3p%%', 'percentwin': '%P',
-        \ 'lineinfo': '%3l:%-2v', 'line': '%l', 'column': '%c' }, 'keep')
-  let s:lightline.component_visible_condition = get(s:lightline, 'component_visible_condition', {})
+        \ 'lineinfo': '%3l:%-2v', 'line': '%l', 'column': '%c', 'close': '%999X X ' }, 'keep')
   call extend(s:lightline.component_visible_condition, {
         \ 'modified': '&modified||!&modifiable', 'readonly': '&readonly', 'paste': '&paste' }, 'keep')
-  let s:lightline.component_function = get(s:lightline, 'component_function', {})
-  let s:lightline.separator = get(s:lightline, 'separator', {})
+  call extend(s:lightline.component_expand, { 'tabs': 'lightline#tabs' }, 'keep')
+  call extend(s:lightline.component_type, { 'tabs': 'tabsel', 'close': 'raw' }, 'keep')
+  call extend(s:lightline.tab_component_function, {
+        \ 'filename': 'lightline#tab#filename', 'modified': 'lightline#tab#modified',
+        \ 'readonly': 'lightline#tab#readonly', 'tabnum': 'lightline#tab#tabnum' }, 'keep')
   call extend(s:lightline.separator, { 'left': '', 'right': '' }, 'keep')
-  let s:lightline.subseparator = get(s:lightline, 'subseparator', {})
   call extend(s:lightline.subseparator, { 'left': '|', 'right': '|' }, 'keep')
   call extend(s:lightline, { 'palette': {}, 'colorscheme': 'default' }, 'keep')
+  set tabline=%!lightline#tabline()
 endfunction
 
 function! lightline#colorscheme()
@@ -81,16 +89,42 @@ function! lightline#mode()
   return get(s:lightline.mode_map, mode(), s:lightline.mode_map['?'])
 endfunction
 
+let s:mode = ''
 function! lightline#link(...)
   let mode = get(s:lightline._mode_, a:0 ? a:1 : mode(), 'normal')
-  for i in range(len(s:lightline.active.left))
+  if s:mode == mode | return '' | endif
+  let s:mode = mode
+  let [left, right, types] = [s:lightline.active.left, s:lightline.active.right, values(s:lightline.component_type)]
+  for i in range(len(left))
     exec printf('hi link LightLineLeft_active_%d LightLineLeft_%s_%d', i, mode, i)
     exec printf('hi link LightLineLeft_active_%d_%d LightLineLeft_%s_%d_%d', i, i + 1, mode, i, i + 1)
+    for j in types
+      exec printf('hi link LightLineLeft_active_%d_%s LightLineLeft_%s_%d_%s', i, j, mode, i, j)
+      exec printf('hi link LightLineLeft_active_%s_%d LightLineLeft_%s_%s_%d', j, i, mode, j, i)
+    endfor
   endfor
   exec printf('hi link LightLineMiddle_active LightLineMiddle_%s', mode)
-  for i in range(len(s:lightline.active.right))
+  for i in range(len(right))
     exec printf('hi link LightLineRight_active_%d LightLineRight_%s_%d', i, mode, i)
     exec printf('hi link LightLineRight_active_%d_%d LightLineRight_%s_%d_%d', i, i + 1, mode, i, i + 1)
+    for j in types
+      exec printf('hi link LightLineRight_active_%d_%s LightLineRight_%s_%d_%s', i, j, mode, i, j)
+      exec printf('hi link LightLineRight_active_%s_%d LightLineRight_%s_%s_%d', j, i, mode, j, i)
+    endfor
+  endfor
+  for j in types
+    exec printf('hi link LightLineLeft_active_%s LightLineLeft_%s_%s', j, mode, j)
+    exec printf('hi link LightLineRight_active_%s LightLineRight_%s_%s', j, mode, j)
+    exec printf('hi link LightLineLeft_active_%s_%d LightLineLeft_%s_%s_%d', j, len(left), mode, j, len(left))
+    exec printf('hi link LightLineLeft_active_%d_%s LightLineLeft_%s_%d_%s', len(left), j, mode, len(left), j)
+    exec printf('hi link LightLineRight_active_%s_%d LightLineRight_%s_%s_%d', j, len(right), mode, j, len(right))
+    exec printf('hi link LightLineRight_active_%d_%s LightLineRight_%s_%d_%s', len(right), j, mode, len(right), j)
+    for k in types
+      exec printf('hi link LightLineLeft_active_%s_%s LightLineLeft_%s_%s_%s', j, k, mode, j, k)
+      exec printf('hi link LightLineLeft_active_%s_%s LightLineLeft_%s_%s_%s', k, j, mode, k, j)
+      exec printf('hi link LightLineRight_active_%s_%s LightLineRight_%s_%s_%s', j, k, mode, j, k)
+      exec printf('hi link LightLineRight_active_%s_%s LightLineRight_%s_%s_%s', k, j, mode, k, j)
+    endfor
   endfor
   return ''
 endfunction
@@ -100,25 +134,33 @@ function! s:term(l)
 endfunction
 
 function! lightline#highlight()
-  let [c, f] = [s:lightline.palette, s:lightline.mode_fallback]
+  let [c, f, g] = [s:lightline.palette, s:lightline.mode_fallback, s:lightline.component_type]
+  if (has('win32') || has('win64')) && !has('gui_running')
+    for u in values(c)
+      for v in values(u)
+        for _  in v | let [_[2], _[3]] = [lightline#colortable#gui2cui(_[0], _[2]), lightline#colortable#gui2cui(_[1], _[3])] | endfor
+      endfor
+    endfor
+  endif
   let [s:lightline.llen, s:lightline.rlen] = [len(c.normal.left), len(c.normal.right)]
-  for mode in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command', 'select']
+  let [s:lightline.tab_llen, s:lightline.tab_rlen] = [len(has_key(c,'tabline') ? c.tabline.left : c.normal.left), len(has_key(c,'tabline') ? c.tabline.right : c.normal.right)]
+  for mode in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command', 'select', 'tabline']
   let d = has_key(c, mode) ? mode : has_key(f, mode) && has_key(c, f[mode]) ? f[mode] : 'normal'
-  let left = d == 'inactive' ? s:lightline.inactive.left : s:lightline.active.left
-  let right = d == 'inactive' ? s:lightline.inactive.right : s:lightline.active.right
+  let left = d == 'tabline' ? s:lightline.tabline.left : d == 'inactive' ? s:lightline.inactive.left : s:lightline.active.left
+  let right = d == 'tabline' ? s:lightline.tabline.right : d == 'inactive' ? s:lightline.inactive.right : s:lightline.active.right
   let l = has_key(c,d) && has_key(c[d],'left') ? c[d].left : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'left') ? c[f[d]].left : c.normal.left
   let r = has_key(c,d) && has_key(c[d],'right') ? c[d].right : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'right') ? c[f[d]].right : c.normal.right
   let m = has_key(c,d) && has_key(c[d],'middle') ? c[d].middle[0] : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'middle') ? c[f[d]].middle[0] : c.normal.middle[0]
-  if (has('win32') || has('win64')) && !has('gui_running')
-    for _  in l | let [_[2], _[3]] = [lightline#colortable#gui2cui(_[0], _[2]), lightline#colortable#gui2cui(_[1], _[3])] | endfor
-    for _  in r | let [_[2], _[3]] = [lightline#colortable#gui2cui(_[0], _[2]), lightline#colortable#gui2cui(_[1], _[3])] | endfor
-    let [m[2], m[3]] = [lightline#colortable#gui2cui(m[0], m[2]), lightline#colortable#gui2cui(_[1], m[3])]
-  endif
   for i in range(len(left))
     let [li, lj] = [i < len(l) ? l[i] : m, i + 1 < len(l) ? l[i + 1] : m]
     exec printf('hi LightLineLeft_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, li[0], li[1], li[2], li[3], s:term(li))
     exec printf('hi LightLineLeft_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', mode,
           \ i, i+1, i>=len(l) ? m[i+1==len(left)] : li[1], i==len(left)-1 ? m[1] : lj[1], i>=len(l) ? m[2+(i+1==len(left))] : li[3], i==len(left)-1 ? m[3] : lj[3])
+    for j in values(g)
+      let s = has_key(c,d) && has_key(c[d],j) ? c[d][j][0] : has_key(c,'tabline') && has_key(c.tabline,j) ? c.tabline[j][0] : has_key(c.normal,j) ? c.normal[j][0] : l[0]
+      exec printf('hi LightLineLeft_%s_%d_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, j, li[1], s[1], li[3], s[3], s:term(li))
+      exec printf('hi LightLineLeft_%s_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, i, s[1], li[1], s[3], li[3], s:term(li))
+    endfor
   endfor
   exec printf('hi LightLineMiddle_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, m[0], m[1], m[2], m[3], s:term(m))
   for i in range(len(right))
@@ -126,14 +168,35 @@ function! lightline#highlight()
     exec printf('hi LightLineRight_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', mode,
           \ i, i+1, i>=len(r) ? m[i+1==len(right)] : ri[1], i==len(right)-1 ? m[1] : rj[1], i>=len(r) ? m[2+(i+1==len(right))] : ri[3], i==len(right)-1 ? m[3] : rj[3])
     exec printf('hi LightLineRight_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, ri[0], ri[1], ri[2], ri[3], s:term(ri))
+    for j in values(g)
+      let s = has_key(c,d) && has_key(c[d],j) ? c[d][j][0] : has_key(c,'tabline') && has_key(c.tabline,j) ? c.tabline[j][0] : has_key(c.normal,j) ? c.normal[j][0] : l[0]
+      exec printf('hi LightLineRight_%s_%d_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, j, ri[1], s[1], ri[3], s[3], s:term(ri))
+      exec printf('hi LightLineRight_%s_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, i, s[1], ri[1], s[3], ri[3], s:term(ri))
+    endfor
+  endfor
+  for j in values(g)
+    let s = has_key(c,d) && has_key(c[d],j) ? c[d][j][0] : has_key(c,'tabline') && has_key(c.tabline,j) ? c.tabline[j][0] : has_key(c.normal,j) ? c.normal[j][0] : l[0]
+    exec printf('hi LightLineLeft_%s_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, s[0], s[1], s[2], s[3], s:term(s))
+    exec printf('hi LightLineRight_%s_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, s[0], s[1], s[2], s[3], s:term(s))
+    exec printf('hi LightLineLeft_%s_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, len(left), s[1], m[1], s[3], m[3], s:term(s))
+    exec printf('hi LightLineLeft_%s_%d_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, len(left), j, m[1], s[1], m[3], s[3], s:term(m))
+    exec printf('hi LightLineRight_%s_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, len(right), s[1], m[1], s[3], m[3], s:term(s))
+    exec printf('hi LightLineRight_%s_%d_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, len(right), j, m[1], s[1], m[3], s[3], s:term(m))
+    for k in values(g)
+      let t = has_key(c,d) && has_key(c[d],k) ? c[d][k][0] : has_key(c,'tabline') && has_key(c.tabline,k) ? c.tabline[k][0] : has_key(c.normal,k) ? c.normal[k][0] : l[0]
+      exec printf('hi LightLineLeft_%s_%s_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, k, s[1], t[1], s[3], t[3], s:term(s))
+      exec printf('hi LightLineLeft_%s_%s_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, k, j, t[1], s[1], t[3], s[3], s:term(t))
+      exec printf('hi LightLineRight_%s_%s_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, k, s[1], t[1], s[3], t[3], s:term(s))
+      exec printf('hi LightLineRight_%s_%s_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, k, j, t[1], s[1], t[3], s[3], s:term(t))
+    endfor
   endfor
   endfor
 endfunction
 
-function! s:subseparator(x, y, s)
+function! s:subseparator(x, y, s, a, b)
   let [c, f, v] = [ s:lightline.component, s:lightline.component_function,  s:lightline.component_visible_condition ]
-  return '%{('.(has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,has_key(c,a:x)?"1":"0")).')*(('.join(map(copy(a:y),
-        \'(has_key(f,v:val)?"!!strlen(exists(\"*".f[v:val]."\")?".f[v:val]."():\"\")":get(v,v:val,has_key(c,v:val)?"1":"0"))'),')+(')."))?('".a:s."'):''}"
+  return '%{('.(a:a?"1":has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,has_key(c,a:x)?"1":"0")).')*(('.join(map(copy(a:y),
+        \'(has_key(f,v:val)?"!!strlen(exists(\"*".f[v:val]."\")?".f[v:val]."():\"\")":get(v,v:val,has_key(c,v:val)?"1":"1"))'),')+(')."))?('".a:s."'):''}"
 endfunction
 
 function! lightline#concatenate(x, s)
@@ -146,26 +209,128 @@ function! lightline#concatenate(x, s)
 endfunction
 
 function! lightline#statusline(inactive)
-  let [_, c, f, l, r] = [ '%{lightline#link()}', s:lightline.component, s:lightline.component_function, s:lightline.llen, s:lightline.rlen ]
-  let mode = a:inactive ? 'inactive' : 'active'
-  let left = has_key(s:lightline, mode) ? s:lightline[mode].left : s:lightline.active.left
-  let right = has_key(s:lightline, mode) ? s:lightline[mode].right : s:lightline.active.right
-  for i in range(len(left))
-    let _ .= printf('%%#LightLineLeft_%s_%d#', mode, i)
-    for j in range(len(left[i]))
-      let _ .= substitute('%( '.(has_key(f,left[i][j])?'%{exists("*'.f[left[i][j]].'")?'.f[left[i][j]].'():""}':get(c,left[i][j],'')).' %)', '^%(  %)', '', '')
-      if j < len(left[i]) - 1 | let _ .= s:subseparator(left[i][j], left[i][j+1:], s:lightline.subseparator.left) | endif
+  return s:line(0, a:inactive)
+endfunction
+
+function! s:expand(tabline, x, l)
+  let [e, t] = [ s:lightline.component_expand, s:lightline.component_type ]
+  let [a, c, _] = [[], [], []]
+  for i in range(len(a:x))
+    if !len(_) || len(_[-1]) | call add(_, []) | call add(c, []) | endif
+    for j in range(len(a:x[i]))
+      if has_key(e, a:x[i][j])
+        try
+          let r = exists('*'.e[a:x[i][j]]) ? eval(e[a:x[i][j]] . '()') : ''
+          if type(r) == 1 && r == '' | continue | endif
+          let s = type(r) == 1 ? [[], [r], []] : r
+          unlet r
+        catch
+          continue
+        endtry
+        if len(s[0])
+          if !len(a) || type(a[-1]) != type(i) || a[-1] != i
+            if len(_[-1])
+              call add(_, s[0]) | call add(c, repeat([1], len(s[0])))
+            else
+              call extend(_[-1], s[0]) | call extend(c[-1], repeat([1], len(s[0])))
+            endif
+            call add(a, i)
+          else
+            call extend(_[-1], s[0]) | call extend(c[-1], repeat([1], len(s[0])))
+          endif
+        endif
+        if has_key(t, a:x[i][j])
+          if len(s[1])
+            if len(_[-1])
+              call add(_, s[1]) | call add(c, repeat([1], len(s[1])))
+            else
+              call extend(_[-1], s[1]) | call extend(c[-1], repeat([1], len(s[1])))
+            endif
+            call add(a, t[a:x[i][j]])
+          endif
+          if len(s[2])
+            if len(_[-1]) && (type(a[-1]) != type(i) || a[-1] != i)
+              call add(_, s[2]) | call add(c, repeat([1], len(s[2]))) | call add(a, i)
+            else
+              call extend(_[-1], s[2]) | call extend(c[-1], repeat([1], len(s[2])))
+            endif
+          endif
+        else
+          if !len(a) || type(a[-1]) != type(i) || a[-1] != i
+            call add(a, i)
+            if len(_[-1])
+              call add(_, s[1]) | call add(c, repeat([1], len(s[1])))
+            else
+              call extend(_[-1], s[1]) | call extend(c[-1], repeat([1], len(s[1])))
+            endif
+          else
+            call extend(_[-1], s[1]) | call extend(c[-1], repeat([1], len(s[1])))
+          endif
+          if len(s[2]) | call extend(_[-1], s[2]) | call extend(c[-1], repeat([1], len(s[2])))| endif
+        endif
+      else
+        if !len(a) || type(a[-1]) != type(i) || a[-1] != i
+          call add(a, i)
+          if len(_) && len(_[-1]) | call add(_, []) | call add(c, []) | endif
+        endif
+        call add(_[-1], a:x[i][j]) | call add(c[-1], 0)
+      endif
     endfor
-    let _ .= printf('%%#LightLineLeft_%s_%d_%d#', mode, i, i + 1) . (i < l ? s:lightline.separator.left : len(left[i]) ? s:lightline.subseparator.left : '')
+  endfor
+  call add(a, len(a:x))
+  while len(_) && !len(_[-1]) | call remove(_, -1) | call remove(c, -1) | endwhile
+  return [a, c, _]
+endfunction
+
+function! s:line(tabline, inactive)
+  let _ = a:tabline ? '' : '%{lightline#link()}'
+  let [l, r] = a:tabline ? [s:lightline.tab_llen, s:lightline.tab_rlen] : [s:lightline.llen, s:lightline.rlen]
+  let [c, f, e, t] = [s:lightline.component, s:lightline.component_function, s:lightline.component_expand, s:lightline.component_type]
+  let mode = a:tabline ? 'tabline' : a:inactive ? 'inactive' : 'active'
+  let l_ = has_key(s:lightline, mode) ? s:lightline[mode].left : s:lightline.active.left
+  let [ll, lc, lt] = s:expand(a:tabline, copy(l_), l)
+  let r_ = has_key(s:lightline, mode) ? s:lightline[mode].right : s:lightline.active.right
+  let [rl, rc, rt] = s:expand(a:tabline, copy(r_), r)
+  for i in range(len(lt))
+    let _ .= printf('%%#LightLineLeft_%s_%s#', mode, ll[i])
+    for j in range(len(lt[i]))
+      let x = substitute('%( '.(lc[i][j] ? lt[i][j] : has_key(f,lt[i][j])?'%{exists("*'.f[lt[i][j]].'")?'.f[lt[i][j]].'():""}':get(c,lt[i][j],'')).' %)', '^%(  %)', '', '')
+      let _ .= has_key(t,lt[i][j])&&t[lt[i][j]]=='raw'&&strlen(x)>7 ? x[3:-2] : x
+      if j < len(lt[i]) - 1 | let _ .= s:subseparator(lt[i][j], lt[i][j+1:], s:lightline.subseparator.left, lc[i][j], lc[i][j+1:]) | endif
+    endfor
+    let _ .= printf('%%#LightLineLeft_%s_%s_%s#', mode, ll[i], ll[i + 1]) . (i < l + len(lt) - len(l_) && ll[i] < l || type(ll[i]) != type(ll[i + 1]) || type(ll[i]) && type(ll[i + 1]) && ll[i] != ll[i + 1] ? s:lightline.separator.left : len(lt[i]) ? s:lightline.subseparator.left : '')
   endfor
   let _ .= printf('%%#LightLineMiddle_%s#%%=', mode)
-  for i in reverse(range(len(right)))
-    let _ .= printf('%%#LightLineRight_%s_%d_%d#', mode, i, i + 1) . (i < r ? s:lightline.separator.right : len(right[i]) ? s:lightline.subseparator.right : '')
-    let _ .= printf('%%#LightLineRight_%s_%d#', mode, i)
-    for j in range(len(right[i]))
-      if j | let _ .= s:subseparator(right[i][j], right[i][:j-1], s:lightline.subseparator.right) | endif
-      let _ .= substitute('%( '.(has_key(f,right[i][j])?'%{exists("*'.f[right[i][j]].'")?'.f[right[i][j]].'():""}':get(c,right[i][j],'')).' %)', '^%(  %)', '', '')
+  for i in reverse(range(len(rt)))
+    let _ .= printf('%%#LightLineRight_%s_%s_%s#', mode, rl[i], rl[i + 1]) . (i < r + len(rt) - len(r_) && rl[i] < r || type(rl[i]) != type(rl[i + 1]) || type(rl[i]) && type(rl[i + 1]) && rl[i] != rl[i + 1] ? s:lightline.separator.right : len(rt[i]) ? s:lightline.subseparator.right : '')
+    let _ .= printf('%%#LightLineRight_%s_%s#', mode, rl[i])
+    for j in range(len(rt[i]))
+      if j | let _ .= s:subseparator(rt[i][j], rt[i][:j-1], s:lightline.subseparator.right, rc[i][j], rc[i][j+1:]) | endif
+      let x = substitute('%( '.(rc[i][j] ? rt[i][j] : has_key(f,rt[i][j])?'%{exists("*'.f[rt[i][j]].'")?'.f[rt[i][j]].'():""}':get(c,rt[i][j],'')).' %)', '^%(  %)', '', '')
+      let _ .= has_key(t,rt[i][j])&&t[rt[i][j]]=='raw'&&strlen(x)>7 ? x[3:-4] : x
     endfor
+  endfor
+  return _
+endfunction
+
+function! lightline#tabline()
+  return s:line(1, 0)
+endfunction
+
+function! lightline#tabs()
+  let [_, t, l, x, y, z] = ['', tabpagenr(), tabpagenr('$'), [], [], []]
+  for i in range(1, l)
+    call add(i<t?(x):i==t?(y):z, '%'.i.'T%{lightline#onetab('.i.','.(i==t).')}'.(i==l?'%T':''))
+  endfor
+  return [x, y, z]
+endfunction
+
+function! lightline#onetab(n, active)
+  let [_, a] = ['', s:lightline.tab[a:active ? 'active' : 'inactive']]
+  let [c, f, l, r] = [s:lightline.tab_component, s:lightline.tab_component_function, s:lightline.tab_llen, s:lightline.tab_rlen ]
+  for i in range(len(a))
+    let s = has_key(f,a[i]) ? eval(f[a[i]].'('.a:n.')') : eval(get(c,a[i],'""'))
+    if strlen(s) | let _ .= (len(_) ? ' ' : '') . s | endif
   endfor
   return _
 endfunction

@@ -1,9 +1,9 @@
 " =============================================================================
-" Filename: autoload/colorscheme/colorscheme.vim
+" Filename: autoload/lightline/colorscheme.vim
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/08/30 23:19:47.
+" Last Change: 2013/09/07 16:22:56.
 " =============================================================================
 
 let s:cuicolor = {
@@ -204,3 +204,13 @@ function! lightline#colorscheme#fill(p)
   return a:p
 endfunction
 
+function! lightline#colorscheme#flatten(p)
+  for k in values(a:p)
+    for l in values(k)
+      for m in range(len(l))
+        let l[m] = [l[m][0][0], l[m][1][0], l[m][0][1], l[m][1][1]]
+      endfor
+    endfor
+  endfor
+  return a:p
+endfunction
