@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/07 21:36:03.
+" Last Change: 2013/09/07 22:11:56.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -318,13 +318,13 @@ function! lightline#tabline()
 endfunction
 
 function! lightline#tabs()
-  let [t, l, x, y, z, u, d] = [tabpagenr(), tabpagenr('$'), [], [], [], '...', max([winwidth('.') / 40, 2])]
+  let [t, l, x, y, z, u, d] = [tabpagenr(), tabpagenr('$'), [], [], [], '...', min([max([winwidth('.') / 40, 2]), 8])]
   for i in range(1, l)
     call add(i<t?(x):i==t?(y):z, '%'.i.'T%{lightline#onetab('.i.','.(i==t).')}'.(i==l?'%T':''))
   endfor
   let [a, b, c] = [len(x), len(z), d * 2]
   return [a>d&&b>d ? extend(add(x[:d/2-1],u),x[-(d+1)/2:]) : a+b<=c ? x : a<=d ? x : extend(add(x[:(c-b)/2-1],u),x[-(c-b+1)/2:]), y,
-        \ a>d&&b>d ? extend(add(z[:d/2-1],u),z[-(d+1)/2:]) : a+b<=c ? z : b<=d ? z : extend(add(z[:(c-a)/2-1],u),z[-(c-a+1)/2:])]
+        \ a>d&&b>d ? extend(add(z[:(d+1)/2-1],u),z[-d/2:]) : a+b<=c ? z : b<=d ? z : extend(add(z[:(c-a+1)/2-1],u),z[-(c-a)/2:])]
 endfunction
 
 function! lightline#onetab(n, active)
