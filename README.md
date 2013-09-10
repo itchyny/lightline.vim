@@ -724,7 +724,7 @@ let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 ```
 
-### Note for other plugins
+### Note for developers of other plugins
 Appearance consistency matters.
 
 The statusline is an important space for Vim users.
@@ -737,4 +737,4 @@ Firstly, give the users a clue to judge which buffer is the one your plugin crea
 The filename is a manner and the filetype is another.
 Then, export a function which is useful to be shown in the statusline.
 Lastly, for advanced users, set important information in buffer variables.
-So that the users can obtain the condition of the plugin freely.
+So that the users can obtain the condition of the plugin easily.

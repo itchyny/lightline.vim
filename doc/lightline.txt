@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/09/07 16:27:13.
+Last Change: 2013/09/10 20:40:34.
 
 CONTENTS					*lightline-contents*
 
@@ -177,6 +177,8 @@ OPTIONS						*lightline-option*
 
 	g:lightline.tab_component_function	*g:lightline.tab_component_function*
 		Another dictionary for components in one tab.
+		A function specified as a tab component takes one argument:
+		the tab [count].
 		The default value is:
 >
 		let g:lightline.tab_component_function = {
@@ -223,11 +225,20 @@ OPTIONS						*lightline-option*
 
 	g:lightline.separator			*g:lightline.separator*
 	g:lightline.subseparator		*g:lightline.subseparator*
-		A dictionaries to store separators.
+		Dictionaries to store separators.
 		The default value is
 >
 		let g:lightline.separator = { 'left': '', 'right': '' }
 		let g:lightline.subseparator = { 'left': '|', 'right': '|' }
+<
+	g:lightline.enable			*g:lightline.enable*
+		A dictionary to specify which feature is turned on.
+		The default value is
+>
+		let g:lightline.enable = {
+		    \ 'statusline': 1
+		    \ 'tabline': 1
+		    \ }
 <
 
 ==============================================================================
@@ -427,7 +438,7 @@ The type of the syntastic component is error, and the palette has error
 colors, the result is:
 >
 	" Expanded result of Example B
-	(error) [ 'syntastic' ]                               ---  s:p.normal.error[0] = ['gray9', 'brightestred']
+	(error) [ syntastic_flag ]                            ---  s:p.normal.error[0] = ['gray9', 'brightestred']
 	(0)     [ 'lineinfo' ]                                ---  s:p.normal.right[0] = ['gray5', 'gray10']
 	(1)     [ 'percent' ]                                 ---  s:p.normal.right[1] = ['gray9', 'gray4']
 	(2)     [ 'fileformat', 'fileencoding', 'filetype' ]  ---  s:p.normal.right[2] = ['gray8', 'gray2']
@@ -466,6 +477,10 @@ then the expanded result is:
 	(tabsel) ['%2T%{lightline#onetab(2,1)}']              ---  s:p.tabline.tabsel[0]
 	(0)      ['%3T%{lightline#onetab(3,0)}%T', 'C', 'D']  ---  s:p.tabline.left[0]
 <
+In summary, when a function in |g:lightline.component_expand| returns an
+array of three elements, the first element and the last element remains as a
+part of existing component group. And the middle element goes up to new
+component group.
 ==============================================================================
 
 EXAMPLES					*lightline-examples*

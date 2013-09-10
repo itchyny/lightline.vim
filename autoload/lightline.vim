@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/08 00:53:10.
+" Last Change: 2013/09/10 20:38:31.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -13,6 +13,7 @@ let s:_ = 1
 
 function! lightline#update()
   if s:_ | call lightline#init() | call lightline#colorscheme() | endif
+  if !s:lightline.enable.statusline | return | endif
   let s = [lightline#statusline(0), lightline#statusline(1)]
   let w = winnr()
   for n in range(1, winnr('$'))
@@ -27,7 +28,7 @@ endfunction
 
 function! lightline#init()
   let s:lightline = deepcopy(get(g:, 'lightline', {}))
-  for k in ['active', 'inactive', 'tabline', 'tab', 'mode_map', 'mode_fallback',
+  for k in ['active', 'inactive', 'tabline', 'tab', 'mode_map', 'mode_fallback', 'enable',
         \ 'component', 'component_visible_condition', 'component_function', 'component_expand', 'component_type',
         \ 'tab_component', 'tab_component_function', 'separator', 'subseparator' ]
     if !has_key(s:lightline, k) | let s:lightline[k] = {} | endif
@@ -69,7 +70,8 @@ function! lightline#init()
   call extend(s:lightline.separator, { 'left': '', 'right': '' }, 'keep')
   call extend(s:lightline.subseparator, { 'left': '|', 'right': '|' }, 'keep')
   call extend(s:lightline, { 'palette': {}, 'colorscheme': 'default' }, 'keep')
-  set tabline=%!lightline#tabline()
+  call extend(s:lightline.enable, { 'statusline': 1, 'tabline': 1 }, 'keep')
+  if s:lightline.enable.tabline | set tabline=%!lightline#tabline() | endif
 endfunction
 
 function! lightline#colorscheme()
