@@ -934,6 +934,7 @@ Problem 8:					*lightline-problem-8*
 		weird characters like <bf> or ¿), firstly try adding
 >
 			scriptencoding utf-8
+			set encoding=utf-8
 <
 		to the head of your .vimrc(_vimrc). Still you have weird
 		characters, use the unicode numbers. For |powerline| font
