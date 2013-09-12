@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/09/10 20:40:34.
+Last Change: 2013/09/12 12:55:19.
 
 CONTENTS					*lightline-contents*
 
@@ -301,7 +301,18 @@ look nice.
 		return ''
 	endfunction
 <
-
+If the statusline does not correctly show the special characters, use the
+unicode numbers. For |powerline| font users:
+>
+		\ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+		\ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+<
+For |vim-powerline| font users:
+>
+		\ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
+		\ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" }
+<
+See |lightline-problem-8| for more detail.
 ==============================================================================
 FUNCTION					*lightline-function*
 Exposed functions for lightline.vim.
@@ -778,7 +789,7 @@ Problem 7:				|lightline-problem-7|
 	patched font.
 
 Problem 8:				|lightline-problem-8|
-	Triangles look weird.
+	Triangles do not appear. Triangles look weird.
 
 Problem 9:				|lightline-problem-9|
 	Where can I find the list of all the cool characters for patched fonts?
@@ -917,8 +928,30 @@ Problem 7:					*lightline-problem-7*
 		|vim-powerline|.
 
 Problem 8:					*lightline-problem-8*
-	Triangles look weird.
+	Triangles do not appear. Triangles look weird.
 
+		If the triangles do not appear (but you get some spaces or
+		weird characters like <bf> or ¿), firstly try adding
+>
+			scriptencoding utf-8
+<
+		to the head of your .vimrc(_vimrc). Still you have weird
+		characters, use the unicode numbers. For |powerline| font
+		users:
+>
+		\ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+		\ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+<
+		For |vim-powerline| font users:
+>
+		\ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
+		\ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" }
+<
+		The full list of unicode numbers for fancy characters is shown
+		in |lightline-problem-9|.
+
+		If the triangles are shown in appropriate characters but the
+		colors do not look correctly, see the following.
 		If you are using iTerm2, change the following settings.
 
 		    + set Profiles>Colors>Minimum contrast to the Lowest.
@@ -931,13 +964,13 @@ Problem 9:					*lightline-problem-9*
 	Where can I find the list of all the cool characters for patched fonts?
 
 				Default		powerline	vim-powerline
-	separator.left		''		''		'⮀'
-	separator.right		''		''		'⮂'
-	subseparator.left	'|'		''		'⮁'
-	subseparator.right	'|'		''		'⮃'
-	branch symbol		--		''		'⭠'
-	readonly symbol		--		''		'⭤'
-	linecolumn symbol	--		''		'⭡'
+	separator.left		''		'' (\ue0b0)		'⮀' (\u2b80)
+	separator.right		''		'' (\ue0b2)		'⮂' (\u2b82)
+	subseparator.left	'|'		'' (\ue0b1)		'⮁' (\u2b81)
+	subseparator.right	'|'		'' (\ue0b4)		'⮃' (\u2b83)
+	branch symbol		--		'' (\ue0a0)		'⭠' (\u2b60)
+	readonly symbol		--		'' (\ue0a2)		'⭤' (\u2b64)
+	linecolumn symbol	--		'' (\ue0a1)		'⭡' (\u2b81)
 
 Problem 10:					*lightline-problem-10*
 	Cool statusline disappears on |unite|, |vimfiler| and |vimshell|

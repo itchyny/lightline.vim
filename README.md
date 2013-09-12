@@ -226,6 +226,24 @@ let g:lightline = {
 
 
 
+If the triangles do not appear (but you get some spaces or weird characters like &lt;bf&gt; or ¿), firstly try adding
+```vim
+scriptencoding utf-8
+```
+to the head of your `.vimrc`.
+Still you have weird characters, use the unicode numbers. For powerline font
+users:
+```vim
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+```
+For vim-powerline font users:
+```vim
+      \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
+      \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" }
+```
+
+
 Almost all of things go well with the patched font but if the triangle looks weird:
 ![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/22.png)
 
