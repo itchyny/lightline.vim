@@ -574,19 +574,19 @@ function! MyFugitive()
 endfunction
 
 function! MyFileformat()
-  return winwidth('.') > 70 ? &fileformat : ''
+  return winwidth(0) > 70 ? &fileformat : ''
 endfunction
 
 function! MyFiletype()
-  return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
 endfunction
 
 function! MyFileencoding()
-  return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 
 function! MyMode()
-  return winwidth('.') > 60 ? lightline#mode() : ''
+  return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 ```
 When the current window width is narrow, the mode component and the file information component collapse.
@@ -671,15 +671,15 @@ function! MyFugitive()
 endfunction
 
 function! MyFileformat()
-  return winwidth('.') > 70 ? &fileformat : ''
+  return winwidth(0) > 70 ? &fileformat : ''
 endfunction
 
 function! MyFiletype()
-  return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
 endfunction
 
 function! MyFileencoding()
-  return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 
 function! MyMode()
@@ -692,7 +692,7 @@ function! MyMode()
         \ &ft == 'unite' ? 'Unite' :
         \ &ft == 'vimfiler' ? 'VimFiler' :
         \ &ft == 'vimshell' ? 'VimShell' :
-        \ winwidth('.') > 60 ? lightline#mode() : ''
+        \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
 function! CtrlPMark()
