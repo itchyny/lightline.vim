@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/17 10:24:04.
+" Last Change: 2013/09/17 10:52:18.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -215,7 +215,7 @@ function! lightline#statusline(inactive)
 endfunction
 
 function! s:expand(x)
-  let [e, t] = [ s:lightline.component_expand, s:lightline.component_type ]
+  let [e, t, d, f] = [ s:lightline.component_expand, s:lightline.component_type, s:lightline.component, s:lightline.component_function ]
   let [a, c, _] = [[], [], []]
   for i in range(len(a:x))
     if !len(_) || len(_[-1]) | call add(_, []) | call add(c, []) | endif
@@ -225,10 +225,12 @@ function! s:expand(x)
           let r = exists('*'.e[a:x[i][j]]) ? eval(e[a:x[i][j]] . '()') : ''
           if type(r) == 1 && r == '' | continue | endif
           let s = type(r) == 1 ? [[], [r], []] : r
+          if len(s) < 3 | call extend(s, [[], [], []]) | endif
           unlet r
         catch
           continue
         endtry
+        call map(s, 'type(v:val)==3?filter(map(v:val,"type(v:val)==1?(v:val):string(v:val)"),"strlen(v:val)"):type(v:val)==1?(strlen(v:val)?[v:val]:[]):[string(v:val)]')
         if len(s[0])
           if !len(a) || type(a[-1]) != type(i) || a[-1] != i
             if len(_[-1])
@@ -270,7 +272,7 @@ function! s:expand(x)
           endif
           if len(s[2]) | call extend(_[-1], s[2]) | call extend(c[-1], repeat([1], len(s[2])))| endif
         endif
-      else
+      elseif has_key(d, a:x[i][j]) || has_key(f, a:x[i][j])
         if !len(a) || type(a[-1]) != type(i) || a[-1] != i
           call add(a, i)
           if len(_) && len(_[-1]) | call add(_, []) | call add(c, []) | endif
