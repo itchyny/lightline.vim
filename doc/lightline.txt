@@ -805,6 +805,10 @@ Problem 12:				|lightline-problem-12|
 	How to change the lightline colorscheme on the fly.
 
 Problem 13:				|lightline-problem-13|
+	The 'E541' warning appears on the right hand side.
+	Many components disable the statusline of lightline.
+
+Problem 14:				|lightline-problem-14|
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
@@ -1034,6 +1038,13 @@ Problem 12:					*lightline-problem-12*
 		endfunction
 <
 Problem 13:					*lightline-problem-13*
+	The 'E541' warning appears on the right hand side.
+	Many components disable the statusline of lightline.
+		
+		The number of items in statusline/tabline is limited to 80
+		(see |E541|). You cannot register too much components.
+
+Problem 14:					*lightline-problem-14*
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
