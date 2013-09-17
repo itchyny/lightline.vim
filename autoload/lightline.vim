@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/11 15:08:32.
+" Last Change: 2013/09/17 10:24:04.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -198,7 +198,7 @@ endfunction
 function! s:subseparator(x, y, s, a, b)
   let [c, f, v] = [ s:lightline.component, s:lightline.component_function,  s:lightline.component_visible_condition ]
   return '%{('.(a:a?"1":has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,has_key(c,a:x)?"1":"0")).')*(('.join(map(copy(a:y),
-        \'(has_key(f,v:val)?"!!strlen(exists(\"*".f[v:val]."\")?".f[v:val]."():\"\")":get(v,v:val,has_key(c,v:val)?"1":"1"))'),')+(')."))?('".a:s."'):''}"
+        \'(a:b[v:key]?"1":has_key(f,v:val)?"!!strlen(exists(\"*".f[v:val]."\")?".f[v:val]."():\"\")":get(v,v:val,has_key(c,v:val)?"1":"0"))'),')+(')."))?('".a:s."'):''}"
 endfunction
 
 function! lightline#concatenate(x, s)
@@ -307,7 +307,7 @@ function! s:line(tabline, inactive)
     let _ .= printf('%%#LightLineRight_%s_%s_%s#', mode, rl[i], rl[i + 1]) . (i < r + len(rt) - len(r_) && rl[i] < r || type(rl[i]) != type(rl[i + 1]) || type(rl[i]) && type(rl[i + 1]) && rl[i] != rl[i + 1] ? s:lightline.separator.right : len(rt[i]) ? s:lightline.subseparator.right : '')
     let _ .= printf('%%#LightLineRight_%s_%s#', mode, rl[i])
     for j in range(len(rt[i]))
-      if j | let _ .= s:subseparator(rt[i][j], rt[i][:j-1], s:lightline.subseparator.right, rc[i][j], rc[i][j+1:]) | endif
+      if j | let _ .= s:subseparator(rt[i][j], rt[i][:j-1], s:lightline.subseparator.right, rc[i][j], rc[i][:j-1]) | endif
       let x = substitute('%( '.(rc[i][j] ? rt[i][j] : has_key(f,rt[i][j])?'%{exists("*'.f[rt[i][j]].'")?'.f[rt[i][j]].'():""}':get(c,rt[i][j],'')).' %)', '^%(  %)', '', '')
       let _ .= has_key(t,rt[i][j])&&t[rt[i][j]]=='raw'&&strlen(x)>7 ? x[3:-4] : x
     endfor
