@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/17 12:02:27.
+" Last Change: 2013/09/17 18:23:26.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -197,8 +197,8 @@ endfunction
 
 function! s:subseparator(x, y, s, a, b)
   let [c, f, v] = [ s:lightline.component, s:lightline.component_function,  s:lightline.component_visible_condition ]
-  return '%{('.(a:a?"1":has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,has_key(c,a:x)?"1":"0")).')*(('.join(map(copy(a:y),
-        \'(a:b[v:key]?"1":has_key(f,v:val)?"!!strlen(exists(\"*".f[v:val]."\")?".f[v:val]."():\"\")":get(v,v:val,has_key(c,v:val)?"1":"0"))'),')+(')."))?('".a:s."'):''}"
+  return '%{('.(a:a?"1":has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,has_key(c,a:x)?"1":"0")).')*(('.join(map(range(len(a:y)),
+        \'(a:b[v:val]?"1":has_key(f,a:y[v:val])?"!!strlen(exists(\"*".f[a:y[v:val]]."\")?".f[a:y[v:val]]."():\"\")":get(v,a:y[v:val],has_key(c,a:y[v:val])?"1":"0"))'),')+(')."))?('".a:s."'):''}"
 endfunction
 
 function! lightline#concatenate(x, s)
