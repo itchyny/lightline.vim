@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/17 10:52:18.
+" Last Change: 2013/09/17 12:02:27.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -224,7 +224,7 @@ function! s:expand(x)
         try
           let r = exists('*'.e[a:x[i][j]]) ? eval(e[a:x[i][j]] . '()') : ''
           if type(r) == 1 && r == '' | continue | endif
-          let s = type(r) == 1 ? [[], [r], []] : r
+          let s = type(r) == 1 ? [[], [r], []] : type(r) == 3 ? r : [[], [string(r)], []]
           if len(s) < 3 | call extend(s, [[], [], []]) | endif
           unlet r
         catch
