@@ -301,7 +301,7 @@ Okay. It works nice.
 
 How does lightline decide the components to show in the statusline?
 It's very simple.
-The variables to select components are `g:lightline.active.left` and `g:lightline.active.left`.
+The variables to select components are `g:lightline.active.left` and `g:lightline.active.right`.
 For example, you add the `g:lightline.active.left` in `.vimrc`.
 ```vim
 let g:lightline = {
