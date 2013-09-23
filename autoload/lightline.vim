@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/17 18:23:26.
+" Last Change: 2013/09/23 22:29:48.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -132,7 +132,7 @@ function! lightline#link(...)
 endfunction
 
 function! s:term(l)
-  return len(a:l) == 5 && type(a:l[4]) == 1 ? 'term='.a:l[4].' cterm='.a:l[4] : ''
+  return len(a:l) == 5 && type(a:l[4]) == 1 && strlen(a:l[4]) ? 'term='.a:l[4].' cterm='.a:l[4].' gui='.a:l[4] : ''
 endfunction
 
 function! lightline#highlight()
