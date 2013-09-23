@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/23 22:29:48.
+" Last Change: 2013/09/24 02:12:21.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -30,7 +30,7 @@ function! lightline#init()
   let s:lightline = deepcopy(get(g:, 'lightline', {}))
   for k in ['active', 'inactive', 'tabline', 'tab', 'mode_map', 'mode_fallback', 'enable',
         \ 'component', 'component_visible_condition', 'component_function', 'component_expand', 'component_type',
-        \ 'tab_component', 'tab_component_function', 'separator', 'subseparator' ]
+        \ 'tab_component', 'tab_component_function', 'separator', 'subseparator', 'tabline_separator', 'tabline_subseparator' ]
     if !has_key(s:lightline, k) | let s:lightline[k] = {} | endif
   endfor
   call extend(s:lightline.active, {
@@ -69,6 +69,8 @@ function! lightline#init()
         \ 'readonly': 'lightline#tab#readonly', 'tabnum': 'lightline#tab#tabnum' }, 'keep')
   call extend(s:lightline.separator, { 'left': '', 'right': '' }, 'keep')
   call extend(s:lightline.subseparator, { 'left': '|', 'right': '|' }, 'keep')
+  call extend(s:lightline.tabline_separator, s:lightline.separator, 'keep')
+  call extend(s:lightline.tabline_subseparator, s:lightline.subseparator, 'keep')
   call extend(s:lightline, { 'palette': {}, 'colorscheme': 'default' }, 'keep')
   call extend(s:lightline.enable, { 'statusline': 1, 'tabline': 1 }, 'keep')
   if s:lightline.enable.tabline | set tabline=%!lightline#tabline() | endif
@@ -289,6 +291,7 @@ endfunction
 function! s:line(tabline, inactive)
   let _ = a:tabline ? '' : '%{lightline#link()}'
   let [l, r] = a:tabline ? [s:lightline.tab_llen, s:lightline.tab_rlen] : [s:lightline.llen, s:lightline.rlen]
+  let [p, s] = a:tabline ? [s:lightline.tabline_separator, s:lightline.tabline_subseparator] : [s:lightline.separator, s:lightline.subseparator]
   let [c, f, t] = [s:lightline.component, s:lightline.component_function, s:lightline.component_type]
   let mode = a:tabline ? 'tabline' : a:inactive ? 'inactive' : 'active'
   let l_ = has_key(s:lightline, mode) ? s:lightline[mode].left : s:lightline.active.left
@@ -300,16 +303,16 @@ function! s:line(tabline, inactive)
     for j in range(len(lt[i]))
       let x = substitute('%( '.(lc[i][j] ? lt[i][j] : has_key(f,lt[i][j])?'%{exists("*'.f[lt[i][j]].'")?'.f[lt[i][j]].'():""}':get(c,lt[i][j],'')).' %)', '^%(  %)', '', '')
       let _ .= has_key(t,lt[i][j])&&t[lt[i][j]]=='raw'&&strlen(x)>7 ? x[3:-2] : x
-      if j < len(lt[i]) - 1 | let _ .= s:subseparator(lt[i][j], lt[i][j+1:], s:lightline.subseparator.left, lc[i][j], lc[i][j+1:]) | endif
+      if j < len(lt[i]) - 1 | let _ .= s:subseparator(lt[i][j], lt[i][j+1:], s.left, lc[i][j], lc[i][j+1:]) | endif
     endfor
-    let _ .= printf('%%#LightLineLeft_%s_%s_%s#', mode, ll[i], ll[i + 1]) . (i < l + len(lt) - len(l_) && ll[i] < l || type(ll[i]) != type(ll[i + 1]) || type(ll[i]) && type(ll[i + 1]) && ll[i] != ll[i + 1] ? s:lightline.separator.left : len(lt[i]) ? s:lightline.subseparator.left : '')
+    let _ .= printf('%%#LightLineLeft_%s_%s_%s#', mode, ll[i], ll[i + 1]) . (i < l + len(lt) - len(l_) && ll[i] < l || type(ll[i]) != type(ll[i + 1]) || type(ll[i]) && type(ll[i + 1]) && ll[i] != ll[i + 1] ? p.left : len(lt[i]) ? s.left : '')
   endfor
   let _ .= printf('%%#LightLineMiddle_%s#%%=', mode)
   for i in reverse(range(len(rt)))
-    let _ .= printf('%%#LightLineRight_%s_%s_%s#', mode, rl[i], rl[i + 1]) . (i < r + len(rt) - len(r_) && rl[i] < r || type(rl[i]) != type(rl[i + 1]) || type(rl[i]) && type(rl[i + 1]) && rl[i] != rl[i + 1] ? s:lightline.separator.right : len(rt[i]) ? s:lightline.subseparator.right : '')
+    let _ .= printf('%%#LightLineRight_%s_%s_%s#', mode, rl[i], rl[i + 1]) . (i < r + len(rt) - len(r_) && rl[i] < r || type(rl[i]) != type(rl[i + 1]) || type(rl[i]) && type(rl[i + 1]) && rl[i] != rl[i + 1] ? p.right : len(rt[i]) ? s.right : '')
     let _ .= printf('%%#LightLineRight_%s_%s#', mode, rl[i])
     for j in range(len(rt[i]))
-      if j | let _ .= s:subseparator(rt[i][j], rt[i][:j-1], s:lightline.subseparator.right, rc[i][j], rc[i][:j-1]) | endif
+      if j | let _ .= s:subseparator(rt[i][j], rt[i][:j-1], s.right, rc[i][j], rc[i][:j-1]) | endif
       let x = substitute('%( '.(rc[i][j] ? rt[i][j] : has_key(f,rt[i][j])?'%{exists("*'.f[rt[i][j]].'")?'.f[rt[i][j]].'():""}':get(c,rt[i][j],'')).' %)', '^%(  %)', '', '')
       let _ .= has_key(t,rt[i][j])&&t[rt[i][j]]=='raw'&&strlen(x)>7 ? x[3:-4] : x
     endfor

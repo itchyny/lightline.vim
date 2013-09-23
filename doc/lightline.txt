@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/09/12 12:55:19.
+Last Change: 2013/09/24 02:25:09.
 
 CONTENTS					*lightline-contents*
 
@@ -230,6 +230,14 @@ OPTIONS						*lightline-option*
 >
 		let g:lightline.separator = { 'left': '', 'right': '' }
 		let g:lightline.subseparator = { 'left': '|', 'right': '|' }
+<
+	g:lightline.tabline_separator			*g:lightline.tabline_separator*
+	g:lightline.tabline_subseparator		*g:lightline.tabline_subseparator*
+		Dictionaries to store separators for the tabline.
+		The default value is
+>
+		let g:lightline.tabline_separator = g:lightline.separator
+		let g:lightline.tabline_subseparator = g:lightline.subseparator
 <
 	g:lightline.enable			*g:lightline.enable*
 		A dictionary to specify which feature is turned on.
@@ -809,6 +817,10 @@ Problem 13:				|lightline-problem-13|
 	Many components disable the statusline of lightline.
 
 Problem 14:				|lightline-problem-14|
+	Do not deal with the tabline.
+	Do not use the fancy separators in the tabline.
+
+Problem 15:				|lightline-problem-15|
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
@@ -1045,6 +1057,23 @@ Problem 13:					*lightline-problem-13*
 		(see |E541|). You cannot register too much components.
 
 Problem 14:					*lightline-problem-14*
+	Do not deal with the tabline.
+	Do not use the fancy separators in the tabline.
+
+		You can disable the tabline feature of lightline.vim using:
+>
+		let g:lightline = {
+			\ 'enable': { 'tabline': 0 },
+			\ }
+<
+		If you don't like the separators in the tabline, use:
+>
+		let g:lightline = {
+			\ 'tabline_separator': { 'left': "", 'right': "" },
+			\ 'tabline_subseparator': { 'left': "", 'right': "" },
+			\ }
+<
+Problem 15:				|lightline-problem-15|
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
