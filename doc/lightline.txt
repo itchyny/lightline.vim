@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/09/24 02:25:09.
+Last Change: 2013/09/24 13:39:09.
 
 CONTENTS					*lightline-contents*
 
@@ -1073,7 +1073,7 @@ Problem 14:					*lightline-problem-14*
 			\ 'tabline_subseparator': { 'left': "", 'right': "" },
 			\ }
 <
-Problem 15:				|lightline-problem-15|
+Problem 15:					*lightline-problem-15*
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
