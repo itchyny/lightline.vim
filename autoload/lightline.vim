@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/24 02:12:21.
+" Last Change: 2013/09/29 11:19:44.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -224,56 +224,31 @@ function! s:expand(x)
     for j in range(len(a:x[i]))
       if has_key(e, a:x[i][j])
         try
+          unlet! r
           let r = exists('*'.e[a:x[i][j]]) ? eval(e[a:x[i][j]] . '()') : ''
           if type(r) == 1 && r == '' | continue | endif
-          let s = type(r) == 1 ? [[], [r], []] : type(r) == 3 ? r : [[], [string(r)], []]
-          if len(s) < 3 | call extend(s, [[], [], []]) | endif
-          unlet r
+          let s = type(r) == 3 ? (len(r) < 3 ? r + [[], [], []] : r) : [[], [r], []]
         catch
           continue
         endtry
-        call map(s, 'type(v:val)==3?filter(map(v:val,"type(v:val)==1?(v:val):string(v:val)"),"strlen(v:val)"):type(v:val)==1?(strlen(v:val)?[v:val]:[]):[string(v:val)]')
-        if len(s[0])
-          if !len(a) || type(a[-1]) != type(i) || a[-1] != i
-            if len(_[-1])
-              call add(_, s[0]) | call add(c, repeat([1], len(s[0])))
+        for k in [0, 1, 2]
+          let sk = filter(type(s[k])==3?map(s[k],"type(v:val)==1?(v:val):string(v:val)"):type(s[k])==1?[s[k]]:[string(s[k])],"strlen(v:val)")
+          if len(sk)
+            unlet! m
+            let m = k == 1 && has_key(t, a:x[i][j]) ? t[a:x[i][j]] : i
+            if !len(a) || type(a[-1]) != type(m) || a[-1] != m
+              if len(_[-1])
+                call add(_, sk) | call add(c, repeat([1], len(sk)))
+              else
+                call extend(_[-1], sk) | call extend(c[-1], repeat([1], len(sk)))
+              endif
+              call add(a, m)
             else
-              call extend(_[-1], s[0]) | call extend(c[-1], repeat([1], len(s[0])))
-            endif
-            call add(a, i)
-          else
-            call extend(_[-1], s[0]) | call extend(c[-1], repeat([1], len(s[0])))
-          endif
-        endif
-        if has_key(t, a:x[i][j])
-          if len(s[1])
-            if len(_[-1])
-              call add(_, s[1]) | call add(c, repeat([1], len(s[1])))
-            else
-              call extend(_[-1], s[1]) | call extend(c[-1], repeat([1], len(s[1])))
-            endif
-            call add(a, t[a:x[i][j]])
-          endif
-          if len(s[2])
-            if len(_[-1]) && (type(a[-1]) != type(i) || a[-1] != i)
-              call add(_, s[2]) | call add(c, repeat([1], len(s[2]))) | call add(a, i)
-            else
-              call extend(_[-1], s[2]) | call extend(c[-1], repeat([1], len(s[2])))
+              if len(_) > 1 && !len(_[-1]) | call remove(_, -1) | call remove(c, -1) | endif
+              call extend(_[-1], sk) | call extend(c[-1], repeat([1], len(sk)))
             endif
           endif
-        else
-          if !len(a) || type(a[-1]) != type(i) || a[-1] != i
-            call add(a, i)
-            if len(_[-1])
-              call add(_, s[1]) | call add(c, repeat([1], len(s[1])))
-            else
-              call extend(_[-1], s[1]) | call extend(c[-1], repeat([1], len(s[1])))
-            endif
-          else
-            call extend(_[-1], s[1]) | call extend(c[-1], repeat([1], len(s[1])))
-          endif
-          if len(s[2]) | call extend(_[-1], s[2]) | call extend(c[-1], repeat([1], len(s[2])))| endif
-        endif
+        endfor
       elseif has_key(d, a:x[i][j]) || has_key(f, a:x[i][j])
         if !len(a) || type(a[-1]) != type(i) || a[-1] != i
           call add(a, i)
