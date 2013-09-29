@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/29 11:19:44.
+" Last Change: 2013/09/29 20:09:38.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -313,7 +313,7 @@ function! lightline#onetab(n, active)
   let [_, a] = ['', s:lightline.tab[a:active ? 'active' : 'inactive']]
   let [c, f] = [s:lightline.tab_component, s:lightline.tab_component_function ]
   for i in range(len(a))
-    let s = has_key(f,a[i]) ? eval(f[a[i]].'('.a:n.')') : eval(get(c,a[i],'""'))
+    let s = has_key(f,a[i]) ? eval(f[a[i]].'('.a:n.')') : get(c,a[i],'')
     if strlen(s) | let _ .= (len(_) ? ' ' : '') . s | endif
   endfor
   return _
