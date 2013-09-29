@@ -244,7 +244,7 @@ OPTIONS						*lightline-option*
 		The default value is
 >
 		let g:lightline.enable = {
-		    \ 'statusline': 1
+		    \ 'statusline': 1,
 		    \ 'tabline': 1
 		    \ }
 <
