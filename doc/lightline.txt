@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/09/24 13:39:09.
+Last Change: 2013/09/30 11:00:26.
 
 CONTENTS					*lightline-contents*
 
@@ -433,11 +433,11 @@ the example A.
 	      \                          [ 'fileformat', 'fileencoding', 'filetype' ] ]
 <
 The colors are ([fgcolor, bgcolor):
+>
 	(0) [ 'lineinfo', 'syntastic' ]                   ---  s:p.normal.right[0] = ['gray5', 'gray10']
 	(1) [ 'percent' ]                                 ---  s:p.normal.right[1] = ['gray9', 'gray4']
 	(2) [ 'fileformat', 'fileencoding', 'filetype' ]  ---  s:p.normal.right[2] = ['gray8', 'gray2']
-
-
+<
 Recall the example B.
 >
 	" Example B
