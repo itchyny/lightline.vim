@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/10/01 15:20:55.
+Last Change: 2013/10/01 15:34:08.
 
 CONTENTS					*lightline-contents*
 
@@ -815,21 +815,24 @@ Problem 11:				|lightline-problem-11|
 	Cool statusline disappears in |CtrlP|, |Tagbar| buffers.
 
 Problem 12:				|lightline-problem-12|
-	How to change the lightline colorscheme on the fly.
+	How to make the plus sign red like |powerline|?
 
 Problem 13:				|lightline-problem-13|
+	How to change the lightline colorscheme on the fly.
+
+Problem 14:				|lightline-problem-14|
 	The 'E541' warning appears on the right hand side.
 	Many components disable the statusline of lightline.
 
-Problem 14:				|lightline-problem-14|
+Problem 15:				|lightline-problem-15|
 	Do not deal with the tabline.
 	Do not use the fancy separators in the tabline.
 
-Problem 15:				|lightline-problem-15|
+Problem 16:				|lightline-problem-16|
 	When changed the component to a function component to an expanding
 	component, the statusline of lightline is sometimes disabled.
 
-Problem 16:				|lightline-problem-16|
+Problem 17:				|lightline-problem-17|
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
@@ -1033,6 +1036,30 @@ Problem 11:					*lightline-problem-11*
 		these plugins.
 
 Problem 12:					*lightline-problem-12*
+	How to make the plus sign red like |powerline|?
+
+		Use the following setings.
+>
+		let g:lightline = {
+		      \ 'component': {
+		      \   'modified': '%#ModifiedColor#%{MyModified()}',
+		      \ }
+		      \ }
+		function! MyModified()
+		  let map = { 'V': 'n', "\<C-v>": 'n', 's': 'n', 'v': 'n', "\<C-s>": 'n', 'c': 'n', 'R': 'n'}
+		  let mode = get(map, mode()[0], mode()[0])
+		  let bgcolor = {'n': [240, '#585858'], 'i': [31, '#0087af']}
+		  let color = get(bgcolor, mode, bgcolor.n)
+		  exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d guifg=#ff0000 guibg=%s term=bold cterm=bold',
+			\ color[0], color[1])
+		  return &modified ? '+' : &modifiable ? '' : '-'
+		endfunction
+<
+		It's surely complicated. There's no easy API to do a thing
+		like this. But it means that your request does not match
+		the spirit of lightline.
+
+Problem 13:					*lightline-problem-13*
 	How to change the lightline colorscheme on the fly.
 
 		Add the following settings to your .vimrc(_vimrc).
@@ -1058,14 +1085,14 @@ Problem 12:					*lightline-problem-12*
 		  endtry
 		endfunction
 <
-Problem 13:					*lightline-problem-13*
+Problem 14:					*lightline-problem-14*
 	The 'E541' warning appears on the right hand side.
 	Many components disable the statusline of lightline.
 		
 		The number of items in statusline/tabline is limited to 80
 		(see |E541|). You cannot register too much components.
 
-Problem 14:					*lightline-problem-14*
+Problem 15:					*lightline-problem-15*
 	Do not deal with the tabline.
 	Do not use the fancy separators in the tabline.
 
@@ -1082,7 +1109,7 @@ Problem 14:					*lightline-problem-14*
 			\ 'tabline_subseparator': { 'left': "", 'right': "" },
 			\ }
 <
-Problem 15:					*lightline-problem-15*
+Problem 16:					*lightline-problem-16*
 	When changed the component to a function component to an expanding
 	component, the statusline of lightline is sometimes disabled.
 
@@ -1107,7 +1134,7 @@ Problem 15:					*lightline-problem-15*
 		  return substitute(text, '%', '%%', 'g')
 		endfunction
 <
-Problem 16:					*lightline-problem-16*
+Problem 17:					*lightline-problem-17*
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
