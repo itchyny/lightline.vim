@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/09/30 11:00:26.
+Last Change: 2013/10/01 15:20:55.
 
 CONTENTS					*lightline-contents*
 
@@ -157,6 +157,11 @@ OPTIONS						*lightline-option*
 				[[ left ], [ middle ], [ right ]]
 		The component in this dictionary has priority over
 		|g:lightline.component| and |g:lightline.component_function|.
+		Note that the return string is appended to the statusline
+		string without any conversion. So you should replace all the
+		% signs with %%. Otherwise, lightline will be disabled in case
+		the text has a % sign.
+		(example: return substitute(text, '%', '%%', 'g')).
 		See |lightline-component-expansion| for more detail.
 >
 		let g:lightline.component_expand = {
@@ -821,6 +826,10 @@ Problem 14:				|lightline-problem-14|
 	Do not use the fancy separators in the tabline.
 
 Problem 15:				|lightline-problem-15|
+	When changed the component to a function component to an expanding
+	component, the statusline of lightline is sometimes disabled.
+
+Problem 16:				|lightline-problem-16|
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
@@ -1074,6 +1083,31 @@ Problem 14:					*lightline-problem-14*
 			\ }
 <
 Problem 15:					*lightline-problem-15*
+	When changed the component to a function component to an expanding
+	component, the statusline of lightline is sometimes disabled.
+
+		When you changed from
+>
+			\ 'component_function': {
+			\   'my': 'My',
+			\ }
+<
+		to
+>
+			\ 'component_expand': {
+			\   'my': 'My',
+			\ }
+<
+		the statusline of lightline is disabled unexpectedly.
+		In such a case, the text returned by 'My' function may include
+		the '%' character. Replace all the '%' signs with '%%'.
+>
+		function My()
+		  ...
+		  return substitute(text, '%', '%%', 'g')
+		endfunction
+<
+Problem 16:					*lightline-problem-16*
 	Found a bug of this plugin.
 	Got many errors while using this plugin.
 	Vim hangs while using this plugin.
