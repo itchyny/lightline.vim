@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/29 20:09:38.
+" Last Change: 2013/10/20 18:46:09.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -147,7 +147,7 @@ function! lightline#highlight()
     endfor
   endif
   let [s:lightline.llen, s:lightline.rlen] = [len(c.normal.left), len(c.normal.right)]
-  let [s:lightline.tab_llen, s:lightline.tab_rlen] = [len(has_key(c,'tabline') ? c.tabline.left : c.normal.left), len(has_key(c,'tabline') ? c.tabline.right : c.normal.right)]
+  let [s:lightline.tab_llen, s:lightline.tab_rlen] = [len(has_key(c,'tabline') && has_key(c.tabline, 'left') ? c.tabline.left : c.normal.left), len(has_key(c,'tabline') && has_key(c.tabline, 'right') ? c.tabline.right : c.normal.right)]
   for mode in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command', 'select', 'tabline']
   let d = has_key(c, mode) ? mode : has_key(f, mode) && has_key(c, f[mode]) ? f[mode] : 'normal'
   let left = d == 'tabline' ? s:lightline.tabline.left : d == 'inactive' ? s:lightline.inactive.left : s:lightline.active.left
