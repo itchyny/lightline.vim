@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/10/01 15:34:08.
+Last Change: 2013/10/20 19:16:34.
 
 CONTENTS					*lightline-contents*
 
@@ -14,6 +14,7 @@ Option					|lightline-option|
 Font					|lightline-font|
 Function				|lightline-function|
 Component Expansion			|lightline-component-expansion|
+Colorscheme				|lightline-colorscheme|
 Examples				|lightline-examples|
 Nice Examples				|lightline-nice-examples|
 Powerful Example			|lightline-powerful-example|
@@ -505,6 +506,99 @@ In summary, when a function in |g:lightline.component_expand| returns an
 array of three elements, the first element and the last element remains as a
 part of existing component group. And the middle element goes up to new
 component group.
+------------------------------------------------------------------------------
+COLORSCHEME					*lightline-colorscheme*
+You can configure the colorscheme of lightline. For example,
+>
+	let g:lightline = {
+		\ 'colorscheme': 'wombat',
+		\ }
+<
+The colorscheme files are found in the directory
+
+	lightline.vim/autoload/lightline/colorscheme/
+
+In each file, one global variable is defined. For example, in the landscape.vim
+file, you see
+>
+	let g:lightline#colorscheme#landscape#palette = s:p
+<
+In the file, the colors for the landscape colorscheme are defined. For example,
+>
+	let s:p.normal.left = [ ['#0000ff', '#ffffff', 21, 231, 'bold' ], [ '#ffffff', '#0000ff', 231, 21 ] ]
+<
+defines the colors for the components on the left hand side, in normal mode.
+>
+	let s:p.tabline.tabsel = [ [ '#dadada', '#121212', 253, 233 ] ]
+<
+defines the colors for the selected tab in tabline. In general, each palette
+follows the following style:
+>
+	let s:p.{mode}.{where} = [ [ {guifg}, {guibg}, {cuifg}, {cuibg} ], ... ]
+<
+
+
+Now, you can create your own colorscheme for lightline. Create a
+yourcolorscheme.vim at
+
+	{one of the paths in &rtp}/autoload/lightline/colorscheme/yourcolorscheme.vim
+
+The following code gives the minimal palette definition for lightline.
+>
+	let s:p = {'normal': {}}
+	let s:p.normal.left = [ [ ... ] ]
+	let s:p.normal.right = [ [ ... ] ]
+	let s:p.normal.middle = [ [ ... ] ]
+	let g:lightline#colorscheme#yourcolorscheme#palette = s:p
+<
+And if you add the colorscheme configuration to your .vimrc(_vimrc),
+>
+	let g:lightline = {
+		\ 'colorscheme': 'yourcolorscheme',
+		\ }
+<
+you find it possible to change the lightline colors as you wish.
+
+Moreover, if you want to change the colors based on the mode of vim, write
+something like this:
+>
+	let s:p.insert.left = [ [ ... ] ]
+	let s:p.insert.right = [ [ ... ] ]
+	let s:p.replace.left = [ [ ... ] ]
+	let s:p.replace.right = [ [ ... ] ]
+	...
+	...
+<
+For expanded components, you are recommended to define the following two
+colors.
+>
+	let s:p.normal.error = [ [ ... ] ]
+	let s:p.normal.warning = [ [ ... ] ]
+<
+For the complete list of components the color of which you should define in
+your colorscheme, see the colorscheme files in lightline.
+
+It is sometimes painful to write all the colors for both gui and cui.
+Actually, lightline has some useful functions for writing colorschemes. For
+example, see
+	lightline.vim/autoload/lightline/colorscheme/Tomorrow_Night.vim
+this colorscheme is defined using only gui color numbers. And convert to the
+normal colorscheme form using:
+>
+	let g:lightline#colorscheme#Tomorrow_Night#palette = lightline#colorscheme#fill(s:p)
+<
+This function fills the cui colors for a palette which has only gui colors, or
+vice varsa. However, note that using the convenient function sources an
+additional Vim script file (autoload/lightline/colorscheme.vim), which causes
+a little slow down. If you want to avoid this situation, write all the colors
+as done in autoload/lightline/colorscheme/landscape.vim; firstly create the
+colorscheme using the fill function, and see the result, in a sense, the
+compiled version of your colorscheme.
+>
+	echo g:lightline#colorscheme#yourcolorscheme#palette 
+<
+Then copy and paste the result to the colorscheme file.
+
 ==============================================================================
 
 EXAMPLES					*lightline-examples*
