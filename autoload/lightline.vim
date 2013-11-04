@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/10/31 21:41:01.
+" Last Change: 2013/11/05 02:20:50.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -14,8 +14,8 @@ let s:_ = 1
 function! lightline#update()
   if s:_ | call lightline#init() | call lightline#colorscheme() | endif
   if !s:lightline.enable.statusline | return | endif
-  let s = [lightline#statusline(0), lightline#statusline(1)]
   let w = winnr()
+  let s = winnr('$') == 1 ? [lightline#statusline(0)] : [lightline#statusline(0), lightline#statusline(1)]
   for n in range(1, winnr('$'))
     call setwinvar(n, '&statusline', s[n!=w])
     call setwinvar(n, 'lightline', n!=w)
@@ -84,7 +84,8 @@ function! lightline#colorscheme()
     let s:lightline.colorscheme = 'default'
     let s:lightline.palette = g:lightline#colorscheme#{s:lightline.colorscheme}#palette
   finally
-    call lightline#highlight()
+    let s:highlight = {}
+    call lightline#highlight('normal')
     let s:_ = 0
   endtry
 endfunction
@@ -98,6 +99,7 @@ function! lightline#link(...)
   let mode = get(s:lightline._mode_, a:0 ? a:1 : mode(), 'normal')
   if s:mode == mode | return '' | endif
   let s:mode = mode
+  if !has_key(s:highlight, mode) | call lightline#highlight(mode) | endif
   let [left, right, types] = [s:lightline.active.left, s:lightline.active.right, values(s:lightline.component_type)]
   for i in range(len(left))
     exec printf('hi link LightLineLeft_active_%d LightLineLeft_%s_%d', i, mode, i)
@@ -150,7 +152,7 @@ function! s:uniq(l)
   return l
 endfunction
 
-function! lightline#highlight()
+function! lightline#highlight(...)
   let [c, f, g] = [s:lightline.palette, s:lightline.mode_fallback, s:lightline.component_type]
   if (has('win32') || has('win64')) && !has('gui_running')
     for u in values(c)
@@ -162,7 +164,9 @@ function! lightline#highlight()
   let [s:lightline.llen, s:lightline.rlen] = [len(c.normal.left), len(c.normal.right)]
   let [s:lightline.tab_llen, s:lightline.tab_rlen] = [len(has_key(c,'tabline') && has_key(c.tabline, 'left') ? c.tabline.left : c.normal.left), len(has_key(c,'tabline') && has_key(c.tabline, 'right') ? c.tabline.right : c.normal.right)]
   let h = s:uniq(filter(copy(values(g)), 'v:val !=# "raw"'))
-  for mode in ['normal', 'insert', 'replace', 'visual', 'inactive', 'command', 'select', 'tabline']
+  let modes = a:0 ? [a:1] : ['normal', 'insert', 'replace', 'visual', 'inactive', 'command', 'select', 'tabline']
+  for mode in modes
+  let s:highlight[mode] = 1
   let d = has_key(c, mode) ? mode : has_key(f, mode) && has_key(c, f[mode]) ? f[mode] : 'normal'
   let left = d == 'tabline' ? s:lightline.tabline.left : d == 'inactive' ? s:lightline.inactive.left : s:lightline.active.left
   let right = d == 'tabline' ? s:lightline.tabline.right : d == 'inactive' ? s:lightline.inactive.right : s:lightline.active.right
@@ -232,6 +236,7 @@ function! lightline#concatenate(x, s)
 endfunction
 
 function! lightline#statusline(inactive)
+  if a:inactive && !has_key(s:highlight, 'inactive') | call lightline#highlight('inactive') | endif
   return s:line(0, a:inactive)
 endfunction
 
@@ -315,6 +320,7 @@ function! s:line(tabline, inactive)
 endfunction
 
 function! lightline#tabline()
+  if !has_key(s:highlight, 'tabline') | call lightline#highlight('tabline') | endif
   return s:line(1, 0)
 endfunction
 
