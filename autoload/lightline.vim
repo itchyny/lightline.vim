@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/11/05 02:20:50.
+" Last Change: 2013/11/15 12:30:33.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -86,6 +86,7 @@ function! lightline#colorscheme()
   finally
     let s:highlight = {}
     call lightline#highlight('normal')
+    call lightline#link()
     let s:_ = 0
   endtry
 endfunction
