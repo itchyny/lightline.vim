@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/11/15 12:30:33.
+" Last Change: 2013/11/29 12:48:45.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -320,9 +320,11 @@ function! s:line(tabline, inactive)
   return _
 endfunction
 
+let [s:tabnrs, s:tabnr, s:tabline] = [-1, -1, '']
 function! lightline#tabline()
   if !has_key(s:highlight, 'tabline') | call lightline#highlight('tabline') | endif
-  return s:line(1, 0)
+  if [s:tabnrs, s:tabnr] != [tabpagenr('$'), tabpagenr()] | let [s:tabnrs, s:tabnr, s:tabline] = [tabpagenr('$'), tabpagenr(), s:line(1, 0)] | endif
+  return s:tabline
 endfunction
 
 function! lightline#tabs()
