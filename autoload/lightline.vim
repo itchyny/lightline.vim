@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/11/29 12:48:45.
+" Last Change: 2013/12/04 08:40:56.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -290,6 +290,7 @@ endfunction
 
 function! s:line(tabline, inactive)
   let _ = a:tabline ? '' : '%{lightline#link()}'
+  if s:lightline.palette == {} | call lightline#colorscheme() | endif
   let [l, r] = a:tabline ? [s:lightline.tab_llen, s:lightline.tab_rlen] : [s:lightline.llen, s:lightline.rlen]
   let [p, s] = a:tabline ? [s:lightline.tabline_separator, s:lightline.tabline_subseparator] : [s:lightline.separator, s:lightline.subseparator]
   let [c, f, t] = [s:lightline.component, s:lightline.component_function, s:lightline.component_type]
