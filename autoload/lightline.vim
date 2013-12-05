@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/12/04 08:40:56.
+" Last Change: 2013/12/05 13:11:43.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -24,6 +24,49 @@ endfunction
 
 function! lightline#update_once()
   if !exists('w:lightline') || w:lightline | call lightline#update() | endif
+endfunction
+
+function! lightline#update_disable()
+  if !s:lightline.enable.statusline | return | endif
+  call setwinvar(1, '&statusline', '')
+endfunction
+
+function! lightline#enable()
+  call lightline#colorscheme()
+  call lightline#update()
+  if s:lightline.enable.tabline | set tabline=%!lightline#tabline() | endif
+  augroup LightLine
+    autocmd!
+    autocmd WinEnter,BufWinEnter,FileType,ColorScheme * call lightline#update()
+    autocmd ColorScheme,SessionLoadPost * call lightline#highlight()
+    autocmd CursorMoved,BufUnload * call lightline#update_once()
+  augroup END
+  augroup LightLineDisable
+    autocmd!
+  augroup END
+  augroup! LightLineDisable
+endfunction
+
+function! lightline#disable()
+  let [&statusline, &tabline] = [get(s:, '_statusline', ''), get(s:, '_tabline', '')]
+  for t in range(1, tabpagenr('$'))
+    for n in range(1, tabpagewinnr(t, '$'))
+      call settabwinvar(t, n, '&statusline', '')
+      call settabwinvar(t, n, 'lightline', 0)
+    endfor
+  endfor
+  augroup LightLine
+    autocmd!
+  augroup END
+  augroup! LightLine
+  augroup LightLineDisable
+    autocmd!
+    autocmd WinEnter * call lightline#update_disable()
+  augroup END
+endfunction
+
+function! lightline#toggle()
+  if exists('#LightLine') | call lightline#disable() | else | call lightline#enable() | endif
 endfunction
 
 function! lightline#init()
@@ -73,6 +116,8 @@ function! lightline#init()
   call extend(s:lightline.tabline_subseparator, s:lightline.subseparator, 'keep')
   call extend(s:lightline, { 'palette': {}, 'colorscheme': 'default' }, 'keep')
   call extend(s:lightline.enable, { 'statusline': 1, 'tabline': 1 }, 'keep')
+  if !exists('s:_statusline') | let s:_statusline = &statusline | endif
+  if !exists('s:_tabline') | let s:_tabline = &tabline | endif
   if s:lightline.enable.tabline | set tabline=%!lightline#tabline() | endif
 endfunction
 

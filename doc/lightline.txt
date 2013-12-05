@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/10/20 19:16:34.
+Last Change: 2013/12/04 18:17:07.
 
 CONTENTS					*lightline-contents*
 
@@ -345,6 +345,15 @@ Exposed functions for lightline.vim.
 
 	lightline#update_once()			*lightline#update_once()*
 		Updates the statuslines only once.
+
+	lightline#enable()			*lightline#enable()*
+		Enables |lightline|.
+
+	lightline#disable()			*lightline#disable()*
+		Disables |lightline|.
+
+	lightline#toggle()			*lightline#toggle()*
+		Toggles |lightline|.
 
 	lightline#link([mode])			*lightline#link()*
 		Creates links of the highlight groups for the active window.
