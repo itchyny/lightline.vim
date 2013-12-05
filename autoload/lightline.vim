@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/12/05 13:11:43.
+" Last Change: 2013/12/05 13:39:56.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -52,7 +52,6 @@ function! lightline#disable()
   for t in range(1, tabpagenr('$'))
     for n in range(1, tabpagewinnr(t, '$'))
       call settabwinvar(t, n, '&statusline', '')
-      call settabwinvar(t, n, 'lightline', 0)
     endfor
   endfor
   augroup LightLine
