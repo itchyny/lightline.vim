@@ -3,24 +3,24 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/12/28 20:24:42.
+" Last Change: 2013/12/29 08:51:40.
 " =============================================================================
-let s:base03 = [ '#002b36', 8 ]
-let s:base02 = [ '#073642', 0 ]
-let s:base01 = [ '#586e75', 10 ]
-let s:base00 = [ '#657b83', 11  ]
-let s:base0 = [ '#839496', 12 ]
-let s:base1 = [ '#93a1a1', 14 ]
-let s:base2 = [ '#eee8d5', 7 ]
-let s:base3 = [ '#fdf6e3', 15 ]
-let s:yellow = [ '#b58900', 3 ]
-let s:orange = [ '#cb4b16', 9 ]
-let s:red = [ '#dc322f', 1 ]
-let s:magenta = [ '#d33682', 5 ]
-let s:violet = [ '#6c71c4', 13 ]
-let s:blue = [ '#268bd2', 4 ]
-let s:cyan = [ '#2aa198', 6 ]
-let s:green = [ '#859900', 2 ]
+let s:base03 = [ '#002b36', 17 ]
+let s:base02 = [ '#073642', 23 ]
+let s:base01 = [ '#586e75', 241 ]
+let s:base00 = [ '#657b83', 66 ]
+let s:base0 = [ '#839496', 102 ]
+let s:base1 = [ '#93a1a1', 109 ]
+let s:base2 = [ '#eee8d5', 188 ]
+let s:base3 = [ '#fdf6e3', 230 ]
+let s:yellow = [ '#b58900', 136 ]
+let s:orange = [ '#cb4b16', 166 ]
+let s:red = [ '#dc322f', 167 ]
+let s:magenta = [ '#d33682',168 ]
+let s:violet = [ '#6c71c4', 61 ]
+let s:blue = [ '#268bd2', 32 ]
+let s:cyan = [ '#2aa198', 36 ]
+let s:green = [ '#859900', 100 ]
 " if &background ==# 'light'
 "   let [s:base03, s:base3] = [s:base3, s:base03]
 "   let [s:base02, s:base2] = [s:base2, s:base02]
