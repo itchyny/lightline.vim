@@ -3,12 +3,12 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/07 12:18:08.
+" Last Change: 2013/12/28 19:59:29.
 " =============================================================================
-let s:base03 = [ '#002b36', 234 ]
-let s:base02 = [ '#073642', 235 ]
-let s:base01 = [ '#586e75', 240 ]
-let s:base00 = [ '#657b83', 241  ]
+let s:base03 = [ '#002b36', 8 ]
+let s:base02 = [ '#073642', 0 ]
+let s:base01 = [ '#586e75', 10 ]
+let s:base00 = [ '#657b83', 11  ]
 let s:base0 = [ '#839496', 244 ]
 let s:base1 = [ '#93a1a1', 245 ]
 let s:base2 = [ '#eee8d5', 254 ]
