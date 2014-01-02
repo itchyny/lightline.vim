@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2013/12/04 18:17:07.
+Last Change: 2014/01/02 10:07:24.
 
 CONTENTS					*lightline-contents*
 
@@ -196,8 +196,8 @@ OPTIONS						*lightline-option*
 	g:lightline.colorscheme			*g:lightline.colorscheme*
 		The colorscheme for lightline.vim.
 		Currently, wombat, solarized, powerline, jellybeans, Tomorrow,
-		Tomorrow_Night, Tomorrow_Night_Blue, Tomorrow_Night_Eighties
-		and landscape are available.
+		Tomorrow_Night, Tomorrow_Night_Blue, Tomorrow_Night_Eighties,
+		landscape and 16color are available.
 		The default value is:
 >
 		let g:lightline.colorscheme = 'default'
