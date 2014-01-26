@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2014/01/02 10:07:24.
+Last Change: 2014/01/27 08:47:37.
 
 CONTENTS					*lightline-contents*
 
@@ -377,6 +377,8 @@ Exposed functions for lightline.vim.
 		then the left sub-separator is used. Otherwise, the right
 		sub-separator is used.
 
+	lightline#palette()			*lightline#palette()*
+		Returns the palette data.
 
 ==============================================================================
 COMPONENT EXPANSION				*lightline-component-expansion*
