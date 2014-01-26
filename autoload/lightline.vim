@@ -135,6 +135,10 @@ function! lightline#colorscheme()
   endtry
 endfunction
 
+function! lightline#palette()
+  return s:lightline.palette
+endfunction
+
 function! lightline#mode()
   return get(s:lightline.mode_map, mode(), s:lightline.mode_map['?'])
 endfunction
