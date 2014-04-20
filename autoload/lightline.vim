@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/02/06 10:51:09.
+" Last Change: 2014/04/15 23:16:18.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -291,6 +291,34 @@ function! lightline#statusline(inactive)
   return s:line(0, a:inactive)
 endfunction
 
+function! s:_expand(a, c, _, e, t, i, j, x)
+  try
+    let r = exists('*'.a:e[a:x[a:i][a:j]]) ? eval(a:e[a:x[a:i][a:j]] . '()') : ''
+    if type(r) == 1 && r == '' | return | endif
+    let s = type(r) == 3 ? (len(r) < 3 ? r + [[], [], []] : r) : [[], [r], []]
+  catch
+    return
+  endtry
+  for k in [0, 1, 2]
+    let sk = filter(type(s[k])==3?map(s[k],"type(v:val)==1?(v:val):string(v:val)"):type(s[k])==1?[s[k]]:[string(s[k])],"strlen(v:val)")
+    if len(sk)
+      unlet! m
+      let m = k == 1 && has_key(a:t, a:x[a:i][a:j]) ? a:t[a:x[a:i][a:j]] : a:i
+      if !len(a:a) || type(a:a[-1]) != type(m) || a:a[-1] != m
+        if len(a:_[-1])
+          call add(a:_, sk) | call add(a:c, repeat([1], len(sk)))
+        else
+          call extend(a:_[-1], sk) | call extend(a:c[-1], repeat([1], len(sk)))
+        endif
+        call add(a:a, m)
+      else
+        if len(a:_) > 1 && !len(a:_[-1]) | call remove(a:_, -1) | call remove(a:c, -1) | endif
+        call extend(a:_[-1], sk) | call extend(a:c[-1], repeat([1], len(sk)))
+      endif
+    endif
+  endfor
+endfunction
+
 function! s:expand(x)
   let [e, t, d, f] = [ s:lightline.component_expand, s:lightline.component_type, s:lightline.component, s:lightline.component_function ]
   let [a, c, _] = [[], [], []]
@@ -298,32 +326,7 @@ function! s:expand(x)
     if !len(_) || len(_[-1]) | call add(_, []) | call add(c, []) | endif
     for j in range(len(a:x[i]))
       if has_key(e, a:x[i][j])
-        try
-          unlet! r
-          let r = exists('*'.e[a:x[i][j]]) ? eval(e[a:x[i][j]] . '()') : ''
-          if type(r) == 1 && r == '' | continue | endif
-          let s = type(r) == 3 ? (len(r) < 3 ? r + [[], [], []] : r) : [[], [r], []]
-        catch
-          continue
-        endtry
-        for k in [0, 1, 2]
-          let sk = filter(type(s[k])==3?map(s[k],"type(v:val)==1?(v:val):string(v:val)"):type(s[k])==1?[s[k]]:[string(s[k])],"strlen(v:val)")
-          if len(sk)
-            unlet! m
-            let m = k == 1 && has_key(t, a:x[i][j]) ? t[a:x[i][j]] : i
-            if !len(a) || type(a[-1]) != type(m) || a[-1] != m
-              if len(_[-1])
-                call add(_, sk) | call add(c, repeat([1], len(sk)))
-              else
-                call extend(_[-1], sk) | call extend(c[-1], repeat([1], len(sk)))
-              endif
-              call add(a, m)
-            else
-              if len(_) > 1 && !len(_[-1]) | call remove(_, -1) | call remove(c, -1) | endif
-              call extend(_[-1], sk) | call extend(c[-1], repeat([1], len(sk)))
-            endif
-          endif
-        endfor
+        call s:_expand(a, c, _, e, t, i, j, a:x)
       elseif has_key(d, a:x[i][j]) || has_key(f, a:x[i][j])
         if !len(a) || type(a[-1]) != type(i) || a[-1] != i
           call add(a, i)
