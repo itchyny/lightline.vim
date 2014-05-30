@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/01/02 23:41:00.
+" Last Change: 2014/05/31 01:04:21.
 " =============================================================================
 
 let s:cuicolors = {
@@ -28,7 +28,7 @@ let s:cuicolors = {
 " The following condition only applies for the console and is the same
 " condition vim-colors-solarized uses to determine which set of colors
 " to use.
-let s:solarized_termcolors = get(g:, 'solarized_termcolors', 16)
+let s:solarized_termcolors = get(g:, 'solarized_termcolors', 256)
 if s:solarized_termcolors != 256 && &t_Co >= 16
   let s:cuiindex = 0
 elseif s:solarized_termcolors == 256
