@@ -7,33 +7,34 @@
 " =============================================================================
 
 let s:cuicolors = {
-\	'base03': [ '8', '234', 'DarkGray' ],
-\	'base02': [ '0', '235', 'Black' ],
-\	'base01': [ '10', '239', 'LightGreen' ],
-\	'base00': [ '11', '240', 'LightYellow' ],
-\	'base0':  [ '12', '244', 'LightBlue' ],
-\	'base1':  [ '14', '245', 'LightCyan' ],
-\	'base2': [ '7', '187', 'LightGray' ],
-\	'base3': [ '15', '230', 'White' ],
-\	'yellow': [ '3', '136', 'DarkYellow' ],
-\	'orange': [ '9', '166', 'LightRed' ],
-\	'red': [ '1', '124', 'DarkRed' ],
-\	'magenta': [ '5', '125', 'DarkMagenta' ],
-\	'violet': [ '13', '61', 'LightMagenta' ],
-\	'blue': [ '4', '33', 'DarkBlue' ],
-\	'cyan': [ '6', '37', 'DarkCyan' ],
-\	'green': [ '2', '64', 'DarkGreen' ],
-\ }
+      \ 'base03': [ '8', '234', 'DarkGray' ],
+      \ 'base02': [ '0', '235', 'Black' ],
+      \ 'base01': [ '10', '239', 'LightGreen' ],
+      \ 'base00': [ '11', '240', 'LightYellow' ],
+      \ 'base0':  [ '12', '244', 'LightBlue' ],
+      \ 'base1':  [ '14', '245', 'LightCyan' ],
+      \ 'base2': [ '7', '187', 'LightGray' ],
+      \ 'base3': [ '15', '230', 'White' ],
+      \ 'yellow': [ '3', '136', 'DarkYellow' ],
+      \ 'orange': [ '9', '166', 'LightRed' ],
+      \ 'red': [ '1', '124', 'DarkRed' ],
+      \ 'magenta': [ '5', '125', 'DarkMagenta' ],
+      \ 'violet': [ '13', '61', 'LightMagenta' ],
+      \ 'blue': [ '4', '33', 'DarkBlue' ],
+      \ 'cyan': [ '6', '37', 'DarkCyan' ],
+      \ 'green': [ '2', '64', 'DarkGreen' ],
+      \ }
 
 " The following condition only applies for the console and is the same
 " condition vim-colors-solarized uses to determine which set of colors
 " to use.
-if g:solarized_termcolors != 256 && &t_Co >= 16
-	let s:cuiindex = 0
-elseif g:solarized_termcolors == 256
-	let s:cuiindex = 1
+let s:solarized_termcolors = get(g:, 'solarized_termcolors', 16)
+if s:solarized_termcolors != 256 && &t_Co >= 16
+  let s:cuiindex = 0
+elseif s:solarized_termcolors == 256
+  let s:cuiindex = 1
 else
-	let s:cuiindex = 2
+  let s:cuiindex = 2
 endif
 
 let s:base03 = [ '#002b36', s:cuicolors.base03[s:cuiindex] ]
