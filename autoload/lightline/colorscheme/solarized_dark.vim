@@ -24,6 +24,10 @@ let s:cuicolors = {
 \	'cyan': [ '6', '37', 'DarkCyan' ],
 \	'green': [ '2', '64', 'DarkGreen' ],
 \ }
+
+" The following condition only applies for the console and is the same
+" condition vim-colors-solarized uses to determine which set of colors
+" to use.
 if g:solarized_termcolors != 256 && &t_Co >= 16
 	let s:cuiindex = 0
 elseif g:solarized_termcolors == 256
@@ -49,12 +53,6 @@ let s:blue = [ '#268bd2', s:cuicolors.blue[s:cuiindex] ]
 let s:cyan = [ '#2aa198', s:cuicolors.cyan[s:cuiindex] ]
 let s:green = [ '#859900', s:cuicolors.green[s:cuiindex] ]
 
-" if &background ==# 'light'
-"   let [s:base03, s:base3] = [s:base3, s:base03]
-"   let [s:base02, s:base2] = [s:base2, s:base02]
-"   let [s:base01, s:base1] = [s:base1, s:base01]
-"   let [s:base00, s:base0] = [s:base0, s:base00]
-" endif
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 let s:p.normal.left = [ [ s:base3, s:blue ], [ s:base3, s:base01 ] ]
 let s:p.normal.right = [ [ s:base02, s:base0 ], [ s:base1, s:base01 ] ]
