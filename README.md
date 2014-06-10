@@ -5,49 +5,49 @@ https://github.com/itchyny/lightline.vim
 
 ### powerline theme (default)
 
-![lightline.vim - powerline - normal](https://raw.github.com/wiki/itchyny/lightline.vim/image/powerline/1.png)
-![lightline.vim - powerline - insert](https://raw.github.com/wiki/itchyny/lightline.vim/image/powerline/2.png)
-![lightline.vim - powerline - visual](https://raw.github.com/wiki/itchyny/lightline.vim/image/powerline/3.png)
-![lightline.vim - powerline - replace](https://raw.github.com/wiki/itchyny/lightline.vim/image/powerline/4.png)
+![lightline.vim - powerline - normal](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/powerline/1.png)
+![lightline.vim - powerline - insert](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/powerline/2.png)
+![lightline.vim - powerline - visual](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/powerline/3.png)
+![lightline.vim - powerline - replace](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/powerline/4.png)
 
 ### wombat (with the patched font)
 
-![lightline.vim - wombat - normal](https://raw.github.com/wiki/itchyny/lightline.vim/image/wombat/1.png)
-![lightline.vim - wombat - insert](https://raw.github.com/wiki/itchyny/lightline.vim/image/wombat/2.png)
-![lightline.vim - wombat - visual](https://raw.github.com/wiki/itchyny/lightline.vim/image/wombat/3.png)
-![lightline.vim - wombat - replace](https://raw.github.com/wiki/itchyny/lightline.vim/image/wombat/4.png)
+![lightline.vim - wombat - normal](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/wombat/1.png)
+![lightline.vim - wombat - insert](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/wombat/2.png)
+![lightline.vim - wombat - visual](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/wombat/3.png)
+![lightline.vim - wombat - replace](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/wombat/4.png)
 
 ### jellybeans (with the patched font)
 
-![lightline.vim - jellybeans - normal](https://raw.github.com/wiki/itchyny/lightline.vim/image/jellybeans/1.png)
-![lightline.vim - jellybeans - insert](https://raw.github.com/wiki/itchyny/lightline.vim/image/jellybeans/2.png)
-![lightline.vim - jellybeans - visual](https://raw.github.com/wiki/itchyny/lightline.vim/image/jellybeans/3.png)
-![lightline.vim - jellybeans - replace](https://raw.github.com/wiki/itchyny/lightline.vim/image/jellybeans/4.png)
+![lightline.vim - jellybeans - normal](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/jellybeans/1.png)
+![lightline.vim - jellybeans - insert](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/jellybeans/2.png)
+![lightline.vim - jellybeans - visual](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/jellybeans/3.png)
+![lightline.vim - jellybeans - replace](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/jellybeans/4.png)
 
 ### solarized theme (dark)
 
-![lightline.vim - solarized_dark - normal](https://raw.github.com/wiki/itchyny/lightline.vim/image/solarized_dark/1.png)
-![lightline.vim - solarized_dark - insert](https://raw.github.com/wiki/itchyny/lightline.vim/image/solarized_dark/2.png)
-![lightline.vim - solarized_dark - visual](https://raw.github.com/wiki/itchyny/lightline.vim/image/solarized_dark/3.png)
-![lightline.vim - solarized_dark - replace](https://raw.github.com/wiki/itchyny/lightline.vim/image/solarized_dark/4.png)
+![lightline.vim - solarized_dark - normal](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_dark/1.png)
+![lightline.vim - solarized_dark - insert](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_dark/2.png)
+![lightline.vim - solarized_dark - visual](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_dark/3.png)
+![lightline.vim - solarized_dark - replace](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_dark/4.png)
 
 ### solarized theme (light)
 
-![lightline.vim - solarized_light - normal](https://raw.github.com/wiki/itchyny/lightline.vim/image/solarized_light/1.png)
-![lightline.vim - solarized_light - insert](https://raw.github.com/wiki/itchyny/lightline.vim/image/solarized_light/2.png)
-![lightline.vim - solarized_light - visual](https://raw.github.com/wiki/itchyny/lightline.vim/image/solarized_light/3.png)
-![lightline.vim - solarized_light - replace](https://raw.github.com/wiki/itchyny/lightline.vim/image/solarized_light/4.png)
+![lightline.vim - solarized_light - normal](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_light/1.png)
+![lightline.vim - solarized_light - insert](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_light/2.png)
+![lightline.vim - solarized_light - visual](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_light/3.png)
+![lightline.vim - solarized_light - replace](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_light/4.png)
 
 
 ### landscape theme (with the patched font)
 
-![lightline.vim - landscape - normal](https://raw.github.com/wiki/itchyny/lightline.vim/image/landscape/1.png)
-![lightline.vim - landscape - insert](https://raw.github.com/wiki/itchyny/lightline.vim/image/landscape/2.png)
-![lightline.vim - landscape - visual](https://raw.github.com/wiki/itchyny/lightline.vim/image/landscape/3.png)
-![lightline.vim - landscape - replace](https://raw.github.com/wiki/itchyny/lightline.vim/image/landscape/4.png)
+![lightline.vim - landscape - normal](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/landscape/1.png)
+![lightline.vim - landscape - insert](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/landscape/2.png)
+![lightline.vim - landscape - visual](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/landscape/3.png)
+![lightline.vim - landscape - replace](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/landscape/4.png)
 
 With branch name, read-only mark and modified mark.
-![lightline.vim - landscape - fugitive](https://raw.github.com/wiki/itchyny/lightline.vim/image/landscape/5.png)
+![lightline.vim - landscape - fugitive](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/landscape/5.png)
 
 landscape is my colorscheme, which is a high-contrast cui-supported colorscheme, available at https://github.com/itchyny/landscape.vim
 
@@ -92,7 +92,7 @@ This software is released under the MIT License, see LICENSE.
 
 ## Configuration tutorial
 By default, the statusline looks like:
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/1.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/1.png)
 
 If you use the wombat colorscheme, add the following settings to your `.vimrc` (or \_vimrc on Windows):
 ```vim
@@ -101,11 +101,11 @@ let g:lightline = {
       \ }
 ```
 to get:
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/2.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/2.png)
 
 
 If your statusline looks like
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/21.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/21.png)
 
 and the cool statuslines appear only on `:vsp`, add
 ```vim
@@ -115,7 +115,7 @@ to your `.vimrc`.
 
 
 If you have problem like
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/20.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/20.png)
 
 then add
 ```sh
@@ -137,7 +137,7 @@ Colors appear correctly? Now let's see how to change the appearance.
 
 
 You may think that the default read-only mark is not so cool:
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/3.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/3.png)
 
 Then edit the read-only component.
 The lightline components are stored in `g:lightline.component`.
@@ -150,7 +150,7 @@ let g:lightline = {
       \ }
       \ }
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/4.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/4.png)
 
 How nice!
 
@@ -166,13 +166,13 @@ let g:lightline = {
       \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/5.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/5.png)
 
 Hurrah! Cool!
 
 
 If your statusline looks like:
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/16.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/16.png)
 
 the patched font is not installed.
 
@@ -198,10 +198,10 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/19.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/19.png)
 
 If you have installed the font for powerline and your statusline looks like
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/18.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/18.png)
 
 remove
 ```vim
@@ -222,7 +222,7 @@ let g:lightline = {
       \ 'subseparator': { 'left': '|', 'right': '|' }
       \ }
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/17.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/17.png)
 
 
 
@@ -246,7 +246,7 @@ For vim-powerline font users:
 
 
 Almost all of things go well with the patched font but if the triangle looks weird:
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/22.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/22.png)
 
 If you are using iTerm2, change the following settings of iTerm2:
 + set `Profiles>Colors>Minimum contrast` to the Lowest.
@@ -258,7 +258,7 @@ For other terminals, this weird-triangle problem will be resolved by disabling t
 
 Now, let us get back to the tutorial (with the patched font for vim-powerline).
 You look into a help file to find the marks annoying.
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/6.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/6.png)
 
 Help files are read-only and no-modifiable? We know that!
 OK, so you again edit the components.
@@ -273,7 +273,7 @@ let g:lightline = {
       \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/7.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/7.png)
 
 Huh? Weird!
 The components do not collapse even if they have no information!
@@ -293,7 +293,7 @@ let g:lightline = {
       \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/8.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/8.png)
 
 Okay. It works nice.
 
@@ -323,14 +323,14 @@ let g:lightline = {
       \ }
 ```
 If the plugin arranges all the components (in a situation you `set paste` and the file `.vimrc` is read-only, try to modify):
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
 
 The mode component, the paste component, read-only component, filename component and modified component in a row.
 Normally, the paste component does not show up.
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/10.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/10.png)
 
 If the file is not read-only (more common cases), the read-only component does not show up.
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/11.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/11.png)
 
 
 Again look into `g:lightline.active.left`.
@@ -341,7 +341,7 @@ let g:lightline = {
       \             [ 'readonly', 'filename', 'modified' ] ] ...
 ```
 And the screen shot of all the components.
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
 
 The mode and paste component are displayed in the same group.
 The read-only, filename and modified component are in the second group.
@@ -387,7 +387,7 @@ let g:lightline = {
       \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/12.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/12.png)
 
 Okay, the branch component is added!
 
@@ -441,7 +441,7 @@ function! MyFugitive()
   return exists('*fugitive#head') ? fugitive#head() : ''
 endfunction
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/13.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/13.png)
 
 Fine and readable! 
 
@@ -497,7 +497,7 @@ function! MyFilename()
        \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/14.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/14.png)
 
 Oops! We forgot the cool mark for the branch component! (work with the patched font for vim-powerline)
 ```vim
@@ -509,7 +509,7 @@ function! MyFugitive()
   return ''
 endfunction
 ```
-![lightline.vim - tutorial](https://raw.github.com/wiki/itchyny/lightline.vim/image/tutorial/15.png)
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/15.png)
 
 How cool!!!
 
@@ -593,10 +593,10 @@ When the current window width is narrow, the mode component and the file informa
 For example, the [gundo](https://github.com/sjl/gundo.vim) buffer is narrow.
 
 Before:
-![lightline.vim - gundo](https://raw.github.com/wiki/itchyny/lightline.vim/image/gundo0.png)
+![lightline.vim - gundo](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/gundo0.png)
 
 After:
-![lightline.vim - gundo](https://raw.github.com/wiki/itchyny/lightline.vim/image/gundo1.png)
+![lightline.vim - gundo](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/gundo1.png)
 
 Nice looking, isn't it?
 
