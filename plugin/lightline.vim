@@ -15,7 +15,7 @@ set cpo&vim
 
 augroup LightLine
   autocmd!
-  autocmd WinEnter,BufWinEnter,FileType,ColorScheme * call lightline#update()
+  autocmd WinEnter,BufWinEnter,FileType,ColorScheme,SessionLoadPost * call lightline#update()
   autocmd ColorScheme,SessionLoadPost * call lightline#highlight()
   autocmd CursorMoved,BufUnload * call lightline#update_once()
 augroup END
