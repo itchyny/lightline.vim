@@ -76,7 +76,7 @@ This software is released under the MIT License, see LICENSE.
 
         git clone https://github.com/itchyny/lightline.vim ~/.vim/bundle/lightline.vim
 
-### Vundle (https://github.com/gmarik/vundle)
+### Vundle (https://github.com/gmarik/Vundle.vim)
 1. Add the following configuration to your `.vimrc`.
 
         Plugin 'itchyny/lightline.vim'
