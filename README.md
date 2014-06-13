@@ -79,9 +79,9 @@ This software is released under the MIT License, see LICENSE.
 ### Vundle (https://github.com/gmarik/vundle)
 1. Add the following configuration to your `.vimrc`.
 
-        Bundle 'itchyny/lightline.vim'
+        Plugin 'itchyny/lightline.vim'
 
-2. Install with `:BundleInstall`.
+2. Install with `:PluginInstall`.
 
 ### NeoBundle (https://github.com/Shougo/neobundle.vim)
 1. Add the following configuration to your `.vimrc`.

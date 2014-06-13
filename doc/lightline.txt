@@ -964,9 +964,9 @@ Problem 1:					*lightline-problem-1*
 			1. Add the following configuration to your
 			.vimrc(_vimrc).
 >
-			Bundle 'itchyny/lightline.vim'
+			Plugin 'itchyny/lightline.vim'
 <
-			2. Install with |:BundleInstall|.
+			2. Install with |:PluginInstall|.
 
 		If you are to install this plugin using |NeoBundle|:
 
@@ -988,7 +988,7 @@ Problem 2:					*lightline-problem-2*
 
 		If you have installed this plugin using Vundle:
 
-			1. Execute |:BundleInstall!|. Or try git pull in the
+			1. Execute |:PluginInstall!|. Or try git pull in the
 			directory of this plugin.
 
 		If you have installed this plugin using NeoBundle:
@@ -1005,9 +1005,9 @@ Problem 3:					*lightline-problem-3*
 
 		If you have installed this plugin using Vundle:
 
-			1. Remove the :Bundle 'itchyny/lightline.vim'
+			1. Remove the :Plugin 'itchyny/lightline.vim'
 			configuration from your .vimrc(_vimrc).
-			2. Update with |:BundleClean|.
+			2. Update with |:PluginClean|.
 
 		If you have installed this plugin using NeoBundle:
 
