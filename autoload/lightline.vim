@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/06/11 14:12:59.
+" Last Change: 2014/06/17 08:01:40.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -120,6 +120,7 @@ function! lightline#init()
   if s:lightline.enable.tabline | set tabline=%!lightline#tabline() | endif
   for f in values(s:lightline.component_function) | silent! call eval(f . '()') | endfor
   for f in values(s:lightline.tab_component_function) | silent! call eval(f . '(0)') | endfor
+  let s:mode = ''
 endfunction
 
 function! lightline#colorscheme()
