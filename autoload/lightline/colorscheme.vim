@@ -3,8 +3,11 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/07 16:22:56.
+" Last Change: 2014/06/17 11:31:23.
 " =============================================================================
+
+let s:save_cpo = &cpo
+set cpo&vim
 
 let s:cuicolor = {
       \ 'black'          : 16,
@@ -214,3 +217,6 @@ function! lightline#colorscheme#flatten(p)
   endfor
   return a:p
 endfunction
+
+let &cpo = s:save_cpo
+unlet s:save_cpo

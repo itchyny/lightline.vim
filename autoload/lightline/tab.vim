@@ -3,8 +3,11 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/07 18:25:26.
+" Last Change: 2014/06/17 11:31:07.
 " =============================================================================
+
+let s:save_cpo = &cpo
+set cpo&vim
 
 function! lightline#tab#filename(n)
   let buflist = tabpagebuflist(a:n)
@@ -26,3 +29,6 @@ endfunction
 function! lightline#tab#tabnum(n)
   return a:n
 endfunction
+
+let &cpo = s:save_cpo
+unlet s:save_cpo

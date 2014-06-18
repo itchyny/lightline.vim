@@ -3,8 +3,11 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/07 16:23:03.
+" Last Change: 2014/06/17 11:31:14.
 " =============================================================================
+
+let s:save_cpo = &cpo
+set cpo&vim
 
 function! s:load()
   let rgbfile = $VIMRUNTIME . '/rgb.txt'
@@ -36,3 +39,6 @@ function! lightline#colortable#gui2cui(rgb, fallback)
   let rgb = [rgb[0] > 127 ? 4 : 0, rgb[1] > 127 ? 2 : 0, rgb[2] > 127 ? 1 : 0]
   return rgb[0] + rgb[1] + rgb[2]
 endfunction
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
