@@ -98,6 +98,7 @@ function! lightline#init()
   call extend(s:lightline.component, {
         \ 'mode': '%{lightline#mode()}',
         \ 'absolutepath': '%F', 'relativepath': '%f', 'filename': '%t', 'modified': '%M', 'bufnum': '%n',
+        \ 'spell': '%{&spell?&spelllang:"no spell"}',
         \ 'paste': '%{&paste?"PASTE":""}', 'readonly': '%R', 'charvalue': '%b', 'charvaluehex': '%B',
         \ 'fileencoding': '%{strlen(&fenc)?&fenc:&enc}', 'fileformat': '%{&fileformat}',
         \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}', 'percent': '%3p%%', 'percentwin': '%P',

@@ -109,6 +109,7 @@ OPTIONS						*lightline-option*
 		    \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}',
 		    \ 'percent': '%3p%%',
 		    \ 'percentwin': '%P',
+		    \ 'spell': '%{&spell?&spelllang:"no spell"}',
 		    \ 'lineinfo': '%3l:%-2v',
 		    \ 'line': '%l',
 		    \ 'column': '%c'
