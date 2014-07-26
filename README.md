@@ -524,6 +524,7 @@ let g:lightline = {
 ```
 
 If you want to get rid of the extraneous default vim mode information that is now provided by lightline:
+![lightline.vim - showmode](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/showmode.png)
 ```vim
 set noshowmode
 ```
