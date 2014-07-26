@@ -523,7 +523,7 @@ let g:lightline = {
     \   'my_component': 'MyComponent', ...
 ```
 
-If you want to get rid of the extraneous default vim mode information that is now provided by liteline:
+If you want to get rid of the extraneous default vim mode information that is now provided by lightline:
 ```vim
 set noshowmode
 ```
