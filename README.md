@@ -255,6 +255,12 @@ If you are using iTerm2, change the following settings of iTerm2:
 For other terminals, this weird-triangle problem will be resolved by disabling transparency or contrast adjustment.
 
 
+If you want to get rid of the extraneous default vim mode information that is now provided by lightline:
+![lightline.vim - showmode](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/showmode.png)
+```vim
+set noshowmode
+```
+
 
 Now, let us get back to the tutorial (with the patched font for vim-powerline).
 You look into a help file to find the marks annoying.
@@ -521,12 +527,6 @@ let g:lightline = {
     \             [ 'my_component' ] ] },
     \ 'component_function': {
     \   'my_component': 'MyComponent', ...
-```
-
-If you want to get rid of the extraneous default vim mode information that is now provided by lightline:
-![lightline.vim - showmode](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/showmode.png)
-```vim
-set noshowmode
 ```
 
 This is the end of the tutorial. For more information, see `:help lightline`. Good luck with your nice statuslines.
