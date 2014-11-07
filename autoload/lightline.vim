@@ -70,9 +70,9 @@ endfunction
 
 function! lightline#init()
   let s:lightline = deepcopy(get(g:, 'lightline', {}))
-  for k in ['active', 'inactive', 'tabline', 'tab', 'mode_map', 'mode_fallback', 'enable',
+  for k in ['active', 'inactive', 'tabline', 'tab', 'buffer', 'mode_map', 'mode_fallback', 'enable',
         \ 'component', 'component_visible_condition', 'component_function', 'component_expand', 'component_type',
-        \ 'tab_component', 'tab_component_function', 'separator', 'subseparator', 'tabline_separator', 'tabline_subseparator' ]
+        \ 'tab_component', 'tab_component_function', 'buffer_component', 'buffer_component_function', 'separator', 'subseparator', 'tabline_separator', 'tabline_subseparator' ]
     if !has_key(s:lightline, k) | let s:lightline[k] = {} | endif
   endfor
   call extend(s:lightline.active, {
@@ -87,6 +87,9 @@ function! lightline#init()
   call extend(s:lightline.tab, {
         \ 'active': [ 'tabnum', 'filename', 'modified' ],
         \ 'inactive': [ 'tabnum', 'filename', 'modified' ] }, 'keep')
+  call extend(s:lightline.buffer, {
+        \ 'active': [ 'bufnum', 'filename', 'modified' ],
+        \ 'inactive': [ 'bufnum', 'filename', 'modified' ] }, 'keep')
   call extend(s:lightline.mode_map, {
         \ 'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL',
         \ 'V': 'V-LINE', 'c': 'COMMAND', "\<C-v>": 'V-BLOCK', 's': 'SELECT',
@@ -105,11 +108,16 @@ function! lightline#init()
         \ 'lineinfo': '%3l:%-2v', 'line': '%l', 'column': '%c', 'close': '%999X X ' }, 'keep')
   call extend(s:lightline.component_visible_condition, {
         \ 'modified': '&modified||!&modifiable', 'readonly': '&readonly', 'paste': '&paste' }, 'keep')
-  call extend(s:lightline.component_expand, { 'tabs': 'lightline#tabs' }, 'keep')
-  call extend(s:lightline.component_type, { 'tabs': 'tabsel', 'close': 'raw' }, 'keep')
+  call extend(s:lightline.component_expand, {
+        \ 'buffers': 'lightline#buffers',
+        \ 'tabs': 'lightline#tabs' }, 'keep')
+  call extend(s:lightline.component_type, { 'buffers': 'tabsel', 'tabs': 'tabsel', 'close': 'raw' }, 'keep')
   call extend(s:lightline.tab_component_function, {
         \ 'filename': 'lightline#tab#filename', 'modified': 'lightline#tab#modified',
         \ 'readonly': 'lightline#tab#readonly', 'tabnum': 'lightline#tab#tabnum' }, 'keep')
+  call extend(s:lightline.buffer_component_function, {
+        \ 'filename': 'lightline#buffer#filename', 'modified': 'lightline#buffer#modified',
+        \ 'readonly': 'lightline#buffer#readonly', 'bufnum': 'lightline#buffer#bufnum' }, 'keep')
   call extend(s:lightline.separator, { 'left': '', 'right': '' }, 'keep')
   call extend(s:lightline.subseparator, { 'left': '|', 'right': '|' }, 'keep')
   call extend(s:lightline.tabline_separator, s:lightline.separator, 'keep')
@@ -121,6 +129,7 @@ function! lightline#init()
   if s:lightline.enable.tabline | set tabline=%!lightline#tabline() | endif
   for f in values(s:lightline.component_function) | silent! call eval(f . '()') | endfor
   for f in values(s:lightline.tab_component_function) | silent! call eval(f . '(0)') | endfor
+  for f in values(s:lightline.buffer_component_function) | silent! call eval(f . '(0)') | endfor
   let s:mode = ''
 endfunction
 
@@ -376,31 +385,46 @@ function! s:line(tabline, inactive)
   return _
 endfunction
 
-let [s:tabnrs, s:tabnr, s:tabline] = [-1, -1, '']
 function! lightline#tabline()
   if !has_key(s:highlight, 'tabline') | call lightline#highlight('tabline') | endif
-  if [s:tabnrs, s:tabnr] != [tabpagenr('$'), tabpagenr()] | let [s:tabnrs, s:tabnr, s:tabline] = [tabpagenr('$'), tabpagenr(), s:line(1, 0)] | endif
-  return s:tabline
+  return s:line(1, 0)
 endfunction
 
-function! lightline#tabs()
-  let [t, l, x, y, z, u, d] = [tabpagenr(), tabpagenr('$'), [], [], [], '...', min([max([winwidth(0) / 40, 2]), 8])]
-  for i in range(1, l)
-    call add(i<t?(x):i==t?(y):z, '%'.i.'T%{lightline#onetab('.i.','.(i==t).')}'.(i==l?'%T':''))
+function! s:tabline(range, active, onefn)
+  let [l, x, y, z, u, d] = [a:range[-1], [], [], [], '...', min([max([winwidth(0) / 40, 2]), 8])]
+  for i in a:range
+    call add(i<a:active?(x):i==a:active?(y):z, '%'.i.'T%{lightline#one'.a:onefn.'('.i.','.(i==a:active).')}'.(i==l?'%T':''))
   endfor
   let [a, b, c] = [len(x), len(z), d * 2]
   return [a>d&&b>d ? extend(add(x[:d/2-1],u),x[-(d+1)/2:]) : a+b<=c||a<=d ? x : extend(add(x[:(c-b)/2-1],u),x[-(c-b+1)/2:]), y,
         \ a>d&&b>d ? extend(add(z[:(d+1)/2-1],u),z[-d/2:]) : a+b<=c||b<=d ? z : extend(add(z[:(c-a+1)/2-1],u),z[-(c-a)/2:])]
 endfunction
 
-function! lightline#onetab(n, active)
-  let [_, a] = ['', s:lightline.tab[a:active ? 'active' : 'inactive']]
-  let [c, f] = [s:lightline.tab_component, s:lightline.tab_component_function ]
+function! lightline#tabs()
+  return s:tabline(range(1, tabpagenr('$')), tabpagenr(), 'tab')
+endfunction
+
+function! lightline#buffers()
+  let bufnrs = filter(range(1, bufnr('$')), 'buflisted(v:val)')
+  return s:tabline(bufnrs, bufnr('%'), 'buffer')
+endfunction
+
+function! s:one(n, active, compmap, comps, compfns)
+  let [_, a] = ['', a:compmap[a:active ? 'active' : 'inactive']]
+  let [c, f] = [a:comps, a:compfns]
   for i in range(len(a))
     let s = has_key(f,a[i]) ? eval(f[a[i]].'('.a:n.')') : get(c,a[i],'')
     if strlen(s) | let _ .= (len(_) ? ' ' : '') . s | endif
   endfor
   return _
+endfunction
+
+function! lightline#onetab(n, active)
+  return s:one(a:n, a:active, s:lightline.tab, s:lightline.tab_component, s:lightline.tab_component_function)
+endfunction
+
+function! lightline#onebuffer(n, active)
+  return s:one(a:n, a:active, s:lightline.buffer, s:lightline.buffer_component, s:lightline.buffer_component_function)
 endfunction
 
 function! lightline#error(msg)
