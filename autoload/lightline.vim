@@ -405,6 +405,7 @@ function! lightline#tabs()
 endfunction
 
 function! lightline#buffers()
+  if tabpagenr('$') != 1 | return lightline#tabs() | endif
   let bufnrs = filter(range(1, bufnr('$')), 'buflisted(v:val)')
   return s:tabline(bufnrs, bufnr('%'), 'buffer')
 endfunction
