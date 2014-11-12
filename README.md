@@ -531,6 +531,18 @@ let g:lightline = {
 
 This is the end of the tutorial. For more information, see `:help lightline`. Good luck with your nice statuslines.
 
+### Cool characters for the patched fonts
+
+Symbol             | Default | powerline     | vim-powerline
+------------------ | ------- | ------------- | -------------
+separator.left     | ''      | '' (\ue0b0) | '⮀' (\u2b80)
+separator.right    | ''      | '' (\ue0b2) | '⮂' (\u2b82)
+subseparator.left  | '|'     | '' (\ue0b1) | '⮁' (\u2b81)
+subseparator.right | '|'     | '' (\ue0b4) | '⮃' (\u2b83)
+branch symbol      | --      | '' (\ue0a0) | '⭠' (\u2b60)
+readonly symbol    | --      | '' (\ue0a2) | '⭤' (\u2b64)
+linecolumn symbol  | --      | '' (\ue0a1) | '⭡' (\u2b81)
+
 ### My settings
 I show my settings. I use the patched font for vim-powerline.
 ```vim
