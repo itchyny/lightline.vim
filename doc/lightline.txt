@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2014/01/27 08:47:37.
+Last Change: 2014/11/14 09:20:21.
 
 CONTENTS					*lightline-contents*
 
@@ -1102,7 +1102,7 @@ Problem 9:					*lightline-problem-9*
 	separator.left		''		'' (\ue0b0)		'⮀' (\u2b80)
 	separator.right		''		'' (\ue0b2)		'⮂' (\u2b82)
 	subseparator.left	'|'		'' (\ue0b1)		'⮁' (\u2b81)
-	subseparator.right	'|'		'' (\ue0b4)		'⮃' (\u2b83)
+	subseparator.right	'|'		'' (\ue0b3)		'⮃' (\u2b83)
 	branch symbol		--		'' (\ue0a0)		'⭠' (\u2b60)
 	readonly symbol		--		'' (\ue0a2)		'⭤' (\u2b64)
 	linecolumn symbol	--		'' (\ue0a1)		'⭡' (\u2b81)

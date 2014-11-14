@@ -538,7 +538,7 @@ Symbol             | Default | powerline     | vim-powerline
 separator.left     | ''      | '' (\ue0b0) | '⮀' (\u2b80)
 separator.right    | ''      | '' (\ue0b2) | '⮂' (\u2b82)
 subseparator.left  | '|'     | '' (\ue0b1) | '⮁' (\u2b81)
-subseparator.right | '|'     | '' (\ue0b4) | '⮃' (\u2b83)
+subseparator.right | '|'     | '' (\ue0b3) | '⮃' (\u2b83)
 branch symbol      | --      | '' (\ue0a0) | '⭠' (\u2b60)
 readonly symbol    | --      | '' (\ue0a2) | '⭤' (\u2b64)
 linecolumn symbol  | --      | '' (\ue0a1) | '⭡' (\u2b81)
