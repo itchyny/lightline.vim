@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/06/17 11:31:14.
+" Last Change: 2014/11/18 09:52:16.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -32,7 +32,6 @@ function! lightline#colortable#gui2cui(rgb, fallback)
   if len(rgb) == 0
     let rgb = lightline#colortable#name_to_rgb(a:rgb)
     if len(rgb) == 0
-    throw a:rgb
       return a:fallback % 128
     endif
   endif
