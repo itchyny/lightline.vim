@@ -228,8 +228,8 @@ let g:lightline = {
 
 If the triangles do not appear (but you get some spaces or weird characters like &lt;bf&gt; or ¿), firstly try adding
 ```vim
-scriptencoding utf-8
 set encoding=utf-8
+scriptencoding utf-8
 ```
 to the head of your `.vimrc`.
 Still you have weird characters, use the unicode numbers. For powerline font
