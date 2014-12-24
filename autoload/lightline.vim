@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/12/17 00:13:36.
+" Last Change: 2014/12/24 14:47:41.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -28,7 +28,7 @@ endfunction
 
 function! lightline#update_disable() abort
   if !s:lightline.enable.statusline | return | endif
-  call setwinvar(1, '&statusline', '')
+  call setwinvar(0, '&statusline', '')
 endfunction
 
 function! lightline#enable() abort
