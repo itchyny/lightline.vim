@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/06/17 11:31:23.
+" Last Change: 2014/12/17 00:14:04.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -109,7 +109,7 @@ let s:guicolor = {
       \ 'green'          : '#859900',
       \ }
 
-function! s:convert(rgb)
+function! s:convert(rgb) abort
   let rgb = map(matchlist(a:rgb, '#\(..\)\(..\)\(..\)')[1:3], '0 + ("0x".v:val)')
   if len(rgb) == 0
     return 0
@@ -127,7 +127,7 @@ function! s:convert(rgb)
   endif
 endfunction
 
-function! s:black(x)
+function! s:black(x) abort
   if a:x < 0x04
     return 16
   elseif a:x > 0xf4
@@ -140,15 +140,15 @@ function! s:black(x)
   endif
 endfunction
 
-function! s:nr(x)
+function! s:nr(x) abort
   return a:x < 0x2f ? 0 : a:x < 0x73 ? 1 : a:x < 0x9b ? 2 : a:x < 0xc7 ? 3 : a:x < 0xef ? 4 : 5
 endfunction
 
-function! s:rgb(r, g, b)
+function! s:rgb(r, g, b) abort
   return printf("#%02x%02x%02x", a:r, a:g, a:b)
 endfunction
 
-function! s:upconvert(nr)
+function! s:upconvert(nr) abort
   let x = a:nr * 1
   if x < 7
     let [b, rg] = [x / 4, x % 4]
@@ -181,7 +181,7 @@ function! s:upconvert(nr)
   endif
 endfunction
 
-function! lightline#colorscheme#fill(p)
+function! lightline#colorscheme#fill(p) abort
   for k in values(a:p)
     for l in values(k)
       for m in l
@@ -207,7 +207,7 @@ function! lightline#colorscheme#fill(p)
   return a:p
 endfunction
 
-function! lightline#colorscheme#flatten(p)
+function! lightline#colorscheme#flatten(p) abort
   for k in values(a:p)
     for l in values(k)
       for m in range(len(l))
