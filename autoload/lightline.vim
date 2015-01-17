@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/12/24 14:47:41.
+" Last Change: 2015/01/08 10:18:33.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -275,7 +275,7 @@ endfunction
 
 function! s:subseparator(x, y, s, a, b) abort
   let [c, f, v] = [ s:lightline.component, s:lightline.component_function,  s:lightline.component_visible_condition ]
-  return '%{('.(a:a?"1":has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,has_key(c,a:x)?"1":"0")).')*(('.join(map(range(len(a:y)),
+  return '%{('.(a:a?'1':has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,has_key(c,a:x)?'1': '0')).')*(('.join(map(range(len(a:y)),
         \'(a:b[v:val]?"1":has_key(f,a:y[v:val])?"!!strlen(exists(\"*".f[a:y[v:val]]."\")?".f[a:y[v:val]]."():\"\")":get(v,a:y[v:val],has_key(c,a:y[v:val])?"1":"0"))'),')+(')."))?('".a:s."'):''}"
 endfunction
 
@@ -302,7 +302,7 @@ function! s:_expand(a, c, _, e, t, i, j, x) abort
     return
   endtry
   for k in [0, 1, 2]
-    let sk = filter(type(s[k])==3?map(s[k],"type(v:val)==1?(v:val):string(v:val)"):type(s[k])==1?[s[k]]:[string(s[k])],"strlen(v:val)")
+    let sk = filter(type(s[k])==3?map(s[k],'type(v:val)==1?(v:val):string(v:val)'):type(s[k])==1?[s[k]]:[string(s[k])],'strlen(v:val)')
     if len(sk)
       unlet! m
       let m = k == 1 && has_key(a:t, a:x[a:i][a:j]) ? a:t[a:x[a:i][a:j]] : a:i

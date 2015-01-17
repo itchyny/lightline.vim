@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/12/17 00:13:51.
+" Last Change: 2015/01/04 22:44:42.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -12,7 +12,7 @@ set cpo&vim
 function! lightline#tab#filename(n) abort
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
-  let _ = expand("#".buflist[winnr - 1].":t")
+  let _ = expand('#'.buflist[winnr - 1].':t')
   return strlen(_) ? _ : '[No Name]'
 endfunction
 

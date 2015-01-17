@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/12/17 00:14:04.
+" Last Change: 2015/01/04 22:44:37.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -145,7 +145,7 @@ function! s:nr(x) abort
 endfunction
 
 function! s:rgb(r, g, b) abort
-  return printf("#%02x%02x%02x", a:r, a:g, a:b)
+  return printf('#%02x%02x%02x', a:r, a:g, a:b)
 endfunction
 
 function! s:upconvert(nr) abort
