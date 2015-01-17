@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2014/11/14 09:20:21.
+Last Change: 2015/01/17 12:42:41.
 
 CONTENTS					*lightline-contents*
 
@@ -284,7 +284,7 @@ nice.
 		return &readonly ? '' : ''
 	endfunction
 	function! MyFugitive()
-		if exists("*fugitive#head")
+		if exists('*fugitive#head')
 			let _ = fugitive#head()
 			return strlen(_) ? ''._ : ''
 		endif
@@ -309,7 +309,7 @@ look nice.
 		return &readonly ? '⭤' : ''
 	endfunction
 	function! MyFugitive()
-		if exists("*fugitive#head")
+		if exists('*fugitive#head')
 			let _ = fugitive#head()
 			return strlen(_) ? '⭠ '._ : ''
 		endif
@@ -327,7 +327,7 @@ For |vim-powerline| font users:
 		\ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
 		\ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" }
 <
-See |lightline-problem-8| for more detail.
+See |lightline-problem-9| for more detail.
 ==============================================================================
 FUNCTION					*lightline-function*
 Exposed functions for lightline.vim.
@@ -600,7 +600,7 @@ normal colorscheme form using:
 	let g:lightline#colorscheme#Tomorrow_Night#palette = lightline#colorscheme#fill(s:p)
 <
 This function fills the cui colors for a palette which has only gui colors, or
-vice varsa. However, note that using the convenient function sources an
+vice versa. However, note that using the convenient function sources an
 additional Vim script file (autoload/lightline/colorscheme.vim), which causes
 a little slow down. If you want to avoid this situation, write all the colors
 as done in autoload/lightline/colorscheme/landscape.vim; firstly create the
@@ -612,7 +612,6 @@ compiled version of your colorscheme.
 Then copy and paste the result to the colorscheme file.
 
 ==============================================================================
-
 EXAMPLES					*lightline-examples*
 You can configure the appearance of statusline.
 Write the following examples in you .vimrc(_vimrc).
@@ -705,7 +704,7 @@ A nice example for non-patched font users.
 		\ ('' != MyModified() ? ' ' . MyModified() : '')
 	endfunction
 	function! MyFugitive()
-		if &ft !~? 'vimfiler' && exists("*fugitive#head")
+		if &ft !~? 'vimfiler' && exists('*fugitive#head')
 			return fugitive#head()
 		endif
 		return ''
@@ -740,7 +739,7 @@ A nice example for |vim-powerline| font users:
 		\ ('' != MyModified() ? ' ' . MyModified() : '')
 	endfunction
 	function! MyFugitive()
-		if &ft !~? 'vimfiler' && exists("*fugitive#head")
+		if &ft !~? 'vimfiler' && exists('*fugitive#head')
 			let _ = fugitive#head()
 			return strlen(_) ? '⭠ '._ : ''
 		endif
@@ -1248,8 +1247,7 @@ Problem 17:					*lightline-problem-17*
 	This troubleshooting is not helpful.
 
 		Report/Request the issue/feature at
-		https://github.com/itchyny/lightline.vim/issues .
-
+		https://github.com/itchyny/lightline.vim/issues.
 
 ==============================================================================
 CHANGELOG					*lightline-changelog*
