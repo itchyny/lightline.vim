@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2015/01/04 22:44:37.
+" Last Change: 2015/01/17 12:51:08.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -187,7 +187,7 @@ function! lightline#colorscheme#fill(p) abort
       for m in l
         if len(m) < 4
           if type(m[0]) == 1 && type(m[1]) == 1
-            if m[0] =~ '^\d\+$' && m[1] =~ '^\d\+$'
+            if m[0] =~# '^\d\+$' && m[1] =~# '^\d\+$'
               call insert(m, s:upconvert(m[1]), 0)
               call insert(m, s:upconvert(m[1]), 0)
             else

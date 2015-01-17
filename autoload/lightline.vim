@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2015/01/08 10:18:33.
+" Last Change: 2015/01/17 12:52:19.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -221,8 +221,8 @@ function! lightline#highlight(...) abort
   for mode in modes
   let s:highlight[mode] = 1
   let d = has_key(c, mode) ? mode : has_key(f, mode) && has_key(c, f[mode]) ? f[mode] : 'normal'
-  let left = d == 'tabline' ? s:lightline.tabline.left : d == 'inactive' ? s:lightline.inactive.left : s:lightline.active.left
-  let right = d == 'tabline' ? s:lightline.tabline.right : d == 'inactive' ? s:lightline.inactive.right : s:lightline.active.right
+  let left = d ==# 'tabline' ? s:lightline.tabline.left : d ==# 'inactive' ? s:lightline.inactive.left : s:lightline.active.left
+  let right = d ==# 'tabline' ? s:lightline.tabline.right : d ==# 'inactive' ? s:lightline.inactive.right : s:lightline.active.right
   let l = has_key(c,d) && has_key(c[d],'left') ? c[d].left : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'left') ? c[f[d]].left : c.normal.left
   let r = has_key(c,d) && has_key(c[d],'right') ? c[d].right : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'right') ? c[f[d]].right : c.normal.right
   let m = has_key(c,d) && has_key(c[d],'middle') ? c[d].middle[0] : has_key(f,d) && has_key(c,f[d]) && has_key(c[f[d]],'middle') ? c[f[d]].middle[0] : c.normal.middle[0]
@@ -296,7 +296,7 @@ endfunction
 function! s:_expand(a, c, _, e, t, i, j, x) abort
   try
     let r = exists('*'.a:e[a:x[a:i][a:j]]) ? eval(a:e[a:x[a:i][a:j]] . '()') : ''
-    if type(r) == 1 && r == '' | return | endif
+    if type(r) == 1 && r ==# '' | return | endif
     let s = type(r) == 3 ? (len(r) < 3 ? r + [[], [], []] : r) : [[], [r], []]
   catch
     return
@@ -358,7 +358,7 @@ function! s:line(tabline, inactive) abort
     let _ .= printf('%%#LightLineLeft_%s_%s#', mode, ll[i])
     for j in range(len(lt[i]))
       let x = substitute('%( '.(lc[i][j] ? lt[i][j] : has_key(f,lt[i][j])?'%{exists("*'.f[lt[i][j]].'")?'.f[lt[i][j]].'():""}':get(c,lt[i][j],'')).' %)', '^%(  %)', '', '')
-      let _ .= has_key(t,lt[i][j])&&t[lt[i][j]]=='raw'&&strlen(x)>7 ? x[3:-2] : x
+      let _ .= has_key(t,lt[i][j])&&t[lt[i][j]]==#'raw'&&strlen(x)>7 ? x[3:-2] : x
       if j < len(lt[i]) - 1 | let _ .= s:subseparator(lt[i][j], lt[i][j+1:], s.left, lc[i][j], lc[i][j+1:]) | endif
     endfor
     let _ .= printf('%%#LightLineLeft_%s_%s_%s#', mode, ll[i], ll[i + 1]) . (i < l + len(lt) - len(l_) && ll[i] < l || type(ll[i]) != type(ll[i + 1]) || type(ll[i]) && type(ll[i + 1]) && ll[i] != ll[i + 1] ? p.left : len(lt[i]) ? s.left : '')
@@ -370,7 +370,7 @@ function! s:line(tabline, inactive) abort
     for j in range(len(rt[i]))
       if j | let _ .= s:subseparator(rt[i][j], rt[i][:j-1], s.right, rc[i][j], rc[i][:j-1]) | endif
       let x = substitute('%( '.(rc[i][j] ? rt[i][j] : has_key(f,rt[i][j])?'%{exists("*'.f[rt[i][j]].'")?'.f[rt[i][j]].'():""}':get(c,rt[i][j],'')).' %)', '^%(  %)', '', '')
-      let _ .= has_key(t,rt[i][j])&&t[rt[i][j]]=='raw'&&strlen(x)>7 ? x[3:-4] : x
+      let _ .= has_key(t,rt[i][j])&&t[rt[i][j]]==#'raw'&&strlen(x)>7 ? x[3:-4] : x
     endfor
   endfor
   return _
