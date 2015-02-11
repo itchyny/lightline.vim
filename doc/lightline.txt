@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2015/01/17 12:42:41.
+Last Change: 2015/02/12 08:27:28.
 
 CONTENTS					*lightline-contents*
 
@@ -504,7 +504,7 @@ It returns an array of three elements. The expanded result is:
 	(tabsel) ['%2T%{lightline#onetab(2,1)}']    ---  s:p.tabline.tabsel[0] = ['gray9', 'gray1']
 	(0)      ['%3T%{lightline#onetab(3,0)}%T']  ---  s:p.tabline.left[0] = ['gray9', 'gray4']
 <
-If the tabline components is
+If the tabline components are
 >
 	let g:lightline.tabline.left = [ [ 'A', 'B', 'tabs', 'C', 'D' ] ]
 <
