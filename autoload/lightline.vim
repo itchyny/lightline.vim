@@ -3,7 +3,7 @@
 " Version: 0.0
 " Author: itchyny
 " License: MIT License
-" Last Change: 2015/01/17 12:52:19.
+" Last Change: 2015/03/01 10:51:32.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -207,7 +207,7 @@ endfunction
 
 function! lightline#highlight(...) abort
   let [c, f, g] = [s:lightline.palette, s:lightline.mode_fallback, s:lightline.component_type]
-  if (has('win32') || has('win64')) && !has('gui_running')
+  if (has('win32') || has('win64')) && !has('gui_running') && &t_Co < 256
     for u in values(c)
       for v in values(u)
         for _  in v | let [_[2], _[3]] = [lightline#colortable#gui2cui(_[0], _[2]), lightline#colortable#gui2cui(_[1], _[3])] | endfor
