@@ -1,6 +1,5 @@
 " =============================================================================
 " Filename: autoload/lightline/tab.vim
-" Version: 0.0
 " Author: itchyny
 " License: MIT License
 " Last Change: 2015/01/04 22:44:42.

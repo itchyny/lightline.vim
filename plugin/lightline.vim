@@ -1,6 +1,5 @@
 " =============================================================================
 " Filename: plugin/lightline.vim
-" Version: 0.0
 " Author: itchyny
 " License: MIT License
 " Last Change: 2014/12/14 14:27:59.

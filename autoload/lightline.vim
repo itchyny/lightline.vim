@@ -1,6 +1,5 @@
 " =============================================================================
 " Filename: autoload/lightline.vim
-" Version: 0.0
 " Author: itchyny
 " License: MIT License
 " Last Change: 2015/03/01 10:51:32.

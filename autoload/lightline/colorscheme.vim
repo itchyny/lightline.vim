@@ -1,6 +1,5 @@
 " =============================================================================
 " Filename: autoload/lightline/colorscheme.vim
-" Version: 0.0
 " Author: itchyny
 " License: MIT License
 " Last Change: 2015/02/15 08:47:11.

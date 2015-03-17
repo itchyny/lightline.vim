@@ -1,6 +1,5 @@
 " =============================================================================
 " Filename: autoload/lightline/colorscheme/Tomorrow_Night_Bright.vim
-" Version: 0.0
 " Author: itchyny
 " License: MIT License
 " Last Change: 2013/09/07 14:13:26.

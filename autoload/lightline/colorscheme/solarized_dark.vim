@@ -1,6 +1,5 @@
 " =============================================================================
 " Filename: autoload/lightline/colorscheme/solarized_dark.vim
-" Version: 0.0
 " Author: itchyny
 " License: MIT License
 " Last Change: 2014/05/31 01:04:15.

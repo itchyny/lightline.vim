@@ -1,6 +1,5 @@
 " =============================================================================
 " Filename: autoload/lightline/colortable.vim
-" Version: 0.0
 " Author: itchyny
 " License: MIT License
 " Last Change: 2014/12/17 00:13:56.

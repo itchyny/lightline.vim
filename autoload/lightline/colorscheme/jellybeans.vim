@@ -1,6 +1,5 @@
 " =============================================================================
 " Filename: autoload/lightline/colorscheme/jellybeans.vim
-" Version: 0.0
 " Author: itchyny
 " License: MIT License
 " Last Change: 2013/09/07 12:21:04.
