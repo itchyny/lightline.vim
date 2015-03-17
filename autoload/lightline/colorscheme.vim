@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/colorscheme.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2015/02/15 08:47:11.
+" Last Change: 2015/03/18 08:37:17.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -210,7 +210,7 @@ function! lightline#colorscheme#flatten(p) abort
   for k in values(a:p)
     for l in values(k)
       for m in range(len(l))
-        let attr = ""
+        let attr = ''
         if len(l[m]) == 3 && type(l[m][2]) == 1
           let attr = l[m][2]
         endif
