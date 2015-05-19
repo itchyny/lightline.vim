@@ -132,6 +132,19 @@ to your `.vimrc`.
 
 If the colors of the statusline do not change from the default colors, move the settings of `g:lightline` before setting the colorscheme.
 
+If you are reloading your `.vimrc` via `autocmd` and get this problem
+
+![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/20.png)
+
+when saving it you need to add the nested flag to your `autocmd` like so
+
+```vim
+augroup reload_vimrc
+    autocmd!
+    autocmd bufwritepost $MYVIMRC nested source $MYVIMRC 
+augroup END
+```
+
 
 Colors appear correctly? Now let's see how to change the appearance.
 
