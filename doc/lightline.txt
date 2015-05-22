@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2015/02/12 08:27:28.
+Last Change: 2015/03/29 07:25:53.
 
 CONTENTS					*lightline-contents*
 
@@ -607,7 +607,7 @@ as done in autoload/lightline/colorscheme/landscape.vim; firstly create the
 colorscheme using the fill function, and see the result, in a sense, the
 compiled version of your colorscheme.
 >
-	echo g:lightline#colorscheme#yourcolorscheme#palette 
+	echo g:lightline#colorscheme#yourcolorscheme#palette
 <
 Then copy and paste the result to the colorscheme file.
 
@@ -775,15 +775,15 @@ For users who uses lots of plugins:
 	      \ },
 	      \ 'subseparator': { 'left': '|', 'right': '|' }
 	      \ }
-	
+
 	function! MyModified()
 	  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 	endfunction
-	
+
 	function! MyReadonly()
 	  return &ft !~? 'help' && &readonly ? 'RO' : ''
 	endfunction
-	
+
 	function! MyFilename()
 	  let fname = expand('%:t')
 	  return fname == 'ControlP' ? g:lightline.ctrlp_item :
@@ -796,7 +796,7 @@ For users who uses lots of plugins:
 	        \ ('' != fname ? fname : '[No Name]') .
 	        \ ('' != MyModified() ? ' ' . MyModified() : '')
 	endfunction
-	
+
 	function! MyFugitive()
 	  try
 	    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
@@ -808,19 +808,19 @@ For users who uses lots of plugins:
 	  endtry
 	  return ''
 	endfunction
-	
+
 	function! MyFileformat()
 	  return winwidth(0) > 70 ? &fileformat : ''
 	endfunction
-	
+
 	function! MyFiletype()
 	  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
 	endfunction
-	
+
 	function! MyFileencoding()
 	  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 	endfunction
-	
+
 	function! MyMode()
 	  let fname = expand('%:t')
 	  return fname == '__Tagbar__' ? 'Tagbar' :
@@ -833,7 +833,7 @@ For users who uses lots of plugins:
 	        \ &ft == 'vimshell' ? 'VimShell' :
 	        \ winwidth(0) > 60 ? lightline#mode() : ''
 	endfunction
-	
+
 	function! CtrlPMark()
 	  if expand('%:t') =~ 'ControlP'
 	    call lightline#link('iR'[g:lightline.ctrlp_regex])
@@ -843,12 +843,12 @@ For users who uses lots of plugins:
 	    return ''
 	  endif
 	endfunction
-	
+
 	let g:ctrlp_status_func = {
 	  \ 'main': 'CtrlPStatusFunc_1',
 	  \ 'prog': 'CtrlPStatusFunc_2',
 	  \ }
-	
+
 	function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
 	  let g:lightline.ctrlp_regex = a:regex
 	  let g:lightline.ctrlp_prev = a:prev
@@ -856,18 +856,18 @@ For users who uses lots of plugins:
 	  let g:lightline.ctrlp_next = a:next
 	  return lightline#statusline(0)
 	endfunction
-	
+
 	function! CtrlPStatusFunc_2(str)
 	  return lightline#statusline(0)
 	endfunction
-	
+
 	let g:tagbar_status_func = 'TagbarStatusFunc'
-	
+
 	function! TagbarStatusFunc(current, sort, fname, ...) abort
 	    let g:lightline.fname = a:fname
 	  return lightline#statusline(0)
 	endfunction
-	
+
 	augroup AutoSyntastic
 	  autocmd!
 	  autocmd BufWritePost *.c,*.cpp call s:syntastic()
@@ -876,7 +876,7 @@ For users who uses lots of plugins:
 	  SyntasticCheck
 	  call lightline#update()
 	endfunction
-	
+
 	let g:unite_force_overwrite_statusline = 0
 	let g:vimfiler_force_overwrite_statusline = 0
 	let g:vimshell_force_overwrite_statusline = 0
@@ -1131,7 +1131,7 @@ Problem 11:					*lightline-problem-11*
 		function! CtrlPStatusFunc_2(str)
 		  return lightline#statusline(0)
 		endfunction
-		
+
 		let g:tagbar_status_func = 'TagbarStatusFunc'
 		function! TagbarStatusFunc(current, sort, fname, ...) abort
 		  return lightline#statusline(0)
@@ -1193,7 +1193,7 @@ Problem 13:					*lightline-problem-13*
 Problem 14:					*lightline-problem-14*
 	The 'E541' warning appears on the right hand side.
 	Many components disable the statusline of lightline.
-		
+
 		The number of items in statusline/tabline is limited to 80
 		(see |E541|). You cannot register too much components.
 
