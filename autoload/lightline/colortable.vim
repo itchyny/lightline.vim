@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/colortable.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/12/17 00:13:56.
+" Last Change: 2015/03/29 06:21:39.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -12,7 +12,7 @@ function! s:load() abort
   let rgbfile = $VIMRUNTIME . '/rgb.txt'
   let table = {}
   if filereadable(rgbfile)
-    for _ in map(filter(readfile(rgbfile), 'v:val !~ "^!"'), 'matchlist(v:val, "^\\s*\\(\\d\\+\\)\\s\\+\\(\\d\\+\\)\\s\\+\\(\\d\\+\\)\\s\\+\\(.*\\)")[1:4]')
+    for _ in map(filter(readfile(rgbfile), 'v:val !~# "^!"'), 'matchlist(v:val, "^\\s*\\(\\d\\+\\)\\s\\+\\(\\d\\+\\)\\s\\+\\(\\d\\+\\)\\s\\+\\(.*\\)")[1:4]')
       let table[tolower(_[3])] = _[0:2]
     endfor
   endif
