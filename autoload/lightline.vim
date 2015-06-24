@@ -89,10 +89,11 @@ function! lightline#init() abort
   call extend(s:lightline.mode_map, {
         \ 'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL',
         \ 'V': 'V-LINE', 'c': 'COMMAND', "\<C-v>": 'V-BLOCK', 's': 'SELECT',
-        \ 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', '?': '      ' }, 'keep')
+        \ 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', 't': 'TERMINAL', '?': '      ' }, 'keep')
   let s:lightline._mode_ = {
         \ 'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual',
-        \ 'c': 'command', "\<C-v>": 'visual', 's': 'select', 'S': 'select', "\<C-s>": 'select' }
+        \ 'c': 'command', "\<C-v>": 'visual', 's': 'select', 'S': 'select', "\<C-s>": 'select',
+        \ 't': 'terminal' }
   call extend(s:lightline.mode_fallback, { 'replace': 'insert', 'select': 'visual' })
   call extend(s:lightline.component, {
         \ 'mode': '%{lightline#mode()}',
