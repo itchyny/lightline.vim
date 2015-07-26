@@ -202,11 +202,23 @@ fun! <SID>grey_number(x) "{{{
    return [a:color, <SID>rgb(a:color)]
  endfun"}}}
 
+let s:red     = <SID>X("#df0000")
+let s:green   = <SID>X("#008700")
+let s:blue    = <SID>X("#00afaf")
+
+let s:pink    = <SID>X("#afdf00")
+let s:olive   = <SID>X("#dfaf5f")
+let s:navy    = <SID>X("#df875f")
+
+let s:orange  = <SID>X("#d75f00")
+let s:purple  = <SID>X("#8959a8")
+let s:aqua    = <SID>X("#3e999f")
+
 " Basics:
 let s:foreground   = <SID>X("#d0d0d0")
 let s:background   = <SID>X("#444444")
 let s:window       = <SID>X("#efefef")
-let s:status       = s:aqua
+let s:status       = <SID>X("#c6c6c6")
 let s:error        = <SID>X("#5f0000")
 
 " Tabline:
@@ -233,7 +245,7 @@ let s:p.normal.middle   = [ [ s:statusline_active_fg, s:statusline_active_bg ]]
 let s:p.inactive.right  = [ [ s:foreground, s:background ], [ s:foreground, s:background ] ]
 let s:p.inactive.left   = [ [ s:foreground, s:background ], [ s:foreground, s:background ] ]
 let s:p.inactive.middle = [ [ s:foreground, s:background ], ]
-let s:p.insert.left     = [ [ s:blue, s:background ], [ s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
+let s:p.insert.left     = [ [ s:background, s:blue], [ s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
 let s:p.replace.left    = [ [ s:background, s:pink ], [s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
 let s:p.visual.left     = [ [ s:visual_fg, s:visual_bg ], [s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ]  ]
 let s:p.tabline.left    = [ [s:tabline_inactive_fg, s:tabline_inactive_bg ]]
@@ -241,6 +253,5 @@ let s:p.tabline.tabsel  = [ [s:tabline_active_fg, s:tabline_active_bg ] ]
 let s:p.tabline.middle  = [ [s:tabline_bg, s:tabline_bg]]
 let s:p.tabline.right   = copy(s:p.normal.right)
 let s:p.normal.error    = [ [ s:background, s:error ] ]
-let s:p.normal.warning  = [ [ s:background, s:olive ] ]
 
-let lightline#colorscheme#papercolor_dark#palette = lightline#colorscheme#flatten(s:p)
+let g:lightline#colorscheme#papercolor_dark#palette = lightline#colorscheme#flatten(s:p)
