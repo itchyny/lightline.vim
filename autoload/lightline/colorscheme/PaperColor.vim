@@ -9,3 +9,4 @@ if &background ==# 'light'
 else
   let g:lightline#colorscheme#papercolor#palette = g:lightline#colorscheme#papercolor_dark#palette
 endif
+
