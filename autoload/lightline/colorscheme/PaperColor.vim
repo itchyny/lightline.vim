@@ -31,12 +31,12 @@
       if a:x < 14
         return 0
       else
-        let l:n = (a:x - 8) / 10
-        let l:m = (a:x - 8) % 10
-        if l:m < 5
-          return l:n
+        let n = (a:x - 8) / 10
+        let m = (a:x - 8) % 10
+        if m < 5
+          return n
         else
-          return l:n + 1
+          return n + 1
         endif
       endif
     endif
@@ -112,12 +112,12 @@
       if a:x < 75
         return 0
       else
-        let l:n = (a:x - 55) / 40
-        let l:m = (a:x - 55) % 40
-        if l:m < 20
-          return l:n
+        let n = (a:x - 55) / 40
+        let m = (a:x - 55) % 40
+        if m < 20
+          return n
         else
-          return l:n + 1
+          return n + 1
         endif
       endif
     endif
@@ -156,45 +156,45 @@
   " Returns the palette index to approximate the given R/G/B color levels
   function! s:color(r, g, b)
     " Get the closest grey
-    let l:gx = s:grey_number(a:r)
-    let l:gy = s:grey_number(a:g)
-    let l:gz = s:grey_number(a:b)
+    let gx = s:grey_number(a:r)
+    let gy = s:grey_number(a:g)
+    let gz = s:grey_number(a:b)
 
     " Get the closest color
-    let l:x = s:rgb_number(a:r)
-    let l:y = s:rgb_number(a:g)
-    let l:z = s:rgb_number(a:b)
+    let x = s:rgb_number(a:r)
+    let y = s:rgb_number(a:g)
+    let z = s:rgb_number(a:b)
 
-    if l:gx == l:gy && l:gy == l:gz
+    if gx == gy && gy == gz
       " There are two possibilities
-      let l:dgr = s:grey_level(l:gx) - a:r
-      let l:dgg = s:grey_level(l:gy) - a:g
-      let l:dgb = s:grey_level(l:gz) - a:b
-      let l:dgrey = (l:dgr * l:dgr) + (l:dgg * l:dgg) + (l:dgb * l:dgb)
-      let l:dr = s:rgb_level(l:gx) - a:r
-      let l:dg = s:rgb_level(l:gy) - a:g
-      let l:db = s:rgb_level(l:gz) - a:b
-      let l:drgb = (l:dr * l:dr) + (l:dg * l:dg) + (l:db * l:db)
-      if l:dgrey < l:drgb
+      let dgr = s:grey_level(gx) - a:r
+      let dgg = s:grey_level(gy) - a:g
+      let dgb = s:grey_level(gz) - a:b
+      let dgrey = (dgr * dgr) + (dgg * dgg) + (dgb * dgb)
+      let dr = s:rgb_level(gx) - a:r
+      let dg = s:rgb_level(gy) - a:g
+      let db = s:rgb_level(gz) - a:b
+      let drgb = (dr * dr) + (dg * dg) + (db * db)
+      if dgrey < drgb
         " Use the grey
-        return s:grey_color(l:gx)
+        return s:grey_color(gx)
       else
         " Use the color
-        return s:rgb_color(l:x, l:y, l:z)
+        return s:rgb_color(x, y, z)
       endif
     else
       " Only one possibility
-      return s:rgb_color(l:x, l:y, l:z)
+      return s:rgb_color(x, y, z)
     endif
   endfunction
 
   " Returns the palette index to approximate the '#rrggbb' hex string
   function! s:rgb(rgb)
-    let l:r = ("0x" . strpart(a:rgb, 1, 2)) + 0
-    let l:g = ("0x" . strpart(a:rgb, 3, 2)) + 0
-    let l:b = ("0x" . strpart(a:rgb, 5, 2)) + 0
+    let r = ("0x" . strpart(a:rgb, 1, 2)) + 0
+    let g = ("0x" . strpart(a:rgb, 3, 2)) + 0
+    let b = ("0x" . strpart(a:rgb, 5, 2)) + 0
 
-    return s:color(l:r, l:g, l:b)
+    return s:color(r, g, b)
   endfunction
 
  function! lightline#colorscheme#PaperColor#X(color)

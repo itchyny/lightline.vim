@@ -4,23 +4,23 @@
 " License: MIT License
 " Last Change: 2015-07-27 06:010
 " =============================================================================
-let s:red     = lightline#colorscheme#PaperColor#X("#df0000")       "Include/Exception
-let s:green   = lightline#colorscheme#PaperColor#X("#008700")       "Boolean/Special
-let s:blue    = lightline#colorscheme#PaperColor#X("#4271ae")       "Keyword
-let s:pink    = lightline#colorscheme#PaperColor#X("#d7005f")       "Type
-let s:olive   = lightline#colorscheme#PaperColor#X("#718c00")       "String
-let s:navy    = lightline#colorscheme#PaperColor#X("#005f87")       "StorageClass
-let s:orange  = lightline#colorscheme#PaperColor#X("#d75f00")       "Number
-let s:purple  = lightline#colorscheme#PaperColor#X("#8959a8")       "Repeat/Conditional
-let s:aqua    = lightline#colorscheme#PaperColor#X("#3e999f")       "Operator/Delimiter
+let s:red     = lightline#colorscheme#PaperColor#color_set("#df0000")       "Include/Exception
+let s:green   = lightline#colorscheme#PaperColor#color_set("#008700")       "Boolean/Special
+let s:blue    = lightline#colorscheme#PaperColor#color_set("#4271ae")       "Keyword
+let s:pink    = lightline#colorscheme#PaperColor#color_set("#d7005f")       "Type
+let s:olive   = lightline#colorscheme#PaperColor#color_set("#718c00")       "String
+let s:navy    = lightline#colorscheme#PaperColor#color_set("#005f87")       "StorageClass
+let s:orange  = lightline#colorscheme#PaperColor#color_set("#d75f00")       "Number
+let s:purple  = lightline#colorscheme#PaperColor#color_set("#8959a8")       "Repeat/Conditional
+let s:aqua    = lightline#colorscheme#PaperColor#color_set("#3e999f")       "Operator/Delimiter
 
 
 " Basics:
-let s:foreground   = lightline#colorscheme#PaperColor#X("#4d4d4c")
-let s:background   = lightline#colorscheme#PaperColor#X("#F5F5F5")
-let s:window       = lightline#colorscheme#PaperColor#X("#efefef")
+let s:foreground   = lightline#colorscheme#PaperColor#color_set("#4d4d4c")
+let s:background   = lightline#colorscheme#PaperColor#color_set("#F5F5F5")
+let s:window       = lightline#colorscheme#PaperColor#color_set("#efefef")
 let s:status       = s:aqua
-let s:error        = lightline#colorscheme#PaperColor#X("#ffafdf")
+let s:error        = lightline#colorscheme#PaperColor#color_set("#ffafdf")
 
 " Tabline:
 let s:tabline_bg          = s:navy
@@ -33,7 +33,7 @@ let s:tabline_inactive_bg = s:aqua
 let s:statusline_active_fg   = s:window
 let s:statusline_active_bg   = s:navy
 let s:statusline_inactive_fg = s:foreground
-let s:statusline_inactive_bg = lightline#colorscheme#PaperColor#X("#dadada")
+let s:statusline_inactive_bg = lightline#colorscheme#PaperColor#color_set("#dadada")
 
 " Visual:
 let s:visual_fg = s:background
