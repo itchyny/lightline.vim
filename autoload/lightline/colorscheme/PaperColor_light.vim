@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/colorscheme/PaperColor_light.vim
 " Author: TKNGUE
 " License: MIT License
-" Last Change: 2015/07/28 07:38:57.
+" Last Change: 2015/07/28 07:46:40.
 " =============================================================================
 
 let s:red = '#df0000'
@@ -14,7 +14,6 @@ let s:navy = '#005f87'
 let s:orange = '#d75f00'
 let s:purple = '#8959a8'
 let s:aqua = '#3e999f'
-
 
 " Basics:
 let s:foreground = '#4d4d4c'
@@ -36,10 +35,6 @@ let s:statusline_active_bg = s:navy
 let s:statusline_inactive_fg = s:foreground
 let s:statusline_inactive_bg = '#dadada'
 
-" Visual:
-let s:visual_fg = s:background
-let s:visual_bg = s:blue
-
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 let s:p.normal.left = [ [ s:foreground, s:background ], [ s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
 let s:p.normal.right = [ [ s:foreground, s:background ], [ s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
@@ -49,7 +44,7 @@ let s:p.inactive.left = [ [ s:foreground, s:background ], [ s:foreground, s:back
 let s:p.inactive.middle = [ [ s:foreground, s:background ], ]
 let s:p.insert.left = [ [ s:blue, s:background ], [ s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
 let s:p.replace.left = [ [ s:background, s:pink ], [s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
-let s:p.visual.left = [ [ s:background, s:blue ], [s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
+let s:p.visual.left = [ [ s:background, s:orange ], [s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
 let s:p.tabline.left = [ [s:tabline_inactive_fg, s:tabline_inactive_bg ]]
 let s:p.tabline.tabsel = [ [s:tabline_active_fg, s:tabline_active_bg ] ]
 let s:p.tabline.middle = [ [s:tabline_bg, s:tabline_bg]]
