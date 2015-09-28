@@ -141,7 +141,7 @@ when saving it you need to add the nested flag to your `autocmd` like so
 ```vim
 augroup reload_vimrc
     autocmd!
-    autocmd bufwritepost $MYVIMRC nested source $MYVIMRC 
+    autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
 augroup END
 ```
 
@@ -462,7 +462,7 @@ endfunction
 ```
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/13.png)
 
-Fine and readable! 
+Fine and readable!
 
 
 Finally, you come up with concatenating the three components: the read-only mark, the filename and the modified mark.
@@ -589,8 +589,8 @@ endfunction
 
 function! LightLineFilename()
   return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
-        \  &ft == 'unite' ? unite#get_status_string() : 
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
         \  &ft == 'vimshell' ? vimshell#get_status_string() :
         \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
         \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
