@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/colorscheme/seoul256.vim
 " Author: atweiden
 " License: MIT License
-" Last Change: 2015/10/29 16:30:00.
+" Last Change: 2015/10/29 20:31:00.
 " =============================================================================
 let s:base03 = [ '#151513', 233 ]
 let s:base02 = [ '#30302c ', 236 ]
@@ -16,6 +16,7 @@ let s:yellow = [ '#d8af5f', 3 ]
 let s:orange = [ '#d7875f', 216 ]
 let s:red = [ '#af5f5f', 131 ]
 let s:magenta = [ '#df5f87', 168 ]
+let s:peach = [ '#e0bebc', 181 ]
 let s:blue = [ '#87afaf', 109 ]
 let s:cyan = [ '#007173', 23 ]
 let s:green = [ '#87af87', 108 ]
@@ -28,7 +29,7 @@ let s:p.inactive.right = [ [ s:base02, s:base00 ], [ s:base0, s:base02 ] ]
 let s:p.inactive.left =  [ [ s:base0, s:base02 ], [ s:base00, s:base02 ] ]
 let s:p.insert.left = [ [ s:base02, s:green ], [ s:base3, s:base01 ] ]
 let s:p.replace.left = [ [ s:base02, s:magenta ], [ s:base3, s:base01 ] ]
-let s:p.visual.left = [ [ s:white, s:cyan ], [ s:base3, s:base01 ] ]
+let s:p.visual.left = [ [ s:base02, s:peach ], [ s:base3, s:base01 ] ]
 let s:p.normal.middle = [ [ s:base0, s:base02 ] ]
 let s:p.inactive.middle = [ [ s:base00, s:base02 ] ]
 let s:p.tabline.left = [ [ s:base3, s:base00 ] ]
