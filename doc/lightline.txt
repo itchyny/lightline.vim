@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2015/07/25 16:57:02.
+Last Change: 2015/11/01 20:04:12.
 
 CONTENTS					*lightline-contents*
 
@@ -198,7 +198,7 @@ OPTIONS						*lightline-option*
 		The colorscheme for lightline.vim.
 		Currently, wombat, solarized, powerline, jellybeans, Tomorrow,
 		Tomorrow_Night, Tomorrow_Night_Blue, Tomorrow_Night_Eighties,
-		landscape and 16color are available.
+		PaperColor, seoul256, landscape and 16color are available.
 		The default value is:
 >
 		let g:lightline.colorscheme = 'default'
@@ -1178,7 +1178,7 @@ Problem 13:					*lightline-problem-13*
 		    return
 		  endif
 		  try
-		    if g:colors_name =~# 'wombat\|solarized\|landscape\|jellybeans\|Tomorrow'
+		    if g:colors_name =~# 'wombat\|solarized\|landscape\|jellybeans\|seoul256\|Tomorrow'
 		      let g:lightline.colorscheme =
 		            \ substitute(substitute(g:colors_name, '-', '_', 'g'), '256.*', '', '') .
 		            \ (g:colors_name ==# 'solarized' ? '_' . &background : '')
