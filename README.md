@@ -38,6 +38,19 @@ https://github.com/itchyny/lightline.vim
 ![lightline.vim - solarized_light - visual](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_light/3.png)
 ![lightline.vim - solarized_light - replace](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_light/4.png)
 
+### PaperColor theme (light)
+
+![lightline.vim - PaperColor - normal](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/PaperColor/1.png)
+![lightline.vim - PaperColor - insert](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/PaperColor/2.png)
+![lightline.vim - PaperColor - visual](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/PaperColor/3.png)
+![lightline.vim - PaperColor - replace](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/PaperColor/4.png)
+
+### seoul256 theme
+
+![lightline.vim - seoul256 - normal](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/seoul256/1.png)
+![lightline.vim - seoul256 - insert](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/seoul256/2.png)
+![lightline.vim - seoul256 - visual](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/seoul256/3.png)
+![lightline.vim - seoul256 - replace](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/seoul256/4.png)
 
 ### landscape theme (with the patched font)
 
