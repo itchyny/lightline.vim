@@ -103,6 +103,13 @@ This software is released under the MIT License, see LICENSE.
 
 2. Install with `:NeoBundleInstall`.
 
+### vim-plug (https://github.com/junegunn/vim-plug)
+1. Add the following configuration to your `.vimrc`.
+
+        Plug 'itchyny/lightline.vim'
+
+2. Install with `:PlugInstall`.
+
 ## Configuration tutorial
 By default, the statusline looks like:
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/1.png)

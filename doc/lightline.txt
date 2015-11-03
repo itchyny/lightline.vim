@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2015/11/01 20:04:12.
+Last Change: 2015/11/04 08:30:43.
 
 CONTENTS					*lightline-contents*
 
@@ -977,6 +977,15 @@ Problem 1:					*lightline-problem-1*
 <
 			2. Install with |:NeoBundleInstall|.
 
+		If you are to install this plugin using |vim-plug|:
+
+			1. Add the following configuration to your
+			.vimrc(_vimrc).
+>
+			Plug 'itchyny/lightline.vim'
+<
+			2. Install with |:PlugInstall|.
+
 Problem 2:					*lightline-problem-2*
 	How to update this plugin.
 
@@ -988,13 +997,15 @@ Problem 2:					*lightline-problem-2*
 
 		If you have installed this plugin using Vundle:
 
-			1. Execute |:PluginInstall!|. Or try git pull in the
-			directory of this plugin.
+			1. Execute |:PluginUpdate|.
 
 		If you have installed this plugin using NeoBundle:
 
-			1. Execute |:NeoBundleInstall!|. Or try git pull in
-			the directory of this plugin.
+			1. Execute |:NeoBundleUpdate|.
+
+		If you have installed this plugin using vim-plug:
+
+			1. Execute |:PlugUpdate|.
 
 Problem 3:					*lightline-problem-3*
 	How to uninstall this plugin.
@@ -1014,6 +1025,12 @@ Problem 3:					*lightline-problem-3*
 			1. Remove the :NeoBundle 'itchyny/lightline.vim'
 			configuration from your .vimrc(_vimrc).
 			2. Update with |:NeoBundleClean|.
+
+		If you have installed this plugin using vim-plug:
+
+			1. Remove the :Plug 'itchyny/lightline.vim'
+			configuration from your .vimrc(_vimrc).
+			2. Update with |:PlugClean|.
 
 Problem 4:					*lightline-problem-4*
 	Cool statuslines appear only on |:vsp|.
