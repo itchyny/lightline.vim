@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/colorscheme/landscape.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/07 12:26:11.
+" Last Change: 2015/11/26 21:49:44.
 " =============================================================================
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
@@ -15,10 +15,10 @@ let s:p.replace.left = [ [ '#af0000', '#ffffff', 124, 231, 'bold' ], [ '#ffffff'
 let s:p.visual.left = [ [ '#5f00ff', '#ffffff', 57, 231, 'bold' ], [ '#ffffff', '#5f00ff', 231, 57 ] ]
 let s:p.normal.middle = [ [ '#8a8a8a', '#303030', 245, 236 ] ]
 let s:p.inactive.middle = [ [ '#303030', '#121212', 236, 233 ] ]
-let s:p.tabline.left = [ [ '#dadada', '#606060', 253, 241 ] ]
+let s:p.tabline.left = [ [ '#d0d0d0', '#666666', 252, 242 ] ]
 let s:p.tabline.tabsel = [ [ '#dadada', '#121212', 253, 233 ] ]
-let s:p.tabline.middle = [ [ '#3a3a3a', '#b2b2b2', 237, 249 ] ]
-let s:p.tabline.right = [ [ '#dadada', '#606060', 253, 241 ] ]
+let s:p.tabline.middle = [ [ '#8a8a8a', '#3a3a3a', 245, 237 ] ]
+let s:p.tabline.right = [ [ '#d0d0d0', '#666666', 252, 242 ] ]
 let s:p.normal.error = [ [ '#d0d0d0', '#ff0000', 252, 196 ] ]
 let s:p.normal.warning = [ [ '#262626', '#ffff00', 235, 226 ] ]
 
