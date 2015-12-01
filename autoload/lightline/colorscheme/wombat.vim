@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/colorscheme/wombat.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/07 12:15:17.
+" Last Change: 2015/11/30 08:37:43.
 " =============================================================================
 let s:base03 = [ '#242424', 235 ]
 let s:base023 = [ '#353535 ', 236 ]
@@ -31,9 +31,9 @@ let s:p.visual.left = [ [ s:base02, s:magenta ], [ s:base3, s:base01 ] ]
 let s:p.normal.middle = [ [ s:base2, s:base02 ] ]
 let s:p.inactive.middle = [ [ s:base1, s:base023 ] ]
 let s:p.tabline.left = [ [ s:base3, s:base00 ] ]
-let s:p.tabline.tabsel = [ [ s:base2, s:base023 ] ]
-let s:p.tabline.middle = [ [ s:base02, s:base1 ] ]
-let s:p.tabline.right = [ [ s:base2, s:base01 ] ]
+let s:p.tabline.tabsel = [ [ s:base3, s:base03 ] ]
+let s:p.tabline.middle = [ [ s:base2, s:base02 ] ]
+let s:p.tabline.right = [ [ s:base2, s:base00 ] ]
 let s:p.normal.error = [ [ s:base03, s:red ] ]
 let s:p.normal.warning = [ [ s:base023, s:yellow ] ]
 
