@@ -94,7 +94,7 @@ function! lightline#init() abort
         \ 'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual',
         \ 'c': 'command', "\<C-v>": 'visual', 's': 'select', 'S': 'select', "\<C-s>": 'select',
         \ 't': 'terminal' }
-  call extend(s:lightline.mode_fallback, { 'replace': 'insert', 'select': 'visual' })
+  call extend(s:lightline.mode_fallback, { 'replace': 'insert', 'terminal': 'insert', 'select': 'visual' })
   call extend(s:lightline.component, {
         \ 'mode': '%{lightline#mode()}',
         \ 'absolutepath': '%F', 'relativepath': '%f', 'filename': '%t', 'modified': '%M', 'bufnum': '%n',
