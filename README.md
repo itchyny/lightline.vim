@@ -121,6 +121,7 @@ let g:lightline = {
       \ }
 ```
 to get:
+
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/2.png)
 
 
@@ -297,6 +298,7 @@ set noshowmode
 
 Now, let us get back to the tutorial (with the patched font for vim-powerline).
 You look into a help file to find the marks annoying.
+
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/6.png)
 
 Help files are read-only and no-modifiable? We know that!
