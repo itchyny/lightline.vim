@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/02/03 22:02:37.
+" Last Change: 2016/02/03 22:04:28.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -230,44 +230,44 @@ function! lightline#highlight(...) abort
     for i in range(w)
       let [li, lj] = [i < len(l) ? l[i] : m, i + 1 < len(l) ? l[i + 1] : m]
       let p = s:term(li)
-      exec printf('hi LightLineLeft_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, li[0], li[1], li[2], li[3], p)
-      exec printf('hi LightLineLeft_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', mode,
+      exec printf('hi LightLineLeft_%s_%d guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, i, li[0], li[1], li[2], li[3], p)
+      exec printf('hi LightLineLeft_%s_%d_%d guifg=%s guibg=%s ctermfg=%s ctermbg=%s', mode,
             \ i, i+1, i>=len(l) ? m[i+1==w] : li[1], i==w-1 ? m[1] : lj[1], i>=len(l) ? m[2+(i+1==w)] : li[3], i==w-1 ? m[3] : lj[3])
       for j in h
         let s = has_key(c,d) && has_key(c[d],j) ? c[d][j][0] : has_key(c,'tabline') && has_key(c.tabline,j) ? c.tabline[j][0] : has_key(c.normal,j) ? c.normal[j][0] : l[0]
-        exec printf('hi LightLineLeft_%s_%d_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, j, li[1], s[1], li[3], s[3], p)
-        exec printf('hi LightLineLeft_%s_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, i, s[1], li[1], s[3], li[3], p)
+        exec printf('hi LightLineLeft_%s_%d_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, i, j, li[1], s[1], li[3], s[3], p)
+        exec printf('hi LightLineLeft_%s_%s_%d guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, j, i, s[1], li[1], s[3], li[3], p)
       endfor
     endfor
-    exec printf('hi LightLineMiddle_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, m[0], m[1], m[2], m[3], n)
+    exec printf('hi LightLineMiddle_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, m[0], m[1], m[2], m[3], n)
     for i in range(x)
       let [ri, rj] = [i < len(r) ? r[i] : m, i + 1 < len(r) ? r[i + 1] : m]
       let p = s:term(ri)
-      exec printf('hi LightLineRight_%s_%d_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d', mode,
+      exec printf('hi LightLineRight_%s_%d_%d guifg=%s guibg=%s ctermfg=%s ctermbg=%s', mode,
             \ i, i+1, i>=len(r) ? m[i+1==x] : ri[1], i==x-1 ? m[1] : rj[1], i>=len(r) ? m[2+(i+1==x)] : ri[3], i==x-1 ? m[3] : rj[3])
-      exec printf('hi LightLineRight_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, ri[0], ri[1], ri[2], ri[3], p)
+      exec printf('hi LightLineRight_%s_%d guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, i, ri[0], ri[1], ri[2], ri[3], p)
       for j in h
         let s = has_key(c,d) && has_key(c[d],j) ? c[d][j][0] : has_key(c,'tabline') && has_key(c.tabline,j) ? c.tabline[j][0] : has_key(c.normal,j) ? c.normal[j][0] : l[0]
-        exec printf('hi LightLineRight_%s_%d_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, i, j, ri[1], s[1], ri[3], s[3], p)
-        exec printf('hi LightLineRight_%s_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, i, s[1], ri[1], s[3], ri[3], p)
+        exec printf('hi LightLineRight_%s_%d_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, i, j, ri[1], s[1], ri[3], s[3], p)
+        exec printf('hi LightLineRight_%s_%s_%d guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, j, i, s[1], ri[1], s[3], ri[3], p)
       endfor
     endfor
     for j in h
       let s = has_key(c,d) && has_key(c[d],j) ? c[d][j][0] : has_key(c,'tabline') && has_key(c.tabline,j) ? c.tabline[j][0] : has_key(c.normal,j) ? c.normal[j][0] : l[0]
       let p = s:term(s)
-      exec printf('hi LightLineLeft_%s_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, s[0], s[1], s[2], s[3], p)
-      exec printf('hi LightLineRight_%s_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, s[0], s[1], s[2], s[3], p)
-      exec printf('hi LightLineLeft_%s_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, w, s[1], m[1], s[3], m[3], p)
-      exec printf('hi LightLineLeft_%s_%d_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, w, j, m[1], s[1], m[3], s[3], n)
-      exec printf('hi LightLineRight_%s_%s_%d guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, x, s[1], m[1], s[3], m[3], p)
-      exec printf('hi LightLineRight_%s_%d_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, x, j, m[1], s[1], m[3], s[3], n)
+      exec printf('hi LightLineLeft_%s_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, j, s[0], s[1], s[2], s[3], p)
+      exec printf('hi LightLineRight_%s_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, j, s[0], s[1], s[2], s[3], p)
+      exec printf('hi LightLineLeft_%s_%s_%d guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, j, w, s[1], m[1], s[3], m[3], p)
+      exec printf('hi LightLineLeft_%s_%d_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, w, j, m[1], s[1], m[3], s[3], n)
+      exec printf('hi LightLineRight_%s_%s_%d guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, j, x, s[1], m[1], s[3], m[3], p)
+      exec printf('hi LightLineRight_%s_%d_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, x, j, m[1], s[1], m[3], s[3], n)
       for k in h
         let t = has_key(c,d) && has_key(c[d],k) ? c[d][k][0] : has_key(c,'tabline') && has_key(c.tabline,k) ? c.tabline[k][0] : has_key(c.normal,k) ? c.normal[k][0] : l[0]
         let q = s:term(t)
-        exec printf('hi LightLineLeft_%s_%s_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, k, s[1], t[1], s[3], t[3], p)
-        exec printf('hi LightLineLeft_%s_%s_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, k, j, t[1], s[1], t[3], s[3], q)
-        exec printf('hi LightLineRight_%s_%s_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, j, k, s[1], t[1], s[3], t[3], p)
-        exec printf('hi LightLineRight_%s_%s_%s guifg=%s guibg=%s ctermfg=%d ctermbg=%d %s', mode, k, j, t[1], s[1], t[3], s[3], q)
+        exec printf('hi LightLineLeft_%s_%s_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, j, k, s[1], t[1], s[3], t[3], p)
+        exec printf('hi LightLineLeft_%s_%s_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, k, j, t[1], s[1], t[3], s[3], q)
+        exec printf('hi LightLineRight_%s_%s_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, j, k, s[1], t[1], s[3], t[3], p)
+        exec printf('hi LightLineRight_%s_%s_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, k, j, t[1], s[1], t[3], s[3], q)
       endfor
     endfor
   endfor
