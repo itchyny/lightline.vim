@@ -207,7 +207,7 @@ endfunction
 
 function! lightline#highlight(...) abort
   let [c, f, g] = [s:lightline.palette, s:lightline.mode_fallback, s:lightline.component_type]
-  if (has('win32') || has('win64')) && !has('gui_running') && &t_Co < 256
+  if has('win32') && !has('gui_running') && &t_Co < 256
     for u in values(c)
       for v in values(u)
         for _  in v | let [_[2], _[3]] = [lightline#colortable#gui2cui(_[0], _[2]), lightline#colortable#gui2cui(_[1], _[3])] | endfor
