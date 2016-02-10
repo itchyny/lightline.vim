@@ -207,7 +207,7 @@ endfunction
 
 function! lightline#highlight(...) abort
   let [c, f, g] = [s:lightline.palette, s:lightline.mode_fallback, s:lightline.component_type]
-  if (has('win32') || has('win64')) && !has('gui_running') && &t_Co < 256
+  if has('win32') && !has('gui_running') && &t_Co < 256
     for u in values(c)
       for v in values(u)
         for _  in v | let [_[2], _[3]] = [lightline#colortable#gui2cui(_[0], _[2]), lightline#colortable#gui2cui(_[1], _[3])] | endfor
@@ -217,7 +217,7 @@ function! lightline#highlight(...) abort
   let [s:lightline.llen, s:lightline.rlen] = [len(c.normal.left), len(c.normal.right)]
   let [s:lightline.tab_llen, s:lightline.tab_rlen] = [len(has_key(c,'tabline') && has_key(c.tabline, 'left') ? c.tabline.left : c.normal.left), len(has_key(c,'tabline') && has_key(c.tabline, 'right') ? c.tabline.right : c.normal.right)]
   let h = s:uniq(filter(copy(values(g)), 'v:val !=# "raw"'))
-  let modes = a:0 ? [a:1] : ['normal', 'insert', 'replace', 'visual', 'inactive', 'command', 'select', 'tabline']
+  let modes = a:0 ? [a:1] : extend(['normal', 'insert', 'replace', 'visual', 'inactive', 'command', 'select', 'tabline'], has('nvim') ? ['terminal'] : [])
   for mode in modes
     let s:highlight[mode] = 1
     let d = has_key(c, mode) ? mode : has_key(f, mode) && has_key(c, f[mode]) ? f[mode] : 'normal'
