@@ -2,7 +2,7 @@
 " Filename: plugin/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/12/14 14:27:59.
+" Last Change: 2016/03/14 03:31:58.
 " =============================================================================
 
 if exists('g:loaded_lightline') || v:version < 700
@@ -13,7 +13,7 @@ let g:loaded_lightline = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-augroup LightLine
+augroup lightline
   autocmd!
   autocmd WinEnter,BufWinEnter,FileType,ColorScheme,SessionLoadPost * call lightline#update()
   autocmd ColorScheme,SessionLoadPost * call lightline#highlight()
