@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/02/03 22:04:28.
+" Last Change: 2016/03/14 03:22:16.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -83,6 +83,13 @@ function! lightline#init() abort
   call extend(s:lightline.tabline, {
         \ 'left': [ [ 'tabs' ] ],
         \ 'right': [ [ 'close' ] ] }, 'keep')
+  let s:lightline.tabline_configured = 0
+  for components in deepcopy(s:lightline.tabline.left + s:lightline.tabline.right)
+    if len(filter(components, 'v:val !=# "tabs" && v:val !=# "close"')) > 0
+      let s:lightline.tabline_configured = 1
+      break
+    endif
+  endfor
   call extend(s:lightline.tab, {
         \ 'active': [ 'tabnum', 'filename', 'modified' ],
         \ 'inactive': [ 'tabnum', 'filename', 'modified' ] }, 'keep')
@@ -379,7 +386,9 @@ endfunction
 let [s:tabnrs, s:tabnr, s:tabline] = [-1, -1, '']
 function! lightline#tabline() abort
   if !has_key(s:highlight, 'tabline') | call lightline#highlight('tabline') | endif
-  if [s:tabnrs, s:tabnr] != [tabpagenr('$'), tabpagenr()] | let [s:tabnrs, s:tabnr, s:tabline] = [tabpagenr('$'), tabpagenr(), s:line(1, 0)] | endif
+  if s:lightline.tabline_configured || [s:tabnrs, s:tabnr] != [tabpagenr('$'), tabpagenr()]
+    let [s:tabnrs, s:tabnr, s:tabline] = [tabpagenr('$'), tabpagenr(), s:line(1, 0)]
+  endif
   return s:tabline
 endfunction
 
