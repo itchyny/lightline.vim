@@ -66,3 +66,53 @@ function! s:suite.tabnew_tabnew_tabprevious()
   tabprevious
   call s:assert.equals(lightline#tabs(), [[s:tab(1, 0, 0)], [s:tab(2, 1, 0)], [s:tab(3, 0, 1)]])
 endfunction
+
+function! s:suite.onetab()
+  call s:assert.equals(lightline#onetab(1, 1), '1 [No Name]')
+endfunction
+
+function! s:suite.onetab_tabnew()
+  tabnew
+  call s:assert.equals(lightline#onetab(1, 0), '1 [No Name]')
+  call s:assert.equals(lightline#onetab(2, 1), '2 [No Name]')
+endfunction
+
+function! s:suite.onetab_tabnew_tabnew()
+  tabnew
+  tabnew
+  call s:assert.equals(lightline#onetab(1, 0), '1 [No Name]')
+  call s:assert.equals(lightline#onetab(2, 0), '2 [No Name]')
+  call s:assert.equals(lightline#onetab(3, 1), '3 [No Name]')
+endfunction
+
+function! s:suite.onetab_modified()
+  call append(0, '')
+  call s:assert.equals(lightline#onetab(1, 1), '1 [No Name] +')
+  undo
+endfunction
+
+function! s:suite.onetab_filename()
+  edit test
+  call s:assert.equals(lightline#onetab(1, 1), '1 test')
+  tabnew
+  bunload test
+endfunction
+
+function! s:suite.onetab_filename_modified()
+  edit test
+  call append(0, '')
+  call s:assert.equals(lightline#onetab(1, 1), '1 test +')
+  tabnew
+  bunload! test
+endfunction
+
+function! s:suite.onetab_active_inactive()
+  let g:lightline = { 'tab': { 'active': [ 'tabnum', 'filename' ], 'inactive': [ 'filename' ] } }
+  call lightline#init()
+  edit test
+  call append(0, '')
+  call s:assert.equals(lightline#onetab(1, 1), '1 test')
+  call s:assert.equals(lightline#onetab(1, 0), 'test')
+  tabnew
+  bunload! test
+endfunction
