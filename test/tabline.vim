@@ -112,3 +112,21 @@ function! s:suite.onetab_active_inactive()
   tabnew
   bunload! test
 endfunction
+
+function! s:suite.tab_component()
+  let g:lightline = { 'tab': { 'active': [ 'custom' ] }, 'tab_component': { 'custom': 'custom' } }
+  call lightline#init()
+  call s:assert.equals(lightline#onetab(1, 1), 'custom')
+  call s:assert.equals(lightline#onetab(2, 1), 'custom')
+endfunction
+
+function! s:suite.tab_component_function()
+  function! Custom(n)
+    return 'custom: ' . a:n
+  endfunction
+  let g:lightline = { 'tab': { 'active': [ 'custom' ] }, 'tab_component_function': { 'custom': 'Custom' } }
+  call lightline#init()
+  call s:assert.equals(lightline#onetab(1, 1), 'custom: 1')
+  call s:assert.equals(lightline#onetab(2, 1), 'custom: 2')
+  delfunction Custom
+endfunction
