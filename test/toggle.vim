@@ -8,7 +8,7 @@ function! s:suite.before_each()
   tabonly
 endfunction
 
-function! s:suite.init()
+function! s:suite.default()
   call s:assert.equals(exists('#lightline'), 1)
   call s:assert.equals(exists('#lightline-disable'), 0)
   call s:assert.not_equals(&tabline, '')
