@@ -32,7 +32,7 @@ function! s:tab(number, active, last) abort
   return '%' . a:number . 'T%{lightline#onetab(' . a:number . ',' . a:active . ')}' . (a:last ? '%T' : '')
 endfunction
 
-function! s:suite.onetab()
+function! s:suite.init()
   call s:assert.equals(lightline#tabs(), [[], [s:tab(1, 1, 1)], []])
 endfunction
 
