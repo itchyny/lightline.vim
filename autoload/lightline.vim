@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/20 00:53:38.
+" Last Change: 2016/03/20 00:56:45.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -457,7 +457,7 @@ function! lightline#tabline() abort
   return s:tabline
 endfunction
 
-let s:winwidth = winwidth(0)
+let s:winwidth = get(get(g:, 'lightline', {}), 'winwidth', winwidth(0))
 function! lightline#tabs() abort
   let [x, y, z] = [[], [], []]
   let nr = tabpagenr()
