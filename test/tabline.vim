@@ -8,6 +8,7 @@ endfunction
 function! s:suite.before_each()
   let g:lightline = {}
   call lightline#init()
+  tabnew
   tabonly
 endfunction
 
