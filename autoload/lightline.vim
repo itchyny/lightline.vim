@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/19 22:36:06.
+" Last Change: 2016/03/20 00:44:39.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -458,13 +458,25 @@ function! lightline#tabline() abort
 endfunction
 
 function! lightline#tabs() abort
-  let [t, l, x, y, z, u, d] = [tabpagenr(), tabpagenr('$'), [], [], [], '...', min([max([winwidth(0) / 40, 2]), 8])]
-  for i in range(1, l)
-    call add(i<t?(x):i==t?(y):z, '%'.i.'T%{lightline#onetab('.i.','.(i==t).')}'.(i==l?'%T':''))
+  let [x, y, z] = [[], [], []]
+  let nr = tabpagenr()
+  let cnt = tabpagenr('$')
+  for i in range(1, cnt)
+    call add(i < nr ? x : i == nr ? y : z, '%'. i . 'T%{lightline#onetab(' . i . ',' . (i == nr) . ')}' . (i == cnt ? '%T' : ''))
   endfor
-  let [a, b, c] = [len(x), len(z), d * 2]
-  return [a>d&&b>d ? extend(add(x[:d/2-1],u),x[-(d+1)/2:]) : a+b<=c||a<=d ? x : extend(add(x[:(c-b)/2-1],u),x[-(c-b+1)/2:]), y,
-        \ a>d&&b>d ? extend(add(z[:(d+1)/2-1],u),z[-d/2:]) : a+b<=c||b<=d ? z : extend(add(z[:(c-a+1)/2-1],u),z[-(c-a)/2:])]
+  let abbr = '...'
+  let n = min([max([winwidth(0) / 40, 2]), 8])
+  if len(x) > n && len(z) > n
+    let x = extend(add(x[:n/2-1], abbr), x[-(n+1)/2:])
+    let z = extend(add(z[:(n+1)/2-1], abbr), z[-n/2:])
+  elseif len(x) + len(z) > 2 * n
+    if len(x) > n
+      let x = extend(add(x[:(2*n-len(z))/2-1], abbr), x[-(2*n-len(z)+1)/2:])
+    elseif len(z) > n
+      let z = extend(add(z[:(2*n-len(x)+1)/2-1], abbr), z[-(2*n-len(x))/2:])
+    endif
+  endif
+  return [x, y, z]
 endfunction
 
 function! lightline#onetab(n, active) abort
