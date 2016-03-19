@@ -1,0 +1,13 @@
+language: generic
+
+sudo: false
+
+install:
+  - git clone --depth=1 https://github.com/vim/vim /tmp/vim
+  - (cd /tmp/vim && ./configure --prefix=$HOME/vim && make && make install)
+  - git clone --depth=1 https://github.com/thinca/vim-themis /tmp/themis
+  - export PATH=$HOME/vim/bin/:$PATH
+
+script:
+  - vim --version
+  - /tmp/themis/bin/themis --reporter spec
