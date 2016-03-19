@@ -63,6 +63,55 @@ function! s:suite.tabnew_tabnew_tabprevious()
   call s:assert.equals(lightline#tabs(), [[s:tab(1, 0, 0)], [s:tab(2, 1, 0)], [s:tab(3, 0, 1)]])
 endfunction
 
+function! s:suite.tabnew_20()
+  for i in range(19)
+    tabnew
+  endfor
+  call s:assert.equals(lightline#tabs(), [[s:tab(1, 0, 0), s:tab(2, 0, 0), s:tab(3, 0, 0), s:tab(4, 0, 0), '...', s:tab(16, 0, 0), s:tab(17, 0, 0), s:tab(18, 0, 0), s:tab(19, 0, 0)], [s:tab(20, 1, 1)], []])
+endfunction
+
+function! s:suite.tabnew_20_tabfirst()
+  for i in range(19)
+    tabnew
+  endfor
+  tabfirst
+  call s:assert.equals(lightline#tabs(), [[], [s:tab(1, 1, 0)], [s:tab(2, 0, 0), s:tab(3, 0, 0), s:tab(4, 0, 0), s:tab(5, 0, 0), '...', s:tab(17, 0, 0), s:tab(18, 0, 0), s:tab(19, 0, 0), s:tab(20, 0, 1)]])
+endfunction
+
+function! s:suite.tabnew_20_tabfirst_tabnext()
+  for i in range(19)
+    tabnew
+  endfor
+  tabfirst
+  tabnext
+  call s:assert.equals(lightline#tabs(), [[s:tab(1, 0, 0)], [s:tab(2, 1, 0)], [s:tab(3, 0, 0), s:tab(4, 0, 0), s:tab(5, 0, 0), s:tab(6, 0, 0), '...', s:tab(18, 0, 0), s:tab(19, 0, 0), s:tab(20, 0, 1)]])
+endfunction
+
+function! s:suite.tabnew_20_tabnext_10()
+  for i in range(19)
+    tabnew
+  endfor
+  tabnext 10
+  call s:assert.equals(lightline#tabs(), [[s:tab(1, 0, 0), s:tab(2, 0, 0), '...', s:tab(8, 0, 0), s:tab(9, 0, 0)], [s:tab(10, 1, 0)], [s:tab(11, 0, 0), s:tab(12, 0, 0), '...', s:tab(19, 0, 0), s:tab(20, 0, 1)]])
+endfunction
+
+function! s:suite.tabnew_20_tabprevious()
+  for i in range(19)
+    tabnew
+  endfor
+  tabprevious
+  call s:assert.equals(lightline#tabs(), [[s:tab(1, 0, 0), s:tab(2, 0, 0), s:tab(3, 0, 0), '...', s:tab(15, 0, 0), s:tab(16, 0, 0), s:tab(17, 0, 0), s:tab(18, 0, 0)], [s:tab(19, 1, 0)], [s:tab(20, 0, 1)]])
+endfunction
+
+function! s:suite.tabnew_20_tabprevious_tabprevious()
+  for i in range(19)
+    tabnew
+  endfor
+  tabprevious
+  tabprevious
+  call s:assert.equals(lightline#tabs(), [[s:tab(1, 0, 0), s:tab(2, 0, 0), s:tab(3, 0, 0), '...', s:tab(15, 0, 0), s:tab(16, 0, 0), s:tab(17, 0, 0)], [s:tab(18, 1, 0)], [s:tab(19, 0, 0), s:tab(20, 0, 1)]])
+endfunction
+
 function! s:suite.onetab()
   call s:assert.equals(lightline#onetab(1, 1), '1 [No Name]')
 endfunction
