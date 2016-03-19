@@ -1,10 +1,6 @@
 let s:suite = themis#suite('tabline')
 let s:assert = themis#helper('assert')
 
-function! s:suite.before()
-  let g:lightline = {}
-endfunction
-
 function! s:suite.before_each()
   let g:lightline = {}
   call lightline#init()
