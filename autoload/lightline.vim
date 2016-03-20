@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/20 10:04:23.
+" Last Change: 2016/03/20 10:13:05.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -151,6 +151,7 @@ function! lightline#init() abort
     elseif !has_key(s:lightline, key)
       let s:lightline[key] = value
     endif
+    unlet value
   endfor
   call extend(s:lightline.tabline_separator, s:lightline.separator, 'keep')
   call extend(s:lightline.tabline_subseparator, s:lightline.subseparator, 'keep')
