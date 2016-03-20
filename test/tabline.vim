@@ -23,3 +23,45 @@ function! s:suite.disabled()
   call lightline#init()
   call s:assert.equals(&tabline, '')
 endfunction
+
+function! s:suite.tabnew()
+  let tabline = lightline#tabline()
+  tabnew
+  call s:assert.not_equals(lightline#tabline(), tabline)
+endfunction
+
+function! s:suite.tabnew_first()
+  let tabline = lightline#tabline()
+  0tabnew
+  call s:assert.not_equals(lightline#tabline(), tabline)
+endfunction
+
+function! s:suite.tabnext()
+  tabnew
+  let tabline = lightline#tabline()
+  tabnext
+  call s:assert.not_equals(lightline#tabline(), tabline)
+endfunction
+
+function! s:suite.tabonly()
+  tabnew
+  tabfirst
+  let tabline = lightline#tabline()
+  tabonly
+  call s:assert.not_equals(lightline#tabline(), tabline)
+endfunction
+
+function! s:suite.tabclose()
+  tabnew
+  let tabline = lightline#tabline()
+  tabclose
+  call s:assert.not_equals(lightline#tabline(), tabline)
+endfunction
+
+function! s:suite.tabclose_last()
+  tabnew
+  tabfirst
+  let tabline = lightline#tabline()
+  $tabclose
+  call s:assert.not_equals(lightline#tabline(), tabline)
+endfunction
