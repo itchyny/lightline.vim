@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/20 10:13:05.
+" Last Change: 2016/03/20 10:36:21.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -468,13 +468,17 @@ function! s:line(tabline, inactive) abort
   return _
 endfunction
 
-let [s:tabnrs, s:tabnr, s:tabline] = [-1, -1, '']
+let s:tabnr = -1
+let s:tabcnt = -1
+let s:tabline = ''
 function! lightline#tabline() abort
   if !has_key(s:highlight, 'tabline')
     call lightline#highlight('tabline')
   endif
-  if s:lightline.tabline_configured || [s:tabnrs, s:tabnr] != [tabpagenr('$'), tabpagenr()]
-    let [s:tabnrs, s:tabnr, s:tabline] = [tabpagenr('$'), tabpagenr(), s:line(1, 0)]
+  if s:lightline.tabline_configured || s:tabnr != tabpagenr() || s:tabcnt != tabpagenr('$')
+    let s:tabnr = tabpagenr()
+    let s:tabcnt = tabpagenr('$')
+    let s:tabline = s:line(1, 0)
   endif
   return s:tabline
 endfunction
