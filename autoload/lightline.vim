@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/20 00:56:45.
+" Last Change: 2016/03/20 09:33:05.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -112,8 +112,8 @@ function! lightline#init() abort
         \ 'inactive': [ 'tabnum', 'filename', 'modified' ] }, 'keep')
   call extend(s:lightline.mode_map, {
         \ 'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL',
-        \ 'V': 'V-LINE', 'c': 'COMMAND', "\<C-v>": 'V-BLOCK', 's': 'SELECT',
-        \ 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', 't': 'TERMINAL', '?': '      ' }, 'keep')
+        \ 'V': 'V-LINE', "\<C-v>": 'V-BLOCK', 'c': 'COMMAND', 's': 'SELECT',
+        \ 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', 't': 'TERMINAL', '?': '' }, 'keep')
   let s:lightline._mode_ = {
         \ 'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual',
         \ 'c': 'command', "\<C-v>": 'visual', 's': 'select', 'S': 'select', "\<C-s>": 'select',
