@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/20 09:33:05.
+" Last Change: 2016/03/20 10:04:23.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -82,24 +82,78 @@ function! lightline#toggle() abort
   endif
 endfunction
 
+let s:_lightline = {
+      \   'active': {
+      \     'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
+      \     'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \   },
+      \   'inactive': {
+      \     'left': [ [ 'filename' ] ],
+      \     'right': [ [ 'lineinfo' ], [ 'percent' ] ]
+      \   },
+      \   'tabline': {
+      \     'left': [ [ 'tabs' ] ],
+      \     'right': [ [ 'close' ] ]
+      \   },
+      \   'tab': {
+      \     'active': [ 'tabnum', 'filename', 'modified' ],
+      \     'inactive': [ 'tabnum', 'filename', 'modified' ]
+      \   },
+      \   'component': {
+      \     'mode': '%{lightline#mode()}',
+      \     'absolutepath': '%F', 'relativepath': '%f', 'filename': '%t', 'modified': '%M', 'bufnum': '%n',
+      \     'spell': '%{&spell?&spelllang:"no spell"}',
+      \     'paste': '%{&paste?"PASTE":""}', 'readonly': '%R', 'charvalue': '%b', 'charvaluehex': '%B',
+      \     'fileencoding': '%{strlen(&fenc)?&fenc:&enc}', 'fileformat': '%{&fileformat}',
+      \     'filetype': '%{strlen(&filetype)?&filetype:"no ft"}', 'percent': '%3p%%', 'percentwin': '%P',
+      \     'lineinfo': '%3l:%-2v', 'line': '%l', 'column': '%c', 'close': '%999X X '
+      \   },
+      \   'component_visible_condition': {
+      \     'modified': '&modified||!&modifiable', 'readonly': '&readonly', 'paste': '&paste'
+      \   },
+      \   'component_function': {},
+      \   'component_expand': {
+      \     'tabs': 'lightline#tabs'
+      \   },
+      \   'component_type': {
+      \     'tabs': 'tabsel', 'close': 'raw'
+      \   },
+      \   'tab_component': {},
+      \   'tab_component_function': {
+      \     'filename': 'lightline#tab#filename', 'modified': 'lightline#tab#modified',
+      \     'readonly': 'lightline#tab#readonly', 'tabnum': 'lightline#tab#tabnum'
+      \   },
+      \   'colorscheme': 'default',
+      \   'mode_map': {
+      \     'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL', 'V': 'V-LINE', "\<C-v>": 'V-BLOCK',
+      \     'c': 'COMMAND', 's': 'SELECT', 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', 't': 'TERMINAL', '?': ''
+      \   },
+      \   'separator': { 'left': '', 'right': '' },
+      \   'subseparator': { 'left': '|', 'right': '|' },
+      \   'tabline_separator': {},
+      \   'tabline_subseparator': {},
+      \   'enable': { 'statusline': 1, 'tabline': 1 },
+      \   '_mode_': {
+      \     'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual', "\<C-v>": 'visual',
+      \     'c': 'command', 's': 'select', 'S': 'select', "\<C-s>": 'select', 't': 'terminal'
+      \   },
+      \   'mode_fallback': { 'replace': 'insert', 'terminal': 'insert', 'select': 'visual' },
+      \   'palette': {},
+      \ }
 function! lightline#init() abort
   let s:lightline = deepcopy(get(g:, 'lightline', {}))
-  for k in ['active', 'inactive', 'tabline', 'tab', 'mode_map', 'mode_fallback', 'enable',
-        \ 'component', 'component_visible_condition', 'component_function', 'component_expand', 'component_type',
-        \ 'tab_component', 'tab_component_function', 'separator', 'subseparator', 'tabline_separator', 'tabline_subseparator' ]
-    if !has_key(s:lightline, k)
-      let s:lightline[k] = {}
+  for [key, value] in items(s:_lightline)
+    if type(value) == type({})
+      if !has_key(s:lightline, key)
+        let s:lightline[key] = {}
+      endif
+      call extend(s:lightline[key], value, 'keep')
+    elseif !has_key(s:lightline, key)
+      let s:lightline[key] = value
     endif
   endfor
-  call extend(s:lightline.active, {
-        \ 'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
-        \ 'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ] }, 'keep')
-  call extend(s:lightline.inactive, {
-        \ 'left': [ [ 'filename' ] ],
-        \ 'right': [ [ 'lineinfo' ], [ 'percent' ] ] }, 'keep')
-  call extend(s:lightline.tabline, {
-        \ 'left': [ [ 'tabs' ] ],
-        \ 'right': [ [ 'close' ] ] }, 'keep')
+  call extend(s:lightline.tabline_separator, s:lightline.separator, 'keep')
+  call extend(s:lightline.tabline_subseparator, s:lightline.subseparator, 'keep')
   let s:lightline.tabline_configured = 0
   for components in deepcopy(s:lightline.tabline.left + s:lightline.tabline.right)
     if len(filter(components, 'v:val !=# "tabs" && v:val !=# "close"')) > 0
@@ -107,39 +161,6 @@ function! lightline#init() abort
       break
     endif
   endfor
-  call extend(s:lightline.tab, {
-        \ 'active': [ 'tabnum', 'filename', 'modified' ],
-        \ 'inactive': [ 'tabnum', 'filename', 'modified' ] }, 'keep')
-  call extend(s:lightline.mode_map, {
-        \ 'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL',
-        \ 'V': 'V-LINE', "\<C-v>": 'V-BLOCK', 'c': 'COMMAND', 's': 'SELECT',
-        \ 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', 't': 'TERMINAL', '?': '' }, 'keep')
-  let s:lightline._mode_ = {
-        \ 'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual',
-        \ 'c': 'command', "\<C-v>": 'visual', 's': 'select', 'S': 'select', "\<C-s>": 'select',
-        \ 't': 'terminal' }
-  call extend(s:lightline.mode_fallback, { 'replace': 'insert', 'terminal': 'insert', 'select': 'visual' })
-  call extend(s:lightline.component, {
-        \ 'mode': '%{lightline#mode()}',
-        \ 'absolutepath': '%F', 'relativepath': '%f', 'filename': '%t', 'modified': '%M', 'bufnum': '%n',
-        \ 'spell': '%{&spell?&spelllang:"no spell"}',
-        \ 'paste': '%{&paste?"PASTE":""}', 'readonly': '%R', 'charvalue': '%b', 'charvaluehex': '%B',
-        \ 'fileencoding': '%{strlen(&fenc)?&fenc:&enc}', 'fileformat': '%{&fileformat}',
-        \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}', 'percent': '%3p%%', 'percentwin': '%P',
-        \ 'lineinfo': '%3l:%-2v', 'line': '%l', 'column': '%c', 'close': '%999X X ' }, 'keep')
-  call extend(s:lightline.component_visible_condition, {
-        \ 'modified': '&modified||!&modifiable', 'readonly': '&readonly', 'paste': '&paste' }, 'keep')
-  call extend(s:lightline.component_expand, { 'tabs': 'lightline#tabs' }, 'keep')
-  call extend(s:lightline.component_type, { 'tabs': 'tabsel', 'close': 'raw' }, 'keep')
-  call extend(s:lightline.tab_component_function, {
-        \ 'filename': 'lightline#tab#filename', 'modified': 'lightline#tab#modified',
-        \ 'readonly': 'lightline#tab#readonly', 'tabnum': 'lightline#tab#tabnum' }, 'keep')
-  call extend(s:lightline.separator, { 'left': '', 'right': '' }, 'keep')
-  call extend(s:lightline.subseparator, { 'left': '|', 'right': '|' }, 'keep')
-  call extend(s:lightline.tabline_separator, s:lightline.separator, 'keep')
-  call extend(s:lightline.tabline_subseparator, s:lightline.subseparator, 'keep')
-  call extend(s:lightline, { 'palette': {}, 'colorscheme': 'default' }, 'keep')
-  call extend(s:lightline.enable, { 'statusline': 1, 'tabline': 1 }, 'keep')
   if !exists('s:_statusline')
     let s:_statusline = &statusline
   endif
