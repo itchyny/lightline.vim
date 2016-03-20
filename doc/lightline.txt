@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2015/11/04 08:30:43.
+Last Change: 2016/03/20 09:33:37.
 
 CONTENTS					*lightline-contents*
 
@@ -207,7 +207,8 @@ OPTIONS						*lightline-option*
 		powerline theme.
 
 	g:lightline.mode_map			*g:lightline.mode_map*
-		A dictionary of names for mode.
+		A dictionary of names for the modes. The keys are the return
+		values of |mode()|.
 		The default value is:
 >
 		let g:lightline.mode_map = {
@@ -216,19 +217,18 @@ OPTIONS						*lightline-option*
 		    \ 'R' : 'REPLACE',
 		    \ 'v' : 'VISUAL',
 		    \ 'V' : 'V-LINE',
-		    \ 'c' : 'COMMAND',
 		    \ "\<C-v>": 'V-BLOCK',
+		    \ 'c' : 'COMMAND',
 		    \ 's' : 'SELECT',
 		    \ 'S' : 'S-LINE',
 		    \ "\<C-s>": 'S-BLOCK',
-		    \ '?': '      ' }
+		    \ 't': 'TERMINAL',
+		    \ '?': '' }
 <
 		When you search a word, you get into the command mode. But if
-		you want to keep the mode indicator as 'NORMAL', add
->
-		let g:lightline.mode_map.c = 'NORMAL'
-<
-		to your .vimrc.
+		you want to keep the mode indicator as 'NORMAL', add >
+		let g:lightline = { 'mode_map': { 'c': 'NORMAL' } }
+<		to your .vimrc.
 
 	g:lightline.separator			*g:lightline.separator*
 	g:lightline.subseparator		*g:lightline.subseparator*
