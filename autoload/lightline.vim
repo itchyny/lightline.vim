@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/20 10:36:21.
+" Last Change: 2016/03/20 19:00:31.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -139,6 +139,7 @@ let s:_lightline = {
       \   },
       \   'mode_fallback': { 'replace': 'insert', 'terminal': 'insert', 'select': 'visual' },
       \   'palette': {},
+      \   'winwidth': winwidth(0),
       \ }
 function! lightline#init() abort
   let s:lightline = deepcopy(get(g:, 'lightline', {}))
@@ -483,7 +484,6 @@ function! lightline#tabline() abort
   return s:tabline
 endfunction
 
-let s:winwidth = get(get(g:, 'lightline', {}), 'winwidth', winwidth(0))
 function! lightline#tabs() abort
   let [x, y, z] = [[], [], []]
   let nr = tabpagenr()
@@ -492,7 +492,7 @@ function! lightline#tabs() abort
     call add(i < nr ? x : i == nr ? y : z, '%'. i . 'T%{lightline#onetab(' . i . ',' . (i == nr) . ')}' . (i == cnt ? '%T' : ''))
   endfor
   let abbr = '...'
-  let n = min([max([s:winwidth / 40, 2]), 8])
+  let n = min([max([s:lightline.winwidth / 40, 2]), 8])
   if len(x) > n && len(z) > n
     let x = extend(add(x[:n/2-1], abbr), x[-(n+1)/2:])
     let z = extend(add(z[:(n+1)/2-1], abbr), z[-n/2:])
