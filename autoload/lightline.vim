@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/21 16:28:31.
+" Last Change: 2016/03/21 17:10:45.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -362,18 +362,35 @@ function! lightline#statusline(inactive) abort
   return s:line(0, a:inactive)
 endfunction
 
-function! s:_expand(a, c, _, component, type, i) abort
+function! s:normalize(result) abort
+  if type(a:result) == 3
+    return map(a:result, 'type(v:val) == 1 ? v:val : string(v:val)')
+  elseif type(a:result) == 1
+    return [a:result]
+  else
+    return [string(a:result)]
+  endif
+endfunction
+
+function! s:evaluate_expand(component) abort
   try
-    let r = eval(a:component . '()')
-    if type(r) == 1 && r ==# ''
-      return
+    let result = eval(a:component . '()')
+    if type(result) == type('') && result ==# ''
+      return []
     endif
-    let s = type(r) == 3 ? (len(r) < 3 ? r + [[], [], []] : r) : [[], [r], []]
   catch
-    return
+    return []
   endtry
+  return map(type(result) == 3 ? (result + [[], [], []])[:2] : [[], [result], []], 'filter(s:normalize(v:val), "v:val !=# ''''")')
+endfunction
+
+function! s:_expand(a, c, _, component, type, i) abort
+  let results = s:evaluate_expand(a:component)
+  if results == []
+    return
+  endif
   for k in [0, 1, 2]
-    let sk = filter(type(s[k])==3?map(s[k],'type(v:val)==1?(v:val):string(v:val)'):type(s[k])==1?[s[k]]:[string(s[k])],'strlen(v:val)')
+    let sk = results[k]
     if len(sk)
       unlet! m
       let m = k == 1 ? a:type : a:i
