@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/21 15:56:33.
+" Last Change: 2016/03/21 16:02:19.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -362,9 +362,9 @@ function! lightline#statusline(inactive) abort
   return s:line(0, a:inactive)
 endfunction
 
-function! s:_expand(a, c, _, e, t, i, name) abort
+function! s:_expand(a, c, _, component, type, i) abort
   try
-    let r = eval(a:e[a:name] . '()')
+    let r = eval(a:component . '()')
     if type(r) == 1 && r ==# ''
       return
     endif
@@ -376,7 +376,7 @@ function! s:_expand(a, c, _, e, t, i, name) abort
     let sk = filter(type(s[k])==3?map(s[k],'type(v:val)==1?(v:val):string(v:val)'):type(s[k])==1?[s[k]]:[string(s[k])],'strlen(v:val)')
     if len(sk)
       unlet! m
-      let m = k == 1 && has_key(a:t, a:name) ? a:t[a:name] : a:i
+      let m = k == 1 ? a:type : a:i
       if !len(a:a) || type(a:a[-1]) != type(m) || a:a[-1] != m
         if len(a:_[-1])
           call add(a:_, sk)
@@ -408,7 +408,7 @@ function! s:expand(x) abort
     endif
     for name in a:x[i]
       if has_key(e, name)
-        call s:_expand(a, c, _, e, t, i, name)
+        call s:_expand(a, c, _, e[name], get(t, name, i), i)
       elseif has_key(d, name) || has_key(f, name)
         if !len(a) || type(a[-1]) != type(i) || a[-1] != i
           call add(a, i)
