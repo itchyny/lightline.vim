@@ -173,6 +173,32 @@ endfunction
 
 function! s:suite.custom_void_string_array_2()
   function! Custom()
+    return [[''], [''], ['']]
+  endfunction
+  let g:lightline = { 'component_expand': { 'custom': 'Custom' } }
+  call lightline#init()
+  call s:assert.equals(SID('expand')([['readonly', 'filename'], ['custom'], ['modified']]),
+        \ [[['readonly', 'filename'], ['modified']], [[0, 0], [0]], [0, 2, 3]])
+  call s:assert.equals(SID('expand')([['readonly', 'filename', 'custom', 'modified']]),
+        \ [[['readonly', 'filename', 'modified']], [[0, 0, 0]], [0, 1]])
+  delfunction Custom
+endfunction
+
+function! s:suite.custom_type_void_string_array_2()
+  function! Custom()
+    return [[''], [''], ['']]
+  endfunction
+  let g:lightline = { 'component_expand': { 'custom': 'Custom' }, 'component_type': { 'custom': 'custom' } }
+  call lightline#init()
+  call s:assert.equals(SID('expand')([['readonly', 'filename'], ['custom'], ['modified']]),
+        \ [[['readonly', 'filename'], ['modified']], [[0, 0], [0]], [0, 2, 3]])
+  call s:assert.equals(SID('expand')([['readonly', 'filename', 'custom', 'modified']]),
+        \ [[['readonly', 'filename', 'modified']], [[0, 0, 0]], [0, 1]])
+  delfunction Custom
+endfunction
+
+function! s:suite.custom_void_string_array_3()
+  function! Custom()
     return ['', 'custom', '']
   endfunction
   let g:lightline = { 'component_expand': { 'custom': 'Custom' } }
@@ -184,9 +210,35 @@ function! s:suite.custom_void_string_array_2()
   delfunction Custom
 endfunction
 
-function! s:suite.custom_type_void_string_array_2()
+function! s:suite.custom_type_void_string_array_3()
   function! Custom()
     return ['', 'custom', '']
+  endfunction
+  let g:lightline = { 'component_expand': { 'custom': 'Custom' }, 'component_type': { 'custom': 'custom' } }
+  call lightline#init()
+  call s:assert.equals(SID('expand')([['readonly', 'filename'], ['custom'], ['modified']]),
+        \ [[['readonly', 'filename'], ['custom'], ['modified']], [[0, 0], [1], [0]], [0, 'custom', 2, 3]])
+  call s:assert.equals(SID('expand')([['readonly', 'filename', 'custom', 'modified']]),
+        \ [[['readonly', 'filename'], ['custom'], ['modified']], [[0, 0], [1], [0]], [0, 'custom', 0, 1]])
+  delfunction Custom
+endfunction
+
+function! s:suite.custom_void_string_array_4()
+  function! Custom()
+    return [[''], ['custom'], ['']]
+  endfunction
+  let g:lightline = { 'component_expand': { 'custom': 'Custom' } }
+  call lightline#init()
+  call s:assert.equals(SID('expand')([['readonly', 'filename'], ['custom'], ['modified']]),
+        \ [[['readonly', 'filename'], ['custom'], ['modified']], [[0, 0], [1], [0]], [0, 1, 2, 3]])
+  call s:assert.equals(SID('expand')([['readonly', 'filename', 'custom', 'modified']]),
+        \ [[['readonly', 'filename', 'custom', 'modified']], [[0, 0, 1, 0]], [0, 1]])
+  delfunction Custom
+endfunction
+
+function! s:suite.custom_type_void_string_array_4()
+  function! Custom()
+    return [[''], ['custom'], ['']]
   endfunction
   let g:lightline = { 'component_expand': { 'custom': 'Custom' }, 'component_type': { 'custom': 'custom' } }
   call lightline#init()
@@ -272,6 +324,32 @@ function! s:suite.custom_type_mixed()
         \ [[['readonly', 'filename'], ['left'], ['{''custom'': 24}'], ['function(''tr'')'], ['modified']], [[0, 0], [1], [1], [1], [0]], [0, 1, 'custom', 1, 2, 3]])
   call s:assert.equals(SID('expand')([['readonly', 'filename', 'custom', 'modified']]),
         \ [[['readonly', 'filename', 'left'], ['{''custom'': 24}'], ['function(''tr'')', 'modified']], [[0, 0, 1], [1], [1, 0]], [0, 'custom', 0, 1]])
+  delfunction Custom
+endfunction
+
+function! s:suite.custom_mixed_2()
+  function! Custom()
+    return [['left', ''], ['', { 'custom': 24 }, ''], [[function('tr')], '']]
+  endfunction
+  let g:lightline = { 'component_expand': { 'custom': 'Custom' } }
+  call lightline#init()
+  call s:assert.equals(SID('expand')([['readonly', 'filename'], ['custom'], ['modified']]),
+        \ [[['readonly', 'filename'], ['left', '{''custom'': 24}', '[function(''tr'')]'], ['modified']], [[0, 0], [1, 1, 1], [0]], [0, 1, 2, 3]])
+  call s:assert.equals(SID('expand')([['readonly', 'filename', 'custom', 'modified']]),
+        \ [[['readonly', 'filename', 'left', '{''custom'': 24}', '[function(''tr'')]', 'modified']], [[0, 0, 1, 1, 1, 0]], [0, 1]])
+  delfunction Custom
+endfunction
+
+function! s:suite.custom_type_mixed_2()
+  function! Custom()
+    return [['left', ''], ['', { 'custom': 24 }, ''], [[function('tr')], '']]
+  endfunction
+  let g:lightline = { 'component_expand': { 'custom': 'Custom' }, 'component_type': { 'custom': 'custom' } }
+  call lightline#init()
+  call s:assert.equals(SID('expand')([['readonly', 'filename'], ['custom'], ['modified']]),
+        \ [[['readonly', 'filename'], ['left'], ['{''custom'': 24}'], ['[function(''tr'')]'], ['modified']], [[0, 0], [1], [1], [1], [0]], [0, 1, 'custom', 1, 2, 3]])
+  call s:assert.equals(SID('expand')([['readonly', 'filename', 'custom', 'modified']]),
+        \ [[['readonly', 'filename', 'left'], ['{''custom'': 24}'], ['[function(''tr'')]', 'modified']], [[0, 0, 1], [1], [1, 0]], [0, 'custom', 0, 1]])
   delfunction Custom
 endfunction
 
