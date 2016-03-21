@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/21 15:48:38.
+" Last Change: 2016/03/21 15:56:33.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -362,9 +362,9 @@ function! lightline#statusline(inactive) abort
   return s:line(0, a:inactive)
 endfunction
 
-function! s:_expand(a, c, _, e, t, i, j, x) abort
+function! s:_expand(a, c, _, e, t, i, name) abort
   try
-    let r = eval(a:e[a:x[a:i][a:j]] . '()')
+    let r = eval(a:e[a:name] . '()')
     if type(r) == 1 && r ==# ''
       return
     endif
@@ -376,7 +376,7 @@ function! s:_expand(a, c, _, e, t, i, j, x) abort
     let sk = filter(type(s[k])==3?map(s[k],'type(v:val)==1?(v:val):string(v:val)'):type(s[k])==1?[s[k]]:[string(s[k])],'strlen(v:val)')
     if len(sk)
       unlet! m
-      let m = k == 1 && has_key(a:t, a:x[a:i][a:j]) ? a:t[a:x[a:i][a:j]] : a:i
+      let m = k == 1 && has_key(a:t, a:name) ? a:t[a:name] : a:i
       if !len(a:a) || type(a:a[-1]) != type(m) || a:a[-1] != m
         if len(a:_[-1])
           call add(a:_, sk)
@@ -406,10 +406,10 @@ function! s:expand(x) abort
       call add(_, [])
       call add(c, [])
     endif
-    for j in range(len(a:x[i]))
-      if has_key(e, a:x[i][j])
-        call s:_expand(a, c, _, e, t, i, j, a:x)
-      elseif has_key(d, a:x[i][j]) || has_key(f, a:x[i][j])
+    for name in a:x[i]
+      if has_key(e, name)
+        call s:_expand(a, c, _, e, t, i, name)
+      elseif has_key(d, name) || has_key(f, name)
         if !len(a) || type(a[-1]) != type(i) || a[-1] != i
           call add(a, i)
           if len(_) && len(_[-1])
@@ -417,7 +417,7 @@ function! s:expand(x) abort
             call add(c, [])
           endif
         endif
-        call add(_[-1], a:x[i][j])
+        call add(_[-1], name)
         call add(c[-1], 0)
       endif
     endfor
