@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/21 17:10:45.
+" Last Change: 2016/03/21 17:50:47.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -416,8 +416,6 @@ function! s:_expand(a, c, _, component, type, i) abort
 endfunction
 
 function! s:expand(x) abort
-  let component = s:lightline.component
-  let component_function = s:lightline.component_function
   let component_expand = s:lightline.component_expand
   let component_type = s:lightline.component_type
   let [a, c, _] = [[], [], []]
@@ -429,7 +427,7 @@ function! s:expand(x) abort
     for name in a:x[i]
       if has_key(component_expand, name)
         call s:_expand(a, c, _, component_expand[name], get(component_type, name, i), i)
-      elseif has_key(component, name) || has_key(component_function, name)
+      else
         if !len(a) || type(a[-1]) != type(i) || a[-1] != i
           call add(a, i)
           if len(_) && len(_[-1])
