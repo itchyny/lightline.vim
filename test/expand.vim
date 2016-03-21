@@ -41,6 +41,32 @@ function! s:suite.custom_type()
   delfunction Custom
 endfunction
 
+function! s:suite.multiple()
+  function! Custom()
+    return [ ['x0', 'x1', 'x2'], ['y0', 'y1', 'y2'], ['z0', 'z1', 'z2'] ]
+  endfunction
+  let g:lightline = { 'component_expand': { 'custom': 'Custom' } }
+  call lightline#init()
+  call s:assert.equals(SID('expand')([['readonly', 'filename'], ['custom'], ['modified']]),
+        \ [[['readonly', 'filename'], ['x0', 'x1', 'x2', 'y0', 'y1', 'y2', 'z0', 'z1', 'z2'], ['modified']], [[0, 0], [1, 1, 1, 1, 1, 1, 1, 1, 1], [0]], [0, 1, 2, 3]])
+  call s:assert.equals(SID('expand')([['readonly', 'filename', 'custom', 'modified']]),
+        \ [[['readonly', 'filename', 'x0', 'x1', 'x2', 'y0', 'y1', 'y2', 'z0', 'z1', 'z2', 'modified']], [[0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]], [0, 1]])
+  delfunction Custom
+endfunction
+
+function! s:suite.multiple_type()
+  function! Custom()
+    return [ ['x0', 'x1', 'x2'], ['y0', 'y1', 'y2'], ['z0', 'z1', 'z2'] ]
+  endfunction
+  let g:lightline = { 'component_expand': { 'custom': 'Custom' }, 'component_type': { 'custom': 'custom' } }
+  call lightline#init()
+  call s:assert.equals(SID('expand')([['readonly', 'filename'], ['custom'], ['modified']]),
+        \ [[['readonly', 'filename'], ['x0', 'x1', 'x2'], ['y0', 'y1', 'y2'], ['z0', 'z1', 'z2'], ['modified']], [[0, 0], [1, 1, 1], [1, 1, 1], [1, 1, 1], [0]], [0, 1, 'custom', 1, 2, 3]])
+  call s:assert.equals(SID('expand')([['readonly', 'filename', 'custom', 'modified']]),
+        \ [[['readonly', 'filename', 'x0', 'x1', 'x2'], ['y0', 'y1', 'y2'], ['z0', 'z1', 'z2', 'modified']], [[0, 0, 1, 1, 1], [1, 1, 1], [1, 1, 1, 0]], [0, 'custom', 0, 1]])
+  delfunction Custom
+endfunction
+
 function! s:suite.flatten()
   function! Custom()
     return [ 'left', 'middle', 'right' ]
