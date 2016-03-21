@@ -67,6 +67,32 @@ function! s:suite.custom_type_string()
   delfunction Custom
 endfunction
 
+function! s:suite.custom_void_string()
+  function! Custom()
+    return ''
+  endfunction
+  let g:lightline = { 'component_expand': { 'custom': 'Custom' } }
+  call lightline#init()
+  call s:assert.equals(SID('expand')([['readonly', 'filename'], ['custom'], ['modified']]),
+        \ [[['readonly', 'filename'], [], ['modified']], [[0, 0], [], [0]], [0, 1, 2, 3]])
+  call s:assert.equals(SID('expand')([['readonly', 'filename', 'custom', 'modified']]),
+        \ [[['readonly', 'filename', 'modified']], [[0, 0, 0]], [0, 1]])
+  delfunction Custom
+endfunction
+
+function! s:suite.custom_void_string()
+  function! Custom()
+    return ''
+  endfunction
+  let g:lightline = { 'component_expand': { 'custom': 'Custom' }, 'component_type': { 'custom': 'custom' } }
+  call lightline#init()
+  call s:assert.equals(SID('expand')([['readonly', 'filename'], ['custom'], ['modified']]),
+        \ [[['readonly', 'filename'], ['modified']], [[0, 0], [0]], [0, 2, 3]])
+  call s:assert.equals(SID('expand')([['readonly', 'filename', 'custom', 'modified']]),
+        \ [[['readonly', 'filename', 'modified']], [[0, 0, 0]], [0, 1]])
+  delfunction Custom
+endfunction
+
 function! s:suite.custom_number()
   function! Custom()
     return 24
