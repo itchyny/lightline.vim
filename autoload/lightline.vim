@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/21 16:05:22.
+" Last Change: 2016/03/21 16:28:31.
 " =============================================================================
 
 let s:save_cpo = &cpo
