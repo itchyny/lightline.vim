@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/21 15:09:56.
+" Last Change: 2016/03/21 15:48:38.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -364,7 +364,7 @@ endfunction
 
 function! s:_expand(a, c, _, e, t, i, j, x) abort
   try
-    let r = exists('*'.a:e[a:x[a:i][a:j]]) ? eval(a:e[a:x[a:i][a:j]] . '()') : ''
+    let r = eval(a:e[a:x[a:i][a:j]] . '()')
     if type(r) == 1 && r ==# ''
       return
     endif
