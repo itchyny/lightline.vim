@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/21 17:50:47.
+" Last Change: 2016/03/22 09:07:32.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -384,68 +384,43 @@ function! s:evaluate_expand(component) abort
   return map(type(result) == 3 ? (result + [[], [], []])[:2] : [[], [result], []], 'filter(s:normalize(v:val), "v:val !=# ''''")')
 endfunction
 
-function! s:_expand(a, c, _, component, type, i) abort
-  let results = s:evaluate_expand(a:component)
-  if results == []
-    return
+function! s:convert(name, index) abort
+  if has_key(s:lightline.component_expand, a:name)
+    let type = get(s:lightline.component_type, a:name, a:index)
+    return filter(map(s:evaluate_expand(s:lightline.component_expand[a:name]), '[v:val, 1, v:key == 1 ? type : a:index]'), 'v:val[0] != []')
+  else
+    return [[[a:name], 0, a:index]]
   endif
-  for k in [0, 1, 2]
-    let sk = results[k]
-    if len(sk)
-      unlet! m
-      let m = k == 1 ? a:type : a:i
-      if !len(a:a) || type(a:a[-1]) != type(m) || a:a[-1] != m
-        if len(a:_[-1])
-          call add(a:_, sk)
-          call add(a:c, repeat([1], len(sk)))
-        else
-          call extend(a:_[-1], sk)
-          call extend(a:c[-1], repeat([1], len(sk)))
-        endif
-        call add(a:a, m)
-      else
-        if len(a:_) > 1 && !len(a:_[-1])
-          call remove(a:_, -1)
-          call remove(a:c, -1)
-        endif
-        call extend(a:_[-1], sk)
-        call extend(a:c[-1], repeat([1], len(sk)))
-      endif
-    endif
-  endfor
 endfunction
 
-function! s:expand(x) abort
-  let component_expand = s:lightline.component_expand
-  let component_type = s:lightline.component_type
-  let [a, c, _] = [[], [], []]
-  for i in range(len(a:x))
-    if !len(_) || len(_[-1])
-      call add(_, [])
-      call add(c, [])
-    endif
-    for name in a:x[i]
-      if has_key(component_expand, name)
-        call s:_expand(a, c, _, component_expand[name], get(component_type, name, i), i)
-      else
-        if !len(a) || type(a[-1]) != type(i) || a[-1] != i
-          call add(a, i)
-          if len(_) && len(_[-1])
-            call add(_, [])
-            call add(c, [])
-          endif
-        endif
-        call add(_[-1], name)
-        call add(c[-1], 0)
-      endif
-    endfor
+function! s:flatten(xss) abort
+  let ys = []
+  for xs in a:xss
+    let ys += xs
   endfor
-  call add(a, len(a:x))
-  while len(_) && !len(_[-1])
-    call remove(_, -1)
-    call remove(c, -1)
-  endwhile
-  return [_, c, a]
+  return ys
+endfunction
+
+function! s:expand(components) abort
+  let components = []
+  let expanded = []
+  let indices = []
+  let previndex = -1
+  let xs = s:flatten(s:flatten(map(deepcopy(a:components), 'map(v:val, "s:convert(v:val, " . v:key . ")")')))
+  for [component, expand, index] in xs
+    if type(previndex) != type(index) || previndex != index
+      call add(indices, index)
+      call add(components, [])
+      call add(expanded, [])
+    endif
+    call extend(components[-1], component)
+    call extend(expanded[-1], repeat([expand], len(component)))
+    unlet previndex
+    let previndex = index
+    unlet index
+  endfor
+  call add(indices, len(a:components))
+  return [components, expanded, indices]
 endfunction
 
 function! s:line(tabline, inactive) abort
