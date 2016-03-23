@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/23 14:12:05.
+" Last Change: 2016/03/24 08:46:19.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -344,15 +344,9 @@ function! s:subseparator(x, y, s, a, b) abort
         \'(a:b[v:val]?"1":has_key(f,a:y[v:val])?"!!strlen(exists(\"*".f[a:y[v:val]]."\")?".f[a:y[v:val]]."():\"\")":get(v,a:y[v:val],has_key(c,a:y[v:val])?"1":"0"))'),')+(')."))?('".a:s."'):''}"
 endfunction
 
-function! lightline#concatenate(x, s) abort
-  let [_, k, s] = ['', 0, ' ' . [s:lightline.subseparator.left, s:lightline.subseparator.right][!!a:s] . ' ']
-  for i in range(len(a:x))
-    let [_, k] = [_ . a:x[i], k || len(a:x[i])]
-    if k && i + 1 < len(a:x) && len(a:x[i + 1])
-      let _ .= s
-    endif
-  endfor
-  return _
+function! lightline#concatenate(xs, right) abort
+  let separator = a:right ? s:lightline.subseparator.right : s:lightline.subseparator.left
+  return join(filter(copy(a:xs), 'v:val !=# ""'), ' ' . separator . ' ')
 endfunction
 
 function! lightline#statusline(inactive) abort
