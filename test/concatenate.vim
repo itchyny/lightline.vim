@@ -80,3 +80,11 @@ function! s:suite.three_empty_all()
   call s:assert.equals(lightline#concatenate(['', '', ''], 0), '')
   call s:assert.equals(lightline#concatenate(['', '', ''], 1), '')
 endfunction
+
+function! s:suite.keep_original()
+  let xs = ['', 'bar', '']
+  call s:assert.equals(lightline#concatenate(xs, 0), 'bar')
+  call s:assert.equals(xs, ['', 'bar', ''])
+  call s:assert.equals(lightline#concatenate(xs, 1), 'bar')
+  call s:assert.equals(xs, ['', 'bar', ''])
+endfunction
