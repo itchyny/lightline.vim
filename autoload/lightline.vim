@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/24 21:15:04.
+" Last Change: 2016/03/24 21:22:33.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -255,9 +255,26 @@ function! s:term(l) abort
   return len(a:l) == 5 && type(a:l[4]) == 1 && strlen(a:l[4]) ? 'term='.a:l[4].' cterm='.a:l[4].' gui='.a:l[4] : ''
 endfunction
 
-function! s:unique(xs) abort
-  return uniq(sort(copy(a:xs)))
-endfunction
+if exists('*uniq')
+  function! s:unique(xs) abort
+    return uniq(sort(a:xs))
+  endfunction
+else
+  function! s:unique(xs) abort
+    call sort(a:xs)
+    let i = 0
+    let l = len(a:xs) - 1
+    while i < l
+      if a:xs[i] ==# a:xs[i + 1]
+        call remove(a:xs, i + 1)
+        let l -= 1
+      else
+        let i += 1
+      endif
+    endwhile
+    return a:xs
+  endfunction
+endif
 
 function! lightline#highlight(...) abort
   let [c, f, g] = [s:lightline.palette, s:lightline.mode_fallback, s:lightline.component_type]
