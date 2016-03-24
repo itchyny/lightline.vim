@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/24 21:22:33.
+" Last Change: 2016/03/24 21:29:36.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -289,7 +289,7 @@ function! lightline#highlight(...) abort
   endif
   let [s:lightline.llen, s:lightline.rlen] = [len(c.normal.left), len(c.normal.right)]
   let [s:lightline.tab_llen, s:lightline.tab_rlen] = [len(has_key(c,'tabline') && has_key(c.tabline, 'left') ? c.tabline.left : c.normal.left), len(has_key(c,'tabline') && has_key(c.tabline, 'right') ? c.tabline.right : c.normal.right)]
-  let h = s:unique(filter(copy(values(g)), 'v:val !=# "raw"'))
+  let h = s:unique(filter(values(g), 'v:val !=# "raw"'))
   let modes = a:0 ? [a:1] : extend(['normal', 'insert', 'replace', 'visual', 'inactive', 'command', 'select', 'tabline'], has('nvim') ? ['terminal'] : [])
   for mode in modes
     let s:highlight[mode] = 1
