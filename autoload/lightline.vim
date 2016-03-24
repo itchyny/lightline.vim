@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/24 20:58:46.
+" Last Change: 2016/03/24 21:15:04.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -255,17 +255,8 @@ function! s:term(l) abort
   return len(a:l) == 5 && type(a:l[4]) == 1 && strlen(a:l[4]) ? 'term='.a:l[4].' cterm='.a:l[4].' gui='.a:l[4] : ''
 endfunction
 
-function! s:unique(l) abort
-  let [l,i,s] = [a:l,0,{}]
-  while i < len(l)
-    let k = string(l[i])
-    if has_key(s, k)
-      call remove(l, i)
-    else
-      let [s[k],i] = [1,i+1]
-    endif
-  endwhile
-  return l
+function! s:unique(xs) abort
+  return uniq(sort(copy(a:xs)))
 endfunction
 
 function! lightline#highlight(...) abort
