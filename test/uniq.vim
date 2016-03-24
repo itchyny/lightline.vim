@@ -29,6 +29,10 @@ function! s:suite.three_duplicated()
   call s:assert.equals(s:uniq(['foo', 'bar', 'foo']), ['foo', 'bar', 'foo'])
 endfunction
 
+function! s:suite.many2()
+  call s:assert.equals(s:uniq(['foo', 'foo', 'foo', 'foo', 'bar', 'bar', 'bar']), ['foo', 'bar'])
+endfunction
+
 function! s:suite.many()
   call s:assert.equals(s:uniq(['foo', 'foo', 'bar', 'baz', 'baz', 'qux', 'foo']), ['foo', 'bar', 'baz', 'qux', 'foo'])
 endfunction
