@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/24 21:35:29.
+" Last Change: 2016/03/24 21:44:35.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -265,10 +265,8 @@ else
     while 0 < i
       if a:xs[i] ==# a:xs[i - 1]
         call remove(a:xs, i)
-        let i -= 2
-      else
-        let i -= 1
       endif
+      let i -= 1
     endwhile
     return a:xs
   endfunction
