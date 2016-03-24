@@ -14,11 +14,11 @@ function! s:suite.one()
 endfunction
 
 function! s:suite.two()
-  call s:assert.equals(s:unique(['foo', 'bar']), ['foo', 'bar'])
+  call s:assert.equals(s:unique(['foo', 'bar']), ['bar', 'foo'])
 endfunction
 
 function! s:suite.three()
-  call s:assert.equals(s:unique(['foo', 'bar', 'baz']), ['foo', 'bar', 'baz'])
+  call s:assert.equals(s:unique(['foo', 'bar', 'baz']), ['bar', 'baz', 'foo'])
 endfunction
 
 function! s:suite.two_duplicated()
@@ -26,9 +26,9 @@ function! s:suite.two_duplicated()
 endfunction
 
 function! s:suite.three_duplicated()
-  call s:assert.equals(s:unique(['foo', 'bar', 'foo']), ['foo', 'bar'])
+  call s:assert.equals(s:unique(['foo', 'bar', 'foo']), ['bar', 'foo'])
 endfunction
 
 function! s:suite.many()
-  call s:assert.equals(s:unique(['foo', 'bar', 'foo', 'baz', 'baz', 'qux', 'foo']), ['foo', 'bar', 'baz', 'qux'])
+  call s:assert.equals(s:unique(['foo', 'bar', 'foo', 'baz', 'baz', 'qux', 'foo']), ['bar', 'baz', 'foo', 'qux'])
 endfunction
