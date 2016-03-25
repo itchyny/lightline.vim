@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/24 21:44:35.
+" Last Change: 2016/03/25 09:05:58.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -262,7 +262,7 @@ if exists('*uniq')
 else
   function! s:uniq(xs) abort
     let i = len(a:xs) - 1
-    while 0 < i
+    while i > 0
       if a:xs[i] ==# a:xs[i - 1]
         call remove(a:xs, i)
       endif
