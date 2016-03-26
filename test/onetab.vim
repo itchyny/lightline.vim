@@ -75,3 +75,24 @@ function! s:suite.tab_component_function()
   call s:assert.equals(lightline#onetab(2, 1), 'custom: 2')
   delfunction Custom
 endfunction
+
+function! s:suite.tab_component_empty_middle()
+  let g:lightline = { 'tab': { 'active': [ 'tabnum', 'custom', 'filename' ], 'inactive': [ 'tabnum', 'custom', 'custom', 'filename' ] }, 'tab_component': { 'custom': '' } }
+  call lightline#init()
+  call s:assert.equals(lightline#onetab(1, 1), '1 [No Name]')
+  call s:assert.equals(lightline#onetab(2, 1), '2 [No Name]')
+endfunction
+
+function! s:suite.tab_component_empty_left()
+  let g:lightline = { 'tab': { 'active': [ 'custom', 'filename' ], 'inactive': [ 'custom', 'custom', 'filename' ] }, 'tab_component': { 'custom': '' } }
+  call lightline#init()
+  call s:assert.equals(lightline#onetab(1, 1), '[No Name]')
+  call s:assert.equals(lightline#onetab(2, 1), '[No Name]')
+endfunction
+
+function! s:suite.tab_component_empty_middle()
+  let g:lightline = { 'tab': { 'active': [ 'tabnum', 'custom' ], 'inactive': [ 'tabnum', 'custom', 'custom' ] }, 'tab_component': { 'custom': '' } }
+  call lightline#init()
+  call s:assert.equals(lightline#onetab(1, 1), '1')
+  call s:assert.equals(lightline#onetab(2, 1), '2')
+endfunction
