@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/25 09:05:58.
+" Last Change: 2016/03/26 14:01:31.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -498,21 +498,15 @@ function! lightline#tabs() abort
 endfunction
 
 function! lightline#onetab(n, active) abort
-  let _ = ''
-  let tab = s:lightline.tab[a:active ? 'active' : 'inactive']
-  let tab_component = s:lightline.tab_component
-  let tab_component_function = s:lightline.tab_component_function
-  for name in tab
-    if has_key(tab_component_function, name)
-      let s = eval(tab_component_function[name].'('.a:n.')')
+  let _ = []
+  for name in s:lightline.tab[a:active ? 'active' : 'inactive']
+    if has_key(s:lightline.tab_component_function, name)
+      call add(_, call(s:lightline.tab_component_function[name], [a:n]))
     else
-      let s = get(tab_component, name, '')
-    endif
-    if strlen(s)
-      let _ .= (len(_) ? ' ' : '') . s
+      call add(_, get(s:lightline.tab_component, name, ''))
     endif
   endfor
-  return _
+  return join(filter(_, 'v:val !=# ""'), ' ')
 endfunction
 
 function! lightline#error(msg) abort
