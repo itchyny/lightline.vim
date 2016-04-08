@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/26 16:05:18.
+" Last Change: 2016/04/08 09:00:37.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -385,7 +385,7 @@ endfunction
 function! s:convert(name, index) abort
   if has_key(s:lightline.component_expand, a:name)
     let type = get(s:lightline.component_type, a:name, a:index)
-    return filter(map(s:evaluate_expand(s:lightline.component_expand[a:name]), '[v:val, 1, v:key == 1 ? type : a:index]'), 'v:val[0] != []')
+    return filter(s:map(s:evaluate_expand(s:lightline.component_expand[a:name]), '[v:val, 1, v:key == 1 ? "' . type . '" : "' . a:index . '"]'), 'v:val[0] != []')
   else
     return [[[a:name], 0, a:index]]
   endif
@@ -401,12 +401,25 @@ function! s:flatten_twice(xss) abort
   return ys
 endfunction
 
+if v:version >= 703
+  let s:map = function('map')
+else
+  function! s:map(xs, f) abort
+    let ys = []
+    for i in range(len(a:xs))
+      let g = substitute(a:f, 'v:key', i, 'g')
+      call extend(ys, map(a:xs[i:i], g))
+    endfor
+    return ys
+  endfunction
+endif
+
 function! s:expand(components) abort
   let components = []
   let expanded = []
   let indices = []
   let previndex = -1
-  let xs = s:flatten_twice(map(deepcopy(a:components), 'map(v:val, "s:convert(v:val, string(" . v:key . "))")'))
+  let xs = s:flatten_twice(s:map(deepcopy(a:components), 'map(v:val, "s:convert(v:val, ''" . v:key . "'')")'))
   for [component, expand, index] in xs
     if previndex != index
       call add(indices, index)
