@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/08 09:00:37.
+" Last Change: 2016/04/08 09:23:19.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -401,14 +401,13 @@ function! s:flatten_twice(xss) abort
   return ys
 endfunction
 
-if v:version >= 703
+if v:version > 702 || v:version == 702 && has('patch295')
   let s:map = function('map')
 else
   function! s:map(xs, f) abort
     let ys = []
     for i in range(len(a:xs))
-      let g = substitute(a:f, 'v:key', i, 'g')
-      call extend(ys, map(a:xs[i:i], g))
+      call extend(ys, map(a:xs[i:i], substitute(a:f, 'v:key', i, 'g')))
     endfor
     return ys
   endfunction
