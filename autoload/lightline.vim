@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/08 09:23:19.
+" Last Change: 2016/04/08 13:49:53.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -407,7 +407,7 @@ else
   function! s:map(xs, f) abort
     let ys = []
     for i in range(len(a:xs))
-      call extend(ys, map(a:xs[i:i], substitute(a:f, 'v:key', i, 'g')))
+      call extend(ys, map(a:xs[(i):(i)], substitute(a:f, 'v:key', i, 'g')))
     endfor
     return ys
   endfunction
