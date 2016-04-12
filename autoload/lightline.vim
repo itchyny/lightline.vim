@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/08 13:49:53.
+" Last Change: 2016/04/13 00:03:51.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -342,10 +342,12 @@ function! lightline#highlight(...) abort
   endfor
 endfunction
 
-function! s:subseparator(x, y, s, a, b) abort
+function! s:subseparator(components, subseparator, expanded) abort
   let [c, f, v] = [ s:lightline.component, s:lightline.component_function,  s:lightline.component_visible_condition ]
-  return '%{('.(a:a?'1':has_key(f,a:x)?'!!strlen(exists("*'.f[a:x].'")?'.f[a:x].'():"")':get(v,a:x,has_key(c,a:x)?'1': '0')).')*(('.join(map(range(len(a:y)),
-        \'(a:b[v:val]?"1":has_key(f,a:y[v:val])?"!!strlen(exists(\"*".f[a:y[v:val]]."\")?".f[a:y[v:val]]."():\"\")":get(v,a:y[v:val],has_key(c,a:y[v:val])?"1":"0"))'),')+(')."))?('".a:s."'):''}"
+  let xs = s:map(a:components, 'a:expanded[v:key] ? "1" : has_key(f, v:val) ?
+        \ (exists("*".f[v:val]) ? "(".f[v:val]."()!=#\"\")" : "(exists(\"*".f[v:val]."\")?".f[v:val]."()!=#\"\":0)") :
+        \ get(v, v:val, has_key(c, v:val) ? "1" : "0")')
+  return '%{' . xs[0] . '&&(' . join(xs[1:], '||') . ')?"' . a:subseparator . '":""}'
 endfunction
 
 function! lightline#concatenate(xs, right) abort
@@ -452,7 +454,7 @@ function! s:line(tabline, inactive) abort
       let x = substitute('%( '.(lc[i][j] ? lt[i][j] : has_key(f,lt[i][j])?'%{exists("*'.f[lt[i][j]].'")?'.f[lt[i][j]].'():""}':get(c,lt[i][j],'')).' %)', '^%(  %)', '', '')
       let _ .= has_key(t,lt[i][j])&&t[lt[i][j]]==#'raw'&&strlen(x)>7 ? x[3:-4] : x
       if j < len(lt[i]) - 1
-        let _ .= s:subseparator(lt[i][j], lt[i][j+1:], s.left, lc[i][j], lc[i][j+1:])
+        let _ .= s:subseparator(lt[i][(j):], s.left, lc[i][(j):])
       endif
     endfor
     let _ .= printf('%%#LightLineLeft_%s_%s_%s#', mode, ll[i], ll[i + 1]) . (i < l + len(lt) - len(l_) && ll[i] < l || type(ll[i]) != type(ll[i + 1]) || type(ll[i]) && type(ll[i + 1]) && ll[i] != ll[i + 1] ? p.left : len(lt[i]) ? s.left : '')
@@ -462,11 +464,11 @@ function! s:line(tabline, inactive) abort
     let _ .= printf('%%#LightLineRight_%s_%s_%s#', mode, rl[i], rl[i + 1]) . (i < r + len(rt) - len(r_) && rl[i] < r || type(rl[i]) != type(rl[i + 1]) || type(rl[i]) && type(rl[i + 1]) && rl[i] != rl[i + 1] ? p.right : len(rt[i]) ? s.right : '')
     let _ .= printf('%%#LightLineRight_%s_%s#', mode, rl[i])
     for j in range(len(rt[i]))
-      if j
-        let _ .= s:subseparator(rt[i][j], rt[i][:j-1], s.right, rc[i][j], rc[i][:j-1])
-      endif
       let x = substitute('%( '.(rc[i][j] ? rt[i][j] : has_key(f,rt[i][j])?'%{exists("*'.f[rt[i][j]].'")?'.f[rt[i][j]].'():""}':get(c,rt[i][j],'')).' %)', '^%(  %)', '', '')
       let _ .= has_key(t,rt[i][j])&&t[rt[i][j]]==#'raw'&&strlen(x)>7 ? x[3:-4] : x
+      if j < len(rt[i]) - 1
+        let _ .= s:subseparator(rt[i][(j):], s.right, rc[i][(j):])
+      endif
     endfor
   endfor
   return _
