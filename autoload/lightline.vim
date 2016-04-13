@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/13 00:33:57.
+" Last Change: 2016/04/13 09:15:25.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -451,7 +451,7 @@ function! s:line(tabline, inactive) abort
   for i in range(len(lt))
     let _ .= printf('%%#LightLineLeft_%s_%s#', mode, ll[i])
     for j in range(len(lt[i]))
-      let x = lc[i][j] ? lt[i][j] : has_key(f, lt[i][j]) ? '%{exists("*' . f[lt[i][j]] . '")?' . f[lt[i][j]] . '():""}' : get(c, lt[i][j], '')
+      let x = lc[i][j] ? lt[i][j] : has_key(f, lt[i][j]) ? (exists('*' . f[lt[i][j]]) ? '%{' . f[lt[i][j]] . '()}' : '%{exists("*' . f[lt[i][j]] . '")?' . f[lt[i][j]] . '():""}') : get(c, lt[i][j], '')
       let _ .= has_key(t, lt[i][j]) && t[lt[i][j]] ==# 'raw' || x ==# '' ? x : '%( ' . x . ' %)'
       if j < len(lt[i]) - 1
         let _ .= s:subseparator(lt[i][(j):], s.left, lc[i][(j):])
@@ -464,7 +464,7 @@ function! s:line(tabline, inactive) abort
     let _ .= printf('%%#LightLineRight_%s_%s_%s#', mode, rl[i], rl[i + 1]) . (i < r + len(rt) - len(r_) && rl[i] < r || type(rl[i]) != type(rl[i + 1]) || type(rl[i]) && type(rl[i + 1]) && rl[i] != rl[i + 1] ? p.right : len(rt[i]) ? s.right : '')
     let _ .= printf('%%#LightLineRight_%s_%s#', mode, rl[i])
     for j in range(len(rt[i]))
-      let x = rc[i][j] ? rt[i][j] : has_key(f, rt[i][j]) ? '%{exists("*' . f[rt[i][j]] . '")?' . f[rt[i][j]] . '():""}' : get(c, rt[i][j], '')
+      let x = rc[i][j] ? rt[i][j] : has_key(f, rt[i][j]) ? (exists('*' . f[rt[i][j]]) ? '%{' . f[rt[i][j]] . '()}' : '%{exists("*' . f[rt[i][j]] . '")?' . f[rt[i][j]] . '():""}') : get(c, rt[i][j], '')
       let _ .= has_key(t, rt[i][j]) && t[rt[i][j]] ==# 'raw' || x ==# '' ? x : '%( ' . x . ' %)'
       if j < len(rt[i]) - 1
         let _ .= s:subseparator(rt[i][(j):], s.right, rc[i][(j):])
