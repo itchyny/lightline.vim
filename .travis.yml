@@ -7,9 +7,9 @@ install:
   - git clone https://github.com/vim/vim /tmp/vim
   - (cd /tmp/vim && ./configure --prefix=/tmp/vim-latest && make && make install)
   - (cd /tmp/vim && git checkout . && git checkout v7.3     && ./configure --prefix=/tmp/vim-7.3     && make && make install)
-  - (cd /tmp/vim && git checkout . && git checkout v7.2.050 && ./configure --prefix=/tmp/vim-7.2.050 && make && make install)
+  - (cd /tmp/vim && git checkout . && git checkout v7.2.051 && ./configure --prefix=/tmp/vim-7.2.051 && make && make install)
 
 script:
-  - PATH=/tmp/vim-latest/bin/:$PATH  vim --version && /tmp/themis/bin/themis --reporter spec
-  - PATH=/tmp/vim-7.3/bin/:$PATH     vim --version && /tmp/themis/bin/themis --reporter spec
-  - PATH=/tmp/vim-7.2.050/bin/:$PATH vim --version && /tmp/themis/bin/themis --reporter spec
+  - PATH=/tmp/vim-latest/bin/:$PATH  /tmp/themis/bin/themis --reporter spec
+  - PATH=/tmp/vim-7.3/bin/:$PATH     /tmp/themis/bin/themis --reporter spec
+  - PATH=/tmp/vim-7.2.051/bin/:$PATH /tmp/themis/bin/themis --reporter spec
