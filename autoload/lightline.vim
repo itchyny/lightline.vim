@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/13 20:35:08.
+" Last Change: 2016/04/13 20:36:13.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -458,12 +458,12 @@ function! s:line(tabline, inactive) abort
       endif
     endfor
     let _ .= '%#LightLineLeft_' . mode . '_' . ll[i] . '_' . ll[i + 1] . '#'
-    let _ .= i < l + len(lt) - len(l_) && ll[i] < l || type(ll[i]) != type(ll[i + 1]) || type(ll[i]) && type(ll[i + 1]) && ll[i] != ll[i + 1] ? p.left : len(lt[i]) ? s.left : ''
+    let _ .= i < l + len(lt) - len(l_) && ll[i] < l || ll[i] != ll[i + 1] ? p.left : len(lt[i]) ? s.left : ''
   endfor
   let _ .= '%#LightLineMiddle_' . mode . '#%='
   for i in reverse(range(len(rt)))
     let _ .= '%#LightLineRight_' . mode . '_' . rl[i] . '_' . rl[i + 1] . '#'
-    let _ .= i < r + len(rt) - len(r_) && rl[i] < r || type(rl[i]) != type(rl[i + 1]) || type(rl[i]) && type(rl[i + 1]) && rl[i] != rl[i + 1] ? p.right : len(rt[i]) ? s.right : ''
+    let _ .= i < r + len(rt) - len(r_) && rl[i] < r || rl[i] != rl[i + 1] ? p.right : len(rt[i]) ? s.right : ''
     let _ .= '%#LightLineRight_' . mode . '_' . rl[i] . '#'
     for j in range(len(rt[i]))
       let x = rc[i][j] ? rt[i][j] : has_key(f, rt[i][j]) ? (exists('*' . f[rt[i][j]]) ? '%{' . f[rt[i][j]] . '()}' : '%{exists("*' . f[rt[i][j]] . '")?' . f[rt[i][j]] . '():""}') : get(c, rt[i][j], '')
