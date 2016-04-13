@@ -41,6 +41,18 @@ function! s:suite.subseparator_component_visible_condition_5()
   call s:assert.equals(s:subseparator(['custom1', 'custom2', 'custom3'], '|', [0, 0, 0]), '')
 endfunction
 
+function! s:suite.subseparator_component_visible_condition_6()
+  let g:lightline = { 'component': { 'custom1': 'custom1', 'custom2': 'custom2', 'custom3': 'custom3' }, 'component_visible_condition': { 'custom1': '1||0', 'custom2': '0', 'custom3': '0' } }
+  call lightline#init()
+  call s:assert.equals(s:subseparator(['custom1', 'custom2', 'custom3'], '|', [0, 0, 0]), '')
+endfunction
+
+function! s:suite.subseparator_component_visible_condition_7()
+  let g:lightline = { 'component': { 'custom1': 'custom1', 'custom2': 'custom2', 'custom3': 'custom3' }, 'component_visible_condition': { 'custom1': '1||1', 'custom2': '0', 'custom3': '0' } }
+  call lightline#init()
+  call s:assert.equals(s:subseparator(['custom1', 'custom2', 'custom3'], '|', [0, 0, 0]), '')
+endfunction
+
 function! s:suite.subseparator_component_function()
   function! Custom1()
     return 'custom1'
