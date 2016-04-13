@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/13 09:15:25.
+" Last Change: 2016/04/13 20:35:08.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -449,7 +449,7 @@ function! s:line(tabline, inactive) abort
   let r_ = has_key(s:lightline, mode) ? s:lightline[mode].right : s:lightline.active.right
   let [rt, rc, rl] = s:expand(copy(r_))
   for i in range(len(lt))
-    let _ .= printf('%%#LightLineLeft_%s_%s#', mode, ll[i])
+    let _ .= '%#LightLineLeft_' . mode . '_' . ll[i] . '#'
     for j in range(len(lt[i]))
       let x = lc[i][j] ? lt[i][j] : has_key(f, lt[i][j]) ? (exists('*' . f[lt[i][j]]) ? '%{' . f[lt[i][j]] . '()}' : '%{exists("*' . f[lt[i][j]] . '")?' . f[lt[i][j]] . '():""}') : get(c, lt[i][j], '')
       let _ .= has_key(t, lt[i][j]) && t[lt[i][j]] ==# 'raw' || x ==# '' ? x : '%( ' . x . ' %)'
@@ -457,12 +457,14 @@ function! s:line(tabline, inactive) abort
         let _ .= s:subseparator(lt[i][(j):], s.left, lc[i][(j):])
       endif
     endfor
-    let _ .= printf('%%#LightLineLeft_%s_%s_%s#', mode, ll[i], ll[i + 1]) . (i < l + len(lt) - len(l_) && ll[i] < l || type(ll[i]) != type(ll[i + 1]) || type(ll[i]) && type(ll[i + 1]) && ll[i] != ll[i + 1] ? p.left : len(lt[i]) ? s.left : '')
+    let _ .= '%#LightLineLeft_' . mode . '_' . ll[i] . '_' . ll[i + 1] . '#'
+    let _ .= i < l + len(lt) - len(l_) && ll[i] < l || type(ll[i]) != type(ll[i + 1]) || type(ll[i]) && type(ll[i + 1]) && ll[i] != ll[i + 1] ? p.left : len(lt[i]) ? s.left : ''
   endfor
-  let _ .= printf('%%#LightLineMiddle_%s#%%=', mode)
+  let _ .= '%#LightLineMiddle_' . mode . '#%='
   for i in reverse(range(len(rt)))
-    let _ .= printf('%%#LightLineRight_%s_%s_%s#', mode, rl[i], rl[i + 1]) . (i < r + len(rt) - len(r_) && rl[i] < r || type(rl[i]) != type(rl[i + 1]) || type(rl[i]) && type(rl[i + 1]) && rl[i] != rl[i + 1] ? p.right : len(rt[i]) ? s.right : '')
-    let _ .= printf('%%#LightLineRight_%s_%s#', mode, rl[i])
+    let _ .= '%#LightLineRight_' . mode . '_' . rl[i] . '_' . rl[i + 1] . '#'
+    let _ .= i < r + len(rt) - len(r_) && rl[i] < r || type(rl[i]) != type(rl[i + 1]) || type(rl[i]) && type(rl[i + 1]) && rl[i] != rl[i + 1] ? p.right : len(rt[i]) ? s.right : ''
+    let _ .= '%#LightLineRight_' . mode . '_' . rl[i] . '#'
     for j in range(len(rt[i]))
       let x = rc[i][j] ? rt[i][j] : has_key(f, rt[i][j]) ? (exists('*' . f[rt[i][j]]) ? '%{' . f[rt[i][j]] . '()}' : '%{exists("*' . f[rt[i][j]] . '")?' . f[rt[i][j]] . '():""}') : get(c, rt[i][j], '')
       let _ .= has_key(t, rt[i][j]) && t[rt[i][j]] ==# 'raw' || x ==# '' ? x : '%( ' . x . ' %)'
