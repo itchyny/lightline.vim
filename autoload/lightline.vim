@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/13 20:36:13.
+" Last Change: 2016/04/14 00:16:41.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -343,11 +343,11 @@ function! lightline#highlight(...) abort
 endfunction
 
 function! s:subseparator(components, subseparator, expanded) abort
-  let [c, f, v] = [ s:lightline.component, s:lightline.component_function,  s:lightline.component_visible_condition ]
-  let xs = s:map(a:components, 'a:expanded[v:key] ? "1" : has_key(f, v:val) ?
-        \ (exists("*".f[v:val]) ? "(".f[v:val]."()!=#\"\")" : "(exists(\"*".f[v:val]."\")?".f[v:val]."()!=#\"\":0)") :
-        \ get(v, v:val, has_key(c, v:val) ? "1" : "0")')
-  return '%{' . xs[0] . '&&(' . join(xs[1:], '||') . ')?"' . a:subseparator . '":""}'
+  let [a, c, f, v] = [ a:components, s:lightline.component, s:lightline.component_function,  s:lightline.component_visible_condition ]
+  let xs = map(range(len(a:components)), 'a:expanded[v:val] ? "1" :
+        \ has_key(f, a[v:val]) ? (exists("*".f[a[v:val]]) ? "(".f[a[v:val]]."()!=#\"\")" : "(exists(\"*".f[a[v:val]]."\")&&".f[a[v:val]]."()!=#\"\")") :
+        \ has_key(v, a[v:val]) ? "(" . v[a[v:val]] . ")" : has_key(c, a[v:val]) ? "1" : "0"')
+  return '%{' . (xs[0] !=# '1' ? xs[0] . '&&' : '') . '(' . join(xs[1:], '||') . ')?"' . a:subseparator . '":""}'
 endfunction
 
 function! lightline#concatenate(xs, right) abort
