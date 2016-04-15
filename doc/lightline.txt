@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2016/03/20 09:33:37.
+Last Change: 2016/04/15 22:14:01.
 
 CONTENTS					*lightline-contents*
 
@@ -786,7 +786,7 @@ For users who uses lots of plugins:
 
 	function! LightLineFilename()
 	  let fname = expand('%:t')
-	  return fname == 'ControlP' ? g:lightline.ctrlp_item :
+	  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
 	        \ fname == '__Tagbar__' ? g:lightline.fname :
 	        \ fname =~ '__Gundo\|NERD_tree' ? '' :
 	        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
@@ -835,7 +835,7 @@ For users who uses lots of plugins:
 	endfunction
 
 	function! CtrlPMark()
-	  if expand('%:t') =~ 'ControlP'
+	  if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
 	    call lightline#link('iR'[g:lightline.ctrlp_regex])
 	    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
 	          \ , g:lightline.ctrlp_next], 0)
