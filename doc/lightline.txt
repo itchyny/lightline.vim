@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2016/04/15 22:14:01.
+Last Change: 2016/04/15 22:26:52.
 
 CONTENTS					*lightline-contents*
 
@@ -104,9 +104,9 @@ OPTIONS						*lightline-option*
 		    \ 'readonly': '%R',
 		    \ 'charvalue': '%b',
 		    \ 'charvaluehex': '%B',
-		    \ 'fileencoding': '%{strlen(&fenc)?&fenc:&enc}',
-		    \ 'fileformat': '%{&fileformat}',
-		    \ 'filetype': '%{strlen(&filetype)?&filetype:"no ft"}',
+		    \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
+		    \ 'fileformat': '%{&ff}',
+		    \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
 		    \ 'percent': '%3p%%',
 		    \ 'percentwin': '%P',
 		    \ 'spell': '%{&spell?&spelllang:"no spell"}',
