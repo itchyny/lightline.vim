@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/15 22:24:06.
+" Last Change: 2016/04/16 15:56:27.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -216,38 +216,20 @@ function! lightline#link(...) abort
   if !has_key(s:highlight, mode)
     call lightline#highlight(mode)
   endif
-  let [left, right, types] = [s:lightline.active.left, s:lightline.active.right, values(s:lightline.component_type)]
-  for i in range(len(left))
-    exec printf('hi link LightLineLeft_active_%d LightLineLeft_%s_%d', i, mode, i)
-    exec printf('hi link LightLineLeft_active_%d_%d LightLineLeft_%s_%d_%d', i, i + 1, mode, i, i + 1)
-    for j in types
-      exec printf('hi link LightLineLeft_active_%d_%s LightLineLeft_%s_%d_%s', i, j, mode, i, j)
-      exec printf('hi link LightLineLeft_active_%s_%d LightLineLeft_%s_%s_%d', j, i, mode, j, i)
+  let types = map(filter(s:uniq(sort(values(s:lightline.component_type))), 'v:val !=# "raw"'), '[v:val, 1]')
+  for [p, l] in [['Left', len(s:lightline.active.left)], ['Right', len(s:lightline.active.right)]]
+    for [i, t] in map(range(0, l), '[v:val, 0]') + types
+      if i != l
+        exec printf('hi link LightLine%s_active_%s LightLine%s_%s_%s', p, i, p, mode, i)
+      endif
+      for [j, s] in map(range(0, l), '[v:val, 0]') + types
+        if i + 1 == j || t || s
+          exec printf('hi link LightLine%s_active_%s_%s LightLine%s_%s_%s_%s', p, i, j, p, mode, i, j)
+        endif
+      endfor
     endfor
   endfor
   exec printf('hi link LightLineMiddle_active LightLineMiddle_%s', mode)
-  for i in range(len(right))
-    exec printf('hi link LightLineRight_active_%d LightLineRight_%s_%d', i, mode, i)
-    exec printf('hi link LightLineRight_active_%d_%d LightLineRight_%s_%d_%d', i, i + 1, mode, i, i + 1)
-    for j in types
-      exec printf('hi link LightLineRight_active_%d_%s LightLineRight_%s_%d_%s', i, j, mode, i, j)
-      exec printf('hi link LightLineRight_active_%s_%d LightLineRight_%s_%s_%d', j, i, mode, j, i)
-    endfor
-  endfor
-  for j in types
-    exec printf('hi link LightLineLeft_active_%s LightLineLeft_%s_%s', j, mode, j)
-    exec printf('hi link LightLineRight_active_%s LightLineRight_%s_%s', j, mode, j)
-    exec printf('hi link LightLineLeft_active_%s_%d LightLineLeft_%s_%s_%d', j, len(left), mode, j, len(left))
-    exec printf('hi link LightLineLeft_active_%d_%s LightLineLeft_%s_%d_%s', len(left), j, mode, len(left), j)
-    exec printf('hi link LightLineRight_active_%s_%d LightLineRight_%s_%s_%d', j, len(right), mode, j, len(right))
-    exec printf('hi link LightLineRight_active_%d_%s LightLineRight_%s_%d_%s', len(right), j, mode, len(right), j)
-    for k in types
-      exec printf('hi link LightLineLeft_active_%s_%s LightLineLeft_%s_%s_%s', j, k, mode, j, k)
-      exec printf('hi link LightLineLeft_active_%s_%s LightLineLeft_%s_%s_%s', k, j, mode, k, j)
-      exec printf('hi link LightLineRight_active_%s_%s LightLineRight_%s_%s_%s', j, k, mode, j, k)
-      exec printf('hi link LightLineRight_active_%s_%s LightLineRight_%s_%s_%s', k, j, mode, k, j)
-    endfor
-  endfor
   return ''
 endfunction
 
