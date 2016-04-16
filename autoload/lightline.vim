@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/16 15:56:27.
+" Last Change: 2016/04/16 19:45:33.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -216,7 +216,7 @@ function! lightline#link(...) abort
   if !has_key(s:highlight, mode)
     call lightline#highlight(mode)
   endif
-  let types = map(filter(s:uniq(sort(values(s:lightline.component_type))), 'v:val !=# "raw"'), '[v:val, 1]')
+  let types = map(s:uniq(sort(filter(values(s:lightline.component_type), 'v:val !=# "raw"'))), '[v:val, 1]')
   for [p, l] in [['Left', len(s:lightline.active.left)], ['Right', len(s:lightline.active.right)]]
     for [i, t] in map(range(0, l), '[v:val, 0]') + types
       if i != l
