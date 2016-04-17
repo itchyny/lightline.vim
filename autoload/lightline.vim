@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/17 12:51:55.
+" Last Change: 2016/04/17 13:49:56.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -144,7 +144,7 @@ let s:_lightline = {
 function! lightline#init() abort
   let s:lightline = deepcopy(get(g:, 'lightline', {}))
   for [key, value] in items(s:_lightline)
-    if type(value) == type({})
+    if type(value) == 4
       if !has_key(s:lightline, key)
         let s:lightline[key] = {}
       endif
@@ -328,7 +328,7 @@ endfunction
 function! s:evaluate_expand(component) abort
   try
     let result = eval(a:component . '()')
-    if type(result) == type('') && result ==# ''
+    if type(result) == 1 && result ==# ''
       return []
     endif
   catch
