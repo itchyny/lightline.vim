@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/16 19:45:33.
+" Last Change: 2016/04/17 12:41:55.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -223,7 +223,7 @@ function! lightline#link(...) abort
         exec printf('hi link LightLine%s_active_%s LightLine%s_%s_%s', p, i, p, mode, i)
       endif
       for [j, s] in map(range(0, l), '[v:val, 0]') + types
-        if i + 1 == j || t || s
+        if i + 1 == j || t || s && i != l
           exec printf('hi link LightLine%s_active_%s_%s LightLine%s_%s_%s_%s', p, i, j, p, mode, i, j)
         endif
       endfor
