@@ -10,9 +10,9 @@ endfunction
 
 function! s:hi(name)
   redir => hi
-    silent! exec 'hi ' . a:name
+    silent! exec 'hi' a:name
   redir END
-  return hi
+  return substitute(join(split(hi, "\n"), ''), ' \+', ' ', 'g')
 endfunction
 
 function! s:suite.link()
