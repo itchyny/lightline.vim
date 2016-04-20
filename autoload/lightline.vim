@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/18 01:20:49.
+" Last Change: 2016/04/20 22:49:50.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -280,12 +280,12 @@ function! lightline#highlight(...) abort
     for [p, l, zs] in [['Left', len(left), ls], ['Right', len(right), rs]]
       for [i, t] in map(range(0, l), '[v:val, 0]') + types
         if i != l
-          let r = t ? (has_key(get(c, d, []), i) ? c[d][i][0] : has_key(get(c, 'tabline', {}), i) ? c.tabline[i][0] : has_key(c.normal, i) ? c.normal[i][0] : zs[0]) : get(zs, i, ms)
+          let r = t ? (has_key(get(c, d, []), i) ? c[d][i][0] : has_key(get(c, 'tabline', {}), i) ? c.tabline[i][0] : get(c.normal, i, zs)[0]) : get(zs, i, ms)
           exec printf('hi LightLine%s_%s_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', p, mode, i, r[0], r[1], r[2], r[3], s:term(r))
         endif
         for [j, s] in map(range(0, l), '[v:val, 0]') + types
           if i + 1 == j || t || s && i != l
-            let q = s ? (has_key(get(c, d, []), j) ? c[d][j][0] : has_key(get(c, 'tabline', {}), j) ? c.tabline[j][0] : has_key(c.normal, j) ? c.normal[j][0] : zs[0]) : (j != l ? get(zs, j, ms) :ms)
+            let q = s ? (has_key(get(c, d, []), j) ? c[d][j][0] : has_key(get(c, 'tabline', {}), j) ? c.tabline[j][0] : get(c.normal, j, zs)[0]) : (j != l ? get(zs, j, ms) :ms)
             exec printf('hi LightLine%s_%s_%s_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s', p, mode, i, j, r[1], q[1], r[3], q[3])
           endif
         endfor
