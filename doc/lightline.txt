@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2016/04/15 22:26:52.
+Last Change: 2016/04/23 13:49:14.
 
 CONTENTS					*lightline-contents*
 
@@ -223,7 +223,7 @@ OPTIONS						*lightline-option*
 		    \ 'S' : 'S-LINE',
 		    \ "\<C-s>": 'S-BLOCK',
 		    \ 't': 'TERMINAL',
-		    \ '?': '' }
+		    \ }
 <
 		When you search a word, you get into the command mode. But if
 		you want to keep the mode indicator as 'NORMAL', add >

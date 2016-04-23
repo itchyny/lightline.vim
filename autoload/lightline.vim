@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/20 22:49:50.
+" Last Change: 2016/04/23 13:49:04.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -126,7 +126,7 @@ let s:_lightline = {
       \   'colorscheme': 'default',
       \   'mode_map': {
       \     'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL', 'V': 'V-LINE', "\<C-v>": 'V-BLOCK',
-      \     'c': 'COMMAND', 's': 'SELECT', 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', 't': 'TERMINAL', '?': ''
+      \     'c': 'COMMAND', 's': 'SELECT', 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', 't': 'TERMINAL'
       \   },
       \   'separator': { 'left': '', 'right': '' },
       \   'subseparator': { 'left': '|', 'right': '|' },
@@ -212,7 +212,7 @@ function! lightline#palette() abort
 endfunction
 
 function! lightline#mode() abort
-  return get(s:lightline.mode_map, mode(), s:lightline.mode_map['?'])
+  return get(s:lightline.mode_map, mode(), '')
 endfunction
 
 let s:mode = ''
