@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/23 13:49:04.
+" Last Change: 2016/04/24 21:48:18.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -242,8 +242,8 @@ function! lightline#link(...) abort
   return ''
 endfunction
 
-function! s:term(l) abort
-  return len(a:l) == 5 && type(a:l[4]) == 1 && strlen(a:l[4]) ? 'term='.a:l[4].' cterm='.a:l[4].' gui='.a:l[4] : ''
+function! s:term(p) abort
+  return get(a:p, 4) !=# '' ? 'term='.a:p[4].' cterm='.a:p[4].' gui='.a:p[4] : ''
 endfunction
 
 if exists('*uniq')
