@@ -2,7 +2,11 @@ let s:suite = themis#suite('uniq')
 let s:assert = themis#helper('assert')
 
 function! s:uniq(...)
-  return call(SID('uniq'), a:000)
+  try
+    return call(SID('uniq'), a:000)
+  catch
+    return call(function('uniq'), a:000)
+  endtry
 endfunction
 
 function! s:suite.nil()
