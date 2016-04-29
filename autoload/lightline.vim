@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/04/24 21:48:18.
+" Last Change: 2016/04/29 13:38:36.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -247,9 +247,7 @@ function! s:term(p) abort
 endfunction
 
 if exists('*uniq')
-  function! s:uniq(xs) abort
-    return uniq(a:xs)
-  endfunction
+  let s:uniq = function('uniq')
 else
   function! s:uniq(xs) abort
     let i = len(a:xs) - 1
