@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2016/04/23 13:49:14.
+Last Change: 2016/05/08 13:56:19.
 
 CONTENTS					*lightline-contents*
 
@@ -109,7 +109,7 @@ OPTIONS						*lightline-option*
 		    \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
 		    \ 'percent': '%3p%%',
 		    \ 'percentwin': '%P',
-		    \ 'spell': '%{&spell?&spelllang:"no spell"}',
+		    \ 'spell': '%{&spell?&spelllang:""}',
 		    \ 'lineinfo': '%3l:%-2v',
 		    \ 'line': '%l',
 		    \ 'column': '%c'
@@ -124,7 +124,8 @@ OPTIONS						*lightline-option*
 		let g:lightline.component_visible_condition = {
 		    \ 'modified': '&modified||!&modifiable',
 		    \ 'readonly': '&readonly',
-		    \ 'paste': '&paste' }
+		    \ 'paste': '&paste',
+		    \ 'spell': '&spell' }
 <
 		Users are recommended to set this option together with the
 		component itself.

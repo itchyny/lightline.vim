@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/05/07 22:18:16.
+" Last Change: 2016/05/08 13:50:23.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -102,14 +102,13 @@ let s:_lightline = {
       \   'component': {
       \     'mode': '%{lightline#mode()}',
       \     'absolutepath': '%F', 'relativepath': '%f', 'filename': '%t', 'modified': '%M', 'bufnum': '%n',
-      \     'spell': '%{&spell?&spelllang:"no spell"}',
       \     'paste': '%{&paste?"PASTE":""}', 'readonly': '%R', 'charvalue': '%b', 'charvaluehex': '%B',
-      \     'fileencoding': '%{&fenc!=#""?&fenc:&enc}', 'fileformat': '%{&ff}',
+      \     'spell': '%{&spell?&spelllang:""}', 'fileencoding': '%{&fenc!=#""?&fenc:&enc}', 'fileformat': '%{&ff}',
       \     'filetype': '%{&ft!=#""?&ft:"no ft"}', 'percent': '%3p%%', 'percentwin': '%P',
       \     'lineinfo': '%3l:%-2v', 'line': '%l', 'column': '%c', 'close': '%999X X '
       \   },
       \   'component_visible_condition': {
-      \     'modified': '&modified||!&modifiable', 'readonly': '&readonly', 'paste': '&paste'
+      \     'modified': '&modified||!&modifiable', 'readonly': '&readonly', 'paste': '&paste', 'spell': '&spell'
       \   },
       \   'component_function': {},
       \   'component_expand': {
