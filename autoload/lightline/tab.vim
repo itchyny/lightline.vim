@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/tab.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2015/01/04 22:44:42.
+" Last Change: 2016/05/07 22:31:02.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -12,7 +12,7 @@ function! lightline#tab#filename(n) abort
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
   let _ = expand('#'.buflist[winnr - 1].':t')
-  return strlen(_) ? _ : '[No Name]'
+  return _ !=# '' ? _ : '[No Name]'
 endfunction
 
 function! lightline#tab#modified(n) abort

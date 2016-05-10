@@ -287,7 +287,7 @@ nice.
 	function! LightLineFugitive()
 		if exists('*fugitive#head')
 			let _ = fugitive#head()
-			return strlen(_) ? ''._ : ''
+			return _ !=# '' ? ''._ : ''
 		endif
 		return ''
 	endfunction
@@ -312,7 +312,7 @@ look nice.
 	function! LightLineFugitive()
 		if exists('*fugitive#head')
 			let _ = fugitive#head()
-			return strlen(_) ? '⭠ '._ : ''
+			return _ !=# '' ? '⭠ '._ : ''
 		endif
 		return ''
 	endfunction
@@ -742,7 +742,7 @@ A nice example for |vim-powerline| font users:
 	function! LightLineFugitive()
 		if &ft !~? 'vimfiler' && exists('*fugitive#head')
 			let _ = fugitive#head()
-			return strlen(_) ? '⭠ '._ : ''
+			return _ !=# '' ? '⭠ '._ : ''
 		endif
 		return ''
 	endfunction
@@ -803,7 +803,7 @@ For users who uses lots of plugins:
 	    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
 	      let mark = ''  " edit here for cool mark
 	      let _ = fugitive#head()
-	      return strlen(_) ? mark._ : ''
+	      return _ !=# '' ? mark._ : ''
 	    endif
 	  catch
 	  endtry
@@ -815,11 +815,11 @@ For users who uses lots of plugins:
 	endfunction
 
 	function! LightLineFiletype()
-	  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+	  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
 	endfunction
 
 	function! LightLineFileencoding()
-	  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+	  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
 	endfunction
 
 	function! LightLineMode()
