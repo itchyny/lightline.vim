@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/05/08 13:50:23.
+" Last Change: 2016/05/13 23:30:54.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -174,10 +174,10 @@ function! lightline#init() abort
     let &tabline = get(s:, '_tabline', '')
   endif
   for f in values(s:lightline.component_function)
-    silent! call eval(f . '()')
+    silent! call call(f, [])
   endfor
   for f in values(s:lightline.tab_component_function)
-    silent! call eval(f . '(0)')
+    silent! call call(f, [1])
   endfor
   let s:mode = ''
 endfunction
