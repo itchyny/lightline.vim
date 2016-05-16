@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2016/05/08 13:56:19.
+Last Change: 2016/05/16 22:48:37.
 
 CONTENTS					*lightline-contents*
 
@@ -286,8 +286,8 @@ nice.
 	endfunction
 	function! LightLineFugitive()
 		if exists('*fugitive#head')
-			let _ = fugitive#head()
-			return _ !=# '' ? ''._ : ''
+			let branch = fugitive#head()
+			return branch !=# '' ? ''.branch : ''
 		endif
 		return ''
 	endfunction
@@ -311,8 +311,8 @@ look nice.
 	endfunction
 	function! LightLineFugitive()
 		if exists('*fugitive#head')
-			let _ = fugitive#head()
-			return _ !=# '' ? '⭠ '._ : ''
+			let branch = fugitive#head()
+			return branch !=# '' ? '⭠ '.branch : ''
 		endif
 		return ''
 	endfunction
@@ -741,8 +741,8 @@ A nice example for |vim-powerline| font users:
 	endfunction
 	function! LightLineFugitive()
 		if &ft !~? 'vimfiler' && exists('*fugitive#head')
-			let _ = fugitive#head()
-			return _ !=# '' ? '⭠ '._ : ''
+			let branch = fugitive#head()
+			return branch !=# '' ? '⭠ '.branch : ''
 		endif
 		return ''
 	endfunction
@@ -802,8 +802,8 @@ For users who uses lots of plugins:
 	  try
 	    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
 	      let mark = ''  " edit here for cool mark
-	      let _ = fugitive#head()
-	      return _ !=# '' ? mark._ : ''
+	      let branch = fugitive#head()
+	      return branch !=# '' ? mark.branch : ''
 	    endif
 	  catch
 	  endtry
