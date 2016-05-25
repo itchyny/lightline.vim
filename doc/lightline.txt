@@ -175,14 +175,18 @@ OPTIONS						*lightline-option*
 		|g:lightline.component_expand|. The types are used to specify
 		the color. Specifically, the type raw is used to specify a
 		component which should not be wrapped by item group: %(...%).
->
+		The default value is: >
+
 		let g:lightline.component_type = {
 		    \ 'tabs': 'tabsel',
 		    \ 'close': 'raw' }
 <
 	g:lightline.tab_component		*g:lightline.tab_component*
 		A dictionary for components in one tab.
+		The default value is: >
 
+		let g:lightline.tab_component = {}
+<
 	g:lightline.tab_component_function	*g:lightline.tab_component_function*
 		Another dictionary for components in one tab.
 		A function specified as a tab component takes one argument:
