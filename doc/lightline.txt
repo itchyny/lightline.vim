@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2016/05/16 22:48:37.
+Last Change: 2016/05/26 21:57:34.
 
 CONTENTS					*lightline-contents*
 
@@ -341,7 +341,7 @@ Exposed functions for lightline.vim.
 		Returns the mode of the Vim using |g:lightline.mode_map|.
 
 	lightline#init()			*lightline#init()*
-		Initializes the variable |g:lightline|.
+		Initializes the internal state from |g:lightline|.
 
 	lightline#colorscheme()			*lightline#colorscheme()*
 		Initializes the colorscheme and the highlight groups.
