@@ -138,6 +138,7 @@ let s:_lightline = {
       \   },
       \   'mode_fallback': { 'replace': 'insert', 'terminal': 'insert', 'select': 'visual' },
       \   'palette': {},
+      \   'highlight': '',
       \   'winwidth': winwidth(0),
       \ }
 function! lightline#init() abort
@@ -185,10 +186,12 @@ endfunction
 function! lightline#colorscheme() abort
   try
     let s:lightline.palette = g:lightline#colorscheme#{s:lightline.colorscheme}#palette
+    let s:lightline.highlight = 'lightline#colorscheme#' . s:lightline.colorscheme . '#highlight'
   catch
     call lightline#error('Could not load colorscheme ' . s:lightline.colorscheme . '.')
     let s:lightline.colorscheme = 'default'
     let s:lightline.palette = g:lightline#colorscheme#{s:lightline.colorscheme}#palette
+    let s:lightline.highlight = 'lightline#colorscheme#' . s:lightline.colorscheme . '#highlight'
   finally
     let s:highlight = {}
     call lightline#highlight('normal')
@@ -289,6 +292,9 @@ function! lightline#highlight(...) abort
       endfor
     endfor
     exec printf('hi LightLineMiddle_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, ms[0], ms[1], ms[2], ms[3], s:term(ms))
+    if exists('*'.s:lightline.highlight)
+      silent! call call(s:lightline.highlight, [mode])
+    endif
   endfor
 endfunction
 
