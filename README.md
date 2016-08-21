@@ -340,15 +340,8 @@ let g:lightline = {
       \ }
 ```
 If the plugin arranges all the components (in a situation you `set paste` and the file `.vimrc` is read-only, try to modify):
+
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
-
-The mode component, the paste component, read-only component, filename component and modified component in a row.
-Normally, the paste component does not show up.
-![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/10.png)
-
-If the file is not read-only (more common cases), the read-only component does not show up.
-![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/11.png)
-
 
 Again look into `g:lightline.active.left`.
 ```vim
@@ -357,8 +350,6 @@ let g:lightline = {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filename', 'modified' ] ] ...
 ```
-And the screen shot of all the components.
-![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/9.png)
 
 The mode and paste component are displayed in the same group.
 The read-only, filename and modified component are in the second group.
@@ -369,11 +360,11 @@ You can configure the components in the statusline by the following four variabl
 + `g:lightline.inactive.left`
 + `g:lightline.inactive.right`
 
-Of course, your settings in `.vimrc` have priority over the default settings in lightline.
+Of course, your configurations in `.vimrc` have priority over the default settings in lightline.
 
 
 
-GitHub branch is important for us.
+Git branch is important for us.
 And it is a default component in [powerline](https://github.com/Lokaltog/powerline) and [vim-powerline](https://github.com/Lokaltog/vim-powerline).
 However, lightline does not provide the branch feature by default.
 
