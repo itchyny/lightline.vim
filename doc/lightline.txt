@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2016/08/09 06:22:39.
+Last Change: 2016/08/20 16:36:03.
 
 CONTENTS					*lightline-contents*
 
@@ -115,10 +115,13 @@ OPTIONS						*lightline-option*
 		    \ 'column': '%c'
 		    \ 'close': '%999X X ' }
 <
-	g:lightline.component_visible_condition		*g:lightline.component_visible_condition*
-		Dictionary of boolean expressions for the components.
+	g:lightline.component_visible_condition
+						*g:lightline.component_visible_condition*
+		Dictionary to store the visible condition of the components.
 		Each expression should correspond to the condition each
-		component have non-zero length.
+		component is not empty. This configuration is used to control
+		the visibility of the subseparators. You cannot use this
+		configuration to control the visibility of the components.
 		The default value is:
 >
 		let g:lightline.component_visible_condition = {
@@ -135,6 +138,11 @@ OPTIONS						*lightline-option*
 		because the user does not have to set both component and
 		component_visible_condition. If a component set to both component and
 		component_function, the setting of component_function has priority.
+
+		The default value is:
+>
+		let g:lightline.component_function = {}
+<
 		For example, if you want a component for read-only mark, which
 		disappears in help windows:
 >
@@ -150,6 +158,19 @@ OPTIONS						*lightline-option*
 		function! LightLineReadonly()
 			return &ft !~? 'help' && &readonly ? 'RO' : ''
 		endfunction
+<
+	g:lightline.component_function_visible_condition
+						*g:lightline.component_function_visible_condition*
+		Dictionary to store the visible conditions of the function
+		components. Each expression should correspond to the condition
+		each component is not empty. This configuration is used to
+		control the visibility of the subseparators. You can use this
+		configuration to reduce the number of function calls for
+		function components by setting the value 1 (to tell lightline
+		that the component is always visible).
+		The default value is:
+>
+		let g:lightline.component_function_visible_condition = {}
 <
 	g:lightline.component_expand		*g:lightline.component_expand*
 		Another dictionary for components. You can create a component

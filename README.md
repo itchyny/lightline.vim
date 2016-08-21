@@ -272,7 +272,7 @@ set noshowmode
 ```
 
 
-Now, let us get back to the tutorial (with the patched font for vim-powerline).
+Now, let's get back to the tutorial (with the patched font for vim-powerline).
 You look into a help file to find the marks annoying.
 
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/6.png)
@@ -293,8 +293,8 @@ let g:lightline = {
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/7.png)
 
 Huh? Weird!
-The components do not collapse even if they have no information!
-In order to avoid this situation, you set expressions to `g:lightline.component_visible_condition`, which should become 1 only when the corresponding components have information.
+The subseparators are visible even if the components are empty.
+In order to hide the subseparators, you can set expressions to `g:lightline.component_visible_condition`, which should be 1 only when the corresponding component is not empty.
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -313,8 +313,8 @@ let g:lightline = {
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/8.png)
 
 Okay. It works nice.
-
-
+The configuration `component_visible_condition` is used to control the visibility of the subseparators.
+You cannot use this variable to control the visibility of the components themselves.
 
 How does lightline decide the components to show in the statusline?
 It's very simple.
