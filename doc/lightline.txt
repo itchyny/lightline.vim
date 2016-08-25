@@ -637,6 +637,15 @@ compiled version of your colorscheme.
 <
 Then copy and paste the result to the colorscheme file.
 
+A colorscheme may register a callback to be notified when lightline changes
+highlighting. This optional feature can be used to create reactive colorschemes.
+To enable this feature, a function that accepts a single argument for the
+current mode should be defined as follows:
+>
+	function! lightline#colorscheme#yourcolorscheme#highlight(mode)
+	  ...
+	endfunction
+<
 ==============================================================================
 EXAMPLES					*lightline-examples*
 You can configure the appearance of statusline.
