@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/08/21 11:23:58.
+" Last Change: 2016/09/04 13:01:40.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -325,7 +325,7 @@ endfunction
 
 function! s:evaluate_expand(component) abort
   try
-    let result = call(a:component, [])
+    let result = eval(a:component . '()')
     if type(result) == 1 && result ==# ''
       return []
     endif
