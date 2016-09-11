@@ -19,7 +19,6 @@ Examples				|lightline-examples|
 Nice Examples				|lightline-nice-examples|
 Powerful Example			|lightline-powerful-example|
 Troubleshooting				|lightline-troubleshooting|
-Changelog				|lightline-changelog|
 
 ==============================================================================
 INTRODUCTION					*lightline-introduction*
@@ -1290,12 +1289,6 @@ Problem 17:					*lightline-problem-17*
 
 		Report/Request the issue/feature at
 		https://github.com/itchyny/lightline.vim/issues.
-
-==============================================================================
-CHANGELOG					*lightline-changelog*
-
-0.0	2013-08-21, ...
-	- Initial commit and implementation
 
 ==============================================================================
 vim:tw=78:sw=4:ts=8:ft=help:norl:noet:
