@@ -4,7 +4,7 @@ Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2016/09/11 15:00:00.
+Last Change: 2016/09/13 23:56:56.
 
 CONTENTS					*lightline-contents*
 
@@ -1146,7 +1146,7 @@ Problem 9:					*lightline-problem-9*
 	subseparator.right	'|'		'' (\ue0b3)		'⮃' (\u2b83)
 	branch symbol		--		'' (\ue0a0)		'⭠' (\u2b60)
 	readonly symbol		--		'' (\ue0a2)		'⭤' (\u2b64)
-	linecolumn symbol	--		'' (\ue0a1)		'⭡' (\u2b81)
+	linecolumn symbol	--		'' (\ue0a1)		'⭡' (\u2b61)
 
 Problem 10:					*lightline-problem-10*
 	Cool statusline disappears on |unite|, |vimfiler| and |vimshell|

@@ -543,7 +543,7 @@ subseparator.left  | '\|'    | '' (\ue0b1) | '⮁' (\u2b81)
 subseparator.right | '\|'    | '' (\ue0b3) | '⮃' (\u2b83)
 branch symbol      | --      | '' (\ue0a0) | '⭠' (\u2b60)
 readonly symbol    | --      | '' (\ue0a2) | '⭤' (\u2b64)
-linecolumn symbol  | --      | '' (\ue0a1) | '⭡' (\u2b81)
+linecolumn symbol  | --      | '' (\ue0a1) | '⭡' (\u2b61)
 
 ### My settings
 I show my settings. I use the patched font for vim-powerline.
