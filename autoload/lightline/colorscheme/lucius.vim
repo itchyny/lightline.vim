@@ -5,7 +5,7 @@
 " =============================================================================
 
 function! s:Color(fg, bg)
-    return [ [synIDattr(synIDtrans(hlID(a:fg)), 'fg#'), 252 ], [synIDattr(synIDtrans(hlID(a:bg)), 'bg#'), 235 ] ]
+    return [ synIDattr(synIDtrans(hlID(a:fg)), 'fg#'), synIDattr(synIDtrans(hlID(a:bg)), 'bg#') ]
 endfunction
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
@@ -29,4 +29,4 @@ let s:p.insert.left = [ s:Color('DiffAdd','DiffAdd'), s:Color('Normal', 'Visual'
 let s:p.replace.left = [ s:Color('DiffDelete','DiffDelete'), s:Color('Normal', 'Visual') ]
 let s:p.visual.left = [ s:Color('DiffChange', 'DiffChange'), s:Color('Normal', 'Visual') ]
 
-let g:lightline#colorscheme#lucius#palette = lightline#colorscheme#flatten(s:p)
+let g:lightline#colorscheme#lucius#palette = lightline#colorscheme#fill(s:p)
