@@ -128,6 +128,10 @@ let s:_lightline = {
       \     'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL', 'V': 'V-LINE', "\<C-v>": 'V-BLOCK',
       \     'c': 'COMMAND', 's': 'SELECT', 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', 't': 'TERMINAL'
       \   },
+      \   'short_mode_map': {
+      \     'n': 'N', 'i': 'I', 'R': 'R', 'v': 'V', 'V': 'V', 'c': 'C',
+      \     "\<C-v>": 'V', 's': 'S', 'S': 'S', "\<C-s>": 'S', 't': 'T'
+      \   },
       \   'separator': { 'left': '', 'right': '' },
       \   'subseparator': { 'left': '|', 'right': '|' },
       \   'tabline_separator': {},
@@ -213,6 +217,10 @@ endfunction
 
 function! lightline#mode() abort
   return get(s:lightline.mode_map, mode(), '')
+endfunction
+
+function! lightline#shortmode() abort
+  return get(s:lightline.short_mode_map, mode(), '')
 endfunction
 
 let s:mode = ''
