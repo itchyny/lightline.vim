@@ -223,7 +223,7 @@ OPTIONS						*lightline-option*
 		The colorscheme for lightline.vim.
 		Currently, wombat, solarized, powerline, jellybeans, Tomorrow,
 		Tomorrow_Night, Tomorrow_Night_Blue, Tomorrow_Night_Eighties,
-		PaperColor, seoul256, landscape and 16color are available.
+		PaperColor, seoul256, landscape, Dracula, and 16color are available.
 		The default value is:
 >
 		let g:lightline.colorscheme = 'default'
