@@ -2,21 +2,19 @@
 " Filename: autoload/lightline/colorscheme/Dracula.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/10/13 01:51:38.
+" Last Change: 2016/11/06 01:08:03.
 " =============================================================================
 
-let s:black = '#282a36'
-let s:gray = '#44475a'
-let s:white = '#f8f8f2'
-let s:darkblue = '#6272a4'
-let s:cyan = '#8be9fd'
-let s:green = '#50fa7b'
-let s:orange = '#ffb86c'
-let s:pink = '#ff79c6'
-let s:purple = '#bd93f9'
-let s:red = '#ff5555'
-let s:yellow = '#f1fa8c'
-
+let s:black = [ '#282a36', 235 ]
+let s:gray = [ '#44475a', 236 ]
+let s:white = [ '#f8f8f2', 231 ]
+let s:darkblue = [ '#6272a4', 61 ]
+let s:cyan = [ '#8be9fd', 117 ]
+let s:green = [ '#50fa7b', 84 ]
+let s:orange = [ '#ffb86c', 215 ]
+let s:purple = [ '#bd93f9', 141 ]
+let s:red = [ '#ff79c6', 212 ]
+let s:yellow = [ '#f1fa8c', 228 ]
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 let s:p.normal.left = [ [ s:black, s:purple ], [ s:cyan, s:gray ] ]
@@ -35,4 +33,4 @@ let s:p.tabline.right = copy(s:p.normal.right)
 let s:p.normal.error = [ [ s:red, s:black ] ]
 let s:p.normal.warning = [ [ s:yellow, s:black ] ]
 
-let g:lightline#colorscheme#Dracula#palette = lightline#colorscheme#fill(s:p)
+let g:lightline#colorscheme#Dracula#palette = lightline#colorscheme#flatten(s:p)
