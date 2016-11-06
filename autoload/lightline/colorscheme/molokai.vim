@@ -4,17 +4,17 @@
 " License: MIT License
 " =============================================================================
 "
-let s:black = '#1A1A1A'
+let s:black = '#1a1a1a'
 let s:gray = '#44475a'
 let s:white = '#f8f8f2'
-let s:darkblue = '#1B388D'
-let s:cyan = '#66D9EF'
-let s:green = '#37E42E'
-let s:orange = '#FF8000'
-let s:pink = '#FB26BF'
-let s:purple = '#8000FF'
-let s:red = '#FF0000'
-let s:yellow = '#E6DB74'
+let s:darkblue = '#1b388d'
+let s:cyan = '#66d9ef'
+let s:green = '#37e42e'
+let s:orange = '#ff8000'
+let s:pink = '#fb26bf'
+let s:purple = '#8000ff'
+let s:red = '#ff0000'
+let s:yellow = '#e6db74'
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 let s:p.insert.left = [ [ s:black, s:green ], [ s:black, s:darkblue ] ]
