@@ -636,6 +636,16 @@ compiled version of your colorscheme.
 <
 Then copy and paste the result to the colorscheme file.
 
+If you want to contribute a new colorscheme that is not currently available
+please follow the following rules:
+    *) All hex codes should be lowercase only
+    *) Use 2 space soft tabs
+    *) If your colorscheme has both light and dark variants, use a single file
+    *) Normal Mode should default to Cyan
+    *) Insert Mode should default to Green
+    *) Visual Mode should default to Yellow
+    *) Replace Mode should default to Red
+
 ==============================================================================
 EXAMPLES					*lightline-examples*
 You can configure the appearance of statusline.
