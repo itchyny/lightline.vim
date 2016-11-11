@@ -15,10 +15,27 @@ let s:red = [ '#ff0000', 160 ]
 let s:yellow = [ '#e6db74', 229 ]
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
-let s:p.insert.left = [ [ s:black, s:green ], [ s:cyan, s:black ] ]
-let s:p.visual.left = [ [ s:black, s:orange ], [ s:black, s:cyan ] ]
+
+" Use 'lightline_molokai_alternative = 1' in your .vimrc or init.vim to use a
+" slightly more molokai like appearnace for your bar
+if exists("g:lightline_molokai_alternative")
+  let s:lightline_molokai_alternative = g:lightline_molokai_alternative
+else
+  let s:lightline_molokai_alternative = 0
+endif
+
+
+
+if s:lightline_molokai_alternative == 1
+  let s:p.visual.left = [ [ s:black, s:orange ], [ s:black, s:cyan ] ]
+  let s:p.normal.left = [ [ s:black, s:pink ], [ s:orange, s:black ] ]
+else
+  let s:p.visual.left = [ [ s:black, s:yellow ], [ s:black, s:cyan ] ]
+  let s:p.normal.left = [ [ s:black, s:cyan ], [ s:orange, s:black ] ]
+end 
+
 let s:p.replace.left = [ [ s:black, s:red ], [ s:black, s:orange ] ]
-let s:p.normal.left = [ [ s:black, s:pink ], [ s:orange, s:black ] ]
+let s:p.insert.left = [ [ s:black, s:green ], [ s:cyan, s:black ] ]
 let s:p.normal.middle = [ [ s:black, s:black ] ]
 let s:p.normal.right = [ [ s:white, s:gray ], [ s:white, s:gray ] ]
 let s:p.normal.error = [ [ s:pink, s:black ] ]
