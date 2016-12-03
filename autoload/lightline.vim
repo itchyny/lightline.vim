@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/11/23 19:33:32.
+" Last Change: 2016/12/03 12:08:08.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -156,7 +156,7 @@ function! lightline#init() abort
   endfor
   call extend(s:lightline.tabline_separator, s:lightline.separator, 'keep')
   call extend(s:lightline.tabline_subseparator, s:lightline.subseparator, 'keep')
-  let s:lightline.tabline_configured = 0
+  let s:lightline.tabline_configured = has_key(get(get(g:, 'lightline', {}), 'component_expand', {}), 'tabs')
   for components in deepcopy(s:lightline.tabline.left + s:lightline.tabline.right)
     if len(filter(components, 'v:val !=# "tabs" && v:val !=# "close"')) > 0
       let s:lightline.tabline_configured = 1
