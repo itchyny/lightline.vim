@@ -111,6 +111,9 @@ set laststatus=2
 to your `.vimrc`.
 
 
+If the statusline hasn't changed, move the `g:lightline` setting before setting `colorscheme` in your `.vimrc`.
+
+
 If you have problem like
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/20.png)
 
