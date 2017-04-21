@@ -18,11 +18,12 @@ cache:
     - $HOME/vim-$VIM_VERSION
 
 env:
-  - VIM_VERSION=8.0.0000 PATH=$HOME/vim-$VIM_VERSION/bin/:$PATH
-  - VIM_VERSION=7.4 PATH=$HOME/vim-$VIM_VERSION/bin/:$PATH
-  - VIM_VERSION=7.3 PATH=$HOME/vim-$VIM_VERSION/bin/:$PATH
-  - VIM_VERSION=7.2.051 PATH=$HOME/vim-$VIM_VERSION/bin/:$PATH
+  - VIM_VERSION=8.0.0000
+  - VIM_VERSION=7.4
+  - VIM_VERSION=7.3
+  - VIM_VERSION=7.2.051
 
 script:
+  - export PATH=$HOME/vim-$VIM_VERSION/bin:$PATH
   - vim --version
   - /tmp/themis/bin/themis --reporter spec
