@@ -4,7 +4,7 @@ Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2017/05/27 22:59:13.
+Last Change: 2017/05/28 00:40:46.
 
 CONTENTS					*lightline-contents*
 
@@ -40,12 +40,15 @@ SPIRIT						*lightline-spirit*
 	    The plugin does not rely on the implementation of other plugins.
 	    Such plugin crossing settings should be configured by users.
 
-	You might find this plugin is not so useful by default. This plugin
-	does not provide the branch information, which is a very basic
-	component in existing plugins. The reason is that branch component is
-	one of plugin crossing settings so users should write the settings
-	using the APIs of the both plugins. Hospitality makes a plugin messy.
-	Good APIs keep a plugin clean.
+	You find this plugin does not integrate with other plugins by default.
+	This plugin does not provide branch information, which is a basic
+	component in existing statusline plugins. It is a design of
+	lightline.vim that such plugin crossing configuration should be
+	written by users. Once a plugin starts to integrate with some famous
+	plugins, it should be kept updated to follow the changes of the
+	plugins and should accept integration requests with new plugins.
+	Instead, lightline.vim is designed very carefully so that users can
+	easily integrate with other plugins. Good APIs keep a plugin clean.
 
 ------------------------------------------------------------------------------
 OPTIONS						*lightline-option*
