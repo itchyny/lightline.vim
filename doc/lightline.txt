@@ -4,7 +4,7 @@ Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2017/05/27 21:32:32.
+Last Change: 2017/05/27 22:59:13.
 
 CONTENTS					*lightline-contents*
 
@@ -133,30 +133,28 @@ OPTIONS						*lightline-option*
 		component itself.
 
 	g:lightline.component_function		*g:lightline.component_function*
-		Another dictionary for components. This is more convenient
-		because the user does not have to set both component and
-		component_visible_condition. If a component set to both component and
-		component_function, the setting of component_function has priority.
+		User can register component functions in this dictionary.
+		This is useful to write a complex component configuration and
+		to integrate with other plugins. If a component set to both
+		component and component_function, the setting of
+		component_function has priority.
 
 		The default value is:
 >
 		let g:lightline.component_function = {}
 <
-		For example, if you want a component for read-only mark, which
-		disappears in help windows:
+		For example, if you want to display the name of the git branch,
+		install vim-fugitive plugin and then configure as:
 >
 		let g:lightline = {
 			\ 'active': {
 			\   'left': [ [ 'mode', 'paste' ],
-			\             [ 'myreadonly', 'filename', 'modified' ] ],
+			\             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
 			\ },
 			\ 'component_function': {
-			\   'myreadonly': 'LightlineReadonly'
+			\   'gitbranch': 'fugitive#head'
 			\ },
 			\ }
-		function! LightlineReadonly()
-			return &ft !~? 'help' && &readonly ? 'RO' : ''
-		endfunction
 <
 	g:lightline.component_function_visible_condition
 						*g:lightline.component_function_visible_condition*
