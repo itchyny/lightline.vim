@@ -4,7 +4,7 @@ Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2016/10/24 08:12:28.
+Last Change: 2017/05/27 21:32:32.
 
 CONTENTS					*lightline-contents*
 
@@ -29,21 +29,21 @@ The *lightline* plugin is a light and configurable statusline/tabline for Vim.
 SPIRIT						*lightline-spirit*
 
 	Minimalism
-	    The core script is very small.
+	    The core script is very small to achive enough functions as a
+	    statusline plugin.
 
 	Configurability
-	    You can create your own component and easily add to the
-	    statusline/tabline.
+	    You can create your own component and easily add to the statusline
+	    and the tabline.
 
 	Orthogonality
-	    Any plugin should not change the settings of another plugin.
-	    Such plugin-crossing settings should be written by users in
-	    .vimrc.
+	    The plugin does not rely on the implementation of other plugins.
+	    Such plugin crossing settings should be configured by users.
 
 	You might find this plugin is not so useful by default. This plugin
 	does not provide the branch information, which is a very basic
 	component in existing plugins. The reason is that branch component is
-	one of plugin-crossing settings so users should write the settings
+	one of plugin crossing settings so users should write the settings
 	using the APIs of the both plugins. Hospitality makes a plugin messy.
 	Good APIs keep a plugin clean.
 
