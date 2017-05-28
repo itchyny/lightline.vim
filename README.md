@@ -56,29 +56,26 @@ landscape is my colorscheme, which is a high-contrast cui-supported colorscheme,
 + Orthogonality. The plugin does not rely on the implementation of other plugins. Such plugin crossing settings should be configured by users.
 
 ## Installation
-### Manually
-1. Put all files under $VIM.
-
-### Pathogen
+### [Pathogen](https://github.com/tpope/vim-pathogen)
 1. Install with the following command.
 
         git clone https://github.com/itchyny/lightline.vim ~/.vim/bundle/lightline.vim
 
-### Vundle (https://github.com/VundleVim/Vundle.vim)
+### [Vundle](https://github.com/VundleVim/Vundle.vim)
 1. Add the following configuration to your `.vimrc`.
 
         Plugin 'itchyny/lightline.vim'
 
 2. Install with `:PluginInstall`.
 
-### NeoBundle (https://github.com/Shougo/neobundle.vim)
+### [NeoBundle](https://github.com/Shougo/neobundle.vim)
 1. Add the following configuration to your `.vimrc`.
 
         NeoBundle 'itchyny/lightline.vim'
 
 2. Install with `:NeoBundleInstall`.
 
-### vim-plug (https://github.com/junegunn/vim-plug)
+### [vim-plug](https://github.com/junegunn/vim-plug)
 1. Add the following configuration to your `.vimrc`.
 
         Plug 'itchyny/lightline.vim'
