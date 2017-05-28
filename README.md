@@ -124,8 +124,7 @@ set noshowmode
 
 ## Colorscheme configuration
 The lightline.vim plugin provides multiple colorschemes to meet your editor colorscheme.
-Do not be confused, editor colorscheme rules how codes look like in buffers.
-The lightline.vim plugin has independent colorscheme feature beside the editor colorscheme and it roles how the statusline looks like.
+Do not be confused, editor colorscheme rules how codes look like in buffers and lightline.vim has independent colorscheme feature, which rules how the statusline looks like.
 
 If you use the wombat colorscheme, add the following settings to your `.vimrc`
 ```vim
@@ -139,7 +138,7 @@ restart Vim and the statusline looks like:
 
 If the colors of the statusline do not change from the default colors, move the settings of `g:lightline` before setting the colorscheme.
 
-There are many lightline colorschemes available. See `:h g:lightline.colorscheme` for the colorscheme list.
+There are many lightline colorschemes available as shown above in this README.md. See `:h g:lightline.colorscheme` for the complete list.
 
 ## Advanced configuration
 The default appearance of lightline.vim is carefully designed that tutorial is enough here for most people.
