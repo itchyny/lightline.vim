@@ -3,7 +3,7 @@ A light and configurable statusline/tabline plugin for Vim
 
 https://github.com/itchyny/lightline.vim
 
-### powerline theme (default)
+### powerline (default)
 
 ![lightline.vim - powerline](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/powerline.png)
 
@@ -15,31 +15,31 @@ https://github.com/itchyny/lightline.vim
 
 ![lightline.vim - jellybeans](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/jellybeans.png)
 
-### solarized theme (dark)
+### solarized dark
 
 ![lightline.vim - solarized_dark](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_dark.png)
 
-### solarized theme (light)
+### solarized light
 
 ![lightline.vim - solarized_light](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_light.png)
 
-### PaperColor theme (light)
+### PaperColor light
 
 ![lightline.vim - PaperColor](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/PaperColor.png)
 
-### seoul256 theme
+### seoul256
 
 ![lightline.vim - seoul256](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/seoul256.png)
 
-### Dracula theme
+### Dracula
 
 ![lightline.vim - Dracula](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/Dracula.png)
 
-### one theme
+### one
 
 ![lightline.vim - one](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/one.png)
 
-### landscape theme
+### landscape
 
 ![lightline.vim - landscape](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/landscape.png)
 
