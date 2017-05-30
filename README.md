@@ -83,10 +83,10 @@ landscape is my colorscheme, which is a high-contrast cui-supported colorscheme,
 2. Install with `:PlugInstall`.
 
 ## Introduction
-After installing the plugin, you restart the editor and get a cool statusline.
+After installing this plugin, you restart the editor and will get a cool statusline.
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/1.png)
 
-The color of the statusline changes due to the mod of Vim. Try typing something, selecting in visual mode and replacing some texts.
+The color of the statusline changes due to the mode of Vim. Try typing something, selecting in visual mode and replacing some texts.
 
 If the statusline looks like
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/21.png)
@@ -112,9 +112,9 @@ endif
 
 Your statusline appears to work correctly? If yes, great, thanks for choosing lightline.vim! If no, please file a issue report to the [issue tracker](https://github.com/itchyny/lightline.vim/issues).
 
-By the way, `-- INSERT --` text is unnecessary anymore because the mode information is displayed in the statusline.
+By the way, `-- INSERT --` is unnecessary anymore because the mode information is displayed in the statusline.
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/13.png)
-If you want to get rid of it, configure as
+If you want to get rid of it, configure as follows.
 ```vim
 set noshowmode
 ```
@@ -123,7 +123,7 @@ set noshowmode
 The lightline.vim plugin provides multiple colorschemes to meet your editor colorscheme.
 Do not be confused, editor colorscheme rules how codes look like in buffers and lightline.vim has independent colorscheme feature, which rules how the statusline looks like.
 
-If you use the wombat colorscheme, add the following settings to your `.vimrc`
+If you are using wombat colorscheme, add the following setting to your `.vimrc`,
 ```vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -133,27 +133,28 @@ restart Vim and the statusline looks like:
 
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/2.png)
 
-If the colors of the statusline do not change from the default colors, move the settings of `g:lightline` before setting the colorscheme.
+If the colors of the statusline do not change, move the settings of `g:lightline` before setting the editor colorscheme.
 
-There are many lightline colorschemes available as shown above in this README.md. See `:h g:lightline.colorscheme` for the complete list.
+There are many lightline colorschemes available as screenshots shown above. See `:h g:lightline.colorscheme` for the complete list.
 
 ## Advanced configuration
-The default appearance of lightline.vim is carefully designed that tutorial is enough here for most people.
+The default appearance of lightline.vim is carefully designed that the tutorial is enough here for most people.
 So please read this section if you really want to configure and enjoy the configurability of lightline.vim.
 
 Sometimes people want to display information of other plugins.
 For example git branch information, syntax check errors and some statuses of plugins.
 
 The lightline.vim plugin does not provide any plugin integration by default.
-This plugin considers orthogonality to be one of the important ideas, which means that the plugin does no rely on the implementation of other plugins.
-Once a plugin starts to integrate with some famous plugins, it should be kept updated to follow the changes of the plugins, it should accept integration requests with new plugins and it will suffer from performance regression due to plugin availability checks.
+This plugin considers orthogonality to be one of the important ideas, which means that the plugin does not rely on implementation of other plugins.
+Once a plugin starts to integrate with some famous plugins, it should be kept updated to follow the changes of the plugins, and should accept integration requests with new plugins and it will suffer from performance regression due to plugin availability checks.
 
-Instead, lightline.vim provides a simple API that use can easily integrate with other plugins.
-Once you understand how to configure and how it will be displayed in the statusline, you can also know how to integrate this plugin with your own plugin.
+Instead, lightline.vim provides a simple API that user can easily integrate with other plugins.
+Once you understand how to configure and how it will be displayed in the statusline, you can also tell how to integrate with your favorite plugins.
 
-Let's start configure the appearance of the statusline.
-The lightline.vim statusline is composed by multiple components.
+Let's start to configure the appearance.
+The statusline is composed by multiple components.
 It shows the current mode, filename, modified status on the left, and file format, encoding, filetype and cursor positions on the right.
+So in order to add something in the statusline, you firstly create a new component and specify the place.
 
 This is the hello world of lightline.vim component.
 ```vim
@@ -176,7 +177,7 @@ The `helloworld` component is added to `g:lightline.active.left` and its content
 The component contents are simply added to `&statusline`.
 Try `:echo &statusline`, it might be a little bit complicated, but you will find `Hello, world!` somewhere.
 
-You can use the `'statusline'` syntax for the components.
+You can use `'statusline'` syntax for lightline.vim components.
 Consult `:h 'statusline'` to see what's available here.
 For example, if you want to print the value of character under the cursor in hexadecimal, configure as
 ```vim
@@ -254,7 +255,7 @@ Here we have leaned two kinds of components.
 
 
 The function component is an important design for the configurability of lightline.vim.
-You can display almost anything via function components.
+By providing the configuration interface via functions, you can adjust the statusline information as you wish.
 For the proof, let's look into some configuration examples in Q&amp;A style.
 
 ### Can I hide the readonly component in the help buffer?
