@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2017/08/09 22:00:57.
+" Last Change: 2017/08/10 04:53:19.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -338,7 +338,8 @@ endfunction
 function! s:convert(name, index) abort
   if has_key(s:lightline.component_expand, a:name)
     let type = get(s:lightline.component_type, a:name, a:index)
-    return filter(s:map(s:evaluate_expand(s:lightline.component_expand[a:name]), '[v:val, 1, v:key == 1 ? "' . type . '" : "' . a:index . '"]'), 'v:val[0] != []')
+    return filter(s:map(s:evaluate_expand(s:lightline.component_expand[a:name]),
+          \ '[v:val, 1 + ' . (type ==# 'raw') . ', v:key == 1 && ' . (type !=# 'raw') . ' ? "' . type . '" : "' . a:index . '"]'), 'v:val[0] != []')
   else
     return [[[a:name], 0, a:index]]
   endif
@@ -403,7 +404,7 @@ function! s:line(tabline, inactive) abort
     let _ .= '%#LightlineLeft_' . mode . '_' . ll[i] . '#'
     for j in range(len(lt[i]))
       let x = lc[i][j] ? lt[i][j] : has_key(f, lt[i][j]) ? (exists('*' . f[lt[i][j]]) ? '%{' . f[lt[i][j]] . '()}' : '%{exists("*' . f[lt[i][j]] . '")?' . f[lt[i][j]] . '():""}') : get(c, lt[i][j], '')
-      let _ .= has_key(t, lt[i][j]) && t[lt[i][j]] ==# 'raw' || ll[i] ==# 'raw' || x ==# '' ? x : '%( ' . x . ' %)'
+      let _ .= has_key(t, lt[i][j]) && t[lt[i][j]] ==# 'raw' || lc[i][j] ==# 2 || x ==# '' ? x : '%( ' . x . ' %)'
       if j < len(lt[i]) - 1 && s.left !=# ''
         let _ .= s:subseparator(lt[i][(j):], s.left, lc[i][(j):])
       endif
@@ -418,7 +419,7 @@ function! s:line(tabline, inactive) abort
     let _ .= '%#LightlineRight_' . mode . '_' . rl[i] . '#'
     for j in range(len(rt[i]))
       let x = rc[i][j] ? rt[i][j] : has_key(f, rt[i][j]) ? (exists('*' . f[rt[i][j]]) ? '%{' . f[rt[i][j]] . '()}' : '%{exists("*' . f[rt[i][j]] . '")?' . f[rt[i][j]] . '():""}') : get(c, rt[i][j], '')
-      let _ .= has_key(t, rt[i][j]) && t[rt[i][j]] ==# 'raw' || rl[i] ==# 'raw' || x ==# '' ? x : '%( ' . x . ' %)'
+      let _ .= has_key(t, rt[i][j]) && t[rt[i][j]] ==# 'raw' || rc[i][j] ==# 2 || x ==# '' ? x : '%( ' . x . ' %)'
       if j < len(rt[i]) - 1 && s.right !=# ''
         let _ .= s:subseparator(rt[i][(j):], s.right, rc[i][(j):])
       endif
