@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/12/03 12:08:08.
+" Last Change: 2017/08/09 22:00:57.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -403,7 +403,7 @@ function! s:line(tabline, inactive) abort
     let _ .= '%#LightlineLeft_' . mode . '_' . ll[i] . '#'
     for j in range(len(lt[i]))
       let x = lc[i][j] ? lt[i][j] : has_key(f, lt[i][j]) ? (exists('*' . f[lt[i][j]]) ? '%{' . f[lt[i][j]] . '()}' : '%{exists("*' . f[lt[i][j]] . '")?' . f[lt[i][j]] . '():""}') : get(c, lt[i][j], '')
-      let _ .= has_key(t, lt[i][j]) && t[lt[i][j]] ==# 'raw' || x ==# '' ? x : '%( ' . x . ' %)'
+      let _ .= has_key(t, lt[i][j]) && t[lt[i][j]] ==# 'raw' || ll[i] ==# 'raw' || x ==# '' ? x : '%( ' . x . ' %)'
       if j < len(lt[i]) - 1 && s.left !=# ''
         let _ .= s:subseparator(lt[i][(j):], s.left, lc[i][(j):])
       endif
@@ -418,7 +418,7 @@ function! s:line(tabline, inactive) abort
     let _ .= '%#LightlineRight_' . mode . '_' . rl[i] . '#'
     for j in range(len(rt[i]))
       let x = rc[i][j] ? rt[i][j] : has_key(f, rt[i][j]) ? (exists('*' . f[rt[i][j]]) ? '%{' . f[rt[i][j]] . '()}' : '%{exists("*' . f[rt[i][j]] . '")?' . f[rt[i][j]] . '():""}') : get(c, rt[i][j], '')
-      let _ .= has_key(t, rt[i][j]) && t[rt[i][j]] ==# 'raw' || x ==# '' ? x : '%( ' . x . ' %)'
+      let _ .= has_key(t, rt[i][j]) && t[rt[i][j]] ==# 'raw' || rl[i] ==# 'raw' || x ==# '' ? x : '%( ' . x . ' %)'
       if j < len(rt[i]) - 1 && s.right !=# ''
         let _ .= s:subseparator(rt[i][(j):], s.right, rc[i][(j):])
       endif
