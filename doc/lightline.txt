@@ -109,8 +109,9 @@ OPTIONS						*lightline-option*
 		    \ 'spell': '%{&spell?&spelllang:""}',
 		    \ 'lineinfo': '%3l:%-2v',
 		    \ 'line': '%l',
-		    \ 'column': '%c'
-		    \ 'close': '%999X X ' }
+		    \ 'column': '%c',
+		    \ 'close': '%999X X ',
+		    \ 'winnr': '%{winnr()}' }
 <
 	g:lightline.component_visible_condition
 						*g:lightline.component_visible_condition*
