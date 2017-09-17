@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2017/08/21 08:19:52.
+" Last Change: 2017/09/18 08:22:45.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -450,7 +450,7 @@ function! lightline#tabs() abort
   let nr = tabpagenr()
   let cnt = tabpagenr('$')
   for i in range(1, cnt)
-    call add(i < nr ? x : i == nr ? y : z, '%'. i . 'T%{lightline#onetab(' . i . ',' . (i == nr) . ')}' . (i == cnt ? '%T' : ''))
+    call add(i < nr ? x : i == nr ? y : z, (i > nr + 3 ? '%<' : '') . '%'. i . 'T%{lightline#onetab(' . i . ',' . (i == nr) . ')}' . (i == cnt ? '%T' : ''))
   endfor
   let abbr = '...'
   let n = min([max([s:lightline.winwidth / 40, 2]), 8])
