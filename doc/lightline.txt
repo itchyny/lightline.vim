@@ -111,7 +111,7 @@ OPTIONS						*lightline-option*
 		    \ 'line': '%l',
 		    \ 'column': '%c',
 		    \ 'close': '%999X X ',
-		    \ 'windownb': '%{winnr()}' }
+		    \ 'winnr': '%{winnr()}' }
 <
 	g:lightline.component_visible_condition
 						*g:lightline.component_visible_condition*
