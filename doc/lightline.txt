@@ -591,7 +591,7 @@ The following code gives the minimal palette definition for lightline.
 	let s:p.normal.left = [ [ ... ] ]
 	let s:p.normal.right = [ [ ... ] ]
 	let s:p.normal.middle = [ [ ... ] ]
-	let g:lightline#colorscheme#yourcolorscheme#palette = s:p
+	let g:lightline#colorscheme#yourcolorscheme#palette = lightline#colorscheme#flatten(s:p)
 <
 And if you add the colorscheme configuration to your .vimrc(_vimrc),
 >
