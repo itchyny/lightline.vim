@@ -4,7 +4,7 @@ Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2017/08/21 08:33:12.
+Last Change: 2017/11/05 20:05:17.
 
 CONTENTS					*lightline-contents*
 
@@ -1252,22 +1252,22 @@ Problem 13:					*lightline-problem-13*
 		can easily switch between lightline colorschemes by adding the
 		following LightlineColorscheme command to your .vimrc(_vimrc).
 >
-		function! s:setLightlineColorscheme(name)
+		function! s:set_lightline_colorscheme(name) abort
 		  let g:lightline.colorscheme = a:name
 		  call lightline#init()
 		  call lightline#colorscheme()
 		  call lightline#update()
-		endfun
+		endfunction
 
-		function! s:lightlineColorschemes(...)
+		function! s:lightline_colorschemes(...) abort
 		  return join(map(
 		        \ globpath(&rtp,"autoload/lightline/colorscheme/*.vim",1,1),
 		        \ "fnamemodify(v:val,':t:r')"),
 		        \ "\n")
-		endfun
+		endfunction
 
-		com! -nargs=1 -complete=custom,s:lightlineColorschemes LightlineColorscheme
-		      \ call s:setLightlineColorscheme(<q-args>)
+		command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
+		      \ call s:set_lightline_colorscheme(<q-args>)
 <
 Problem 14:					*lightline-problem-14*
 	The 'E541' warning appears on the right hand side.
