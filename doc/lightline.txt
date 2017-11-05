@@ -1224,7 +1224,9 @@ Problem 12:					*lightline-problem-12*
 Problem 13:					*lightline-problem-13*
 	How to change the lightline colorscheme on the fly.
 
-		Add the following settings to your .vimrc(_vimrc).
+		To update your lightline colorscheme in sync with your vim
+		colorscheme (only for select colorschemes which exist for
+		both), add the following settings to your .vimrc(_vimrc).
 >
 		augroup LightlineColorscheme
 		  autocmd!
@@ -1245,6 +1247,27 @@ Problem 13:					*lightline-problem-13*
 		  catch
 		  endtry
 		endfunction
+<
+		If you have not settled on a single lightline colorscheme, you
+		can easily switch between lightline colorschemes by adding the
+		following LightlineColorscheme command to your .vimrc(_vimrc).
+>
+		function! s:setLightlineColorscheme(name)
+		  let g:lightline.colorscheme = a:name
+		  call lightline#init()
+		  call lightline#colorscheme()
+		  call lightline#update()
+		endfun
+
+		function! s:lightlineColorschemes(...)
+		  return join(map(
+		        \ globpath(&rtp,"autoload/lightline/colorscheme/*.vim",1,1),
+		        \ "fnamemodify(v:val,':t:r')"),
+		        \ "\n")
+		endfun
+
+		com! -nargs=1 -complete=custom,s:lightlineColorschemes LightlineColorscheme
+		      \ call s:setLightlineColorscheme(<q-args>)
 <
 Problem 14:					*lightline-problem-14*
 	The 'E541' warning appears on the right hand side.
