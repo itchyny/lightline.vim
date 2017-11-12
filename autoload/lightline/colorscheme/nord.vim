@@ -1,8 +1,8 @@
 " =============================================================================
 " Filename: autoload/lightline/colorscheme/nord.vim
 " Author: arcticicestudio
-" License: Apache 2.0
-" Last Change: 2017/08/03 09:14:52
+" License: MIT
+" Last Change: 2017/11/12 20:27:51
 " =============================================================================
 
 let s:nord_vim_version="0.6.0"
