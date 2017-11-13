@@ -5,7 +5,6 @@
 " Last Change: 2017/11/12 20:27:51
 " =============================================================================
 
-let s:nord_vim_version="0.6.0"
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
 let s:nord0 = ["#2E3440", "NONE"]
