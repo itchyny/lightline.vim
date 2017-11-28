@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/colorscheme/one.vim
 " Author: Zoltan Dalmadi
 " License: MIT License
-" Last Change: 2016/11/2 17:34:27.
+" Last Change: 2017/11/25 11:13:44.
 " =============================================================================
 
 " Common colors
@@ -16,7 +16,7 @@ let s:yellow = '#e5c07b'
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
-if &background ==# 'light'
+if lightline#colorscheme#background() ==# 'light'
   " Light variant
   let s:bg     = '#fafafa'
   let s:gray1  = '#494b53'
