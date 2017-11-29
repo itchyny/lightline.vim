@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/colorscheme.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2017/11/28 21:25:13.
+" Last Change: 2017/11/29 12:54:05.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -233,9 +233,11 @@ else
   function! lightline#colorscheme#background() abort
     let bg_color = synIDattr(synIDtrans(hlID('Normal')), 'bg', 'cterm')
     if bg_color !=# ''
-      if bg_color < 8 || 232 <= bg_color && bg_color < 244
+      if bg_color < 16
+        return &background
+      elseif 232 <= bg_color && bg_color < 244
         return 'dark'
-      elseif 8 <= bg_color && bg_color < 16 || 244 <= bg_color
+      elseif 244 <= bg_color
         return 'light'
       endif
     endif
