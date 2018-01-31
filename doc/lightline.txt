@@ -229,7 +229,8 @@ OPTIONS						*lightline-option*
 		Currently, wombat, solarized, powerline, jellybeans, Tomorrow,
 		Tomorrow_Night, Tomorrow_Night_Blue, Tomorrow_Night_Eighties,
 		PaperColor, seoul256, landscape, one, Dracula, darcula,
-		molokai, materia, material, OldHope, nord and 16color are available.
+		molokai, materia, material, OldHope, nord, 16color and deus
+		are available.
 		The default value is:
 >
 		let g:lightline.colorscheme = 'default'
