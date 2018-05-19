@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/colorscheme/srcery_drk.vim
 " Author: Christopher Vittal
 " License: MIT License
-" Last Change: 2017/22/07
+" Last Change: 2018/05/19
 " =============================================================================
 let s:base03 = [ '#151513', 233 ]
 let s:base02 = [ '#30302c ', 236 ]
@@ -25,11 +25,11 @@ let s:bright_green = ["#98bc37", 10]
 let s:white = ["#fce8c3", 15]
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
-let s:p.normal.left = [ [ s:base02, s:bright_green, 'bold' ], [ s:base3, s:base01 ] ]
+let s:p.normal.left = [ [ s:base02, s:bright_blue, 'bold' ], [ s:base3, s:base01 ] ]
 let s:p.normal.right = [ [ s:base02, s:base1 ], [ s:base2, s:base01 ] ]
 let s:p.inactive.right = [ [ s:base02, s:base00 ], [ s:base0, s:base02 ] ]
 let s:p.inactive.left =  [ [ s:base0, s:base02 ], [ s:base00, s:base02 ] ]
-let s:p.insert.left = [ [ s:base02, s:bright_blue, 'bold' ], [ s:base3, s:base01 ] ]
+let s:p.insert.left = [ [ s:base02, s:bright_green, 'bold' ], [ s:base3, s:base01 ] ]
 let s:p.replace.left = [ [ s:base3, s:red, 'bold' ], [ s:base3, s:base01 ] ]
 let s:p.visual.left = [ [ s:base3, s:bright_magenta, 'bold' ], [ s:base3, s:base01 ] ]
 let s:p.normal.middle = [ [ s:base0, s:base02 ] ]
