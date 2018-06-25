@@ -45,14 +45,7 @@ function! lightline#enable() abort
   if s:lightline.enable.tabline
     set tabline=%!lightline#tabline()
   endif
-  augroup lightline
-    autocmd!
-    autocmd WinEnter,BufWinEnter,FileType,SessionLoadPost * call lightline#update()
-    autocmd SessionLoadPost * call lightline#highlight()
-    autocmd ColorScheme * if !has('vim_starting') || expand('<amatch>') !=# 'macvim'
-          \ | call lightline#update() | call lightline#highlight() | endif
-    autocmd CursorMoved,BufUnload * call lightline#update_once()
-  augroup END
+  call LightlineAugroup()
   augroup lightline-disable
     autocmd!
   augroup END

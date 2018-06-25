@@ -13,14 +13,18 @@ let g:loaded_lightline = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-augroup lightline
-  autocmd!
-  autocmd WinEnter,BufWinEnter,FileType,SessionLoadPost * call lightline#update()
-  autocmd SessionLoadPost * call lightline#highlight()
-  autocmd ColorScheme * if !has('vim_starting') || expand('<amatch>') !=# 'macvim'
-        \ | call lightline#update() | call lightline#highlight() | endif
-  autocmd CursorMoved,BufUnload * call lightline#update_once()
-augroup END
+function! LightlineAugroup() abort
+    augroup lightline
+      autocmd!
+      autocmd WinEnter,BufWinEnter,FileType,SessionLoadPost * call lightline#update()
+      autocmd SessionLoadPost * call lightline#highlight()
+      autocmd ColorScheme * if !has('vim_starting') || expand('<amatch>') !=# 'macvim'
+            \ | call lightline#update() | call lightline#highlight() | endif
+      autocmd CursorMoved,BufUnload * call lightline#update_once()
+    augroup END
+endfunction
+
+call LightlineAugroup()
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
