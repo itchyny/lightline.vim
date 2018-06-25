@@ -24,5 +24,7 @@ function! LightlineAugroup() abort
     augroup END
 endfunction
 
+call LightlineAugroup()
+
 let &cpo = s:save_cpo
 unlet s:save_cpo
