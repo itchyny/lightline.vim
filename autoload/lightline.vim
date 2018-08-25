@@ -138,7 +138,7 @@ let s:_lightline = {
       \   'enable': { 'statusline': 1, 'tabline': 1 },
       \   '_mode_': {
       \     'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual', "\<C-v>": 'visual',
-      \     'c': 'command', 's': 'select', 'S': 'select', "\<C-s>": 'select', 't': 'terminal'
+      \     'c': 'command', 's': 'select', 'S': 'select', "\<C-s>": 'select', 't': 'terminal', 'x': 'special'
       \   },
       \   'mode_fallback': { 'replace': 'insert', 'terminal': 'insert', 'select': 'visual' },
       \   'palette': {},
@@ -220,7 +220,7 @@ endfunction
 
 let s:mode = ''
 function! lightline#link(...) abort
-  let mode = get(s:lightline._mode_, a:0 ? a:1 : mode(), 'normal')
+  let mode = get(s:lightline._mode_, a:0 ? a:1 : exists("*g:lightline.special_mode") ?  g:lightline.special_mode() : mode(), 'normal')
   if s:mode == mode
     return ''
   endif
