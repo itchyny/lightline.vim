@@ -214,6 +214,15 @@ function! lightline#palette() abort
   return s:lightline.palette
 endfunction
 
+function! lightline#cs_apply() abort
+  let s:lightline.colorscheme = g:lightline.colorscheme
+  call lightline#colorscheme()
+endfunction
+
+function! lightline#cs_complete(A, L, P) abort
+  return [ 'one', 'nord', 'deus', 'wombat', '16color', 'materia', 'OldHope', 'molokai', 'darcula', 'default', 'seoul256', 'material', 'Tomorrow', 'landscape', 'solarized', 'powerline', 'PaperColor', 'srcery_drk', 'jellybeans', 'Tomorrow_Night', 'PaperColor_dark', 'PaperColor_light', 'Tomorrow_Night_Blue', 'Tomorrow_Night_Bright', 'Tomorrow_Night_Eighties' ]
+endfunction
+
 function! lightline#mode() abort
   return get(s:lightline.mode_map, mode(), '')
 endfunction

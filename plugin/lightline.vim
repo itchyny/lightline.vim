@@ -22,5 +22,6 @@ augroup lightline
   autocmd CursorMoved,BufUnload * call lightline#update_once()
 augroup END
 
+command! -nargs=1 -complete=customlist,lightline#cs_complete LightlineTheme let g:lightline.colorscheme = <q-args> | call lightline#cs_apply()
 let &cpo = s:save_cpo
 unlet s:save_cpo
