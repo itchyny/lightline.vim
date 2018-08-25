@@ -60,7 +60,7 @@ if lightline#colorscheme#background() ==# 'light'
   let [ s:base00, s:base0 ] = [ s:base0, s:base00 ]
 endif
 
-let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'special': {}, 'tabline': {}}
 let s:p.normal.left = [ [ s:base03, s:blue ], [ s:base03, s:base00 ] ]
 let s:p.normal.right = [ [ s:base03, s:base1 ], [ s:base03, s:base00 ] ]
 let s:p.inactive.right = [ [ s:base03, s:base00 ], [ s:base0, s:base02 ] ]
@@ -68,6 +68,7 @@ let s:p.inactive.left =  [ [ s:base0, s:base02 ], [ s:base0, s:base02 ] ]
 let s:p.insert.left = [ [ s:base03, s:green ], [ s:base03, s:base00 ] ]
 let s:p.replace.left = [ [ s:base03, s:red ], [ s:base03, s:base00 ] ]
 let s:p.visual.left = [ [ s:base03, s:magenta ], [ s:base03, s:base00 ] ]
+let s:p.special.left = [ [ s:base3, s:red ], [ s:base03, s:base00 ] ]
 let s:p.normal.middle = [ [ s:base1, s:base02 ] ]
 let s:p.inactive.middle = [ [ s:base01, s:base02 ] ]
 let s:p.tabline.left = [ [ s:base03, s:base00 ] ]

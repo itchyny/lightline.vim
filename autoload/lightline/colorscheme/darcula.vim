@@ -14,7 +14,7 @@ let s:purple = [ '#9876aa', 104 ]
 let s:red = [ '#ff6b68', 204 ]
 let s:yellow = [ '#ffc66d', 222 ]
 
-let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'special': {}, 'tabline': {}}
 let s:p.normal.left = [ [ s:black, s:purple ], [ s:purple, s:gray ] ]
 let s:p.normal.right = [ [ s:black, s:purple ], [ s:purple, s:gray ] ]
 let s:p.inactive.left =  [ [ s:black, s:blue ], [ s:blue, s:gray ] ]
@@ -25,6 +25,7 @@ let s:p.replace.left = [ [ s:black, s:red ], [ s:red, s:gray ] ]
 let s:p.replace.right = [ [ s:black, s:red ], [ s:red, s:gray ] ]
 let s:p.visual.left = [ [ s:black, s:yellow ], [ s:yellow, s:gray ] ]
 let s:p.visual.right = [ [ s:black, s:yellow ], [ s:yellow, s:gray ] ]
+let s:p.special.left = [ [ s:black, s:blue ], [ s:blue, s:gray ] ]
 let s:p.normal.middle = [ [ s:white, s:gray ] ]
 let s:p.inactive.middle = [ [ s:white, s:gray ] ]
 let s:p.tabline.left = [ [ s:blue, s:gray ] ]

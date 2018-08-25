@@ -14,7 +14,7 @@ let s:term_white = 145
 let s:term_black = 235
 let s:term_grey = 236
 
-let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'special': {}, 'tabline': {}}
 
 let s:p.normal.left = [ [ '#292c33', '#98c379', s:term_black, s:term_green, 'bold' ], [ '#98c379', '#292c33', s:term_green, s:term_black ] ]
 let s:p.normal.right = [ [ '#292c33', '#98c379', s:term_black, s:term_green ], [ '#abb2bf', '#3e4452', s:term_white, s:term_grey ], [ '#98c379', '#292c33', s:term_green, s:term_black ] ]
@@ -26,6 +26,7 @@ let s:p.insert.right = [ [ '#292c33', '#61afef', s:term_black, s:term_blue ], [ 
 let s:p.replace.left = [ [ '#292c33', '#e06c75', s:term_black, s:term_red, 'bold' ], [ '#e06c75', '#292c33', s:term_red, s:term_black ] ]
 let s:p.replace.right = [ [ '#292c33', '#e06c75', s:term_black, s:term_red, 'bold' ], s:p.normal.right[1], [ '#e06c75', '#292c33', s:term_red, s:term_black ] ]
 let s:p.visual.left = [ [ '#292c33', '#c678dd', s:term_black, s:term_purple, 'bold' ], [ '#c678dd', '#292c33', s:term_purple, s:term_black ] ]
+let s:p.special.left = [ [ '#292c33', '#e5c07b', s:term_black, s:term_purple, 'bold' ], [ '#e5c07b', '#292c33', s:term_purple, s:term_black ] ]
 let s:p.visual.right = [ [ '#292c33', '#c678dd', s:term_black, s:term_purple, 'bold' ], s:p.normal.right[1], [ '#c678dd', '#292c33', s:term_purple, s:term_black ] ]
 let s:p.normal.middle = [ [ '#abb2bf', '#292c33', s:term_white, s:term_black ] ]
 let s:p.insert.middle = s:p.normal.middle

@@ -35,7 +35,7 @@ let s:statusline_active_bg = s:navy
 let s:statusline_inactive_fg = s:foreground
 let s:statusline_inactive_bg = '#dadada'
 
-let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'special': {}, 'tabline': {}}
 let s:p.normal.left = [ [ s:foreground, s:background ], [ s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
 let s:p.normal.right = [ [ s:foreground, s:background ], [ s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
 let s:p.normal.middle = [ [ s:statusline_active_fg, s:statusline_active_bg ]]
@@ -45,6 +45,7 @@ let s:p.inactive.middle = [ [ s:foreground, s:background ], ]
 let s:p.insert.left = [ [ s:blue, s:background ], [ s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
 let s:p.replace.left = [ [ s:background, s:pink ], [s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
 let s:p.visual.left = [ [ s:background, s:orange ], [s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
+let s:p.special.left = [ [ s:background, s:pink ], [s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
 let s:p.tabline.left = [ [s:tabline_inactive_fg, s:tabline_inactive_bg ]]
 let s:p.tabline.tabsel = [ [s:tabline_active_fg, s:tabline_active_bg ] ]
 let s:p.tabline.middle = [ [s:tabline_bg, s:tabline_bg]]

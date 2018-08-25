@@ -15,7 +15,7 @@ let s:pink = [ '#f92672', 161 ]
 let s:red = [ '#ff0000', 160 ]
 let s:yellow = [ '#e6db74', 229 ]
 
-let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'special': {}, 'tabline': {}}
 
 let s:p.normal.left = [ [ s:black, s:cyan ], [ s:orange, s:black ] ]
 let s:p.normal.middle = [ [ s:orange, s:black ] ]
@@ -24,6 +24,7 @@ let s:p.normal.error = [ [ s:pink, s:black ] ]
 let s:p.normal.warning = [ [ s:yellow, s:black ] ]
 let s:p.insert.left = [ [ s:black, s:green ], [ s:green, s:black ] ]
 let s:p.visual.left = [ [ s:black, s:yellow ], [ s:yellow, s:black ] ]
+let s:p.special.left = [ [ s:black, s:orange ], [ s:yellow, s:black ] ]
 let s:p.replace.left = [ [ s:black, s:red ], [ s:red, s:black ] ]
 let s:p.inactive.left =  [ [ s:pink, s:black ], [ s:white, s:black ] ]
 let s:p.inactive.middle = [ [ s:gray, s:black ] ]
