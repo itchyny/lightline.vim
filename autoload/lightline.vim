@@ -140,6 +140,7 @@ let s:_lightline = {
       \     'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual', "\<C-v>": 'visual',
       \     'c': 'command', 's': 'select', 'S': 'select', "\<C-s>": 'select', 't': 'terminal', 'x': 'special'
       \   },
+      \   'link': '%{mode()}',
       \   'mode_fallback': { 'replace': 'insert', 'terminal': 'insert', 'select': 'visual' },
       \   'palette': {},
       \   'winwidth': winwidth(0),
@@ -229,7 +230,7 @@ endfunction
 
 let s:mode = ''
 function! lightline#link(...) abort
-  let mode = get(s:lightline._mode_, a:0 ? a:1 : exists("*g:lightline.special_mode") ?  g:lightline.special_mode() : mode(), 'normal')
+  let mode = get(s:lightline._mode_, a:0 ? a:1 : g:lightline.link(), 'normal')
   if s:mode == mode
     return ''
   endif
