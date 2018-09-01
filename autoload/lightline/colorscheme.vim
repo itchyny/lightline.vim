@@ -224,7 +224,7 @@ function! lightline#colorscheme#flatten(p) abort
   return a:p
 endfunction
 
-if has('gui_running')
+if has('gui_running') || ( has('nvim') && &termguicolors )
   function! lightline#colorscheme#background() abort
     return &background
   endfunction
