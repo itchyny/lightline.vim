@@ -140,13 +140,15 @@ let s:_lightline = {
       \     'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual', "\<C-v>": 'visual',
       \     'c': 'command', 's': 'select', 'S': 'select', "\<C-s>": 'select', 't': 'terminal', 'x': 'special'
       \   },
-      \   'link': '%{mode()}',
       \   'mode_fallback': { 'replace': 'insert', 'terminal': 'insert', 'select': 'visual' },
       \   'palette': {},
       \   'winwidth': winwidth(0),
       \ }
 function! lightline#init() abort
   let s:lightline = deepcopy(get(g:, 'lightline', {}))
+  if !has_key(s:lightline, 'link')
+    let s:lightline.link = { -> mode() }
+  endif
   for [key, value] in items(s:_lightline)
     if type(value) == 4
       if !has_key(s:lightline, key)
@@ -230,7 +232,7 @@ endfunction
 
 let s:mode = ''
 function! lightline#link(...) abort
-  let mode = get(s:lightline._mode_, a:0 ? a:1 : g:lightline.link(), 'normal')
+  let mode = get(s:lightline._mode_, a:0 ? a:1 : s:lightline.link(), 'normal')
   if s:mode == mode
     return ''
   endif
