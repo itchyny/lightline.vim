@@ -14,7 +14,7 @@ let s:red1   = [ '#e06c75', 168 ]
 let s:red2   = [ '#be5046', 168 ]
 let s:yellow = [ '#e5c07b', 180 ]
 
-let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'special': {}, 'tabline': {}}
 
 if lightline#colorscheme#background() ==# 'light'
   " Light variant
@@ -31,6 +31,7 @@ if lightline#colorscheme#background() ==# 'light'
   let s:p.inactive.right  = [ [ s:bg, s:gray3 ], [ s:bg, s:gray3 ] ]
   let s:p.insert.left     = [ [ s:bg, s:blue, 'bold' ], [ s:gray1, s:gray3 ] ]
   let s:p.replace.left    = [ [ s:bg, s:red1, 'bold' ], [ s:gray1, s:gray3 ] ]
+  let s:p.special.left    = [ [ s:bg, s:yellow, 'bold' ], [ s:gray1, s:gray3 ] ]
   let s:p.visual.left     = [ [ s:bg, s:purple, 'bold' ], [ s:gray1, s:gray3 ] ]
 else
   " Dark variant
@@ -46,6 +47,7 @@ else
   let s:p.inactive.right  = [ [ s:gray1, s:bg ], [ s:gray1, s:bg ] ]
   let s:p.insert.left     = [ [ s:bg, s:blue, 'bold' ], [ s:fg, s:gray3 ] ]
   let s:p.replace.left    = [ [ s:bg, s:red1, 'bold' ], [ s:fg, s:gray3 ] ]
+  let s:p.special.left    = [ [ s:bg, s:yellow, 'bold' ], [ s:fg, s:gray3 ] ]
   let s:p.visual.left     = [ [ s:bg, s:purple, 'bold' ], [ s:fg, s:gray3 ] ]
 endif
 

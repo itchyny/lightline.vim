@@ -16,11 +16,12 @@ let s:gray = [ '#686b78' , 242 ]
 let s:darkGray = [ '#45474f' , 238 ]
 let s:veryDarkGray = [ '#1c1d21' , 234 ]
 
-let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'special': {}, 'tabline': {}}
 
 let s:p.normal.left = [ [ s:white, s:blue ], [ s:white, s:gray ] ]
 let s:p.insert.left = [ [ s:white, s:green ], [ s:white, s:gray ] ]
 let s:p.visual.left = [ [ s:white, s:orange ], [ s:white, s:gray ] ]
+let s:p.special.left = [ [ s:white, s:red ], [ s:white, s:gray ] ]
 let s:p.replace.left = [ [ s:white, s:red ], [ s:white, s:gray ] ]
 
 let s:p.inactive.right = [ [ s:darkGray, s:gray ], [ s:darkGray, s:gray ] ]

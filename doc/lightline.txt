@@ -261,6 +261,27 @@ OPTIONS						*lightline-option*
 		let g:lightline = { 'mode_map': { 'c': 'NORMAL' } }
 <		to your .vimrc.
 
+	g:lightline.link			*g:lightline.link*
+		By default, this is a function that returns |mode()|.
+		You can create a function that replaces the default one, to
+		tune the highlight color on the base of the context.
+		There is an additional mode 'x', that is highlighted with
+		its own color. Therefore you can use this function to check if
+		this 'special' color should be used. Example:
+>
+		let g:lightline.link = { -> &modified ? 'x' : mode() }
+<
+		would activate the special highlight color when a buffer has
+		been modified. You can of course create more complex checks,
+		to use the special highlight if the case applies. You aren't
+		limited to the special highlight 'x', you can return any other
+		valid mode:
+>
+		fun! g:lightline.special_mode() dict
+		    return &ft == 'nerdtree' ? 'v' :
+			\  &modified ? 'x' : mode()
+		endfun
+<
 	g:lightline.separator			*g:lightline.separator*
 	g:lightline.subseparator		*g:lightline.subseparator*
 		Dictionaries to store separators.

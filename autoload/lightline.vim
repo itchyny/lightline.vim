@@ -138,7 +138,7 @@ let s:_lightline = {
       \   'enable': { 'statusline': 1, 'tabline': 1 },
       \   '_mode_': {
       \     'n': 'normal', 'i': 'insert', 'R': 'replace', 'v': 'visual', 'V': 'visual', "\<C-v>": 'visual',
-      \     'c': 'command', 's': 'select', 'S': 'select', "\<C-s>": 'select', 't': 'terminal'
+      \     'c': 'command', 's': 'select', 'S': 'select', "\<C-s>": 'select', 't': 'terminal', 'x': 'special'
       \   },
       \   'mode_fallback': { 'replace': 'insert', 'terminal': 'insert', 'select': 'visual' },
       \   'palette': {},
@@ -146,6 +146,9 @@ let s:_lightline = {
       \ }
 function! lightline#init() abort
   let s:lightline = deepcopy(get(g:, 'lightline', {}))
+  if !has_key(s:lightline, 'link')
+    let s:lightline.link = { -> mode() }
+  endif
   for [key, value] in items(s:_lightline)
     if type(value) == 4
       if !has_key(s:lightline, key)
@@ -214,13 +217,22 @@ function! lightline#palette() abort
   return s:lightline.palette
 endfunction
 
+function! lightline#cs_apply() abort
+  let s:lightline.colorscheme = g:lightline.colorscheme
+  call lightline#colorscheme()
+endfunction
+
+function! lightline#cs_complete(A, L, P) abort
+  return [ 'one', 'nord', 'deus', 'wombat', '16color', 'materia', 'OldHope', 'molokai', 'darcula', 'default', 'seoul256', 'material', 'Tomorrow', 'landscape', 'solarized', 'powerline', 'PaperColor', 'srcery_drk', 'jellybeans', 'Tomorrow_Night', 'PaperColor_dark', 'PaperColor_light', 'Tomorrow_Night_Blue', 'Tomorrow_Night_Bright', 'Tomorrow_Night_Eighties' ]
+endfunction
+
 function! lightline#mode() abort
   return get(s:lightline.mode_map, mode(), '')
 endfunction
 
 let s:mode = ''
 function! lightline#link(...) abort
-  let mode = get(s:lightline._mode_, a:0 ? a:1 : mode(), 'normal')
+  let mode = get(s:lightline._mode_, a:0 ? a:1 : s:lightline.link(), 'normal')
   if s:mode == mode
     return ''
   endif

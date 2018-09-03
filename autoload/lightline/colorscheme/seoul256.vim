@@ -22,7 +22,7 @@ let s:cyan = [ '#87d7d7', 23 ]
 let s:green = [ '#87af87', 108 ]
 let s:white = [ '#d0d0d0', 252 ]
 
-let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'special': {}, 'tabline': {}}
 let s:p.normal.left = [ [ s:base02, s:blue ], [ s:base3, s:base01 ] ]
 let s:p.normal.right = [ [ s:base02, s:base1 ], [ s:base2, s:base01 ] ]
 let s:p.inactive.right = [ [ s:base02, s:base00 ], [ s:base0, s:base02 ] ]
@@ -30,6 +30,7 @@ let s:p.inactive.left =  [ [ s:base0, s:base02 ], [ s:base00, s:base02 ] ]
 let s:p.insert.left = [ [ s:base02, s:green ], [ s:base3, s:base01 ] ]
 let s:p.replace.left = [ [ s:base02, s:magenta ], [ s:base3, s:base01 ] ]
 let s:p.visual.left = [ [ s:base02, s:peach ], [ s:base3, s:base01 ] ]
+let s:p.special.left = [ [ s:base02, s:orange ], [ s:base3, s:base01 ] ]
 let s:p.normal.middle = [ [ s:base0, s:base02 ] ]
 let s:p.inactive.middle = [ [ s:base00, s:base02 ] ]
 let s:p.tabline.left = [ [ s:base3, s:base00 ] ]
