@@ -235,7 +235,7 @@ function! lightline#link(...) abort
         exec printf('hi link Lightline%s_active_%s Lightline%s_%s_%s', p, i, p, mode, i)
       endif
       for [j, s] in map(range(0, l), '[v:val, 0]') + types
-        if i + 1 == j || t || s && i != l
+        if i + 1 <= j || t || s && i != l
           exec printf('hi link Lightline%s_active_%s_%s Lightline%s_%s_%s_%s', p, i, j, p, mode, i, j)
         endif
       endfor
@@ -285,7 +285,7 @@ function! lightline#highlight(...) abort
           exec printf('hi Lightline%s_%s_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', p, mode, i, r[0], r[1], r[2], r[3], s:term(r))
         endif
         for [j, s] in map(range(0, l), '[v:val, 0]') + types
-          if i + 1 == j || t || s && i != l
+          if i + 1 <= j || t || s && i != l
             let q = s ? (has_key(get(c, d, []), j) ? c[d][j][0] : has_key(get(c, 'tabline', {}), j) ? c.tabline[j][0] : get(c.normal, j, zs)[0]) : (j != l ? get(zs, j, ms) :ms)
             exec printf('hi Lightline%s_%s_%s_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s', p, mode, i, j, r[1], q[1], r[3], q[3])
           endif
