@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2018/09/16 23:00:00.
+" Last Change: 2018/09/17 12:00:00.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -393,6 +393,11 @@ function! s:expand(components) abort
     call extend(expanded[-1], repeat([expand], len(component)))
     let prevtype = type
     let previndex = index
+  endfor
+  for i in range(previndex + 1, max([previndex, len(a:components) - 1]))
+    call add(indices, string(i))
+    call add(components, [])
+    call add(expanded, [])
   endfor
   call add(indices, string(len(a:components)))
   return [components, expanded, indices]

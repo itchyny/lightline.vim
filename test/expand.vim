@@ -507,6 +507,22 @@ function! s:suite.custom_type_notfound()
         \ [[['readonly', 'filename', 'modified']], [[0, 0, 0]], ['0', '1']])
 endfunction
 
+function! s:suite.duplicated_string()
+  function! Custom()
+    return 'custom'
+  endfunction
+  function! Modified()
+    return ''
+  endfunction
+  let g:lightline = { 'component_expand': { 'custom': 'Custom', 'modified': 'Modified' } }
+  call lightline#init()
+  call s:assert.equals(s:expand([['filename'], ['custom', 'custom'], ['modified']]),
+        \ [[['filename'], ['custom', 'custom'], []], [[0], [1, 1], []], ['0', '1', '2', '3']])
+  call s:assert.equals(s:expand([['filename', 'custom', 'custom', 'modified']]),
+        \ [[['filename', 'custom', 'custom']], [[0, 1, 1]], ['0', '1']])
+  delfunction Custom
+endfunction
+
 function! s:suite.duplicated_left_nil()
   function! Custom()
     return [ [], ['y0', 'y1'], ['z0', 'z1'] ]
