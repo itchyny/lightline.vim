@@ -521,6 +521,7 @@ function! s:suite.duplicated_string()
   call s:assert.equals(s:expand([['filename', 'custom', 'custom', 'modified']]),
         \ [[['filename', 'custom', 'custom']], [[0, 1, 1]], ['0', '1']])
   delfunction Custom
+  delfunction Modified
 endfunction
 
 function! s:suite.duplicated_left_nil()
