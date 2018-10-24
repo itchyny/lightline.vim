@@ -15,7 +15,7 @@ set cpo&vim
 
 augroup lightline
   autocmd!
-  autocmd WinEnter,BufWinEnter,FileType,SessionLoadPost * call lightline#update()
+  autocmd WinEnter,BufWinEnter,FileType,SessionLoadPost,TerminalOpen * call lightline#update()
   autocmd SessionLoadPost * call lightline#highlight()
   autocmd ColorScheme * if !has('vim_starting') || expand('<amatch>') !=# 'macvim'
         \ | call lightline#update() | call lightline#highlight() | endif

@@ -19,9 +19,17 @@ function! lightline#update() abort
     return
   endif
   let w = winnr()
-  let s = winnr('$') == 1 ? [lightline#statusline(0)] : [lightline#statusline(0), lightline#statusline(1)]
+  let a = lightline#statusline(0, 0)
+  let i = winnr('$') == 1 ? a : lightline#statusline(1, 0)
+  let t = len(term_list()) == 0 ? a : lightline#statusline(0, 1)
   for n in range(1, winnr('$'))
-    call setwinvar(n, '&statusline', s[n!=w])
+    if n!=w
+      call setwinvar(n, '&statusline', i)
+    elseif getbufvar(winbufnr(n), '&buftype') ==# 'terminal'
+      call setwinvar(n, '&statusline', t)
+    else
+      call setwinvar(n, '&statusline', a)
+    endif
     call setwinvar(n, 'lightline', n!=w)
   endfor
 endfunction
@@ -47,7 +55,7 @@ function! lightline#enable() abort
   endif
   augroup lightline
     autocmd!
-    autocmd WinEnter,BufWinEnter,FileType,SessionLoadPost * call lightline#update()
+    autocmd WinEnter,BufWinEnter,FileType,SessionLoadPost,TerminalOpen * call lightline#update()
     autocmd SessionLoadPost * call lightline#highlight()
     autocmd ColorScheme * if !has('vim_starting') || expand('<amatch>') !=# 'macvim'
           \ | call lightline#update() | call lightline#highlight() | endif
@@ -92,6 +100,10 @@ let s:_lightline = {
       \   'inactive': {
       \     'left': [['filename']],
       \     'right': [['lineinfo'], ['percent']]
+      \   },
+      \   'terminal': {
+      \     'left': [['mode', 'paste'], ['readonly', 'filename', 'modified']],
+      \     'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype']]
       \   },
       \   'tabline': {
       \     'left': [['tabs']],
@@ -309,11 +321,12 @@ function! lightline#concatenate(xs, right) abort
   return join(filter(copy(a:xs), 'v:val !=# ""'), ' ' . separator . ' ')
 endfunction
 
-function! lightline#statusline(inactive) abort
-  if a:inactive && !has_key(s:highlight, 'inactive')
+function! lightline#statusline(...) abort
+  let [l:inactive, l:terminal] = [get(a:, 1, 0), get(a:, 2, 0)]
+  if l:inactive && !has_key(s:highlight, 'inactive')
     call lightline#highlight('inactive')
   endif
-  return s:line(0, a:inactive)
+  return s:line(0, l:inactive, l:terminal)
 endfunction
 
 function! s:normalize(result) abort
@@ -403,7 +416,7 @@ function! s:expand(components) abort
   return [components, expanded, indices]
 endfunction
 
-function! s:line(tabline, inactive) abort
+function! s:line(tabline, inactive, terminal) abort
   let _ = a:tabline ? '' : '%{lightline#link()}'
   if s:lightline.palette == {}
     call lightline#colorscheme()
@@ -412,9 +425,10 @@ function! s:line(tabline, inactive) abort
   let [p, s] = a:tabline ? [s:lightline.tabline_separator, s:lightline.tabline_subseparator] : [s:lightline.separator, s:lightline.subseparator]
   let [c, f, t, w] = [s:lightline.component, s:lightline.component_function, s:lightline.component_type, s:lightline.component_raw]
   let mode = a:tabline ? 'tabline' : a:inactive ? 'inactive' : 'active'
-  let l_ = has_key(s:lightline, mode) ? s:lightline[mode].left : s:lightline.active.left
+  let comp = a:tabline ? 'tabline' : a:inactive ? 'inactive' : a:terminal ? 'terminal' : 'active'
+  let l_ = has_key(s:lightline, comp) ? s:lightline[comp].left : s:lightline.active.left
   let [lt, lc, ll] = s:expand(copy(l_))
-  let r_ = has_key(s:lightline, mode) ? s:lightline[mode].right : s:lightline.active.right
+  let r_ = has_key(s:lightline, comp) ? s:lightline[comp].right : s:lightline.active.right
   let [rt, rc, rl] = s:expand(copy(r_))
   for i in range(len(lt))
     let _ .= '%#LightlineLeft_' . mode . '_' . ll[i] . '#'
@@ -454,7 +468,7 @@ function! lightline#tabline() abort
   if s:lightline.tabline_configured || s:tabnr != tabpagenr() || s:tabcnt != tabpagenr('$')
     let s:tabnr = tabpagenr()
     let s:tabcnt = tabpagenr('$')
-    let s:tabline = s:line(1, 0)
+    let s:tabline = s:line(1, 0, 0)
   endif
   return s:tabline
 endfunction
