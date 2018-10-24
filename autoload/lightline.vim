@@ -102,8 +102,8 @@ let s:_lightline = {
       \     'right': [['lineinfo'], ['percent']]
       \   },
       \   'terminal': {
-      \     'left': [['mode', 'paste'], ['readonly', 'filename', 'modified']],
-      \     'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype']]
+      \     'left': [['mode', 'paste'], ['termtitle']],
+      \     'right': [['buftype']]
       \   },
       \   'tabline': {
       \     'left': [['tabs']],
@@ -119,7 +119,8 @@ let s:_lightline = {
       \     'paste': '%{&paste?"PASTE":""}', 'readonly': '%R', 'charvalue': '%b', 'charvaluehex': '%B',
       \     'spell': '%{&spell?&spelllang:""}', 'fileencoding': '%{&fenc!=#""?&fenc:&enc}', 'fileformat': '%{&ff}',
       \     'filetype': '%{&ft!=#""?&ft:"no ft"}', 'percent': '%3p%%', 'percentwin': '%P',
-      \     'lineinfo': '%3l:%-2v', 'line': '%l', 'column': '%c', 'close': '%999X X ', 'winnr': '%{winnr()}'
+      \     'lineinfo': '%3l:%-2v', 'line': '%l', 'column': '%c', 'close': '%999X X ', 'winnr': '%{winnr()}',
+      \     'termtitle': '%{term_gettitle("%")}', 'buftype': '%{&bt!=#""?&bt:"no bt"}'
       \   },
       \   'component_visible_condition': {
       \     'modified': '&modified||!&modifiable', 'readonly': '&readonly', 'paste': '&paste', 'spell': '&spell'
