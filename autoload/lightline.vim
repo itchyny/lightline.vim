@@ -22,8 +22,10 @@ function! lightline#update() abort
   let w = winnr()
   let s = winnr('$') == 1 ? [lightline#statusline(0)] : [lightline#statusline(0), lightline#statusline(1)]
   for n in range(1, winnr('$'))
-    call setwinvar(n, '&statusline', s[n!=w])
-    call setwinvar(n, 'lightline', n!=w)
+    if !getwinvar(n, 'lightline_ignore', 0)
+      call setwinvar(n, '&statusline', s[n!=w])
+      call setwinvar(n, 'lightline', n!=w)
+    endif
   endfor
 endfunction
 
