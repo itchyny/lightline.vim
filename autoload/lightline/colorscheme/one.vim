@@ -50,7 +50,7 @@ else
 endif
 
 " Common
-let s:p.normal.right   = [ [ s:bg, s:green, 'bold' ], [ s:bg, s:green, 'bold' ] ]
+let s:p.normal.right   = [ [ s:bg, s:green, 'bold' ], [ s:fg, s:gray3 ] ]
 let s:p.normal.error   = [ [ s:red2,   s:bg ] ]
 let s:p.normal.warning = [ [ s:yellow, s:bg ] ]
 let s:p.insert.right   = [ [ s:bg, s:blue, 'bold' ], [ s:bg, s:blue, 'bold' ] ]
