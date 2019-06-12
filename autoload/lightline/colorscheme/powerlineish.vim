@@ -1,8 +1,8 @@
 " =============================================================================
-" Filename: autoload/lightline/colorscheme/powerline.vim
+" Filename: autoload/lightline/colorscheme/powerlineish.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2013/09/07 15:54:41.
+" Last Change: 2019/06/12 18:47:00.
 " =============================================================================
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
