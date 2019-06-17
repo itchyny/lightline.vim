@@ -1,5 +1,5 @@
 " =============================================================================
-" Filename: autoload/lightline/colorscheme/darcula.vim
+" Filename: autoload/lightline/colorscheme/dracula.vim
 " Author: kkopec
 " License: MIT License
 " Last Change: 2017/02/11 21:18:54.
@@ -34,4 +34,4 @@ let s:p.tabline.right = [ [ s:black, s:blue ] ]
 let s:p.normal.error = [ [ s:red, s:black ] ]
 let s:p.normal.warning = [ [ s:yellow, s:black ] ]
 
-let g:lightline#colorscheme#darcula#palette = lightline#colorscheme#flatten(s:p)
+let g:lightline#colorscheme#dracula#palette = lightline#colorscheme#flatten(s:p)
