@@ -228,7 +228,7 @@ OPTIONS						*lightline-option*
 		The colorscheme for lightline.vim.
 		Currently, wombat, solarized, powerline, powerlineish, jellybeans,
 		Tomorrow, Tomorrow_Night, Tomorrow_Night_Blue, Tomorrow_Night_Eighties,
-		PaperColor, seoul256, landscape, one, darcula, molokai, materia,
+		PaperColor, seoul256, landscape, one, dracula, molokai, materia,
 		material, OldHope, nord, 16color and deus are available.
 		The default value is:
 >
