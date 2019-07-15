@@ -11,6 +11,9 @@ set cpo&vim
 let s:_ = 1 " 1: uninitialized, 2: disabled
 
 function! lightline#update() abort
+  if &buftype == 'popup'
+      return
+  endif
   if s:_
     if s:_ == 2 | return | endif
     call lightline#init()
