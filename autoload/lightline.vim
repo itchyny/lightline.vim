@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2018/11/24 12:00:00.
+" Last Change: 2019/07/20 12:00:00.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -11,9 +11,7 @@ set cpo&vim
 let s:_ = 1 " 1: uninitialized, 2: disabled
 
 function! lightline#update() abort
-  if &buftype == 'popup'
-      return
-  endif
+  if &buftype ==# 'popup' | return | endif
   if s:_
     if s:_ == 2 | return | endif
     call lightline#init()
