@@ -4,7 +4,7 @@ Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2019/06/12 18:47:11.
+Last Change: 2019/07/22 11:10:30.
 
 CONTENTS					*lightline-contents*
 
@@ -226,10 +226,11 @@ OPTIONS						*lightline-option*
 <
 	g:lightline.colorscheme			*g:lightline.colorscheme*
 		The colorscheme for lightline.vim.
-		Currently, wombat, solarized, powerline, powerlineish, jellybeans,
-		Tomorrow, Tomorrow_Night, Tomorrow_Night_Blue, Tomorrow_Night_Eighties,
-		PaperColor, seoul256, landscape, one, darcula, molokai, materia,
-		material, OldHope, nord, 16color and deus are available.
+		Currently, wombat, solarized, selenized_dark, powerline, powerlineish,
+		jellybeans, Tomorrow, Tomorrow_Night, Tomorrow_Night_Blue,
+		Tomorrow_Night_Eighties, PaperColor, seoul256, landscape, one,
+		darcula, molokai, materia, material, OldHope, nord, 16color and
+		deus are available.
 		The default value is:
 >
 		let g:lightline.colorscheme = 'default'
