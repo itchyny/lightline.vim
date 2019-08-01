@@ -52,6 +52,10 @@ landscape is my colorscheme, which is a high-contrast cterm-supported colorschem
 + Orthogonality. The plugin does not rely on the implementation of other plugins. Such plugin crossing settings should be configured by users.
 
 ## Installation
+### [Vim packages](http://vimhelp.appspot.com/repeat.txt.html#packages) (since Vim 7.4.1528)
+
+        git clone https://github.com/itchyny/lightline.vim ~/.vim/pack/plugins/start/lightline
+
 ### [Pathogen](https://github.com/tpope/vim-pathogen)
 1. Install with the following command.
 
