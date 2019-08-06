@@ -1,7 +1,5 @@
 language: generic
 
-sudo: false
-
 install:
   - git clone --depth=1 https://github.com/thinca/vim-themis /tmp/themis
   - (if ! test -d $HOME/vim-$VIM_VERSION/bin; then
