@@ -4,12 +4,12 @@
 " License: MIT License
 " Last Change: 2019/08/11 11:52:20.
 " =============================================================================
-let s:base0 = [ '#D9D7CE', 244 ]
-let s:base1 = [ '#D9D7CE', 247 ]
+let s:base0 = [ '#d9d7ce', 244 ]
+let s:base1 = [ '#d9d7ce', 247 ]
 let s:base2 = [ '#607080', 248 ]
-let s:base3 = [ '#D9D7CE', 252 ]
-let s:base00 = [ '#272D38', 242  ]
-let s:base01 = [ '#272D38', 240 ]
+let s:base3 = [ '#d9d7ce', 252 ]
+let s:base00 = [ '#272d38', 242  ]
+let s:base01 = [ '#272d38', 240 ]
 let s:base02 = [ '#212733', 238 ]
 let s:base023 = [ '#212733', 236 ]
 let s:base03 = [ '#ffc44c', 235 ]
@@ -36,5 +36,4 @@ let s:p.tabline.middle = [ [ s:base2, s:base02 ] ]
 let s:p.tabline.right = [ [ s:base2, s:base00 ] ]
 let s:p.normal.error = [ [ s:base03, s:red ] ]
 let s:p.normal.warning = [ [ s:base023, s:yellow ] ]
-
 let g:lightline#colorscheme#ayu_mirage#palette = lightline#colorscheme#flatten(s:p)
