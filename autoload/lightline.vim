@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2019/07/30 12:00:00.
+" Last Change: 2019/08/20 14:00:00.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -21,7 +21,7 @@ function! lightline#update() abort
     return
   endif
   let w = winnr()
-  let s = winnr('$') == 1 ? [lightline#statusline(0)] : [lightline#statusline(0), lightline#statusline(1)]
+  let s = winnr('$') == 1 && w > 0 ? [lightline#statusline(0)] : [lightline#statusline(0), lightline#statusline(1)]
   for n in range(1, winnr('$'))
     call setwinvar(n, '&statusline', s[n!=w])
     call setwinvar(n, 'lightline', n!=w)
