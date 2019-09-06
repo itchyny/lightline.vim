@@ -15,6 +15,8 @@ set cpo&vim
 
 augroup lightline
   autocmd!
+  autocmd FocusGained * call lightline#focus_gained()
+  autocmd FocusLost * call lightline#focus_lost()
   autocmd WinEnter,BufEnter,SessionLoadPost * call lightline#update()
   if !has('patch-8.1.1715')
     autocmd FileType qf call lightline#update()

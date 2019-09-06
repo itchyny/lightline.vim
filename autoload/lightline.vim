@@ -28,6 +28,20 @@ function! lightline#update() abort
   endfor
 endfunction
 
+function! lightline#focus_gained() abort
+  if !s:lightline.enable.statusline
+    return
+  endif
+  call setwinvar(winnr(), '&statusline', lightline#statusline(0))
+endfunction
+
+function! lightline#focus_lost() abort
+  if !s:lightline.enable.statusline
+    return
+  endif
+  call setwinvar(winnr(), '&statusline', lightline#statusline(1))
+endfunction
+
 function! lightline#update_once() abort
   if !exists('w:lightline') || w:lightline
     call lightline#update()
@@ -46,6 +60,8 @@ function! lightline#enable() abort
   call lightline#update()
   augroup lightline
     autocmd!
+    autocmd FocusGained * call lightline#focus_gained()
+    autocmd FocusLost * call lightline#focus_lost()
     autocmd WinEnter,BufEnter,SessionLoadPost * call lightline#update()
     if !has('patch-8.1.1715')
       autocmd FileType qf call lightline#update()
