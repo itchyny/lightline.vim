@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/colorscheme/simpleblack.vim
 " Author: lucasprag
 " License: MIT License
-" Last Change: 2019/06/19 10:00:01.
+" Last Change: 2019/10/28 22:54:01.
 " =============================================================================
 let s:black = [ '#000000', '0' ]
 let s:black2 = [ '#121212', '233' ]
