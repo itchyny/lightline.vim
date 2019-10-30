@@ -12,13 +12,13 @@ let s:gray2 = [ '#3a3a3a', '237' ]
 let s:gray3 = [ '#4e4e4e', '239' ]
 let s:gray4 = [ '#626262', '241' ]
 
-let s:violet = [ '#CF73E6', '170' ]
+let s:violet = [ '#cf73e6', '170' ]
 
 let s:blue = [ '#5f87af', '67' ]
-let s:blue2 = [ '#91AADF', '110' ]
+let s:blue2 = [ '#91aadf', '110' ]
 
-let s:green = [ '#57BA37', '71' ]
-let s:gold = [ '#F0D50C', '220' ]
+let s:green = [ '#57ba37', '71' ]
+let s:gold = [ '#f0d50c', '220' ]
 let s:red = [ '#d70000', '160' ]
 let s:none = [ 'NONE', 'NONE' ]
 
