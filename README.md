@@ -41,12 +41,6 @@ https://github.com/itchyny/lightline.vim
 
 landscape is my colorscheme, which is a high-contrast cterm-supported colorscheme, available at https://github.com/itchyny/landscape.vim
 
-### simpleblack
-
-![lightline.vim - simpleblack](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/simpleblack.png)
-
-Based on a colorscheme called [simpleblack](https://github.com/lucasprag/simpleblack)
-
 
 For screenshots of all available colorshemes, see [this file](colorscheme.md).
 
