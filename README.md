@@ -5,48 +5,50 @@ https://github.com/itchyny/lightline.vim
 
 ### powerline (default)
 
-![lightline.vim - powerline](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/powerline.png)
+![lightline.vim - powerline](../../wiki/image/powerline.png)
 
 ### wombat
 
-![lightline.vim - wombat](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/wombat.png)
+![lightline.vim - wombat](../../wiki/image/wombat.png)
 
 ### jellybeans
 
-![lightline.vim - jellybeans](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/jellybeans.png)
+![lightline.vim - jellybeans](../../wiki/image/jellybeans.png)
 
 ### solarized dark
 
-![lightline.vim - solarized_dark](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_dark.png)
+![lightline.vim - solarized_dark](../../wiki/image/solarized_dark.png)
 
 ### solarized light
 
-![lightline.vim - solarized_light](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_light.png)
+![lightline.vim - solarized_light](../../wiki/image/solarized_light.png)
 
 ### PaperColor light
 
-![lightline.vim - PaperColor](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/PaperColor.png)
+![lightline.vim - PaperColor](../../wiki/image/PaperColor.png)
 
 ### seoul256
 
-![lightline.vim - seoul256](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/seoul256.png)
+![lightline.vim - seoul256](../../wiki/image/seoul256.png)
 
 ### one
 
-![lightline.vim - one](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/one.png)
+![lightline.vim - one](../../wiki/image/one.png)
 
 ### landscape
 
-![lightline.vim - landscape](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/landscape.png)
+![lightline.vim - landscape](../../wiki/image/landscape.png)
 
 landscape is my colorscheme, which is a high-contrast cterm-supported colorscheme, available at https://github.com/itchyny/landscape.vim
 
 ### simpleblack
 
-![lightline.vim - simpleblack](https://user-images.githubusercontent.com/2293178/67733484-da28ca00-f9d4-11e9-904f-1636b6b38d81.png)
+![lightline.vim - simpleblack](../../wiki/image/simpleblack.png)
 
 Based on a colorscheme called [simpleblack](https://github.com/lucasprag/simpleblack)
 
+
+For screenshots of all available colorshemes, see [this file](colorscheme.md).
 
 ## Why yet another clone of powerline?
 + [vim-powerline](https://github.com/Lokaltog/vim-powerline) is a nice plugin, but deprecated.
