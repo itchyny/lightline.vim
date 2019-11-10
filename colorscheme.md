@@ -1,8 +1,16 @@
 # Available Colorschemes
 
-### 16color
+### powerline (default)
 
-![lightline.vim - 16color](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/16color.png)
+![lightline.vim - powerline](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/powerline.png)
+
+### powerlineish
+
+![lightline.vim - powerlineish](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/powerlineish.png)
+
+### wombat
+
+![lightline.vim - wombat](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/wombat.png)
 
 ### OldHope
 
@@ -52,9 +60,17 @@
 
 ![lightline.vim - jellybeans](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/jellybeans.png)
 
-### landscape
+### selenized dark
 
-![lightline.vim - landscape](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/landscape.png)
+![lightline.vim - selenized dark](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/selenized_dark.png)
+
+### solarized dark
+
+![lightline.vim - solarized_dark](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_dark.png)
+
+### solarized light
+
+![lightline.vim - solarized_light](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_light.png)
 
 ### materia
 
@@ -72,38 +88,26 @@
 
 ![lightline.vim - nord](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/nord.png)
 
+### seoul256
+
+![lightline.vim - seoul256](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/seoul256.png)
+
 ### one
 
 ![lightline.vim - one](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/one.png)
 
-### powerline (default)
+### srcery_drk
 
-![lightline.vim - powerline](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/powerline.png)
-
-### powerlineish
-
-![lightline.vim - powerlineish](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/powerlineish.png)
-
-### selenized dark
-
-![lightline.vim - selenized dark](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/selenized_dark.png)
-
-### seoul256
-
-![lightline.vim - seoul256](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/seoul256.png)
+![lightline.vim - srcery_drk](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/srcery_drk.png)
 
 ### simpleblack
 
 ![lightline.vim - simpleblack](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/simpleblack.png)
 
-### solarized
+### landscape
 
-![lightline.vim - solarized](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized.png)
+![lightline.vim - landscape](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/landscape.png)
 
-### srcery drk
+### 16color
 
-![lightline.vim - srcery drk](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/srcery_drk.png)
-
-### wombat
-
-![lightline.vim - wombat](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/wombat.png)
+![lightline.vim - 16color](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/16color.png)
