@@ -87,6 +87,13 @@ For screenshots of all available colorshemes, see [this file](colorscheme.md).
 
 2. Install with `:PlugInstall`.
 
+### [dein.vim](https://github.com/Shougo/dein.vim)
+1. Add the following configuration to your `.vimrc`.
+
+        call dein#add('itchyny/lightline.vim')
+
+2. Install with `:call dein#install()`
+
 ## Introduction
 After installing this plugin, you restart the editor and will get a cool statusline.
 ![lightline.vim - tutorial](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/tutorial/1.png)
