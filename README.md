@@ -384,6 +384,40 @@ endfunction
 You can control the visibility and contents by writing simple functions.
 Now you notice how much function component is important for the configurability of lightline.vim.
 
+### more tips
+#### Mode names are too long. Can I use shorter mode names?
+Yes, configure `g:lightline.mode_map`.
+```vim
+let g:lightline = {
+      \ 'mode_map': {
+        \ 'n' : 'N',
+        \ 'i' : 'I',
+        \ 'R' : 'R',
+        \ 'v' : 'V',
+        \ 'V' : 'VL',
+        \ "\<C-v>": 'VB',
+        \ 'c' : 'C',
+        \ 's' : 'S',
+        \ 'S' : 'SL',
+        \ "\<C-s>": 'SB',
+        \ 't': 'T',
+        \ },
+      \ }
+```
+
+#### How can I truncate the components from the right in narrow windows?
+Please include `%<` to one of the right components.
+```vim
+let g:lightline = {
+      \ 'component': {
+      \   'lineinfo': '%3l:%-2v%<',
+      \ },
+      \ }
+```
+
+#### Where can I find the default components?
+See `:h g:lightline.component`.
+
 ## Note for developers of other plugins
 Appearance consistency matters.
 
