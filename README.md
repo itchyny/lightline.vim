@@ -330,7 +330,7 @@ let g:lightline = {
       \ }
 
 function! LightlineMode()
-  return expand('%:t') ==# '__Tagbar__' ? 'Tagbar':
+  return expand('%:t') =~# '^__Tagbar__' ? 'Tagbar':
         \ expand('%:t') ==# 'ControlP' ? 'CtrlP' :
         \ &filetype ==# 'unite' ? 'Unite' :
         \ &filetype ==# 'vimfiler' ? 'VimFiler' :
