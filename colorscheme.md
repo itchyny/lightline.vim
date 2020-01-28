@@ -48,9 +48,9 @@
 
 ![lightline.vim - ayu mirage](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/ayu_mirage.png)
 
-### darcula
+### dracula
 
-![lightline.vim - darcula](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/darcula.png)
+![lightline.vim - dracula](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/dracula.png)
 
 ### deus
 

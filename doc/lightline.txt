@@ -227,7 +227,7 @@ OPTIONS						*lightline-option*
 	g:lightline.colorscheme			*g:lightline.colorscheme*
 		The colorscheme for lightline.vim.
 		Currently, wombat, solarized, powerline, powerlineish,
-		jellybeans, molokai, seoul256, darcula, selenized_dark,
+		jellybeans, molokai, seoul256, dracula, selenized_dark,
 		Tomorrow, Tomorrow_Night, Tomorrow_Night_Blue,
 		Tomorrow_Night_Bright, Tomorrow_Night_Eighties, PaperColor,
 		landscape, one, materia, material, OldHope, nord, deus,
