@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2020/01/27 19:41:58.
+" Last Change: 2020/01/29 21:00:00.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -24,14 +24,7 @@ function! lightline#update() abort
   let s = winnr('$') == 1 && w > 0 ? [lightline#statusline(0)] : [lightline#statusline(0), lightline#statusline(1)]
   for n in range(1, winnr('$'))
     call setwinvar(n, '&statusline', s[n!=w])
-    call setwinvar(n, 'lightline', n!=w)
   endfor
-endfunction
-
-function! lightline#update_once() abort
-  if !exists('w:lightline') || w:lightline
-    call lightline#update()
-  endif
 endfunction
 
 function! lightline#update_disable() abort
@@ -53,7 +46,6 @@ function! lightline#enable() abort
     autocmd SessionLoadPost * call lightline#highlight()
     autocmd ColorScheme * if !has('vim_starting') || expand('<amatch>') !=# 'macvim'
           \ | call lightline#update() | call lightline#highlight() | endif
-    autocmd CursorMoved,BufUnload * call lightline#update_once()
   augroup END
   augroup lightline-disable
     autocmd!
