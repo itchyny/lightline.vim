@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2020/01/29 21:00:00.
+" Last Change: 2020/02/01 18:00:00.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -216,7 +216,7 @@ endfunction
 let s:mode = ''
 function! lightline#link(...) abort
   let mode = get(s:lightline._mode_, a:0 ? a:1 : mode(), 'normal')
-  if s:mode == mode
+  if s:mode ==# mode
     return ''
   endif
   let s:mode = mode
