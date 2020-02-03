@@ -2,7 +2,7 @@
 " Filename: plugin/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2020/01/29 21:00:00.
+" Last Change: 2020/02/03 22:03:24.
 " =============================================================================
 
 if exists('g:loaded_lightline') || v:version < 700
@@ -15,7 +15,7 @@ set cpo&vim
 
 augroup lightline
   autocmd!
-  autocmd WinEnter,BufEnter,SessionLoadPost * call lightline#update()
+  autocmd WinEnter,BufEnter,BufDelete,SessionLoadPost * call lightline#update()
   if !has('patch-8.1.1715')
     autocmd FileType qf call lightline#update()
   endif
