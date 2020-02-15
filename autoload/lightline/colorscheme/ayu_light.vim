@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/colorscheme/ayu_light.vim
 " Author: christalib
 " License: MIT License
-" Last Change: 2020/02/11 13:52:20.
+" Last Change: 2020/02/15 18:45:57.
 " =============================================================================
 let s:base0 = [ '#5C6773', 244 ]
 let s:base1 = [ '#5C6773', 247 ]
@@ -12,8 +12,8 @@ let s:base00 = [ '#FFFFFF', 242  ]
 let s:base01 = [ '#FFFFFF', 240 ]
 let s:base02 = [ '#FAFAFA', 238 ]
 let s:base023 = [ '#FAFAFA', 236 ]
-let s:base03 = [ '#E6B673c', 235 ]
-let s:yellow = [ '#E6B673c', 180 ]
+let s:base03 = [ '#E6B673', 235 ]
+let s:yellow = [ '#E6B673', 180 ]
 let s:orange = [ '#FF7733', 173 ]
 let s:red = [ '#f07178', 203 ]
 let s:magenta = [ '#A37ACC', 216 ]
