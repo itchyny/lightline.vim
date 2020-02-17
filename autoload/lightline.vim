@@ -54,6 +54,9 @@ function! lightline#enable() abort
 endfunction
 
 function! lightline#disable() abort
+  if !s:lightline.enable.tabline && &tabline != s:_tabline
+      let s:_tabline = &tabline  " change tabline after lightline#init
+  endif
   let [&statusline, &tabline] = [get(s:, '_statusline', ''), get(s:, '_tabline', '')]
   for t in range(1, tabpagenr('$'))
     for n in range(1, tabpagewinnr(t, '$'))
