@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2020/02/03 22:09:14.
+" Last Change: 2020/03/16 19:10:15.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -39,7 +39,7 @@ function! lightline#enable() abort
   call lightline#update()
   augroup lightline
     autocmd!
-    autocmd WinEnter,BufEnter,BufDelete,SessionLoadPost * call lightline#update()
+    autocmd WinEnter,BufEnter,BufDelete,SessionLoadPost,FileChangedShellPost * call lightline#update()
     if !has('patch-8.1.1715')
       autocmd FileType qf call lightline#update()
     endif
