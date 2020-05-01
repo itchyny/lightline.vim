@@ -52,6 +52,10 @@
 
 ![lightline.vim - ayu light](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/ayu_light.png)
 
+### ayu_dark
+
+![lightline.vim - ayu dark](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/ayu_dark.png)
+
 ### darcula
 
 ![lightline.vim - darcula](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/darcula.png)
