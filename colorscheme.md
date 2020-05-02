@@ -72,6 +72,18 @@
 
 ![lightline.vim - selenized dark](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/selenized_dark.png)
 
+### selenized black
+
+![lightline.vim - selenized black](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/selenized_black.png)
+
+### selenized light
+
+![lightline.vim - selenized light](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/selenized_light.png)
+
+### selenized white
+
+![lightline.vim - selenized white](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/selenized_white.png)
+
 ### solarized dark
 
 ![lightline.vim - solarized dark](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/solarized_dark.png)
