@@ -6,21 +6,21 @@
 " =============================================================================
 
 " https://github.com/jan-warchol/selenized/blob/master/the-values.md#selenized-dark
-let s:bg_1      = '#184956'
-let s:bg_2      = '#2d5b69'
-let s:dim_0     = '#72898f'
-let s:red       = '#fa5750'
-let s:green     = '#75b938'
-let s:yellow    = '#dbb32d'
-let s:blue      = '#4695f7'
-let s:magenta   = '#f275be'
-let s:cyan      = '#41c7b9'
-let s:brred     = '#ff665c'
-let s:brgreen   = '#84c747'
-let s:bryellow  = '#ebc13d'
-let s:brblue    = '#58a3ff'
-let s:brmagenta = '#ff84cd'
-let s:brcyan    = '#53d6c7'
+let s:bg_1      = ['#184956', 0]
+let s:bg_2      = ['#2d5b69', 8]
+let s:dim_0     = ['#72898f', 7]
+let s:red       = ['#fa5750', 1]
+let s:green     = ['#75b938', 2]
+let s:yellow    = ['#dbb32d', 3]
+let s:blue      = ['#4695f7', 4]
+let s:magenta   = ['#f275be', 5]
+let s:cyan      = ['#41c7b9', 6]
+let s:brred     = ['#ff665c', 9]
+let s:brgreen   = ['#84c747', 10]
+let s:bryellow  = ['#ebc13d', 11]
+let s:brblue    = ['#58a3ff', 12]
+let s:brmagenta = ['#ff84cd', 13]
+let s:brcyan    = ['#53d6c7', 14]
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
@@ -46,4 +46,4 @@ let s:p.tabline.right = [[ s:bg_1, s:red ]]
 let s:p.tabline.left = [[ s:cyan, s:bg_2 ]]
 let s:p.tabline.tabsel = [[ s:bg_1, s:blue ]]
 
-let g:lightline#colorscheme#selenized_dark#palette = lightline#colorscheme#fill(s:p)
+let g:lightline#colorscheme#selenized_dark#palette = lightline#colorscheme#flatten(s:p)
