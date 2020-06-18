@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2020/06/19 07:02:24.
+" Last Change: 2020/06/19 07:27:34.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -17,14 +17,13 @@ function! lightline#update() abort
     call lightline#init()
     call lightline#colorscheme()
   endif
-  if !s:lightline.enable.statusline
-    return
+  if s:lightline.enable.statusline
+    let w = winnr()
+    let s = winnr('$') == 1 && w > 0 ? [lightline#statusline(0)] : [lightline#statusline(0), lightline#statusline(1)]
+    for n in range(1, winnr('$'))
+      call setwinvar(n, '&statusline', s[n!=w])
+    endfor
   endif
-  let w = winnr()
-  let s = winnr('$') == 1 && w > 0 ? [lightline#statusline(0)] : [lightline#statusline(0), lightline#statusline(1)]
-  for n in range(1, winnr('$'))
-    call setwinvar(n, '&statusline', s[n!=w])
-  endfor
 endfunction
 
 if exists('*win_gettype')
@@ -38,10 +37,9 @@ else
 endif
 
 function! lightline#update_disable() abort
-  if !s:lightline.enable.statusline
-    return
+  if s:lightline.enable.statusline
+    call setwinvar(0, '&statusline', '')
   endif
-  call setwinvar(0, '&statusline', '')
 endfunction
 
 function! lightline#enable() abort
