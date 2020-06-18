@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2020/03/16 19:10:15.
+" Last Change: 2020/06/19 07:02:24.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -11,7 +11,7 @@ set cpo&vim
 let s:_ = 1 " 1: uninitialized, 2: disabled
 
 function! lightline#update() abort
-  if &buftype ==# 'popup' | return | endif
+  if s:skip() | return | endif
   if s:_
     if s:_ == 2 | return | endif
     call lightline#init()
@@ -26,6 +26,16 @@ function! lightline#update() abort
     call setwinvar(n, '&statusline', s[n!=w])
   endfor
 endfunction
+
+if exists('*win_gettype')
+  function! s:skip() abort " Vim 8.2.0257 (00f3b4e007), 8.2.0991 (0fe937fd86), 8.2.0996 (40a019f157)
+    return win_gettype() ==# 'popup' || win_gettype() ==# 'autocmd'
+  endfunction
+else
+  function! s:skip() abort
+    return &buftype ==# 'popup'
+  endfunction
+endif
 
 function! lightline#update_disable() abort
   if !s:lightline.enable.statusline
