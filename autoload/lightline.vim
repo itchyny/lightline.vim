@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2020/06/19 07:27:34.
+" Last Change: 2020/06/19 11:08:46.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -198,13 +198,7 @@ function! lightline#colorscheme() abort
     let s:lightline.palette = g:lightline#colorscheme#{s:lightline.colorscheme}#palette
   finally
     if has('win32') && !has('gui_running') && &t_Co < 256
-      for u in values(s:lightline.palette)
-        for v in values(u)
-          for _  in v
-            let [_[2], _[3]] = [lightline#colortable#gui2cui(_[0], _[2]), lightline#colortable#gui2cui(_[1], _[3])]
-          endfor
-        endfor
-      endfor
+      call lightline#colortable#gui2cui_palette(s:lightline.palette)
     endif
     let s:highlight = {}
     call lightline#highlight('normal')
