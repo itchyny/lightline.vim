@@ -1,5 +1,5 @@
 " =============================================================================
-" Filename: autoload/lightline/colorscheme/16half.vim
+" Filename: autoload/lightline/colorscheme/16color.vim
 " Author: jackno
 " License: MIT License
 " =============================================================================
@@ -50,4 +50,4 @@ let s:p.tabline.tabsel = copy(s:p.normal.right)
 let s:p.tabline.middle = [ [ s:silver, s:black ] ]
 let s:p.tabline.right = copy(s:p.normal.right)
 
-let g:lightline#colorscheme#16half#palette = lightline#colorscheme#flatten(s:p)
+let g:lightline#colorscheme#16color#palette = lightline#colorscheme#flatten(s:p)
