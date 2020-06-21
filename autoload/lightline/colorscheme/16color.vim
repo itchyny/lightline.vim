@@ -1,6 +1,6 @@
 " =============================================================================
 " Filename: autoload/lightline/colorscheme/16color.vim
-" Author: jackno
+" Author: itchyny, jackno
 " License: MIT License
 " =============================================================================
 
