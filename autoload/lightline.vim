@@ -145,7 +145,6 @@ let s:_lightline = {
       \   },
       \   'mode_fallback': { 'replace': 'insert', 'terminal': 'insert', 'select': 'visual' },
       \   'palette': {},
-      \   'winwidth': winwidth(0),
       \ }
 function! lightline#init() abort
   let s:lightline = deepcopy(get(g:, 'lightline', {}))
@@ -443,14 +442,16 @@ endfunction
 
 let s:tabnr = -1
 let s:tabcnt = -1
+let s:columns = -1
 let s:tabline = ''
 function! lightline#tabline() abort
   if !has_key(s:highlight, 'tabline')
     call lightline#highlight('tabline')
   endif
-  if s:lightline.tabline_configured || s:tabnr != tabpagenr() || s:tabcnt != tabpagenr('$')
+  if s:lightline.tabline_configured || s:tabnr != tabpagenr() || s:tabcnt != tabpagenr('$') || s:columns != &columns
     let s:tabnr = tabpagenr()
     let s:tabcnt = tabpagenr('$')
+    let s:columns = &columns
     let s:tabline = s:line(1, 0)
   endif
   return s:tabline
@@ -464,7 +465,7 @@ function! lightline#tabs() abort
     call add(i < nr ? x : i == nr ? y : z, (i > nr + 3 ? '%<' : '') . '%'. i . 'T%{lightline#onetab(' . i . ',' . (i == nr) . ')}' . (i == cnt ? '%T' : ''))
   endfor
   let abbr = '...'
-  let n = min([max([s:lightline.winwidth / 40, 2]), 8])
+  let n = min([max([&columns / 40, 2]), 8])
   if len(x) > n && len(z) > n
     let x = extend(add(x[:n/2-1], abbr), x[-(n+1)/2:])
     let z = extend(add(z[:(n+1)/2-1], abbr), z[-n/2:])
