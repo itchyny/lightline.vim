@@ -107,7 +107,7 @@ OPTIONS						*lightline-option*
 		    \ 'percent': '%3p%%',
 		    \ 'percentwin': '%P',
 		    \ 'spell': '%{&spell?&spelllang:""}',
-		    \ 'lineinfo': '%3l:%-2v',
+		    \ 'lineinfo': '%3l:%-2c',
 		    \ 'line': '%l',
 		    \ 'column': '%c',
 		    \ 'close': '%999X X ',
@@ -305,7 +305,7 @@ nice.
 >
 	let g:lightline = {
 		\ 'component': {
-		\   'lineinfo': ' %3l:%-2v',
+		\   'lineinfo': ' %3l:%-2c',
 		\ },
 		\ 'component_function': {
 		\   'readonly': 'LightlineReadonly',
@@ -330,7 +330,7 @@ look nice.
 >
 	let g:lightline = {
 		\ 'component': {
-		\   'lineinfo': '⭡ %3l:%-2v',
+		\   'lineinfo': '⭡ %3l:%-2c',
 		\ },
 		\ 'component_function': {
 		\   'readonly': 'LightlineReadonly',
