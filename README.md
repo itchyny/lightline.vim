@@ -43,6 +43,10 @@ https://github.com/itchyny/lightline.vim
 
 ![lightline.vim - one light](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/one_light.png)
 
+### Tender
+
+![tender.vim - Tender](https://raw.githubusercontent.com/wiki/josegl/lightline.vim/image/tender.png)
+
 ### landscape
 
 ![lightline.vim - landscape](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/landscape.png)
