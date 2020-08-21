@@ -139,3 +139,7 @@
 ### 16color light
 
 ![lightline.vim - 16color light](https://raw.githubusercontent.com/wiki/itchyny/lightline.vim/image/16color_light.png)
+
+### Tender
+
+![tender.vim - Tender](https://raw.githubusercontent.com/wiki/josegl/lightline.vim/image/tender.png)
