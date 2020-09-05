@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2020/06/19 11:08:46.
+" Last Change: 2020/09/05 20:57:51.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -409,9 +409,9 @@ function! s:line(tabline, inactive) abort
   let [c, f, t, w] = [s:lightline.component, s:lightline.component_function, s:lightline.component_type, s:lightline.component_raw]
   let mode = a:tabline ? 'tabline' : a:inactive ? 'inactive' : 'active'
   let l_ = has_key(s:lightline, mode) ? s:lightline[mode].left : s:lightline.active.left
-  let [lt, lc, ll] = s:expand(copy(l_))
+  let [lt, lc, ll] = s:expand(l_)
   let r_ = has_key(s:lightline, mode) ? s:lightline[mode].right : s:lightline.active.right
-  let [rt, rc, rl] = s:expand(copy(r_))
+  let [rt, rc, rl] = s:expand(r_)
   for i in range(len(lt))
     let _ .= '%#LightlineLeft_' . mode . '_' . ll[i] . '#'
     for j in range(len(lt[i]))
