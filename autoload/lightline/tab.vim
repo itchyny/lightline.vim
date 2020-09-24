@@ -11,8 +11,9 @@ set cpo&vim
 function! lightline#tab#filename(n) abort
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
+  let icon = (strlen(&filetype) ? ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft').' '
   let _ = expand('#'.buflist[winnr - 1].':t')
-  return _ !=# '' ? _ : '[No Name]'
+  return _ !=# '' ? _.icon : '[No Name]'
 endfunction
 
 function! lightline#tab#modified(n) abort
