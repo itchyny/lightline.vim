@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2020/09/05 20:57:51.
+" Last Change: 2020/09/25 10:56:16.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -290,6 +290,7 @@ function! lightline#highlight(...) abort
     endfor
     exec printf('hi LightlineMiddle_%s guifg=%s guibg=%s ctermfg=%s ctermbg=%s %s', mode, ms[0], ms[1], ms[2], ms[3], s:term(ms))
   endfor
+  if !a:0 | let s:mode = '' | endif
 endfunction
 
 function! s:subseparator(components, subseparator, expanded) abort
