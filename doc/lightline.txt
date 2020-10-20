@@ -4,7 +4,7 @@ Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2020/10/20 21:23:32.
+Last Change: 2020/10/20 21:28:13.
 
 CONTENTS					*lightline-contents*
 
@@ -591,34 +591,27 @@ In order to change the colorscheme:
 		\ 'colorscheme': 'wombat',
 		\ }
 <
-
 In order to define your own component:
 >
 	let g:lightline = {
-		\ 'active': {
-		\   'left': [ [ 'mode', 'paste' ], [ 'myfilename' ] ]
-		\ },
 		\ 'component_function': {
-		\   'myfilename': 'LightlineFilename',
-		\   'myreadonly': 'LightlineReadonly',
-		\   'mymodified': 'LightlineModified',
+		\   'filename': 'LightlineFilename',
+		\   'readonly': 'LightlineReadonly',
+		\   'modified': 'LightlineModified',
 		\ }
 		\ }
 	function! LightlineFilename()
-		return (LightlineReadonly() !=# '' ? LightlineReadonly() . ' ' : '') .
-		      \ (&ft ==# 'vimfiler' ? vimfiler#get_status_string() :
+		return &ft ==# 'vimfiler' ? vimfiler#get_status_string() :
 		      \  &ft ==# 'unite' ? unite#get_status_string() :
-		      \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]') .
-		      \ (LightlineModified() !=# '' ? ' ' . LightlineModified() : '')
+		      \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
 	endfunction
 	function! LightlineReadonly()
-		return &ft !~? 'help' && &readonly ? 'RO' : ''
+		return &ft !~? 'help\|vimfiler' && &readonly ? 'RO' : ''
 	endfunction
 	function! LightlineModified()
 		return &modifiable && &modified ? '+' : ''
 	endfunction
 <
-
 Separators settings:
 >
 	let g:lightline = {
