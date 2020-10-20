@@ -4,7 +4,7 @@ Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2020/05/02 17:05:15.
+Last Change: 2020/10/20 20:53:11.
 
 CONTENTS					*lightline-contents*
 
@@ -984,20 +984,17 @@ Problem 17:				|lightline-problem-17|
 Problem 1:					*lightline-problem-1*
 	How to install this plugin.
 
-		If you are to install this plugin manually:
-
-			1. Put all the files under $VIM.
-
-		If you are to install this plugin using |vim-pathogen|:
-
-			1. Install this plugin with the following command.
+		If you install this plugin using Vim packages:
+>
+			git clone https://github.com/itchyny/lightline.vim \
+			    ~/.vim/pack/plugins/start/lightline
+<
+		If you install this plugin using |vim-pathogen|:
 >
 			git clone https://github.com/itchyny/lightline.vim \
 			    ~/.vim/bundle/lightline.vim
 <
-			2. Generate help tags with |:Helptags|.
-
-		If you are to install this plugin using |Vundle|:
+		If you install this plugin using |Vundle|:
 
 			1. Add the following configuration to your
 			.vimrc(_vimrc).
@@ -1006,7 +1003,7 @@ Problem 1:					*lightline-problem-1*
 <
 			2. Install with |:PluginInstall|.
 
-		If you are to install this plugin using |NeoBundle|:
+		If you install this plugin using |NeoBundle|:
 
 			1. Add the following configuration to your
 			.vimrc(_vimrc).
@@ -1015,7 +1012,7 @@ Problem 1:					*lightline-problem-1*
 <
 			2. Install with |:NeoBundleInstall|.
 
-		If you are to install this plugin using |vim-plug|:
+		If you install this plugin using |vim-plug|:
 
 			1. Add the following configuration to your
 			.vimrc(_vimrc).
@@ -1024,51 +1021,76 @@ Problem 1:					*lightline-problem-1*
 <
 			2. Install with |:PlugInstall|.
 
+		If you install this plugin using |dein|:
+
+			1. Add the following configuration to your
+			.vimrc(_vimrc).
+>
+			call dein#add('itchyny/lightline.vim')
+<
+			2. Install with :call |dein#install()|.
+
 Problem 2:					*lightline-problem-2*
 	How to update this plugin.
 
-		If you have installed this plugin manually:
+		If you installed this plugin using Vim packages:
+>
+			git -C ~/.vim/pack/plugins/start/lightline pull
+<
+		If you installed this plugin using |vim-pathogen|:
+>
+			git -C ~/.vim/bundle/lightline.vim pull
+<
+		If you installed this plugin using |Vundle|:
 
-			1. Access https://github.com/itchyny/lightline.vim .
-			2. Download the latest scripts.
-			3. Place the scripts as written in Problem 1.
+			Execute |:PluginUpdate|.
 
-		If you have installed this plugin using Vundle:
+		If you installed this plugin using |NeoBundle|:
 
-			1. Execute |:PluginUpdate|.
+			Execute |:NeoBundleUpdate|.
 
-		If you have installed this plugin using NeoBundle:
+		If you installed this plugin using |vim-plug|:
 
-			1. Execute |:NeoBundleUpdate|.
+			Execute |:PlugUpdate|.
 
-		If you have installed this plugin using vim-plug:
+		If you installed this plugin using |dein|:
 
-			1. Execute |:PlugUpdate|.
+			Execute :call |dein#update()|.
 
 Problem 3:					*lightline-problem-3*
 	How to uninstall this plugin.
 
-		If you have installed this plugin manually:
+		If you installed this plugin using Vim packages:
+>
+			rm -rf ~/.vim/pack/plugins/start/lightline
+<
+		If you installed this plugin using |vim-pathogen|:
+>
+			rm -rf ~/.vim/bundle/lightline.vim
+<
+		If you have installed this plugin using |Vundle|:
 
-			1. Remove all the lightline.*s under $VIM.
+			1. Remove `Plugin 'itchyny/lightline.vim'`
+			from your .vimrc(_vimrc).
+			2. Execute |:PluginClean|.
 
-		If you have installed this plugin using Vundle:
+		If you installed this plugin using |NeoBundle|:
 
-			1. Remove the :Plugin 'itchyny/lightline.vim'
-			configuration from your .vimrc(_vimrc).
-			2. Update with |:PluginClean|.
+			1. Remove `NeoBundle 'itchyny/lightline.vim'`
+			from your .vimrc(_vimrc).
+			2. Remove the plugin directory.
 
-		If you have installed this plugin using NeoBundle:
+		If you installed this plugin using |vim-plug|:
 
-			1. Remove the :NeoBundle 'itchyny/lightline.vim'
-			configuration from your .vimrc(_vimrc).
-			2. Update with |:NeoBundleClean|.
+			1. Remove `Plug 'itchyny/lightline.vim'`
+			from your .vimrc(_vimrc).
+			2. Execute |:PlugClean|.
 
-		If you have installed this plugin using vim-plug:
+		If you installed this plugin using |dein|:
 
-			1. Remove the :Plug 'itchyny/lightline.vim'
-			configuration from your .vimrc(_vimrc).
-			2. Update with |:PlugClean|.
+			1. Remove `call dein#add('itchyny/lightline.vim')`
+			from your .vimrc(_vimrc).
+			2. Remove the plugin directory.
 
 Problem 4:					*lightline-problem-4*
 	Cool statuslines appear only on |:vsp|.
