@@ -1,10 +1,9 @@
 *lightline.txt*	A light and configurable statusline/tabline for Vim
 
-Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2020/10/20 21:28:13.
+Last Change: 2020/10/20 21:35:06.
 
 CONTENTS					*lightline-contents*
 
