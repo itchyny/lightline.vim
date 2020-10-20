@@ -4,7 +4,7 @@ Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2020/10/20 21:20:32.
+Last Change: 2020/10/20 21:23:32.
 
 CONTENTS					*lightline-contents*
 
@@ -149,6 +149,10 @@ OPTIONS						*lightline-option*
 			\ },
 			\ }
 <
+		If you simply want to display the branch name instead of
+		installing a plugin for full git integration, you can use
+		vim-gitbranch (https://github.com/itchyny/vim-gitbranch).
+
 	g:lightline.component_function_visible_condition
 						*g:lightline.component_function_visible_condition*
 		A dictionary to store the visible conditions of the function
