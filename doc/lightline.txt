@@ -4,20 +4,17 @@ Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/lightline.vim
-Last Change: 2020/10/20 20:53:11.
+Last Change: 2020/10/20 21:20:32.
 
 CONTENTS					*lightline-contents*
 
 Introduction				|lightline-introduction|
 Spirit					|lightline-spirit|
 Option					|lightline-option|
-Font					|lightline-font|
 Function				|lightline-function|
 Component Expansion			|lightline-component-expansion|
 Colorscheme				|lightline-colorscheme|
 Examples				|lightline-examples|
-Nice Examples				|lightline-nice-examples|
-Powerful Example			|lightline-powerful-example|
 Troubleshooting				|lightline-troubleshooting|
 
 ==============================================================================
@@ -290,78 +287,6 @@ OPTIONS						*lightline-option*
 		    \ 'tabline': 1
 		    \ }
 <
-==============================================================================
-FONT						*lightline-font*
-You can use the patched font you used for |vim-powerline| and |powerline|.
-
-The patched fonts for |powerline| are available at
-https://github.com/Lokaltog/powerline-fonts
-
-A tutorial to create a patched font for |vim-powerline| is available at
-https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher
-
-If you have installed the patched font for |powerline|, following settings look
-nice.
->
-	let g:lightline = {
-		\ 'component': {
-		\   'lineinfo': ' %3l:%-2c',
-		\ },
-		\ 'component_function': {
-		\   'readonly': 'LightlineReadonly',
-		\   'fugitive': 'LightlineFugitive'
-		\ },
-		\ 'separator': { 'left': '', 'right': '' },
-		\ 'subseparator': { 'left': '', 'right': '' }
-		\ }
-	function! LightlineReadonly()
-		return &readonly ? '' : ''
-	endfunction
-	function! LightlineFugitive()
-		if exists('*FugitiveHead')
-			let branch = FugitiveHead()
-			return branch !=# '' ? ''.branch : ''
-		endif
-		return ''
-	endfunction
-<
-If you have installed the patched font for |vim-powerline|, following settings
-look nice.
->
-	let g:lightline = {
-		\ 'component': {
-		\   'lineinfo': '⭡ %3l:%-2c',
-		\ },
-		\ 'component_function': {
-		\   'readonly': 'LightlineReadonly',
-		\   'fugitive': 'LightlineFugitive'
-		\ },
-		\ 'separator': { 'left': '⮀', 'right': '⮂' },
-		\ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-		\ }
-	function! LightlineReadonly()
-		return &readonly ? '⭤' : ''
-	endfunction
-	function! LightlineFugitive()
-		if exists('*FugitiveHead')
-			let branch = FugitiveHead()
-			return branch !=# '' ? '⭠ '.branch : ''
-		endif
-		return ''
-	endfunction
-<
-If the statusline does not correctly show the special characters, use the
-unicode numbers. For |powerline| font users:
->
-		\ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-		\ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
-<
-For |vim-powerline| font users:
->
-		\ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
-		\ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" }
-<
-See |lightline-problem-9| for more detail.
 ==============================================================================
 FUNCTION					*lightline-function*
 Exposed functions for lightline.vim.
@@ -697,30 +622,9 @@ Separators settings:
 		\ 'subseparator': { 'left': '|', 'right': '|' }
 		\ }
 <
-
-For |powerline| font users:
+An example for fugitive, vimfiler and unite users.
 >
 	let g:lightline = {
-		\ 'separator': { 'left': '', 'right': '' },
-		\ 'subseparator': { 'left': '', 'right': '' }
-		\ }
-<
-
-For |vim-powerline| font users:
->
-	let g:lightline = {
-		\ 'separator': { 'left': '⮀', 'right': '⮂' },
-		\ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-		\ }
-<
-
-------------------------------------------------------------------------------
-NICE EXAMPLES					*lightline-nice-examples*
-
-A nice example for non-patched font users.
->
-	let g:lightline = {
-		\ 'colorscheme': 'wombat',
 		\ 'active': {
 		\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
 		\ },
@@ -739,61 +643,19 @@ A nice example for non-patched font users.
 		return (LightlineReadonly() !=# '' ? LightlineReadonly() . ' ' : '') .
 		\ (&ft ==# 'vimfiler' ? vimfiler#get_status_string() :
 		\  &ft ==# 'unite' ? unite#get_status_string() :
-		\  &ft ==# 'vimshell' ? vimshell#get_status_string() :
 		\ expand('%:t') !=# '' ? expand('%:t') : '[No Name]') .
 		\ (LightlineModified() !=# '' ? ' ' . LightlineModified() : '')
 	endfunction
 	function! LightlineFugitive()
-		if &ft !~? 'vimfiler' && exists('*FugitiveHead')
+		if exists('*FugitiveHead')
 			return FugitiveHead()
 		endif
 		return ''
 	endfunction
 <
-A nice example for |vim-powerline| font users:
+For users of lots of plugins:
 >
 	let g:lightline = {
-		\ 'colorscheme': 'wombat',
-		\ 'active': {
-		\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-		\ },
-		\ 'component_function': {
-		\   'fugitive': 'LightlineFugitive',
-		\   'filename': 'LightlineFilename'
-		\ },
-		\ 'separator': { 'left': '⮀', 'right': '⮂' },
-		\ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-		\ }
-	function! LightlineModified()
-		return &ft =~# 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-	endfunction
-	function! LightlineReadonly()
-		return &ft !~? 'help\|vimfiler' && &readonly ? '⭤' : ''
-	endfunction
-	function! LightlineFilename()
-		return (LightlineReadonly() !=# '' ? LightlineReadonly() . ' ' : '') .
-		\ (&ft ==# 'vimfiler' ? vimfiler#get_status_string() :
-		\  &ft ==# 'unite' ? unite#get_status_string() :
-		\  &ft ==# 'vimshell' ? vimshell#get_status_string() :
-		\ expand('%:t') !=# '' ? expand('%:t') : '[No Name]') .
-		\ (LightlineModified() !=# '' ? ' ' . LightlineModified() : '')
-	endfunction
-	function! LightlineFugitive()
-		if &ft !~? 'vimfiler' && exists('*FugitiveHead')
-			let branch = FugitiveHead()
-			return branch !=# '' ? '⭠ '.branch : ''
-		endif
-		return ''
-	endfunction
-<
-
-------------------------------------------------------------------------------
-POWERFUL EXAMPLE				*lightline-powerful-example*
-
-For users who uses lots of plugins:
->
-	let g:lightline = {
-	      \ 'colorscheme': 'wombat',
 	      \ 'active': {
 	      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
 	      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
@@ -935,17 +797,7 @@ Problem 5:				|lightline-problem-5|
 	The statusline does not seem to be correctly colored.
 
 Problem 6:				|lightline-problem-6|
-	How to install a patched font.
-
-Problem 7:				|lightline-problem-7|
-	Right triangles do not stick to the right components with the
-	patched font.
-
-Problem 8:				|lightline-problem-8|
-	Triangles do not appear. Triangles look weird.
-
-Problem 9:				|lightline-problem-9|
-	Where can I find the list of all the cool characters for patched fonts?
+	How to use a powerline font and the triangles for separators.
 
 Problem 10:				|lightline-problem-10|
 	Cool statusline disappears in |unite|, |vimfiler| and |vimshell|
@@ -1115,74 +967,22 @@ Problem 5:					*lightline-problem-5*
 		to your .vimrc(_vimrc).
 
 Problem 6:					*lightline-problem-6*
-	How to install a patched font.
+	How to use a powerline font and the triangles for separators.
 
-		There are two kinds of patched fonts:
+		Using a patched font is not recommended due to less
+		portability. Also the powerline fonts project is not actively
+		maintained (https://github.com/powerline/fonts).
 
-		+ The patched fonts for |vim-powerline|
-		(https://github.com/Lokaltog/vim-powerline):
-		follow the guide https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher
-		+ The patched fonts for |powerline|
-		(https://github.com/Lokaltog/powerline):
-		download from https://github.com/Lokaltog/powerline-fonts
-
-Problem 7:					*lightline-problem-7*
-	Right triangles do not stick to the right components with patched
-	font.
-
-		Remove the following setting from your .vimrc(_vimrc).
->
-			set ambiwidth=double
-<
-		If you want to keep this setting, try the patched font for
-		|vim-powerline|.
-
-Problem 8:					*lightline-problem-8*
-	Triangles do not appear. Triangles look weird.
-
-		If the triangles do not appear (but you get some spaces or
-		weird characters like <bf> or ¿), firstly try adding
->
-			scriptencoding utf-8
-			set encoding=utf-8
-<
-		to the head of your .vimrc(_vimrc). Still you have weird
-		characters, use the unicode numbers. For |powerline| font
-		users:
+		If you still want to use a patched font, you can configure
 >
 		\ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-		\ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+		\ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
 <
-		For |vim-powerline| font users:
+		or
 >
 		\ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
-		\ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" }
+		\ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
 <
-		The full list of unicode numbers for fancy characters is shown
-		in |lightline-problem-9|.
-
-		If the triangles are shown in appropriate characters but the
-		colors do not look correctly, see the following.
-		If you are using iTerm2, change the following settings.
-
-		    + set Profiles>Colors>Minimum contrast to the Lowest.
-		    + set Profiles>Window>Transparency to the Opaquest.
-
-		For other terminals, this weird-triangle problem will be
-		resolved by disabling transparency or contrast adjustment.
-
-Problem 9:					*lightline-problem-9*
-	Where can I find the list of all the cool characters for patched fonts?
-
-				Default		powerline	vim-powerline
-	separator.left		''		'' (\ue0b0)		'⮀' (\u2b80)
-	separator.right		''		'' (\ue0b2)		'⮂' (\u2b82)
-	subseparator.left	'|'		'' (\ue0b1)		'⮁' (\u2b81)
-	subseparator.right	'|'		'' (\ue0b3)		'⮃' (\u2b83)
-	branch symbol		--		'' (\ue0a0)		'⭠' (\u2b60)
-	readonly symbol		--		'' (\ue0a2)		'⭤' (\u2b64)
-	linecolumn symbol	--		'' (\ue0a1)		'⭡' (\u2b61)
-
 Problem 10:					*lightline-problem-10*
 	Cool statusline disappears on |unite|, |vimfiler| and |vimshell|
 	buffers.
@@ -1214,7 +1014,7 @@ Problem 11:					*lightline-problem-11*
 		  return lightline#statusline(0)
 		endfunction
 <
-		See |lightline-powerful-example| for more cool settings for
+		See |lightline-example| for more cool settings for
 		these plugins.
 
 Problem 12:					*lightline-problem-12*
@@ -1309,8 +1109,8 @@ Problem 15:					*lightline-problem-15*
 		If you don't like the separators in the tabline, use:
 >
 		let g:lightline = {
-			\ 'tabline_separator': { 'left': "", 'right': "" },
-			\ 'tabline_subseparator': { 'left': "", 'right': "" },
+			\ 'tabline_separator': { 'left': '', 'right': '' },
+			\ 'tabline_subseparator': { 'left': '', 'right': '' },
 			\ }
 <
 Problem 16:					*lightline-problem-16*
