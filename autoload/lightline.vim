@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2020/11/05 20:04:51.
+" Last Change: 2020/11/20 21:34:03.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -346,23 +346,14 @@ function! s:convert(name, index) abort
   endif
 endfunction
 
-function! s:flatten_twice(xss) abort
-  let ys = []
-  for xs in a:xss
-    for x in xs
-      let ys += x
-    endfor
-  endfor
-  return ys
-endfunction
-
 function! s:expand(components) abort
   let components = []
   let expanded = []
   let indices = []
   let prevtype = ''
   let previndex = -1
-  let xs = s:flatten_twice(map(deepcopy(a:components), 'map(v:val, "s:convert(v:val, ''" . v:key . "'')")'))
+  let xs = []
+  call map(deepcopy(a:components), 'map(v:val, "extend(xs, s:convert(v:val, ''" . v:key . "''))")')
   for [component, expand, type, index] in xs
     if prevtype !=# type
       for i in range(previndex + 1, max([previndex, index - 1]))
