@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2020/11/21 00:23:36.
+" Last Change: 2020/11/21 14:03:29.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -336,13 +336,13 @@ function! s:evaluate_expand(component) abort
 endfunction
 
 function! s:convert(name, index) abort
-  if has_key(s:lightline.component_expand, a:name)
+  if !has_key(s:lightline.component_expand, a:name)
+    return [[[a:name], 0, a:index, a:index]]
+  else
     let type = get(s:lightline.component_type, a:name, a:index)
     let is_raw = get(s:lightline.component_raw, a:name) || type ==# 'raw'
     return filter(map(s:evaluate_expand(s:lightline.component_expand[a:name]),
           \ '[v:val, 1 + ' . is_raw . ', v:key == 1 && ' . (type !=# 'raw') . ' ? "' . type . '" : "' . a:index . '", "' . a:index . '"]'), 'v:val[0] != []')
-  else
-    return [[[a:name], 0, a:index, a:index]]
   endif
 endfunction
 
