@@ -32,6 +32,12 @@ if exists('*win_gettype')
   endfunction
 else
   function! s:skip() abort
+    if has('nvim')
+      if nvim_win_get_config(nvim_get_current_win()).relative != ''
+        return 1
+      endif
+    endif
+
     return &buftype ==# 'popup'
   endfunction
 endif
