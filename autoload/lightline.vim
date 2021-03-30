@@ -211,7 +211,7 @@ function! lightline#palette() abort
 endfunction
 
 function! lightline#mode() abort
-  return get(s:lightline.mode_map, mode(), '')
+  return get(s:lightline.mode_map, mode(1), get(s:lightline.mode_map, mode(), ''))
 endfunction
 
 let s:mode = ''
