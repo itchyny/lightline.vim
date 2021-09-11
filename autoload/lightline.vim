@@ -11,9 +11,13 @@ set cpo&vim
 let s:_ = 1 " 1: uninitialized, 2: disabled
 
 function! lightline#update() abort
-  if s:skip() | return | endif
+  if s:skip()
+    return
+  endif
   if s:_
-    if s:_ == 2 | return | endif
+    if s:_ == 2
+      return
+    endif
     call lightline#init()
     call lightline#colorscheme()
   endif
