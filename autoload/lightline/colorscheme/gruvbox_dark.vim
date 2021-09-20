@@ -4,7 +4,6 @@
 " License: MIT License
 " Last Change: 2021/09/20 20:47:00.
 " =============================================================================
-"
 let s:p = { 'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {} }
 
 let s:base03            = [ '#282828', 235 ]
