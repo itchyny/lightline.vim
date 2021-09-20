@@ -41,4 +41,4 @@ let s:p.tabline.middle  = [ [ s:base02, s:base03 ] ]
 let s:p.tabline.right   = [ [ s:base2, s:base02 ] ]
 let s:p.tabline.tabsel  = [ [ s:base3, s:base00 ] ]
 
-let g:lightline#colorscheme#gruvboxdark#palette = lightline#colorscheme#flatten(s:p)
+let g:lightline#colorscheme#gruvbox_dark#palette = lightline#colorscheme#flatten(s:p)
