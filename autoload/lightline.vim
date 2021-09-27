@@ -12,11 +12,9 @@ let s:_ = 1 " 1: uninitialized, 2: disabled
 
 function! lightline#update() abort
   if s:skip() | return | endif
-  if s:_
-    if s:_ == 2 | return | endif
-    call lightline#init()
-    call lightline#colorscheme()
-  endif
+  if s:_ == 2 | return | endif
+  call lightline#init()
+  call lightline#colorscheme()
   if s:lightline.enable.statusline
     let w = winnr()
     let s = winnr('$') == 1 && w > 0 ? [lightline#statusline(0)] : [lightline#statusline(0), lightline#statusline(1)]
@@ -190,6 +188,7 @@ endfunction
 
 function! lightline#colorscheme() abort
   try
+    execute 'runtime autoload/lightline/colorscheme/' . s:lightline.colorscheme . '.vim'
     let s:lightline.palette = g:lightline#colorscheme#{s:lightline.colorscheme}#palette
   catch
     call lightline#error('Could not load colorscheme ' . s:lightline.colorscheme . '.')
