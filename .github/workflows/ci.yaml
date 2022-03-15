@@ -27,6 +27,7 @@ jobs:
       with:
         repository: thinca/vim-themis
         path: vim-themis
+        ref: v1.6.0
     - name: Setup Vim
       uses: rhysd/action-setup-vim@v1
       id: vim
