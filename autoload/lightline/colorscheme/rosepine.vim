@@ -2,7 +2,7 @@
 " Filename: autoload/lightline/colorscheme/rose_pine.vim
 " Author: sheruost
 " License: MIT License
-" Last Change: 2022/02/20 06:30:01.
+" Last Change: 2022/03/15 23:57:28.
 " =============================================================================
 
 " Reference: https://rosepinetheme.com/palette
@@ -37,7 +37,6 @@ else
   let s:rose = [ '#ebbcba', 217 ]
   let s:love = [ '#eb6f92', 204 ]
 endif
-
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 let s:p.normal.left = [ [ s:base, s:pine ], [ s:subtle, s:surface ] ]
