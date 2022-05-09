@@ -1,5 +1,5 @@
 " =============================================================================
-" Filename: autoload/lightline/colorscheme/rose_pine.vim
+" Filename: autoload/lightline/colorscheme/rosepine.vim
 " Author: sheruost
 " License: MIT License
 " Last Change: 2022/05/09 23:27:50.
