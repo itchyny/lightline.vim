@@ -2,21 +2,21 @@
 " Filename: autoload/lightline/colorscheme/rose_pine.vim
 " Author: sheruost
 " License: MIT License
-" Last Change: 2022/03/15 23:57:28.
+" Last Change: 2022/05/09 23:27:50.
 " =============================================================================
 
 " Reference: https://rosepinetheme.com/palette
 if lightline#colorscheme#background() ==# 'light'
   " Rosé Pine Dawn
-  let s:base = [ '#faf4ed', 230 ]
-  let s:surface = [ '#fffaf3', 231 ]
+  let s:base = [ '#faf4ed', 255 ]
+  let s:surface = [ '#fffaf3', 255 ]
 
-  let s:overlay = [ '#f2e9e1', 229 ]
-  let s:highlight_m = [ '#dfdad9', 188 ]
+  let s:overlay = [ '#f2e9e1', 254 ]
+  let s:highlight_m = [ '#dfdad9', 145 ]
   let s:muted = [ '#9893a5', 103 ]
   let s:subtle = [ '#797593', 102 ]
 
-  let s:iris = [ '#907aa9', 170 ]
+  let s:iris = [ '#907aa9', 139 ]
   let s:pine = [ '#286983', 24 ]
   let s:foam = [ '#56949f', 67 ]
   let s:rose = [ '#d7827e', 174 ]
@@ -32,7 +32,7 @@ else
   let s:subtle = [ '#908caa', 103 ]
 
   let s:iris = [ '#c4a7e7', 182 ]
-  let s:pine = [ '#31748f', 66 ]
+  let s:pine = [ '#31748f', 30 ]
   let s:foam = [ '#9ccfd8', 152 ]
   let s:rose = [ '#ebbcba', 217 ]
   let s:love = [ '#eb6f92', 204 ]
