@@ -48,7 +48,7 @@ function! lightline#enable() abort
   augroup lightline
     autocmd!
     autocmd WinEnter,BufEnter,SessionLoadPost,FileChangedShellPost * call lightline#update()
-    if !has('patch-8.1.1715')
+    if !(has('patch-8.1.1715') || has('nvim-0.4'))
       autocmd FileType qf call lightline#update()
     endif
     autocmd SessionLoadPost * call lightline#highlight()
