@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2021/11/21 22:54:46.
+" Last Change: 2024/12/30 21:33:02.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -317,26 +317,13 @@ function! lightline#statusline(inactive) abort
   return s:line(0, a:inactive)
 endfunction
 
-function! s:normalize(result) abort
-  if type(a:result) == 3
-    return map(a:result, 'type(v:val) == 1 ? v:val : string(v:val)')
-  elseif type(a:result) == 1
-    return [a:result]
-  else
-    return [string(a:result)]
-  endif
-endfunction
-
 function! s:evaluate_expand(component) abort
-  try
-    let result = eval(a:component . '()')
-    if type(result) == 1 && result ==# ''
-      return []
-    endif
-  catch
-    return []
-  endtry
-  return map(type(result) == 3 ? (result + [[], [], []])[:2] : [[], [result], []], 'filter(s:normalize(v:val), "v:val !=# ''''")')
+  try | let value = eval(a:component . '()') | catch | return [] | endtry
+  return value is '' ? [] :
+        \ map(type(value) == 3 ? value : [[], [value], []],
+        \ 'filter(map(type(v:val) == 3 ? v:val : [v:val],
+        \            "type(v:val) == 1 ? v:val : string(v:val)"),
+        \        "v:val !=# ''''")')
 endfunction
 
 function! s:convert(name, index) abort
@@ -346,7 +333,8 @@ function! s:convert(name, index) abort
     let type = get(s:lightline.component_type, a:name, a:index)
     let is_raw = get(s:lightline.component_raw, a:name) || type ==# 'raw'
     return filter(map(s:evaluate_expand(s:lightline.component_expand[a:name]),
-          \ '[v:val, 1 + ' . is_raw . ', v:key == 1 && ' . (type !=# 'raw') . ' ? "' . type . '" : "' . a:index . '", "' . a:index . '"]'), 'v:val[0] != []')
+          \ '[v:val, 1 + ' . is_raw . ', v:key == 1 && ' . (type !=# 'raw') .
+          \ ' ? "' . type . '" : "' . a:index . '", "' . a:index . '"]'), 'v:val[0] != []')
   endif
 endfunction
 
