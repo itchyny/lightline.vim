@@ -215,7 +215,19 @@ function! lightline#palette() abort
 endfunction
 
 function! lightline#mode() abort
-  return get(s:lightline.mode_map, mode(), '')
+  let mode = mode(1)
+  let mode_name = get(s:lightline.mode_map, mode, '')
+  while mode_name == '' && len(mode) > 1
+    mode = mode[:-2]
+    mode_name = get(s:lightline.mode_map, mode, '')
+  endwhile
+  " If, somehow, we got to a single-char mode(1) string and we DON'T have a
+  " result (should be impossible!), fall back to the legacy mode(0)
+  " (functionally equivalent to `mode(1)[0]`) behaviour:
+  if mode_name == ''
+    mode_name = get(s:lightline.mode_map, mode(), '')
+  endif
+  return mode_name
 endfunction
 
 let s:mode = ''

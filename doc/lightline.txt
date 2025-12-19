@@ -242,9 +242,12 @@ OPTIONS						*lightline-option*
 		powerline theme.
 
 	g:lightline.mode_map			*g:lightline.mode_map*
-		A dictionary of names for the modes. The keys are the return
-		values of |mode()|.
-		The default value is:
+		A dictionary of names for the modes. The full mode string from
+		mode(|non-zero-arg|) is checked, and the last character(s) are
+		removed until a match is found. For example, if the mode is
+		'niI', lightline.nvim will check if there is a name for 'niI'
+		in the map, then 'ni', finally falling back to 'n'. See |mode()|.
+		The default values are:
 >
 		let g:lightline.mode_map = {
 		    \ 'n' : 'NORMAL',
@@ -318,7 +321,7 @@ Exposed functions for lightline.vim.
 	lightline#link([mode])			*lightline#link()*
 		Creates links of the highlight groups for the active window.
 		This function accepts an optional argument. It should be one
-		of the return value of |mode()|.
+		of the return values of |mode()|.
 
 	lightline#highlight()			*lightline#highlight()*
 		Set the highlight groups.
