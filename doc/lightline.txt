@@ -245,7 +245,7 @@ OPTIONS						*lightline-option*
 		A dictionary of names for the modes. The full mode string from
 		mode(|non-zero-arg|) is checked, and the last character(s) are
 		removed until a match is found. For example, if the mode is
-		'niI', lightline.nvim will check if there is a name for 'niI'
+		'niI', lightline.vim will check if there is a name for 'niI'
 		in the map, then 'ni', finally falling back to 'n'. See |mode()|.
 		The default values are:
 >
