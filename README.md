@@ -53,6 +53,10 @@ For screenshots of all available colorshemes, see [this file](colorscheme.md).
 
         git clone https://github.com/itchyny/lightline.vim ~/.vim/pack/plugins/start/lightline
 
+Microsoft Windows
+
+        git clone https://github.com/itchyny/lightline.vim "%USERPROFILE%\vimfiles\pack\plugins\start\lightline"
+
 ### [Pathogen](https://github.com/tpope/vim-pathogen)
 1. Install with the following command.
 
