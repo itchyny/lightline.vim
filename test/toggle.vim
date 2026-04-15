@@ -49,3 +49,15 @@ function! s:suite.toggle()
   call s:assert.not_equals(&statusline, '')
   call s:assert.not_equals(&tabline, '')
 endfunction
+
+function! s:suite.notab_toggle()
+  let g:lightline = { 'enable': { 'tabline': 0 } }
+  call lightline#init()
+  call lightline#toggle()
+  set tabline=ASDF
+  call lightline#toggle()
+  let check_tabline = &tabline
+  set tabline=
+  call s:assert.equals(check_tabline, 'ASDF')
+endfunction
+

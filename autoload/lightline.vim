@@ -66,7 +66,14 @@ function! lightline#enable() abort
 endfunction
 
 function! lightline#disable() abort
-  let [&statusline, &tabline] = [get(s:, '_statusline', ''), get(s:, '_tabline', '')]
+  if exists('s:_statusline')
+    let &statusline = s:_statusline
+    unlet s:_statusline
+  endif
+  if exists("s:_tabline")
+    let &tabline = s:_tabline
+    unlet s:_tabline
+  endif
   for t in range(1, tabpagenr('$'))
     for n in range(1, tabpagewinnr(t, '$'))
       call settabwinvar(t, n, '&statusline', '')
@@ -172,16 +179,19 @@ function! lightline#init() abort
       break
     endif
   endfor
-  if !exists('s:_statusline')
+  if s:lightline.enable.statusline && !exists('s:_statusline')
     let s:_statusline = &statusline
   endif
-  if !exists('s:_tabline')
-    let s:_tabline = &tabline
-  endif
   if s:lightline.enable.tabline
+    if !exists('s:_tabline')
+      let s:_tabline = &tabline
+    endif
     set tabline=%!lightline#tabline()
   else
-    let &tabline = get(s:, '_tabline', '')
+    if exists("s:_tabline")
+      let &tabline = s:_tabline
+      unlet s:_tabline
+    endif
   endif
   for f in values(s:lightline.component_function)
     silent! call call(f, [])
