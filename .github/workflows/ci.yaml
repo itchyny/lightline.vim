@@ -16,6 +16,7 @@ jobs:
     strategy:
       matrix:
         vim:
+          - v9.2.0000
           - v9.1.0000
           - v9.0.0000
           - v8.2.0000
@@ -26,9 +27,9 @@ jobs:
       fail-fast: false
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Checkout vim-themis
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: thinca/vim-themis
           path: vim-themis
