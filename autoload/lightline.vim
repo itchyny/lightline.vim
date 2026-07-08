@@ -21,22 +21,28 @@ function! lightline#update() abort
     let w = winnr()
     let s = winnr('$') == 1 && w > 0 ? [lightline#statusline(0)] : [lightline#statusline(0), lightline#statusline(1)]
     for n in range(1, winnr('$'))
-      call setwinvar(n, '&statusline', s[n!=w])
+      if !s:skip(n)
+        call setwinvar(n, '&statusline', s[n!=w])
+      endif
     endfor
   endif
 endfunction
 
-if exists('*nvim_win_get_config')
-  function! s:skip() abort
-    return !nvim_win_get_config(0).focusable
-  endfunction
-elseif exists('*win_gettype')
-  function! s:skip() abort " Vim 8.2.0257 (00f3b4e007), 8.2.0991 (0fe937fd86), 8.2.0996 (40a019f157)
-    return win_gettype() ==# 'popup' || win_gettype() ==# 'autocmd'
+if exists('*win_gettype')
+  function! s:skip(...) abort " Vim 8.2.0257 (00f3b4e007), 8.2.0991 (0fe937fd86), 8.2.0996 (40a019f157)
+    let l:wintype = call('win_gettype', a:000)
+    return l:wintype ==# 'popup' || l:wintype ==# 'autocmd'
   endfunction
 else
-  function! s:skip() abort
-    return &buftype ==# 'popup'
+  function! s:skip(...) abort
+    let l:winid
+    if a:0 > 0
+      let l:buftype = getbufvar(win_getbuf(a:1), '&buftype')
+    else
+      let l:buftype = &buftype
+    endif
+
+    return l:buftype ==# 'popup'
   endfunction
 endif
 
