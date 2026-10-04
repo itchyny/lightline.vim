@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2026/10/04 06:24:32.
+" Last Change: 2026/10/04 10:42:20.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -296,12 +296,12 @@ function! lightline#highlight(...) abort
   if !a:0 | let s:mode = '' | endif
 endfunction
 
-function! s:subseparator(components, subseparator, expanded) abort
-  let [a, c, f, v, u] = [a:components, s:lightline.component, s:lightline.component_function, s:lightline.component_visible_condition, s:lightline.component_function_visible_condition]
-  let xs = map(range(len(a:components)), 'a:expanded[v:val] ? "1" :
-        \ has_key(f, a[v:val]) ? (has_key(u, a[v:val]) ? "(".u[a[v:val]].")" : (exists("*".f[a[v:val]]) ? "" : "exists(\"*".f[a[v:val]]."\")&&").f[a[v:val]]."()!=#\"\"") :
-        \ has_key(v, a[v:val]) ? "(".v[a[v:val]].")" : has_key(c, a[v:val]) ? "1" : "0"')
-  return '%{' . (xs[0] ==# '1' || xs[0] ==# '(1)' ? '' : xs[0] . '&&(') . join(xs[1:], '||') . (xs[0] ==# '1' || xs[0] ==# '(1)' ? '' : ')') . '?"' . a:subseparator . '":""}'
+function! s:subseparators(components, subseparator, expanded) abort
+  let [c, f, v, u] = [s:lightline.component, s:lightline.component_function, s:lightline.component_visible_condition, s:lightline.component_function_visible_condition]
+  let xs = map(copy(a:components), 'a:expanded[v:key] ? "1" :
+        \ has_key(f, v:val) ? (has_key(u, v:val) ? "(".u[v:val].")" : (exists("*".f[v:val]) ? "" : "exists(\"*".f[v:val]."\")&&").f[v:val]."()!=#\"\"") :
+        \ has_key(v, v:val) ? "(".v[v:val].")" : has_key(c, v:val) ? "1" : "0"')
+  return map(xs[:-2], '"%{" . (v:val ==# "1" || v:val ==# "(1)" ? "" : v:val . "&&") . "(" . join(xs[v:key+1:], "||") . ")?\"" . a:subseparator . "\":\"\"}"')
 endfunction
 
 function! lightline#concatenate(xs, right) abort
@@ -389,12 +389,11 @@ function! s:line(tabline, inactive) abort
   let [rc, re, ri] = s:expand(rs)
   for i in range(len(lc))
     let _ .= '%#LightlineLeft_' . mode . '_' . li[i] . '#'
+    let ss = s.left !=# '' ? s:subseparators(lc[i], s.left, le[i]) : []
     for j in range(len(lc[i]))
       let x = le[i][j] ? lc[i][j] : has_key(f, lc[i][j]) ? s:func(f[lc[i][j]]) : get(c, lc[i][j], '')
       let _ .= has_key(t, lc[i][j]) && t[lc[i][j]] ==# 'raw' || get(w, lc[i][j]) || le[i][j] ==# 2 || x ==# '' ? x : '%( ' . x . ' %)'
-      if j < len(lc[i]) - 1 && s.left !=# ''
-        let _ .= s:subseparator(lc[i][(j):], s.left, le[i][(j):])
-      endif
+      let _ .= get(ss, j, '')
     endfor
     let _ .= '%#LightlineLeft_' . mode . '_' . li[i] . '_' . li[i + 1] . '#'
     let _ .= i < l + len(lc) - len(ls) && li[i] < l || li[i] != li[i + 1] ? p.left : len(lc[i]) ? s.left : ''
@@ -404,12 +403,11 @@ function! s:line(tabline, inactive) abort
     let _ .= '%#LightlineRight_' . mode . '_' . ri[i] . '_' . ri[i + 1] . '#'
     let _ .= i < r + len(rc) - len(rs) && ri[i] < r || ri[i] != ri[i + 1] ? p.right : len(rc[i]) ? s.right : ''
     let _ .= '%#LightlineRight_' . mode . '_' . ri[i] . '#'
+    let ss = s.right !=# '' ? s:subseparators(rc[i], s.right, re[i]) : []
     for j in range(len(rc[i]))
       let x = re[i][j] ? rc[i][j] : has_key(f, rc[i][j]) ? s:func(f[rc[i][j]]) : get(c, rc[i][j], '')
       let _ .= has_key(t, rc[i][j]) && t[rc[i][j]] ==# 'raw' || get(w, rc[i][j]) || re[i][j] ==# 2 || x ==# '' ? x : '%( ' . x . ' %)'
-      if j < len(rc[i]) - 1 && s.right !=# ''
-        let _ .= s:subseparator(rc[i][(j):], s.right, re[i][(j):])
-      endif
+      let _ .= get(ss, j, '')
     endfor
   endfor
   return _
