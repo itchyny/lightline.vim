@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2026/10/04 10:42:20.
+" Last Change: 2026/10/04 11:12:39.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -316,7 +316,7 @@ function! lightline#statusline(inactive) abort
   return s:line(0, a:inactive)
 endfunction
 
-function! s:evaluate_expand(component) abort
+function! s:expand_value(component) abort
   try | let value = eval(a:component . '()') | catch | return [] | endtry
   return value is '' ? [] :
         \ map(type(value) == 3 ? value : [[], [value], []],
@@ -325,47 +325,35 @@ function! s:evaluate_expand(component) abort
         \        "v:val !=# ''''")')
 endfunction
 
-function! s:convert(name, index) abort
+function! s:expand_component(name, index) abort
   if !has_key(s:lightline.component_expand, a:name)
-    return [[[a:name], 0, a:index, a:index]]
+    return [[[a:name], [0], a:index]]
   else
     let type = get(s:lightline.component_type, a:name, a:index)
     let is_raw = get(s:lightline.component_raw, a:name) || type ==# 'raw'
-    return filter(map(s:evaluate_expand(s:lightline.component_expand[a:name]),
-          \ '[v:val, 1 + ' . is_raw . ', v:key == 1 && ' . (type !=# 'raw') .
-          \ ' ? "' . type . '" : "' . a:index . '", "' . a:index . '"]'), 'v:val[0] != []')
+    return filter(map(s:expand_value(s:lightline.component_expand[a:name]),
+          \ '[v:val, repeat([' . (1 + is_raw) . '], len(v:val)), v:key == 1 && ' .
+          \ (type !=# 'raw') . ' ? "' . type . '" : "' . a:index . '"]'), 'v:val[0] != []')
   endif
 endfunction
 
-function! s:expand(components) abort
-  let components = []
-  let expanded = []
-  let indices = []
-  let prevtype = ''
-  let previndex = -1
+function! s:expand_group(names, index) abort
+  if empty(filter(copy(a:names), 'has_key(s:lightline.component_expand, v:val)'))
+    return [[a:names, repeat([0], len(a:names)), a:index]]
+  endif
   let xs = []
-  call map(deepcopy(a:components), 'map(v:val, "extend(xs, s:convert(v:val, ''" . v:key . "''))")')
-  for [component, expand, type, index] in xs
-    if prevtype !=# type
-      for i in range(previndex + 1, max([previndex, index - 1]))
-        call add(indices, string(i))
-        call add(components, [])
-        call add(expanded, [])
-      endfor
-      call add(indices, type)
-      call add(components, [])
-      call add(expanded, [])
-    endif
-    call extend(components[-1], component)
-    call extend(expanded[-1], repeat([expand], len(component)))
-    let prevtype = type
-    let previndex = index
-  endfor
-  for i in range(previndex + 1, max([previndex, len(a:components) - 1]))
-    call add(indices, string(i))
-    call add(components, [])
-    call add(expanded, [])
-  endfor
+  call map(copy(a:names), 'extend(xs, s:expand_component(v:val, a:index))')
+  return empty(xs) ? [[[], [], a:index]] : xs
+endfunction
+
+function! s:expand(components) abort
+  let xs = []
+  call map(copy(a:components), 'extend(xs, s:expand_group(v:val, string(v:key)))')
+  let [components, expanded, indices] = [[], [], ['']]
+  call map(xs, '[v:val[2] ==# indices[-1] ? 0 :
+        \ [add(components, []), add(expanded, []), add(indices, v:val[2])],
+        \ extend(components[-1], v:val[0]), extend(expanded[-1], v:val[1])]')
+  call remove(indices, 0)
   call add(indices, string(len(a:components)))
   return [components, expanded, indices]
 endfunction
