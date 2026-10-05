@@ -49,3 +49,26 @@ function! s:suite.toggle()
   call s:assert.not_equals(&statusline, '')
   call s:assert.not_equals(&tabline, '')
 endfunction
+
+function! s:suite.toggle_tabline_disabled()
+  let g:lightline = { 'enable': { 'tabline': 0 } }
+  call lightline#init()
+  call lightline#toggle()
+  set tabline=TAB
+  call lightline#toggle()
+  let tabline = &tabline
+  set tabline=
+  call s:assert.equals(tabline, 'TAB')
+endfunction
+
+function! s:suite.disable_statusline_disabled()
+  let g:lightline = { 'enable': { 'statusline': 0 } }
+  call lightline#init()
+  let [&g:statusline, &l:statusline] = ['GLOBAL', 'LOCAL']
+  call lightline#disable()
+  let [statusline, l_statusline] = [&g:statusline, &l:statusline]
+  let [&g:statusline, &l:statusline] = ['', '']
+  call lightline#enable()
+  call s:assert.equals(statusline, 'GLOBAL')
+  call s:assert.equals(l_statusline, 'LOCAL')
+endfunction

@@ -2,7 +2,7 @@
 " Filename: autoload/lightline.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2026/10/04 11:12:39.
+" Last Change: 2026/10/06 08:20:13.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -65,12 +65,21 @@ function! lightline#enable() abort
 endfunction
 
 function! lightline#disable() abort
-  let [&statusline, &tabline] = [get(s:, '_statusline', ''), get(s:, '_tabline', '')]
-  for t in range(1, tabpagenr('$'))
-    for n in range(1, tabpagewinnr(t, '$'))
-      call settabwinvar(t, n, '&statusline', '')
+  if exists('s:_statusline')
+    let &statusline = s:_statusline
+    unlet s:_statusline
+  endif
+  if exists('s:_tabline')
+    let &tabline = s:_tabline
+    unlet s:_tabline
+  endif
+  if !exists('s:lightline') || s:lightline.enable.statusline
+    for t in range(1, tabpagenr('$'))
+      for n in range(1, tabpagewinnr(t, '$'))
+        call settabwinvar(t, n, '&statusline', '')
+      endfor
     endfor
-  endfor
+  endif
   augroup lightline
     autocmd!
   augroup END
@@ -171,16 +180,21 @@ function! lightline#init() abort
       break
     endif
   endfor
-  if !exists('s:_statusline')
-    let s:_statusline = &statusline
-  endif
-  if !exists('s:_tabline')
-    let s:_tabline = &tabline
+  if s:lightline.enable.statusline
+    if !exists('s:_statusline')
+      let s:_statusline = &statusline
+    endif
+  elseif exists('s:_statusline')
+    unlet s:_statusline
   endif
   if s:lightline.enable.tabline
+    if !exists('s:_tabline')
+      let s:_tabline = &tabline
+    endif
     set tabline=%!lightline#tabline()
-  else
-    let &tabline = get(s:, '_tabline', '')
+  elseif exists('s:_tabline')
+    let &tabline = s:_tabline
+    unlet s:_tabline
   endif
   for f in values(s:lightline.component_function)
     silent! call call(f, [])
